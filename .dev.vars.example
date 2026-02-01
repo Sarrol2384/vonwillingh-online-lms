@@ -1,0 +1,36 @@
+# VonWillingh Online LMS - Environment Variables
+# Copy this file and replace with your actual values
+
+# ============================================
+# SUPABASE CONFIGURATION (Required)
+# ============================================
+# Get these from: Supabase Dashboard → Settings → API
+SUPABASE_URL=https://your-project-id.supabase.co
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.your_anon_key_here
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.your_service_role_key_here
+
+# ============================================
+# EMAIL CONFIGURATION (Optional - can add later)
+# ============================================
+# For Brevo: Sign up at https://www.brevo.com (free tier: 300 emails/day)
+BREVO_API_KEY=xkeysib-your_brevo_api_key_here
+FROM_EMAIL=noreply@vonwillingh.co.za
+CONTACT_EMAIL=sarrol@vonwillingh.co.za
+CONTACT_PHONE=081 216 3629
+
+# ============================================
+# BANK DETAILS FOR EFT PAYMENTS
+# ============================================
+BANK_NAME=Absa
+BANK_ACCOUNT_NAME=S Von Willingh
+BANK_ACCOUNT_NUMBER=01163971026
+BANK_BRANCH_CODE=632005
+BANK_ACCOUNT_TYPE=Cheque Account
+
+# ============================================
+# NOTES:
+# - Replace all "your_xxx_here" with actual values
+# - Never commit this file to Git (it's in .gitignore)
+# - Keep SUPABASE_SERVICE_ROLE_KEY secret!
+# - Email config is optional for now
+# ============================================

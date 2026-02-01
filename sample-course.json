@@ -1,0 +1,130 @@
+{
+  "course": {
+    "name": "AI Tools Every Small Business Should Use in 2026",
+    "code": "AI-FREE-001",
+    "level": "Short Course",
+    "category": "AI & Technology",
+    "description": "Discover the essential AI tools that can transform your small business operations. Learn practical applications of ChatGPT, automation tools, and AI-powered solutions to boost productivity and efficiency.",
+    "duration": "2 hours",
+    "price": 0,
+    "is_free": true
+  },
+  "modules": [
+    {
+      "title": "Introduction to AI for Small Business",
+      "description": "Understanding how AI can help your business without technical expertise or massive budgets.",
+      "order_number": 1,
+      "content": "# Introduction to AI for Small Business\n\n## Overview\nArtificial Intelligence (AI) is no longer just for large corporations. Small businesses can now leverage powerful AI tools to compete effectively, save time, and reduce costs.\n\n## Key Concepts\n- **AI Democratization**: How AI tools became accessible to everyone\n- **Practical vs. Hype**: Focus on tools that solve real business problems\n- **ROI of AI**: Measuring time saved and efficiency gained\n- **Getting Started**: No coding required approaches\n\n## The AI Revolution for Small Business\n1. **ChatGPT & Language AI**: Writing, customer service, content creation\n2. **Design AI**: Canva AI, logo makers, image generation\n3. **Automation**: Zapier, Make.com for connecting tools\n4. **Email AI**: Smart inbox management and response drafting\n5. **Analytics AI**: Understanding customer data without spreadsheets\n\n## Case Studies\n- How a hair salon used AI chatbot to book 40% more appointments\n- Small retailer saves 10 hours/week using AI for social media content\n- Freelance consultant uses AI assistant to manage 3x more clients\n\n## What You'll Learn\n- Which AI tools solve which business problems\n- How to start using AI today (even if you're not tech-savvy)\n- Free vs. paid tools comparison\n- Common mistakes to avoid",
+      "content_type": "lesson",
+      "duration_minutes": 40,
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the main benefit of AI tools for small businesses in 2026?",
+            "options": [
+              "They replace all employees",
+              "They are free forever",
+              "They automate repetitive tasks and save time",
+              "They guarantee business success"
+            ],
+            "correct_answer": "They automate repetitive tasks and save time"
+          },
+          {
+            "question": "Which of these is NOT a practical use of ChatGPT for small business?",
+            "options": [
+              "Drafting customer emails",
+              "Replacing your accountant completely",
+              "Writing social media captions",
+              "Brainstorming marketing ideas"
+            ],
+            "correct_answer": "Replacing your accountant completely"
+          },
+          {
+            "question": "What should be your first consideration when choosing AI tools?",
+            "options": [
+              "How expensive they are",
+              "What specific business problem they solve",
+              "How many features they have",
+              "If competitors are using them"
+            ],
+            "correct_answer": "What specific business problem they solve"
+          }
+        ]
+      }
+    },
+    {
+      "title": "ChatGPT for Business: Practical Applications",
+      "description": "Master ChatGPT to handle everyday business tasks like email writing, content creation, and customer service.",
+      "order_number": 2,
+      "content": "# ChatGPT for Business: Practical Applications\n\n## Getting Started with ChatGPT\nChatGPT is an AI assistant that can understand and generate human-like text. It's like having a smart intern who never sleeps and costs almost nothing.\n\n## Practical Use Cases\n\n### 1. Email Management\n- **Draft responses**: \"Write a professional email declining a vendor proposal\"\n- **Follow-ups**: \"Create a friendly payment reminder email\"\n- **Templates**: Build reusable email templates for common situations\n\n### 2. Content Creation\n- **Social Media**: Generate post ideas and captions\n- **Blog Posts**: Outline articles and draft content\n- **Product Descriptions**: Write compelling descriptions quickly\n\n### 3. Customer Service\n- **FAQ Responses**: Create consistent, helpful answers\n- **Problem-Solving**: Draft solutions to customer complaints\n- **Feedback Analysis**: Summarize customer reviews\n\n### 4. Business Planning\n- **Brainstorming**: Generate business ideas and strategies\n- **Market Research**: Analyze trends and competitors\n- **Goal Setting**: Create SMART goals and action plans\n\n## Hands-On Examples\n\n### Example 1: Writing a Professional Email\n**Prompt**: \"Write a professional email to a late-paying client, firm but friendly\"\n\n**Result**: A well-crafted email that maintains the relationship while addressing the issue.\n\n### Example 2: Social Media Content\n**Prompt**: \"Create 5 Instagram caption ideas for a bakery promoting weekend specials\"\n\n**Result**: Creative, engaging captions ready to use.\n\n## Best Practices\n1. **Be Specific**: The more details you provide, the better the output\n2. **Iterate**: Ask ChatGPT to revise or improve responses\n3. **Add Your Voice**: Edit AI output to match your brand tone\n4. **Save Prompts**: Keep a list of your best-performing prompts\n\n## Time-Saving Tips\n- Use ChatGPT to draft first, then personalize\n- Create prompt templates for recurring tasks\n- Combine with other tools (export to Google Docs, etc.)\n- Use voice input on mobile for even faster results",
+      "content_type": "lesson",
+      "duration_minutes": 50,
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the most important principle when using ChatGPT for business?",
+            "options": [
+              "Use it for everything without checking",
+              "Be specific and provide context in your prompts",
+              "Only use the free version",
+              "Share your company secrets with it"
+            ],
+            "correct_answer": "Be specific and provide context in your prompts"
+          },
+          {
+            "question": "How should you use ChatGPT-generated content?",
+            "options": [
+              "Copy and paste directly without reading",
+              "Ignore it completely",
+              "Review and personalize before using",
+              "Only use it for unimportant tasks"
+            ],
+            "correct_answer": "Review and personalize before using"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Automation Tools & AI Integration",
+      "description": "Connect your business tools with AI to create powerful automated workflows that save hours every week.",
+      "order_number": 3,
+      "content": "# Automation Tools & AI Integration\n\n## Why Automation Matters\nManual, repetitive tasks drain your time and energy. Automation tools combined with AI can handle these tasks 24/7, freeing you to focus on growing your business.\n\n## Top Automation Tools for Small Business\n\n### 1. Zapier (Beginner-Friendly)\n- **What it does**: Connects different apps and automates workflows\n- **Example**: When you get a new lead in Facebook, automatically add to Google Sheets and send welcome email\n- **Cost**: Free plan available (100 tasks/month)\n\n### 2. Make.com (Formerly Integromat)\n- **What it does**: Visual workflow builder for complex automations\n- **Example**: Process customer orders → send to accounting → notify warehouse → update inventory\n- **Cost**: Free plan available (1000 operations/month)\n\n### 3. AI-Powered Email Tools\n- **SaneBox**: AI organizes your inbox automatically\n- **Superhuman**: AI-powered email with smart replies\n- **EmailTree**: AI customer service responses\n\n## Real-World Automation Examples\n\n### Example 1: New Customer Onboarding\n**Trigger**: New sale in Shopify\n**Actions**:\n1. Add customer to mailing list\n2. Send welcome email with AI-generated personalized message\n3. Create task in project management tool\n4. Notify team on Slack\n\n**Time Saved**: 15 minutes per customer → 5 hours/week for 20 customers\n\n### Example 2: Social Media Management\n**Trigger**: New blog post published\n**Actions**:\n1. AI generates social media captions for 3 platforms\n2. Create images using Canva AI\n3. Schedule posts on Buffer/Hootsuite\n4. Track engagement automatically\n\n**Time Saved**: 2 hours per blog post → 8 hours/month\n\n### Example 3: Invoice Follow-Up\n**Trigger**: Invoice overdue by 7 days\n**Actions**:\n1. AI drafts friendly reminder email\n2. Send automatically\n3. Log in CRM\n4. Escalate if no payment after 14 days\n\n**Time Saved**: 30 minutes per week on invoice management\n\n## Getting Started with Automation\n\n### Step 1: Identify Repetitive Tasks\nList tasks you do weekly that follow the same pattern:\n- Email follow-ups\n- Data entry\n- Social media posting\n- Invoicing\n- Customer onboarding\n\n### Step 2: Choose Your Tool\n- **Beginners**: Start with Zapier\n- **Tech-Comfortable**: Try Make.com for more control\n- **Specific Needs**: Look for industry-specific tools\n\n### Step 3: Start Small\n- Pick ONE workflow to automate first\n- Test thoroughly before going live\n- Monitor results for the first week\n- Refine and expand\n\n### Step 4: Scale Up\n- Add more automation as you get comfortable\n- Look for connections between different workflows\n- Document your automations (so you remember what does what!)\n\n## Common Mistakes to Avoid\n1. **Over-Automation**: Don't automate customer relationships that need a personal touch\n2. **No Testing**: Always test automations before launching\n3. **Complexity Creep**: Keep automations simple and maintainable\n4. **Ignoring Errors**: Set up notifications for failed automations\n\n## ROI Calculator\nIf you save 10 hours/week at R500/hour value:\n- Weekly savings: R5,000\n- Monthly savings: R20,000\n- Annual savings: R240,000\n\nVs. Automation tool cost: ~R500/month = R6,000/year\n\n**ROI**: 4000% return on investment!\n\n## Action Items\n1. Sign up for a free Zapier account\n2. Identify your top 3 time-consuming repetitive tasks\n3. Build your first simple automation this week\n4. Track time saved over the next month",
+      "content_type": "lesson",
+      "duration_minutes": 30,
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the main benefit of automation tools for small businesses?",
+            "options": [
+              "They make your business look more professional",
+              "They save time by handling repetitive tasks automatically",
+              "They are fun to set up",
+              "They eliminate the need for employees"
+            ],
+            "correct_answer": "They save time by handling repetitive tasks automatically"
+          },
+          {
+            "question": "Which tool is recommended for beginners starting with automation?",
+            "options": [
+              "Custom coding your own solution",
+              "Zapier",
+              "Hiring a developer",
+              "Excel macros"
+            ],
+            "correct_answer": "Zapier"
+          },
+          {
+            "question": "What is a common mistake when implementing automation?",
+            "options": [
+              "Starting with one simple workflow",
+              "Testing before going live",
+              "Over-automating personal customer interactions",
+              "Documenting your workflows"
+            ],
+            "correct_answer": "Over-automating personal customer interactions"
+          }
+        ]
+      }
+    }
+  ]
+}
