@@ -705,7 +705,7 @@ app.get('/student-login', (c) => {
         <div class="min-h-screen flex items-center justify-center px-4">
             <div class="max-w-md w-full">
                 <div class="text-center mb-8">
-                    <img src="/static/eyethu-logo.png" alt="Eyethu Property Group Logo" class="h-48 w-48 mx-auto mb-4">
+                    <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-48 w-48 mx-auto mb-4">
                     <h2 class="text-3xl font-bold">Student Portal</h2>
                     <p class="text-gray-600">Sign in to access your courses</p>
                 </div>
@@ -795,7 +795,7 @@ app.get('/student/dashboard', (c) => {
             <div class="container mx-auto px-4">
                 <div class="flex items-center justify-between py-4">
                     <div class="flex items-center space-x-4">
-                        <img src="/static/eyethu-logo.png" alt="Eyethu Property Group Logo" class="h-12 w-12">
+                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
                         <div>
                             <h1 class="text-xl font-bold">Eyethu Property Group</h1>
                             <p class="text-sm opacity-90">Student Portal</p>
@@ -880,7 +880,7 @@ app.get('/student/dashboard', (c) => {
         </div>
 
         <!-- Hidden images for certificate generation -->
-        <img id="eyethuLogoImage" src="/static/eyethu-logo.png" style="display: none;" crossorigin="anonymous">
+        <img id="vonwillinghLogoImage" src="/static/vonwillingh-logo.png" style="display: none;" crossorigin="anonymous">
         <img id="signature1Image" src="/static/signature-mjgumede.png" style="display: none;" crossorigin="anonymous">
         <img id="signature2Image" src="/static/signature-svonwillingh.png" style="display: none;" crossorigin="anonymous">
 
@@ -912,7 +912,7 @@ app.get('/student/change-password', (c) => {
         <div class="min-h-screen flex items-center justify-center px-4">
             <div class="max-w-md w-full">
                 <div class="text-center mb-8">
-                    <img src="/static/eyethu-logo.png" alt="Eyethu Property Group Logo" class="h-48 w-48 mx-auto mb-4">
+                    <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-48 w-48 mx-auto mb-4">
                     <h2 class="text-3xl font-bold">Change Password</h2>
                     <p class="text-gray-600">Please create a new permanent password</p>
                 </div>
@@ -1006,7 +1006,7 @@ app.get('/student/course/:courseId', (c) => {
             <div class="container mx-auto px-4">
                 <div class="flex items-center justify-between py-4">
                     <div class="flex items-center space-x-4">
-                        <img src="/static/eyethu-logo.png" alt="Eyethu Property Group Logo" class="h-12 w-12">
+                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
                         <div>
                             <h1 class="text-xl font-bold">Eyethu Property Group</h1>
                             <p class="text-sm opacity-90">Course Content</p>
@@ -1097,7 +1097,7 @@ app.get('/student/module/:moduleId', (c) => {
                 <div class="container mx-auto px-4">
                     <div class="flex items-center justify-between py-4">
                         <div class="flex items-center space-x-4">
-                            <img src="/static/eyethu-logo.png" alt="Eyethu Property Group Logo" class="h-12 w-12">
+                            <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
                             <div>
                                 <p class="text-sm opacity-90" id="courseName">Course</p>
                                 <h1 class="text-lg font-bold" id="moduleTitle">Module</h1>

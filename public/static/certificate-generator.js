@@ -1,5 +1,5 @@
 /**
- * PBK Institute Certificate Generator
+ * VonWillingh Online Certificate Generator
  * Uses jsPDF for client-side PDF generation
  */
 
@@ -100,7 +100,7 @@ class CertificateGenerator {
   addHeader(doc, width) {
     // Add logo if available
     try {
-      const logo = document.getElementById('eyethuLogoImage');
+      const logo = document.getElementById('vonwillinghLogoImage');
       if (logo && logo.complete) {
         // Center the logo at the top
         const logoWidth = 30;
@@ -115,14 +115,13 @@ class CertificateGenerator {
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(24);
     doc.setTextColor(139, 115, 85); // Brown/Gold
-    doc.text('EYETHU PROPERTY GROUP', width / 2, 58, { align: 'center' });
-    doc.text('MJG REAL ESTATE T/A', width / 2, 68, { align: 'center' });
+    doc.text('VONWILLINGH ONLINE', width / 2, 63, { align: 'center' });
 
     // Tagline
     doc.setFont('helvetica', 'italic');
     doc.setFontSize(10);
     doc.setTextColor(100, 100, 100);
-    doc.text('Your Trusted Property Experts', width / 2, 75, { align: 'center' });
+    doc.text('AI-Powered Business Training', width / 2, 75, { align: 'center' });
   }
 
   /**
@@ -266,7 +265,7 @@ class CertificateGenerator {
     doc.setFont('helvetica', 'italic');
     doc.setFontSize(8);
     doc.setTextColor(100, 100, 100);
-    doc.text('www.pbkleadership.org.za | info@pbkleadership.org.za', width / 2, height - 7, { align: 'center' });
+    doc.text('sarrol@vonwillingh.co.za | 081 216 3629', width / 2, height - 7, { align: 'center' });
   }
 
   /**
@@ -284,7 +283,7 @@ class CertificateGenerator {
   static generateCertificateId(studentId, courseId) {
     const timestamp = Date.now();
     const random = Math.random().toString(36).substring(2, 8).toUpperCase();
-    return `PBK-${courseId}-${random}-${timestamp.toString().substring(8)}`;
+    return `VW-${courseId}-${random}-${timestamp.toString().substring(8)}`;
   }
 
   /**
