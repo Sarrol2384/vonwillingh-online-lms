@@ -119,14 +119,14 @@ app.get('/', (c) => {
                 <div class="flex justify-between items-center py-3">
                     <!-- Logo and Title -->
                     <div class="flex items-center space-x-3">
-                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 sm:h-14 md:h-16 object-contain">
+                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-24 sm:h-28 md:h-32 object-contain">
                         <div class="hidden sm:block">
                             <h1 class="text-sm sm:text-base md:text-xl font-bold leading-tight">VonWillingh Online</h1>
-                            <p class="text-xs sm:text-sm text-blue-100">Smart Business Training</p>
+                            <p class="text-xs sm:text-sm text-blue-100">AI-Powered Business Training</p>
                         </div>
                         <div class="block sm:hidden">
                             <h1 class="text-sm font-bold">VonWillingh<br>Online</h1>
-                            <p class="text-xs text-blue-100">Business Training</p>
+                            <p class="text-xs text-blue-100">AI Training</p>
                         </div>
                     </div>
                     
@@ -174,8 +174,8 @@ app.get('/', (c) => {
         <!-- Hero Section -->
         <section class="brand-bg text-white py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-5xl font-bold mb-6">Grow Your Business with Practical Skills</h2>
-                <p class="text-xl mb-8 text-blue-100">30 Business Courses | 10 FREE Courses | Learn at Your Pace | Real-World Skills</p>
+                <h2 class="text-5xl font-bold mb-6">Master AI & Business Skills for the Future</h2>
+                <p class="text-xl mb-8 text-blue-100">30 AI-Powered Courses | 10 FREE Courses | Learn at Your Pace | Future-Ready Skills</p>
                 <div class="flex justify-center space-x-4">
                     <a href="/apply" class="bg-white text-blue-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition shadow-lg">
                         <i class="fas fa-file-alt mr-2"></i> Start Your Application
