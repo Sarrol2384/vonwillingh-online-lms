@@ -659,7 +659,7 @@ app.get('/application-success', (c) => {
                 </div>
                 <h1 class="text-3xl font-bold mb-4">Application Submitted Successfully!</h1>
                 <p class="text-lg text-gray-600 mb-6">
-                    Thank you for applying to Eyethu Property Group.
+                    Thank you for applying to VonWillingh Online.
                 </p>
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
                     <h3 class="font-bold mb-3">What Happens Next?</h3>
@@ -694,7 +694,7 @@ app.get('/student-login', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Student Login - Eyethu Property Group</title>
+        <title>Student Login - VonWillingh Online</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
@@ -781,7 +781,7 @@ app.get('/student/dashboard', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Student Dashboard - Eyethu Property Group</title>
+        <title>Student Dashboard - VonWillingh Online</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
@@ -797,7 +797,7 @@ app.get('/student/dashboard', (c) => {
                     <div class="flex items-center space-x-4">
                         <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
                         <div>
-                            <h1 class="text-xl font-bold">Eyethu Property Group</h1>
+                            <h1 class="text-xl font-bold">VonWillingh Online</h1>
                             <p class="text-sm opacity-90">Student Portal</p>
                         </div>
                     </div>
@@ -901,7 +901,7 @@ app.get('/student/change-password', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Change Password - Eyethu Property Group</title>
+        <title>Change Password - VonWillingh Online</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
@@ -992,7 +992,7 @@ app.get('/student/course/:courseId', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Course - Eyethu Property Group</title>
+        <title>Course - VonWillingh Online</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
@@ -1008,7 +1008,7 @@ app.get('/student/course/:courseId', (c) => {
                     <div class="flex items-center space-x-4">
                         <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
                         <div>
-                            <h1 class="text-xl font-bold">Eyethu Property Group</h1>
+                            <h1 class="text-xl font-bold">VonWillingh Online</h1>
                             <p class="text-sm opacity-90">Course Content</p>
                         </div>
                     </div>
@@ -1069,7 +1069,7 @@ app.get('/student/module/:moduleId', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Module - Eyethu Property Group</title>
+        <title>Module - VonWillingh Online</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
@@ -1187,7 +1187,7 @@ app.get('/payment-instructions/:applicationId', async (c) => {
       <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Payment Instructions - Eyethu Property Group</title>
+          <title>Payment Instructions - VonWillingh Online</title>
           <script src="https://cdn.tailwindcss.com"></script>
           <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
           <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
@@ -1251,7 +1251,7 @@ app.get('/payment-instructions/:applicationId', async (c) => {
                               </div>
                               <div>
                                   <p class="text-sm text-gray-600 mb-1">Account Name</p>
-                                  <p class="font-bold text-lg">Eyethu Property Group (Pty) Ltd</p>
+                                  <p class="font-bold text-lg">VonWillingh Online (Pty) Ltd</p>
                               </div>
                               <div>
                                   <p class="text-sm text-gray-600 mb-1">Account Number</p>
@@ -1372,7 +1372,7 @@ app.get('/admin-payments', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Payment Management - Eyethu Property Group</title>
+        <title>Payment Management - VonWillingh Online</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
@@ -1515,7 +1515,7 @@ app.get('/admin-login', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Login - Eyethu Property Group</title>
+        <title>Admin Login - VonWillingh Online</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
@@ -1589,7 +1589,7 @@ app.get('/admin-dashboard', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Dashboard - Eyethu Property Group</title>
+        <title>Admin Dashboard - VonWillingh Online</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
@@ -1737,7 +1737,7 @@ app.get('/admin-sessions', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Student Session Monitoring - Eyethu Property Group</title>
+        <title>Student Session Monitoring - VonWillingh Online</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
@@ -1857,7 +1857,7 @@ app.get('/admin/courses/import', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Import Course - Eyethu Property Group</title>
+        <title>Import Course - VonWillingh Online</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
@@ -2411,7 +2411,7 @@ app.post('/api/admin/applications/:id/reject', async (c) => {
     try {
       await sendEmail(c.env, {
         to: application.students.email,
-        subject: 'Application Decision - Eyethu Property Group',
+        subject: 'Application Decision - VonWillingh Online',
         html: getApplicationRejectedEmail(
           application.students.full_name,
           application.courses.name,
@@ -2964,7 +2964,7 @@ app.post('/api/applications', async (c) => {
       
       await sendEmail(c.env, {
         to: data.email,
-        subject: 'Application Received - Eyethu Property Group',
+        subject: 'Application Received - VonWillingh Online',
         html: getApplicationReceivedEmail(data.fullName, courseName)
       })
       console.log('Application received email sent to:', data.email)
@@ -3008,11 +3008,11 @@ app.get('/api/test-email', async (c) => {
     
     const result = await sendEmail(c.env, {
       to: email,
-      subject: 'Test Email - Eyethu Property Group LMS',
+      subject: 'Test Email - VonWillingh Online LMS',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h1 style="color: #8B7355;">🧪 Test Email</h1>
-          <p>This is a test email from Eyethu Property Group LMS.</p>
+          <p>This is a test email from VonWillingh Online LMS.</p>
           <p><strong>Email Service:</strong> Brevo (formerly Sendinblue)</p>
           <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
           <p>If you received this email, the email configuration is working correctly! ✅</p>
@@ -3333,7 +3333,7 @@ app.post('/api/admin/payments/verify', async (c) => {
       try {
         await sendEmail(c.env, {
           to: application.students.email,
-          subject: 'Welcome to Eyethu Property Group - Your Login Credentials',
+          subject: 'Welcome to VonWillingh Online - Your Login Credentials',
           html: getPaymentVerifiedEmail(
             application.students.full_name,
             application.courses.name,
@@ -3372,7 +3372,7 @@ app.get('/admin-courses', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Course Management - Eyethu Property Group Admin</title>
+        <title>Course Management - VonWillingh Online Admin</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
