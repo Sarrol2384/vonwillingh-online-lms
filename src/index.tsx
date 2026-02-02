@@ -1155,7 +1155,7 @@ app.get('/student/module/:moduleId', (c) => {
 app.get('/payment-instructions/:applicationId', async (c) => {
   try {
     const applicationId = c.req.param('applicationId')
-    const supabase = getSupabaseClient(c.env)
+    const supabase = getSupabaseAdminClient(c.env)
     
     // Get application details
     const { data: application, error } = await supabase
