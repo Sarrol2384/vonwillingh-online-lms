@@ -1247,23 +1247,23 @@ app.get('/payment-instructions/:applicationId', async (c) => {
                           <div class="grid md:grid-cols-2 gap-4">
                               <div>
                                   <p class="text-sm text-gray-600 mb-1">Bank</p>
-                                  <p class="font-bold text-lg">Absa</p>
+                                  <p class="font-bold text-lg">${c.env.BANK_NAME || 'Absa'}</p>
                               </div>
                               <div>
                                   <p class="text-sm text-gray-600 mb-1">Account Name</p>
-                                  <p class="font-bold text-lg">VonWillingh Online (Pty) Ltd</p>
+                                  <p class="font-bold text-lg">${c.env.BANK_ACCOUNT_NAME || 'S Von Willingh'}</p>
                               </div>
                               <div>
                                   <p class="text-sm text-gray-600 mb-1">Account Number</p>
-                                  <p class="font-bold text-xl text-blue-600">4109771651</p>
+                                  <p class="font-bold text-xl text-blue-600">${c.env.BANK_ACCOUNT_NUMBER || '01163971026'}</p>
                               </div>
                               <div>
                                   <p class="text-sm text-gray-600 mb-1">Branch Code</p>
-                                  <p class="font-bold text-xl text-blue-600">632005</p>
+                                  <p class="font-bold text-xl text-blue-600">${c.env.BANK_BRANCH_CODE || '632005'}</p>
                               </div>
                               <div>
                                   <p class="text-sm text-gray-600 mb-1">Account Type</p>
-                                  <p class="font-bold text-lg">Current Account</p>
+                                  <p class="font-bold text-lg">${c.env.BANK_ACCOUNT_TYPE || 'Cheque'}</p>
                               </div>
                               <div>
                                   <p class="text-sm text-gray-600 mb-1">Payment Reference</p>
