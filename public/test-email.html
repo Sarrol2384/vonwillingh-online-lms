@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test VonWillingh Email System</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            background: #2C3E50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #34495e;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 VonWillingh Email Test</h1>
+    <p>This will test if Brevo email is working by sending a test application.</p>
+    
+    <div>
+        <label>Your Email:</label><br>
+        <input type="email" id="testEmail" value="sarrol@vonwillingh.co.za" style="width: 100%; padding: 10px; margin: 10px 0;">
+    </div>
+    
+    <button onclick="testEmail()">📧 Send Test Email</button>
+    
+    <div id="result"></div>
+    
+    <script>
+        async function testEmail() {
+            const email = document.getElementById('testEmail').value;
+            const resultDiv = document.getElementById('result');
+            
+            resultDiv.innerHTML = '<div class="result">⏳ Sending test application...</div>';
+            
+            try {
+                // Submit test application
+                const response = await axios.post('/api/applications', {
+                    full_name: 'Email Test Student',
+                    email: email,
+                    phone: '0812163629',
+                    address: 'Test Address for Email Verification',
+                    date_of_birth: '1990-01-01',
+                    course_id: 1,
+                    highest_qualification: 'Matric',
+                    institution: 'Test School',
+                    year_completed: 2020
+                });
+                
+                if (response.data.success) {
+                    resultDiv.innerHTML = `
+                        <div class="result success">
+                            <strong>✅ Success!</strong><br>
+                            Test application submitted successfully.<br>
+                            Application ID: ${response.data.application.id}<br><br>
+                            <strong>Check your email:</strong> ${email}<br>
+                            (Also check spam folder)<br><br>
+                            <strong>Also check:</strong><br>
+                            1. Brevo dashboard for sent email<br>
+                            2. Supabase applications table
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="result error">
+                            <strong>⚠️ Application submitted but check for errors:</strong><br>
+                            ${JSON.stringify(response.data, null, 2)}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result error">
+                        <strong>❌ Error:</strong><br>
+                        ${error.message}<br><br>
+                        ${error.response ? JSON.stringify(error.response.data, null, 2) : ''}
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
