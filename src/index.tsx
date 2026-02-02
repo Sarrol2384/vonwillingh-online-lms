@@ -2346,7 +2346,9 @@ app.post('/api/admin/applications/:id/approve', async (c) => {
     
     // Send approval email with payment instructions
     try {
-      const paymentInstructionsUrl = `https://3001-i64xhl5zgmighole8jufo-2e1b9533.sandbox.novita.ai/payment-instructions/${id}`
+      // Use the request URL to build the payment instructions URL dynamically
+      const baseUrl = new URL(c.req.url).origin
+      const paymentInstructionsUrl = `${baseUrl}/payment-instructions/${id}`
       
       await sendEmail(c.env, {
         to: application.students.email,
