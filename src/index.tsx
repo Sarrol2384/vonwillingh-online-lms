@@ -525,20 +525,12 @@ app.get('/apply', async (c) => {
                                 <input type="file" name="idDocument" required accept=".pdf,.jpg,.jpeg,.png" class="w-full border border-gray-300 rounded px-4 py-2">
                             </div>
                             <div>
-                                <label class="block font-semibold mb-2">Academic Transcripts * <span class="text-sm text-gray-500">(PDF)</span></label>
-                                <input type="file" name="transcripts" required accept=".pdf" class="w-full border border-gray-300 rounded px-4 py-2">
-                            </div>
-                            <div>
                                 <label class="block font-semibold mb-2">Certificates <span class="text-sm text-gray-500">(PDF)</span></label>
                                 <input type="file" name="certificates" accept=".pdf" class="w-full border border-gray-300 rounded px-4 py-2">
                             </div>
                             <div>
                                 <label class="block font-semibold mb-2">CV / Resume * <span class="text-sm text-gray-500">(PDF)</span></label>
                                 <input type="file" name="cv" required accept=".pdf" class="w-full border border-gray-300 rounded px-4 py-2">
-                            </div>
-                            <div>
-                                <label class="block font-semibold mb-2">Passport Photo * <span class="text-sm text-gray-500">(JPG, PNG)</span></label>
-                                <input type="file" name="photo" required accept=".jpg,.jpeg,.png" class="w-full border border-gray-300 rounded px-4 py-2">
                             </div>
                         </div>
                     </div>
@@ -580,7 +572,7 @@ app.get('/apply', async (c) => {
                 const formData = new FormData(e.target)
                 
                 // Validate file sizes (5MB max)
-                const files = ['idDocument', 'transcripts', 'certificates', 'cv', 'photo']
+                const files = ['idDocument', 'certificates', 'cv']
                 for (const fileName of files) {
                     const file = formData.get(fileName)
                     if (file && file.size > 5 * 1024 * 1024) {
