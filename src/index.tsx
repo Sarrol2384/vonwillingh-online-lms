@@ -488,34 +488,6 @@ app.get('/apply', async (c) => {
                         </div>
                     </div>
 
-                    <!-- Educational Background -->
-                    <div class="border-b pb-6">
-                        <h3 class="text-xl font-bold mb-4">Educational Background</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block font-semibold mb-2">Highest Qualification *</label>
-                                <select name="highestQualification" required class="w-full border border-gray-300 rounded px-4 py-2">
-                                    <option value="">-- Select --</option>
-                                    <option value="Grade 12">Grade 12 / Matric</option>
-                                    <option value="Certificate">Certificate</option>
-                                    <option value="Diploma">Diploma</option>
-                                    <option value="Bachelor">Bachelor's Degree</option>
-                                    <option value="Honours">Honours Degree</option>
-                                    <option value="Master">Master's Degree</option>
-                                    <option value="Doctorate">Doctorate</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block font-semibold mb-2">Institution Name</label>
-                                <input type="text" name="institution" class="w-full border border-gray-300 rounded px-4 py-2">
-                            </div>
-                            <div>
-                                <label class="block font-semibold mb-2">Year Completed</label>
-                                <input type="number" name="yearCompleted" min="1950" max="2024" class="w-full border border-gray-300 rounded px-4 py-2">
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Document Upload -->
                     <div class="border-b pb-6">
                         <h3 class="text-xl font-bold mb-4">Document Upload (Max 5MB per file)</h3>
@@ -592,9 +564,6 @@ app.get('/apply', async (c) => {
                         dob: formData.get('dob'),
                         address: formData.get('address'),
                         courseId: formData.get('courseId'),
-                        highestQualification: formData.get('highestQualification'),
-                        institution: formData.get('institution'),
-                        yearCompleted: formData.get('yearCompleted'),
                         motivation: formData.get('motivation')
                     }
                     
@@ -2890,10 +2859,7 @@ app.post('/api/applications', async (c) => {
           full_name: data.fullName,
           phone: data.phone,
           address: data.address,
-          date_of_birth: data.dob,
-          highest_qualification: data.highestQualification,
-          institution: data.institution,
-          year_completed: data.yearCompleted ? parseInt(data.yearCompleted) : null
+          date_of_birth: data.dob
         })
         .eq('id', studentId)
       
@@ -2913,10 +2879,7 @@ app.post('/api/applications', async (c) => {
           email: data.email,
           phone: data.phone,
           address: data.address,
-          date_of_birth: data.dob,
-          highest_qualification: data.highestQualification,
-          institution: data.institution,
-          year_completed: data.yearCompleted ? parseInt(data.yearCompleted) : null
+          date_of_birth: data.dob
         })
         .select('id')
         .single()
