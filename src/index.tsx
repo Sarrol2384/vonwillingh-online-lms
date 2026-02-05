@@ -1996,7 +1996,6 @@ app.post('/api/admin/courses/import', async (c) => {
           category: course.category || 'General',
           level: course.level,
           modules_count: modules.length,
-          semesters_count: course.semesters || Math.ceil(modules.length / 6),
           price: parseFloat(course.price),
           description: course.description
         })
@@ -2024,7 +2023,6 @@ app.post('/api/admin/courses/import', async (c) => {
           category: course.category || 'General',
           level: course.level,
           modules_count: modules.length,
-          semesters_count: course.semesters || Math.ceil(modules.length / 6),
           price: parseFloat(course.price),
           description: course.description
         })
@@ -2078,8 +2076,7 @@ app.post('/api/admin/courses/import', async (c) => {
       const { data: updatedCourse, error: updateError } = await supabase
         .from('courses')
         .update({
-          modules_count: newModulesCount,
-          semesters_count: course.semesters || Math.ceil(newModulesCount / 6)
+          modules_count: newModulesCount
         })
         .eq('id', existingCourse.id)
         .select()
