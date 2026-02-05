@@ -115,7 +115,12 @@ function validateCourseData(data) {
   // Validate course required fields
   const requiredCourseFields = ['name', 'code', 'level', 'description', 'duration', 'price'];
   for (const field of requiredCourseFields) {
-    if (!course[field]) {
+    // Special handling for price field - allow 0 as valid value
+    if (field === 'price') {
+      if (course[field] === undefined || course[field] === null || course[field] === '') {
+        return { valid: false, message: `Course is missing required field: ${field}` };
+      }
+    } else if (!course[field]) {
       return { valid: false, message: `Course is missing required field: ${field}` };
     }
   }
