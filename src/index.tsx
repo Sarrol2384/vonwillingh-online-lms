@@ -2192,6 +2192,273 @@ ${q.options.map((opt, optIdx) => `${String.fromCharCode(65 + optIdx)}) ${opt}`).
   }
 })
 
+// ============================================
+// EXTERNAL API ENDPOINT FOR COURSE IMPORT
+// ============================================
+// This endpoint allows external apps to push courses directly to the LMS
+// Usage: POST https://vonwillingh-online-lms.pages.dev/api/courses/external-import
+// Headers: { "X-API-Key": "YOUR_API_KEY", "Content-Type": "application/json" }
+// Body: { course: {...}, modules: [...] }
+
+app.post('/api/courses/external-import', async (c) => {
+  try {
+    // 1. AUTHENTICATE - Check API Key
+    const apiKey = c.req.header('X-API-Key')
+    const validApiKey = c.env.COURSE_IMPORT_API_KEY || 'vonwillingh-lms-import-key-2026'
+    
+    if (!apiKey || apiKey !== validApiKey) {
+      console.warn('⚠️ Unauthorized import attempt from:', c.req.header('CF-Connecting-IP'))
+      return c.json({ 
+        success: false, 
+        message: 'Unauthorized: Invalid or missing API key',
+        error: 'INVALID_API_KEY'
+      }, 401)
+    }
+    
+    console.log('✅ External import authenticated')
+    
+    // 2. PARSE REQUEST BODY
+    const body = await c.req.json()
+    const { course, modules } = body
+    
+    // 3. VALIDATE DATA STRUCTURE
+    if (!course || !modules || !Array.isArray(modules) || modules.length === 0) {
+      return c.json({ 
+        success: false, 
+        message: 'Invalid data structure. Required: { course: {...}, modules: [...] }',
+        error: 'INVALID_DATA_STRUCTURE'
+      }, 400)
+    }
+    
+    // 4. VALIDATE REQUIRED COURSE FIELDS
+    const requiredCourseFields = ['name', 'code', 'level', 'description', 'duration', 'price']
+    const missingFields = requiredCourseFields.filter(field => {
+      if (field === 'price') {
+        return course.price === undefined || course.price === null
+      }
+      return !course[field]
+    })
+    
+    if (missingFields.length > 0) {
+      return c.json({ 
+        success: false, 
+        message: `Missing required course fields: ${missingFields.join(', ')}`,
+        error: 'MISSING_COURSE_FIELDS',
+        missing_fields: missingFields
+      }, 400)
+    }
+    
+    // 5. VALIDATE COURSE CODE FORMAT
+    if (!/^[A-Za-z0-9_-]+$/.test(course.code)) {
+      return c.json({ 
+        success: false, 
+        message: 'Course code must contain only letters, numbers, dashes, and underscores',
+        error: 'INVALID_COURSE_CODE'
+      }, 400)
+    }
+    
+    // 6. VALIDATE COURSE LEVEL
+    const validLevels = ['Certificate', 'Diploma', 'Advanced Diploma', 'Bachelor']
+    if (!validLevels.includes(course.level)) {
+      return c.json({ 
+        success: false, 
+        message: `Course level must be one of: ${validLevels.join(', ')}`,
+        error: 'INVALID_COURSE_LEVEL',
+        valid_levels: validLevels
+      }, 400)
+    }
+    
+    // 7. VALIDATE PRICE
+    const price = parseFloat(course.price)
+    if (isNaN(price) || price < 0) {
+      return c.json({ 
+        success: false, 
+        message: 'Course price must be a positive number',
+        error: 'INVALID_PRICE'
+      }, 400)
+    }
+    
+    // 8. VALIDATE MODULES
+    const requiredModuleFields = ['title', 'description', 'order_number', 'content']
+    for (let i = 0; i < modules.length; i++) {
+      const module = modules[i]
+      const missingModuleFields = requiredModuleFields.filter(field => !module[field])
+      
+      if (missingModuleFields.length > 0) {
+        return c.json({ 
+          success: false, 
+          message: `Module ${i + 1} is missing required fields: ${missingModuleFields.join(', ')}`,
+          error: 'MISSING_MODULE_FIELDS',
+          module_index: i,
+          missing_fields: missingModuleFields
+        }, 400)
+      }
+      
+      if (typeof module.order_number !== 'number' || module.order_number < 1) {
+        return c.json({ 
+          success: false, 
+          message: `Module ${i + 1}: order_number must be a positive integer`,
+          error: 'INVALID_MODULE_ORDER',
+          module_index: i
+        }, 400)
+      }
+    }
+    
+    console.log('📥 External course import request:', course.name, `(${modules.length} modules)`)
+    
+    // 9. GET SUPABASE CLIENT
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    // 10. CHECK FOR EXISTING COURSE BY CODE
+    const { data: existingCourse } = await supabase
+      .from('courses')
+      .select('id, name, code')
+      .eq('code', course.code)
+      .single()
+    
+    if (existingCourse) {
+      return c.json({ 
+        success: false, 
+        message: `Course with code "${course.code}" already exists (Name: "${existingCourse.name}", ID: ${existingCourse.id})`,
+        error: 'COURSE_EXISTS',
+        existing_course: {
+          id: existingCourse.id,
+          name: existingCourse.name,
+          code: existingCourse.code
+        }
+      }, 409)
+    }
+    
+    // 11. GET NEXT COURSE ID
+    const { data: maxIdResult } = await supabase
+      .from('courses')
+      .select('id')
+      .order('id', { ascending: false })
+      .limit(1)
+    
+    const nextId = maxIdResult && maxIdResult.length > 0 ? maxIdResult[0].id + 1 : 1
+    console.log('📝 Next course ID will be:', nextId)
+    
+    // 12. CREATE COURSE
+    const { data: insertedCourse, error: courseError } = await supabase
+      .from('courses')
+      .insert({
+        id: nextId,
+        name: course.name,
+        code: course.code,
+        category: course.category || 'General',
+        level: course.level,
+        modules_count: modules.length,
+        price: price,
+        description: course.description,
+        duration: course.duration
+      })
+      .select()
+      .single()
+    
+    if (courseError) {
+      console.error('❌ Course insert error:', courseError)
+      return c.json({ 
+        success: false, 
+        message: 'Failed to create course: ' + courseError.message,
+        error: 'DATABASE_ERROR'
+      }, 500)
+    }
+    
+    console.log('✅ Course created:', insertedCourse.id, '-', insertedCourse.name)
+    
+    // 13. INSERT MODULES
+    const moduleInserts = modules.map((module, index) => ({
+      course_id: insertedCourse.id,
+      module_number: module.order_number || (index + 1),
+      title: module.title,
+      description: module.description,
+      content: module.content,
+      content_type: module.content_type || 'lesson',
+      video_url: module.video_url || null,
+      duration_minutes: module.duration_minutes || 0,
+      order_index: module.order_number || (index + 1),
+      is_published: true
+    }))
+    
+    const { data: insertedModules, error: modulesError } = await supabase
+      .from('modules')
+      .insert(moduleInserts)
+      .select()
+    
+    if (modulesError) {
+      console.error('❌ Modules insert error:', modulesError)
+      
+      // Rollback: Delete the course
+      await supabase.from('courses').delete().eq('id', insertedCourse.id)
+      
+      return c.json({ 
+        success: false, 
+        message: 'Failed to insert modules: ' + modulesError.message,
+        error: 'DATABASE_ERROR'
+      }, 500)
+    }
+    
+    console.log(`✅ ${insertedModules.length} modules inserted`)
+    
+    // 14. APPEND QUIZZES TO MODULE CONTENT (if any)
+    for (let i = 0; i < modules.length; i++) {
+      const module = modules[i]
+      if (module.quiz && module.quiz.questions && module.quiz.questions.length > 0) {
+        const moduleId = insertedModules[i].id
+        const quiz = module.quiz
+        
+        // Build quiz Markdown section
+        let quizSection = `\n\n---\n\n## 📝 Module Quiz\n\n`
+        quizSection += `**Passing Score:** ${quiz.passing_score || 70}%\n\n`
+        quizSection += `**Maximum Attempts:** ${quiz.max_attempts || 3}\n\n`
+        quizSection += `### Questions:\n\n`
+        
+        quiz.questions.forEach((q: any, qIndex: number) => {
+          quizSection += `**${qIndex + 1}. ${q.question}**\n\n`
+          q.options.forEach((opt: string, optIndex: number) => {
+            const letter = String.fromCharCode(65 + optIndex)
+            const isCorrect = opt === q.correct_answer ? ' ✅' : ''
+            quizSection += `${letter}) ${opt}${isCorrect}\n\n`
+          })
+        })
+        
+        // Update module content with quiz
+        await supabase
+          .from('modules')
+          .update({
+            content: insertedModules[i].content + quizSection
+          })
+          .eq('id', moduleId)
+      }
+    }
+    
+    // 15. SUCCESS RESPONSE
+    return c.json({
+      success: true,
+      message: `Course "${course.name}" created successfully with ${insertedModules.length} modules`,
+      data: {
+        course_id: insertedCourse.id,
+        course_name: insertedCourse.name,
+        course_code: insertedCourse.code,
+        modules_count: insertedModules.length,
+        price: price,
+        level: course.level,
+        duration: course.duration,
+        course_url: `https://vonwillingh-online-lms.pages.dev/courses`
+      }
+    })
+    
+  } catch (error: any) {
+    console.error('❌ External import error:', error)
+    return c.json({ 
+      success: false, 
+      message: 'Import failed: ' + error.message,
+      error: 'INTERNAL_ERROR'
+    }, 500)
+  }
+})
+
 // API endpoint - Admin Login
 app.post('/api/admin/login', async (c) => {
   try {
