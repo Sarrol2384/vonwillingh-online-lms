@@ -1,0 +1,174 @@
+{
+  "course": {
+    "name": "Digital Marketing for South African Small Businesses",
+    "code": "DIGIMKT001",
+    "level": "Certificate",
+    "description": "Master digital marketing strategies tailored for South African small businesses. Learn how to reach your target audience, create compelling content, run effective social media campaigns, and measure your marketing ROI. This practical course covers Facebook, Instagram, Google My Business, email marketing, and content creation - all with a focus on low-budget, high-impact strategies perfect for South African entrepreneurs. No prior marketing experience required!",
+    "duration": "4 weeks",
+    "price": 1500,
+    "category": "Digital Marketing"
+  },
+  "modules": [
+    {
+      "title": "Module 1: Digital Marketing Fundamentals for SA Businesses",
+      "description": "Understand the digital marketing landscape in South Africa, identify your target audience, and create your marketing strategy foundation.",
+      "order_number": 1,
+      "content": "<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 10px; margin-bottom: 30px;'><h1 style='margin: 0 0 15px 0;'>📱 Module 1: Digital Marketing Fundamentals</h1><p style='font-size: 1.2em; margin: 0;'>Build Your Marketing Foundation</p></div><div style='background: #e8f5e9; border-left: 5px solid #4caf50; padding: 25px; margin: 30px 0; border-radius: 5px;'><h3 style='color: #2e7d32; margin-top: 0;'>🎯 What You'll Learn</h3><ul style='line-height: 1.8;'><li>✅ Understand the digital marketing landscape in South Africa</li><li>✅ Identify and define your target audience</li><li>✅ Choose the right digital channels for your business</li><li>✅ Create a simple marketing strategy on any budget</li></ul></div><h2>What is Digital Marketing?</h2><p>Digital marketing is promoting your business using online channels like social media, Google, email, and websites. For South African small businesses, it's the most cost-effective way to reach customers!</p><div style='background: #fff3e0; border: 2px solid #ff9800; padding: 20px; margin: 25px 0; border-radius: 8px;'><h4 style='color: #e65100; margin-top: 0;'>💡 Key Insight</h4><p><strong>You don't need a big budget!</strong> With R500-R1,000 per month, South African small businesses are seeing real results. It's about being smart, not rich!</p></div><h3>Why Digital Marketing for SA Businesses?</h3><div style='display: grid; gap: 15px; margin: 20px 0;'><div style='background: white; border-left: 4px solid #4caf50; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);'><strong style='color: #2e7d32;'>💰 Cost-Effective:</strong> Reach 1,000 people on Facebook for R50 (vs R5,000 in newspaper ads)</div><div style='background: white; border-left: 4px solid #2196f3; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);'><strong style='color: #1565c0;'>🎯 Targeted:</strong> Show your ads only to people in Johannesburg who love baking (perfect for a bakery!)</div><div style='background: white; border-left: 4px solid #9c27b0; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);'><strong style='color: #6a1b9a;'>📊 Measurable:</strong> Know exactly how many people saw your ad, clicked, and bought</div><div style='background: white; border-left: 4px solid #ff9800; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);'><strong style='color: #e65100;'>⚡ Fast:</strong> Start today, see results this week!</div></div><h3>Your Target Audience</h3><p>Before spending R1 on marketing, answer these:</p><ol style='line-height: 1.8;'><li><strong>Who are they?</strong> Age, gender, location, income</li><li><strong>What do they need?</strong> Problems you solve</li><li><strong>Where are they online?</strong> Facebook? WhatsApp? Google?</li><li><strong>When do they buy?</strong> Payday? Weekends?</li></ol><div style='background: white; border: 1px solid #e0e0e0; border-radius: 10px; padding: 25px; margin: 25px 0;'><h4 style='color: #333; margin-top: 0;'>🏪 Real Example: Thabo's Hardware Store</h4><p><strong>Target Audience:</strong></p><ul><li>Homeowners in Soweto</li><li>Age 30-55</li><li>DIY enthusiasts and contractors</li><li>Active on Facebook and WhatsApp</li></ul><p><strong>Result:</strong> Thabo focused his R800 monthly budget on Facebook ads targeting Soweto only. Sales increased 40% in 2 months!</p></div>",
+      "resources": [
+        "Facebook Business Manager: https://business.facebook.com",
+        "Google My Business: https://www.google.com/business/",
+        "Target Audience Template (Download PDF)"
+      ],
+      "quiz": {
+        "passing_score": 70,
+        "max_attempts": 3,
+        "questions": [
+          {
+            "question": "What is the main advantage of digital marketing for South African small businesses compared to traditional marketing?",
+            "options": [
+              "It's more expensive but reaches more people",
+              "It's cost-effective and highly targeted",
+              "It only works for big companies",
+              "It requires a large marketing team"
+            ],
+            "correct_answer": "It's cost-effective and highly targeted"
+          },
+          {
+            "question": "Before starting any digital marketing campaign, what is the MOST important thing to define first?",
+            "options": [
+              "Your budget",
+              "Your target audience",
+              "Your logo design",
+              "Your website"
+            ],
+            "correct_answer": "Your target audience"
+          },
+          {
+            "question": "In the example, how much did Thabo spend monthly on Facebook ads?",
+            "options": [
+              "R100",
+              "R500",
+              "R800",
+              "R2,000"
+            ],
+            "correct_answer": "R800"
+          },
+          {
+            "question": "Which of the following is NOT mentioned as a benefit of digital marketing?",
+            "options": [
+              "Measurable results",
+              "Fast implementation",
+              "Guaranteed viral content",
+              "Cost-effective reach"
+            ],
+            "correct_answer": "Guaranteed viral content"
+          },
+          {
+            "question": "What information is important when defining your target audience?",
+            "options": [
+              "Only their age",
+              "Only their location",
+              "Age, location, needs, and online behavior",
+              "Just their income level"
+            ],
+            "correct_answer": "Age, location, needs, and online behavior"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Module 2: Facebook & Instagram Marketing",
+      "description": "Master Facebook and Instagram marketing to reach South African customers where they spend their time online.",
+      "order_number": 2,
+      "content": "<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 10px; margin-bottom: 30px;'><h1 style='margin: 0 0 15px 0;'>📱 Module 2: Facebook & Instagram Marketing</h1><p style='font-size: 1.2em; margin: 0;'>Reach 30+ Million South Africans on Social Media</p></div><h2>Why Facebook & Instagram?</h2><p><strong>The numbers speak for themselves:</strong></p><div style='background: #e3f2fd; padding: 25px; margin: 25px 0; border-radius: 8px;'><div style='background: white; padding: 15px; border-radius: 5px; margin-bottom: 10px;'><div style='font-size: 2.5em; color: #2196f3; font-weight: bold;'>26 million</div><p style='margin: 5px 0 0 0; color: #666;'>South Africans on Facebook (2024)</p></div><div style='background: white; padding: 15px; border-radius: 5px;'><div style='font-size: 2.5em; color: #2196f3; font-weight: bold;'>10 million</div><p style='margin: 5px 0 0 0; color: #666;'>South Africans on Instagram (2024)</p></div></div><h3>Creating Engaging Content</h3><p>What works best on Facebook & Instagram in SA:</p><div style='display: grid; gap: 15px; margin: 20px 0;'><div style='background: white; border-left: 4px solid #4caf50; padding: 15px; border-radius: 5px;'><strong>📸 Photos:</strong> Before/after, behind-the-scenes, product shots</div><div style='background: white; border-left: 4px solid #2196f3; padding: 15px; border-radius: 5px;'><strong>🎥 Videos:</strong> How-to guides, customer testimonials (even 30-second clips work!)</div><div style='background: white; border-left: 4px solid #9c27b0; padding: 15px; border-radius: 5px;'><strong>💬 Stories:</strong> Daily updates, polls, 'swipe up' for specials</div><div style='background: white; border-left: 4px solid #ff9800; padding: 15px; border-radius: 5px;'><strong>🎁 Specials:</strong> Limited-time offers, payday deals, township delivery specials</div></div><h3>Facebook Ads on a Budget</h3><p>You can start with as little as R5 per day (R150/month)!</p><div style='background: #fff3e0; border: 2px solid #ff9800; padding: 20px; margin: 25px 0; border-radius: 8px;'><h4 style='color: #e65100; margin-top: 0;'>💡 Pro Tip</h4><p>Start with R10/day for 7 days. Learn what works. Then increase budget on winning ads!</p></div>",
+      "resources": [
+        "Facebook Ads Guide: https://www.facebook.com/business/ads",
+        "Instagram for Business: https://business.instagram.com",
+        "Canva (Free Design Tool): https://www.canva.com"
+      ],
+      "quiz": {
+        "passing_score": 70,
+        "max_attempts": 3,
+        "questions": [
+          {
+            "question": "How many South Africans are on Facebook (as mentioned in the course)?",
+            "options": [
+              "10 million",
+              "15 million",
+              "26 million",
+              "50 million"
+            ],
+            "correct_answer": "26 million"
+          },
+          {
+            "question": "What is the minimum daily budget suggested to start Facebook ads?",
+            "options": [
+              "R1 per day",
+              "R5 per day",
+              "R50 per day",
+              "R100 per day"
+            ],
+            "correct_answer": "R5 per day"
+          },
+          {
+            "question": "Which type of content is mentioned as effective on Instagram?",
+            "options": [
+              "Only professional photos",
+              "Long written articles",
+              "Stories, videos, and photos",
+              "Only paid advertisements"
+            ],
+            "correct_answer": "Stories, videos, and photos"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Module 3: Google My Business & Local SEO",
+      "description": "Get found by local customers searching on Google - the #1 way South Africans find businesses near them.",
+      "order_number": 3,
+      "content": "<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 10px; margin-bottom: 30px;'><h1 style='margin: 0 0 15px 0;'>🔍 Module 3: Google My Business & Local SEO</h1><p style='font-size: 1.2em; margin: 0;'>Get Found When Customers Search Near You</p></div><h2>Why Google My Business is FREE Gold</h2><p>When someone searches 'hardware store near me' or 'best salon in Sandton', Google My Business puts YOUR business on the map - literally!</p><div style='background: #e8f5e9; border-left: 5px solid #4caf50; padding: 25px; margin: 30px 0; border-radius: 5px;'><h4 style='color: #2e7d32; margin-top: 0;'>💰 Best Part: IT'S 100% FREE!</h4><p>No monthly fees, no hidden costs. Just free customers finding you on Google!</p></div><h3>Setting Up Your Google My Business</h3><ol style='line-height: 1.8; font-size: 1.1em;'><li>Go to <a href='https://www.google.com/business/'>google.com/business</a></li><li>Click 'Manage Now'</li><li>Enter your business name and address</li><li>Verify with postcard or phone (Google will call/mail you)</li><li>Add photos, hours, description</li><li>Done! You're on Google Maps! 🎉</li></ol><div style='background: white; border: 1px solid #e0e0e0; border-radius: 10px; padding: 25px; margin: 30px 0;'><h4>🏪 Real Success Story: Nomsa's Salon - Soweto</h4><p><strong>Before Google My Business:</strong> 5 walk-in customers per week</p><p><strong>After setting up (2 weeks later):</strong> 25 new customers from Google searches!</p><p><strong>Cost:</strong> R0</p><p><strong>Nomsa's tip:</strong> 'I ask every happy customer to leave a Google review. Now I have 47 five-star reviews and I'm the top salon in my area!'</p></div><h3>Getting Great Reviews</h3><p>Reviews = Trust = More Customers!</p><ul style='line-height: 1.8;'><li>✅ Ask happy customers for reviews (show them how!)</li><li>✅ Respond to ALL reviews (good and bad)</li><li>✅ Keep responses professional and friendly</li><li>✅ Fix problems mentioned in negative reviews</li></ul>",
+      "resources": [
+        "Google My Business: https://www.google.com/business/",
+        "Google Maps Help: https://support.google.com/business/",
+        "Review Request Template (Download)"
+      ],
+      "quiz": {
+        "passing_score": 70,
+        "max_attempts": 3,
+        "questions": [
+          {
+            "question": "What is the cost of Google My Business?",
+            "options": [
+              "R50 per month",
+              "R500 per year",
+              "100% FREE",
+              "Free for first month only"
+            ],
+            "correct_answer": "100% FREE"
+          },
+          {
+            "question": "In the success story, how many customers did Nomsa get from Google searches after setting up her profile?",
+            "options": [
+              "5 customers",
+              "10 customers",
+              "25 customers",
+              "50 customers"
+            ],
+            "correct_answer": "25 customers"
+          },
+          {
+            "question": "What should you do with ALL reviews (good and bad)?",
+            "options": [
+              "Delete the bad ones",
+              "Ignore them",
+              "Respond to all of them",
+              "Only respond to good ones"
+            ],
+            "correct_answer": "Respond to all of them"
+          }
+        ]
+      }
+    }
+  ]
+}
