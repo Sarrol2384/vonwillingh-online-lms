@@ -1,0 +1,101 @@
+{
+  "course": {
+    "name": "Test Course - Social Media Basics",
+    "code": "TEST001",
+    "level": "Certificate",
+    "category": "Digital Marketing",
+    "description": "A simple test course to verify the import system works perfectly. Learn the fundamentals of social media marketing for South African small businesses.",
+    "duration": "1 week",
+    "price": 0
+  },
+  "modules": [
+    {
+      "title": "Module 1: Introduction to Social Media",
+      "description": "Understand the basics of social media marketing and why it matters for your business.",
+      "order_number": 1,
+      "content": "<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 20px; border-radius: 12px; margin-bottom: 30px; text-align: center;'><h1 style='margin: 0 0 15px 0; font-size: 2.2em;'>📱 Introduction to Social Media</h1><p style='font-size: 1.3em; margin: 0; opacity: 0.95;'>Reach Your Customers Where They Spend Their Time</p></div><div style='background: #e8f5e9; border-left: 5px solid #4caf50; padding: 25px; margin: 30px 0; border-radius: 8px;'><h3 style='color: #2e7d32; margin-top: 0;'>🎯 What You'll Learn</h3><ul style='line-height: 1.8; margin: 10px 0;'><li>✅ Understand the power of social media for small businesses</li><li>✅ Choose the right platforms for your business</li><li>✅ Create engaging content that attracts customers</li><li>✅ Measure your social media success</li></ul></div><h2>Why Social Media Matters</h2><p>Social media is where your customers spend 2-3 hours every day. By having a strong social media presence, you can reach them where they already are!</p><div style='background: #fff3e0; border: 2px solid #ff9800; padding: 20px; margin: 25px 0; border-radius: 8px;'><h4 style='color: #e65100; margin-top: 0;'>💡 Key Insight</h4><p style='margin-bottom: 0;'><strong>You don't need a big budget to succeed on social media.</strong> Consistency and authenticity matter more than expensive ads!</p></div><h3>The Big Three Platforms for SA Businesses</h3><ul style='line-height: 1.8;'><li><strong>Facebook:</strong> 26 million South Africans use it - perfect for reaching adults 25-65</li><li><strong>Instagram:</strong> 10 million SA users - ideal for visual businesses (salons, restaurants, fashion)</li><li><strong>WhatsApp Business:</strong> 90%+ of SA smartphone users - great for direct customer communication</li></ul><div style='background: white; border: 2px solid #2196f3; border-radius: 10px; padding: 25px; margin: 30px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);'><h4 style='color: #1565c0; margin-top: 0;'>🏪 Real Success Story: Thabo's Bakery - Soweto</h4><p><strong>Business Type:</strong> Small bakery specializing in traditional South African baked goods</p><p><strong>Challenge:</strong> Foot traffic was slow, only 15 customers per day</p><p><strong>Solution:</strong> Started posting daily photos of fresh bread and cakes on Facebook and Instagram</p><div style='background: #e3f2fd; padding: 15px; border-radius: 5px; margin: 15px 0;'><p style='margin: 0;'><strong>📊 Results After 2 Months:</strong></p><ul style='margin: 10px 0;'><li>✅ 45 customers per day (3x increase!)</li><li>✅ 800 Facebook followers</li><li>✅ Pre-orders through WhatsApp every morning</li></ul></div><p><strong>💰 Total Investment:</strong> R0 per month (used free organic posts only)</p><p><strong>💬 Thabo's Tip:</strong> Take photos in good morning light, show your products fresh out of the oven, and respond to every comment within an hour!</p></div><h3>📝 Step-by-Step: Create Your First Post</h3><ol style='line-height: 1.8; font-size: 1.05em;'><li><strong>Take a photo:</strong> Use your smartphone camera in good lighting</li><li><strong>Write a caption:</strong> What's special about this product/service?</li><li><strong>Add a call-to-action:</strong> Visit us today! or Call to order!</li><li><strong>Post at peak times:</strong> 7-9am, 12-1pm, or 6-8pm</li><li><strong>Engage with comments:</strong> Reply within 1 hour for best results</li></ol><div style='background: #e1f5fe; border-left: 4px solid #0288d1; padding: 20px; margin: 20px 0; border-radius: 5px;'><p style='margin: 0;'><strong>💡 Pro Tip:</strong> Post consistently! 3 times per week is better than 7 posts one week and nothing the next.</p></div><div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin: 30px 0;'><h3 style='margin-top: 0; color: white;'>✅ Your Action Plan (Complete This Week)</h3><ol style='line-height: 2; font-size: 1.05em;'><li>Day 1: Create business pages on Facebook and Instagram</li><li>Day 2: Take 10 photos of your products/services</li><li>Day 3: Write 3 post captions and schedule them</li><li>Day 4-7: Post once per day and engage with comments</li></ol></div><div style='background: #fff9c4; border: 2px solid #fbc02d; padding: 25px; margin: 30px 0; border-radius: 10px;'><h4 style='color: #f57f17; margin-top: 0;'>🎯 Key Takeaway</h4><p style='font-size: 1.1em; line-height: 1.8; margin-bottom: 0;'>Social media success comes from showing up consistently, being authentic, and engaging with your community - not from having the biggest budget!</p></div>",
+      "content_type": "lesson",
+      "video_url": "",
+      "duration_minutes": 15,
+      "resources": [
+        "Facebook Business: https://business.facebook.com",
+        "Instagram for Business: https://business.instagram.com",
+        "Canva for Social Media: https://www.canva.com"
+      ],
+      "quiz": {
+        "passing_score": 70,
+        "max_attempts": 3,
+        "questions": [
+          {
+            "id": 1,
+            "question": "How many South Africans use Facebook according to the module?",
+            "type": "multiple_choice",
+            "options": [
+              "10 million",
+              "15 million",
+              "26 million",
+              "50 million"
+            ],
+            "correct_answer": "26 million",
+            "difficulty": "easy",
+            "explanation": "According to the module, 26 million South Africans use Facebook, making it the largest social media platform in the country and perfect for reaching adults aged 25-65."
+          },
+          {
+            "id": 2,
+            "question": "True or False: You need a big budget to succeed on social media.",
+            "type": "true_false",
+            "options": [
+              "True",
+              "False"
+            ],
+            "correct_answer": "False",
+            "difficulty": "easy",
+            "explanation": "False! The module emphasizes that consistency and authenticity matter more than expensive ads. Thabo's Bakery succeeded with R0 investment using only organic posts."
+          },
+          {
+            "id": 3,
+            "question": "What was Thabo's Bakery's customer increase after 2 months of social media posting?",
+            "type": "multiple_choice",
+            "options": [
+              "From 5 to 15 customers per day",
+              "From 15 to 45 customers per day",
+              "From 20 to 40 customers per day",
+              "From 10 to 25 customers per day"
+            ],
+            "correct_answer": "From 15 to 45 customers per day",
+            "difficulty": "medium",
+            "explanation": "Thabo's Bakery went from 15 customers per day to 45 customers per day - a 3x increase! This shows the power of consistent social media posting with quality photos and engagement."
+          },
+          {
+            "id": 4,
+            "question": "According to the module, what percentage of SA smartphone users have WhatsApp?",
+            "type": "multiple_choice",
+            "options": [
+              "50%",
+              "70%",
+              "80%",
+              "90%+"
+            ],
+            "correct_answer": "90%+",
+            "difficulty": "medium",
+            "explanation": "Over 90% of South African smartphone users have WhatsApp, making it an essential platform for direct customer communication and order taking."
+          },
+          {
+            "id": 5,
+            "question": "What is the recommended posting frequency according to the Pro Tip?",
+            "type": "multiple_choice",
+            "options": [
+              "Once per month",
+              "Once per day",
+              "3 times per week consistently",
+              "7 times per day"
+            ],
+            "correct_answer": "3 times per week consistently",
+            "difficulty": "medium",
+            "explanation": "The module's Pro Tip states that 3 times per week consistently is better than 7 posts one week and nothing the next. Consistency beats frequency!"
+          }
+        ]
+      }
+    }
+  ]
+}
