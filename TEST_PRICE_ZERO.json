@@ -1,0 +1,69 @@
+{
+  "course": {
+    "name": "FREE COURSE TEST - Price Zero Validation",
+    "code": "FREETEST001",
+    "level": "Certificate",
+    "category": "Test Category",
+    "description": "This course tests that price: 0 (FREE courses) work correctly without validation errors.",
+    "duration": "1 week",
+    "price": 0
+  },
+  "modules": [
+    {
+      "title": "Module 1: Testing Price Zero",
+      "description": "This module verifies that free courses (price: 0) import successfully.",
+      "order_number": 1,
+      "content": "<h1>Testing Price: 0</h1><p>If you can see this module, it means the validation correctly accepts <strong>price: 0</strong> for FREE courses!</p><h2>What We're Testing:</h2><ul><li>✅ Price field exists</li><li>✅ Price is exactly 0 (zero)</li><li>✅ Validation should accept it</li><li>✅ Course should be created successfully</li></ul><h2>Validation Logic:</h2><pre>if (course.price === undefined || course.price === null) {\n  throw error\n}\n// This correctly accepts: price: 0, 1, 100, etc.\n// This correctly rejects: price: undefined, null, missing</pre>",
+      "content_type": "lesson",
+      "video_url": "",
+      "duration_minutes": 5,
+      "resources": [],
+      "quiz": {
+        "passing_score": 70,
+        "max_attempts": 3,
+        "questions": [
+          {
+            "id": 1,
+            "question": "What is the price of this course?",
+            "type": "multiple_choice",
+            "options": [
+              "R0 (FREE)",
+              "R100",
+              "R500",
+              "R1,000"
+            ],
+            "correct_answer": "R0 (FREE)",
+            "difficulty": "easy",
+            "explanation": "This course has price: 0, which makes it completely FREE. The validation should accept 0 as a valid price value."
+          },
+          {
+            "id": 2,
+            "question": "True or False: The validation code 'if (!course.price)' would reject price: 0",
+            "type": "true_false",
+            "options": [
+              "True",
+              "False"
+            ],
+            "correct_answer": "True",
+            "difficulty": "medium",
+            "explanation": "TRUE! The code 'if (!course.price)' treats 0 as falsy and would incorrectly reject it. That's why we use 'if (course.price === undefined || course.price === null)' instead, which correctly accepts 0."
+          },
+          {
+            "id": 3,
+            "question": "Which validation check correctly accepts price: 0?",
+            "type": "multiple_choice",
+            "options": [
+              "if (!course.price)",
+              "if (course.price === undefined || course.price === null)",
+              "if (!course.price || course.price === 0)",
+              "if (course.price == false)"
+            ],
+            "correct_answer": "if (course.price === undefined || course.price === null)",
+            "difficulty": "hard",
+            "explanation": "Option 2 is correct! It explicitly checks for undefined or null, allowing 0 as a valid value. Option 1 would reject 0 (falsy), Option 3 has confusing logic, and Option 4 is incorrect."
+          }
+        ]
+      }
+    }
+  ]
+}
