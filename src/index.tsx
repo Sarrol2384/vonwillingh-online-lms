@@ -2350,8 +2350,7 @@ app.post('/api/courses/external-import', async (c) => {
         level: course.level,
         modules_count: modules.length,
         price: price,
-        description: course.description,
-        duration: course.duration
+        description: course.description
       })
       .select()
       .single()
