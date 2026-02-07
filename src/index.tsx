@@ -2058,12 +2058,12 @@ app.post('/api/admin/courses/import', async (c) => {
       // Get current max module order
       const { data: existingModules } = await supabase
         .from('modules')
-        .select('order_index')
+        .select('order_number')
         .eq('course_id', existingCourse.id)
-        .order('order_index', { ascending: false })
+        .order('order_number', { ascending: false })
         .limit(1)
       
-      const maxOrderIndex = existingModules && existingModules.length > 0 ? existingModules[0].order_index : 0
+      const maxOrderIndex = existingModules && existingModules.length > 0 ? existingModules[0].order_number : 0
       const startOrderIndex = maxOrderIndex + 1
       
       // Update module order numbers to continue from last module
@@ -2878,7 +2878,7 @@ app.get('/api/student/course/:courseId', async (c) => {
       .select('*')
       .eq('course_id', courseId)
       .eq('is_published', true)
-      .order('order_index', { ascending: true })
+      .order('order_number', { ascending: true })
     
     // Get student's progress for each module
     const { data: progress } = await supabase
@@ -2983,9 +2983,9 @@ app.get('/api/student/module/:moduleId', async (c) => {
     // Get previous and next modules
     const { data: allModules } = await supabase
       .from('modules')
-      .select('id, title, order_index')
+      .select('id, title, order_number')
       .eq('course_id', module.course_id)
-      .order('order_index', { ascending: true })
+      .order('order_number', { ascending: true })
     
     const currentIndex = allModules?.findIndex(m => m.id === moduleId) || 0
     const previousModule = currentIndex > 0 ? allModules?.[currentIndex - 1] : null
@@ -3839,7 +3839,7 @@ app.get('/api/admin/courses/:id/modules', async (c) => {
       .from('modules')
       .select('*')
       .eq('course_id', courseId)
-      .order('order_index')
+      .order('order_number')
     
     if (modulesError) {
       throw new Error(modulesError.message)
@@ -3870,16 +3870,16 @@ app.post('/api/admin/courses/:id/modules', async (c) => {
       return c.json({ success: false, message: 'Title and content are required' }, 400)
     }
     
-    // Get next order_index
+    // Get next order_number
     const { data: existingModules } = await supabase
       .from('modules')
-      .select('order_index')
+      .select('order_number')
       .eq('course_id', courseId)
-      .order('order_index', { ascending: false })
+      .order('order_number', { ascending: false })
       .limit(1)
     
     const nextOrder = existingModules && existingModules.length > 0 
-      ? existingModules[0].order_index + 1 
+      ? existingModules[0].order_number + 1 
       : 1
     
     // Insert module
@@ -3890,7 +3890,7 @@ app.post('/api/admin/courses/:id/modules', async (c) => {
         title,
         description: description || null,
         content,
-        order_index: nextOrder,
+        order_number: nextOrder,
         duration_hours: duration_hours || null,
         video_url: video_url || null
       })
@@ -3919,7 +3919,7 @@ app.post('/api/admin/courses/:id/modules', async (c) => {
 app.put('/api/admin/modules/:id', async (c) => {
   try {
     const moduleId = c.req.param('id')
-    const { title, description, content, duration_hours, video_url, order_index } = await c.req.json()
+    const { title, description, content, duration_hours, video_url, order_number } = await c.req.json()
     const supabase = getSupabaseAdminClient(c.env)
     
     const updateData: any = {}
@@ -3928,7 +3928,7 @@ app.put('/api/admin/modules/:id', async (c) => {
     if (content !== undefined) updateData.content = content
     if (duration_hours !== undefined) updateData.duration_hours = duration_hours
     if (video_url !== undefined) updateData.video_url = video_url
-    if (order_index !== undefined) updateData.order_index = order_index
+    if (order_number !== undefined) updateData.order_number = order_number
     
     const { data: module, error: updateError } = await supabase
       .from('modules')
