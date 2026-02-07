@@ -1993,6 +1993,7 @@ app.post('/api/admin/courses/import', async (c) => {
         .insert({
           id: nextId,
           name: course.name,
+          code: course.code || `COURSE${nextId}`,
           category: course.category || 'General',
           level: course.level,
           modules_count: modules.length,
