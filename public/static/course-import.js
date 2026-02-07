@@ -117,7 +117,8 @@ function validateCourseData(data) {
   for (const field of requiredCourseFields) {
     // Special handling for price field - allow 0 as valid value
     if (field === 'price') {
-      if (course[field] === undefined || course[field] === null || course[field] === '') {
+      // Only reject if truly missing (undefined/null), NOT if it's 0
+      if (course[field] === undefined || course[field] === null) {
         return { valid: false, message: `Course is missing required field: ${field}` };
       }
     } else if (!course[field]) {
