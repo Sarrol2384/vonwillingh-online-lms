@@ -2098,15 +2098,13 @@ app.post('/api/admin/courses/import', async (c) => {
     // Insert modules
     const moduleInserts = modules.map((module, index) => ({
       course_id: targetCourse.id,
-      module_number: module.order_number || (index + 1),
+      order_number: module.order_number || (index + 1),
       title: module.title,
       description: module.description,
       content: module.content,
       content_type: module.content_type || 'lesson',
       video_url: module.video_url || null,
-      duration_minutes: module.duration_minutes || null,
-      order_index: module.order_number || (index + 1),
-      is_published: true
+      duration_minutes: module.duration_minutes || null
     }))
     
     const { data: insertedModules, error: modulesError } = await supabase
@@ -2369,15 +2367,13 @@ app.post('/api/courses/external-import', async (c) => {
     // 13. INSERT MODULES
     const moduleInserts = modules.map((module, index) => ({
       course_id: insertedCourse.id,
-      module_number: module.order_number || (index + 1),
+      order_number: module.order_number || (index + 1),
       title: module.title,
       description: module.description,
       content: module.content,
       content_type: module.content_type || 'lesson',
       video_url: module.video_url || null,
-      duration_minutes: module.duration_minutes || 0,
-      order_index: module.order_number || (index + 1),
-      is_published: true
+      duration_minutes: module.duration_minutes || 0
     }))
     
     const { data: insertedModules, error: modulesError } = await supabase
