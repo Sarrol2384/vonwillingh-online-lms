@@ -1,0 +1,43 @@
+{
+  "course": {
+    "name": "AI Basics for Small Business Owners",
+    "code": "AIFREE001",
+    "level": "Certificate",
+    "category": "Artificial Intelligence & Technology",
+    "description": "Welcome to AI Basics for Small Business Owners - your gateway to understanding and leveraging artificial intelligence in your business.",
+    "duration": "2 weeks",
+    "price": 0.01
+  },
+  "modules": [
+    {
+      "title": "Module 1: Understanding AI",
+      "description": "Learn what AI is and how it works for small businesses.",
+      "order_number": 1,
+      "content": "<h1>Understanding AI</h1><p>Introduction to AI for small business owners.</p>",
+      "content_type": "lesson",
+      "video_url": "",
+      "duration_minutes": 30,
+      "resources": [],
+      "quiz": {
+        "passing_score": 70,
+        "max_attempts": 3,
+        "questions": [
+          {
+            "id": 1,
+            "question": "What does AI stand for?",
+            "type": "multiple_choice",
+            "options": [
+              "Artificial Intelligence",
+              "Automated Internet",
+              "Advanced Integration",
+              "None of the above"
+            ],
+            "correct_answer": "Artificial Intelligence",
+            "difficulty": "easy",
+            "explanation": "AI stands for Artificial Intelligence - technology that can learn and make decisions."
+          }
+        ]
+      }
+    }
+  ]
+}
