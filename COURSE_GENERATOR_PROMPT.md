@@ -33,7 +33,8 @@ Generate the course in this EXACT format:
     "category": "Course Category",
     "description": "200-300 word engaging course description that sells the value, highlights practical outcomes, and mentions South African relevance. Use 'you' language. Make it inspiring!",
     "duration": "X weeks",
-    "price": 0
+    "price": 0,
+    "semesters_count": 0
   },
   "modules": [
     {
