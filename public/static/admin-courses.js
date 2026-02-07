@@ -219,7 +219,7 @@ async function viewModules(courseId, courseName) {
                                 <div class="flex-1">
                                     <div class="flex items-center space-x-3">
                                         <span class="bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded-full text-sm">
-                                            Module ${module.order_index}
+                                            Module ${module.order_number}
                                         </span>
                                         <h4 class="text-lg font-semibold text-gray-900">${module.title}</h4>
                                     </div>
