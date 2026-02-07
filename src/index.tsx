@@ -2098,6 +2098,7 @@ app.post('/api/admin/courses/import', async (c) => {
     // Insert modules
     const moduleInserts = modules.map((module, index) => ({
       course_id: targetCourse.id,
+      module_number: module.order_number || (index + 1),
       order_number: module.order_number || (index + 1),
       title: module.title,
       description: module.description,
@@ -2367,6 +2368,8 @@ app.post('/api/courses/external-import', async (c) => {
     // 13. INSERT MODULES
     const moduleInserts = modules.map((module, index) => ({
       course_id: insertedCourse.id,
+      course_id: insertedCourse.id,
+      module_number: module.order_number || (index + 1),
       order_number: module.order_number || (index + 1),
       title: module.title,
       description: module.description,
