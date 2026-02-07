@@ -1997,7 +1997,8 @@ app.post('/api/admin/courses/import', async (c) => {
           level: course.level,
           modules_count: modules.length,
           price: parseFloat(course.price),
-          description: course.description
+          description: course.description,
+          semesters_count: 0
         })
         .select()
         .single()
@@ -2350,7 +2351,8 @@ app.post('/api/courses/external-import', async (c) => {
         level: course.level,
         modules_count: modules.length,
         price: price,
-        description: course.description
+        description: course.description,
+        semesters_count: 0
       })
       .select()
       .single()
