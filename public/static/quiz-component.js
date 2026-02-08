@@ -40,12 +40,19 @@ class QuizComponent {
   }
 
   async loadQuizData() {
-    const response = await axios.get(`/api/student/module/${this.moduleId}/quiz?studentId=${this.studentId}`);
-    
-    if (response.data.success) {
-      this.questions = response.data.questions;
-    } else {
-      throw new Error(response.data.message || 'Failed to load quiz');
+    try {
+      const response = await axios.get(`/api/student/module/${this.moduleId}/quiz?studentId=${this.studentId}`);
+      
+      if (response.data.success) {
+        this.questions = response.data.questions;
+      } else {
+        throw new Error(response.data.message || 'Failed to load quiz');
+      }
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        throw new Error(error.response.data.message);
+      }
+      throw error;
     }
   }
 
