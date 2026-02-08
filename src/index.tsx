@@ -2852,7 +2852,7 @@ app.get('/api/student/course/:courseId', async (c) => {
       return c.json({ success: false, message: 'Student ID required' }, 400)
     }
     
-    const supabase = getSupabaseClient(c.env)
+    const supabase = getSupabaseAdminClient(c.env)
     
     // Get course details
     const { data: course } = await supabase
