@@ -50,6 +50,15 @@ async function loadModule(moduleId) {
       document.getElementById('moduleDescription').textContent = module.description || '';
       document.getElementById('moduleContentArea').innerHTML = module.content || '<p>No content available.</p>';
       
+      // Trigger professional renderer after content is loaded
+      setTimeout(() => {
+        if (window.ProfessionalModuleRenderer) {
+          const contentArea = document.getElementById('moduleContentArea');
+          const renderer = new window.ProfessionalModuleRenderer(contentArea);
+          renderer.render();
+        }
+      }, 100);
+      
       // Setup navigation buttons
       setupNavigation(navigation, module.course_id);
       
