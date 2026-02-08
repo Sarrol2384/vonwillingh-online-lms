@@ -65,15 +65,26 @@ class QuizComponent {
   }
 
   async loadPreviousAttempts() {
-    const response = await axios.get(`/api/student/module/${this.moduleId}/quiz/attempts?studentId=${this.studentId}`);
-    
-    if (response.data.success) {
-      this.previousAttempts = response.data.attempts || [];
+    try {
+      console.log('[QuizComponent] Loading previous attempts...');
+      const response = await axios.get(`/api/student/module/${this.moduleId}/quiz/attempts?studentId=${this.studentId}`);
       
-      // Find last attempt
-      if (this.previousAttempts.length > 0) {
-        this.currentAttempt = this.previousAttempts[0]; // Most recent
+      console.log('[QuizComponent] Attempts response:', response.data);
+      
+      if (response.data.success) {
+        this.previousAttempts = response.data.attempts || [];
+        console.log('[QuizComponent] Found', this.previousAttempts.length, 'previous attempts');
+        
+        // Find last attempt
+        if (this.previousAttempts.length > 0) {
+          this.currentAttempt = this.previousAttempts[0]; // Most recent
+        }
       }
+    } catch (error) {
+      console.warn('[QuizComponent] Failed to load previous attempts, continuing anyway:', error);
+      // Don't throw - just continue without previous attempts
+      this.previousAttempts = [];
+      this.currentAttempt = null;
     }
   }
 
