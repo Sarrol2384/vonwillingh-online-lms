@@ -2922,7 +2922,7 @@ app.get('/api/student/module/:moduleId', async (c) => {
       return c.json({ success: false, message: 'Student ID required' }, 400)
     }
     
-    const supabase = getSupabaseClient(c.env)
+    const supabase = getSupabaseAdminClient(c.env)
     
     // Get module details
     const { data: module } = await supabase
@@ -3016,7 +3016,7 @@ app.post('/api/student/module/:moduleId/complete', async (c) => {
     const moduleId = c.req.param('moduleId')
     const { studentId, enrollmentId } = await c.req.json()
     
-    const supabase = getSupabaseClient(c.env)
+    const supabase = getSupabaseAdminClient(c.env)
     
     // Update module progress
     await supabase
