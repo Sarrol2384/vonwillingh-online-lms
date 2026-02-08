@@ -1,65 +1,109 @@
-// Quiz Renderer - Cleans up and hides repeated quiz text
-// Simply hides all the messy repeated quiz questions
+// Quiz Renderer for Module Viewer - Clean up repeated quiz text
+console.log('🎯 Quiz Renderer Script Loaded!');
 
-function initQuizRenderer() {
-  // Wait a bit for content to load
-  setTimeout(() => {
-    const contentArea = document.getElementById('contentArea');
-    if (!contentArea) return;
-    
-    let html = contentArea.innerHTML;
-    
-    // Check if there are repeated quiz patterns
-    const hasRepeatedQuestions = (html.match(/Question\s+\d+/g) || []).length > 10;
-    
-    if (!hasRepeatedQuestions) return;
-    
-    console.log('Detected repeated quiz text, cleaning up...');
-    
-    // Find where the repetition starts by looking for the pattern
-    // Usually the content is good until we hit the first "**Question" or similar
-    const patterns = [
-      /\*\*Question\s+1/i,
-      /<p>\s*Question\s+1/i,
-      /###\s*Question\s+1/i
-    ];
-    
-    let cutoffIndex = -1;
-    for (const pattern of patterns) {
-      const match = html.match(pattern);
-      if (match) {
-        cutoffIndex = html.indexOf(match[0]);
-        break;
-      }
-    }
-    
-    if (cutoffIndex > 100) {
-      // Keep only the content before the repeated quiz mess
-      const cleanContent = html.substring(0, cutoffIndex);
-      
-      // Add a note about the quiz
-      const quizNote = `
-        <hr class="my-8 border-gray-300">
-        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded">
-          <h3 class="text-lg font-bold text-blue-900 mb-2">
-            <i class="fas fa-info-circle mr-2"></i>Module Quiz
-          </h3>
-          <p class="text-blue-800">
-            This module includes quiz questions that will be made interactive in the next update.
-            For now, focus on learning the content above!
-          </p>
-        </div>
-      `;
-      
-      contentArea.innerHTML = cleanContent + quizNote;
-      console.log('Content cleaned successfully');
-    }
-  }, 600);
+// Initialize when page loads
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initQuizCleanup);
+} else {
+  initQuizCleanup();
 }
 
-// Initialize
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initQuizRenderer);
-} else {
-  initQuizRenderer();
+function initQuizCleanup() {
+  console.log('📚 Initializing quiz cleanup...');
+  
+  // Wait for content to be loaded by module-viewer.js
+  let attempts = 0;
+  const maxAttempts = 10;
+  
+  const checkInterval = setInterval(() => {
+    attempts++;
+    const contentArea = document.getElementById('contentArea');
+    
+    console.log(`Attempt ${attempts}: Checking for content area...`);
+    
+    if (contentArea && contentArea.innerHTML.length > 100) {
+      console.log('✓ Content area found! Length:', contentArea.innerHTML.length);
+      clearInterval(checkInterval);
+      cleanupQuizText();
+    } else if (attempts >= maxAttempts) {
+      console.log('✗ Max attempts reached, no content found');
+      clearInterval(checkInterval);
+    }
+  }, 1000);
+}
+
+function cleanupQuizText() {
+  const contentArea = document.getElementById('contentArea');
+  if (!contentArea) {
+    console.log('✗ No content area found');
+    return;
+  }
+  
+  let html = contentArea.innerHTML;
+  console.log('📝 Content HTML length:', html.length);
+  
+  // Count how many times "Question" appears
+  const questionMatches = html.match(/Question\s+\d+/gi) || [];
+  console.log('📊 Found', questionMatches.length, 'question references');
+  
+  // If there are many repeated questions (more than 15), it's the messy quiz text
+  if (questionMatches.length < 15) {
+    console.log('ℹ️ Not enough questions to indicate messy quiz text');
+    return;
+  }
+  
+  console.log('🧹 Detected messy quiz text! Cleaning up...');
+  
+  // Strategy: Keep content until we hit the first occurrence of the repeated pattern
+  // Look for patterns like "**Question 1" or "### Question 1" etc.
+  const cutoffPatterns = [
+    '## Quiz ### Question 1',
+    '**Question 1',
+    '### Question 1',
+    'Question 1 What is an important concept'
+  ];
+  
+  let cutoffIndex = -1;
+  let foundPattern = '';
+  
+  for (const pattern of cutoffPatterns) {
+    const index = html.indexOf(pattern);
+    if (index > 0 && (cutoffIndex === -1 || index < cutoffIndex)) {
+      cutoffIndex = index;
+      foundPattern = pattern;
+    }
+  }
+  
+  if (cutoffIndex > 0) {
+    console.log('✂️ Found cutoff at index', cutoffIndex, 'with pattern:', foundPattern);
+    
+    // Keep everything before the messy quiz section
+    const cleanHtml = html.substring(0, cutoffIndex);
+    
+    // Add a nice message about the quiz
+    const quizNotice = `
+      <hr class="my-8 border-gray-300">
+      <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-lg font-medium text-blue-900">Module Quiz</h3>
+            <div class="mt-2 text-sm text-blue-700">
+              <p>This module includes quiz questions to test your understanding.</p>
+              <p class="mt-2"><strong>Note:</strong> Interactive quiz functionality will be available in the next update. For now, review the learning objectives above.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    contentArea.innerHTML = cleanHtml + quizNotice;
+    console.log('✅ Quiz text cleaned up successfully!');
+  } else {
+    console.log('⚠️ Could not find a clear cutoff point for quiz text');
+  }
 }
