@@ -2664,7 +2664,7 @@ app.post('/api/student/login', async (c) => {
     // Find student by email
     const { data: student, error } = await supabase
       .from('students')
-      .select('id, full_name, email, temporary_password, account_status, last_login')
+      .select('id, full_name, email, password, temporary_password, account_status, last_login')
       .eq('email', email)
       .single()
     
@@ -2680,8 +2680,9 @@ app.post('/api/student/login', async (c) => {
       }, 403)
     }
     
-    // Check if password matches (temporary password for now)
-    if (student.temporary_password !== password) {
+    // Check if password matches (check both permanent and temporary)
+    const passwordMatches = student.password === password || student.temporary_password === password
+    if (!passwordMatches) {
       return c.json({ success: false, message: 'Invalid email or password' }, 401)
     }
     
@@ -2808,7 +2809,7 @@ app.get('/api/student/dashboard', async (c) => {
 app.post('/api/student/change-password', async (c) => {
   try {
     const { studentId, currentPassword, newPassword } = await c.req.json()
-    const supabase = getSupabaseClient(c.env)
+    const supabase = getSupabaseAdminClient(c.env)
     
     // Verify current password
     const { data: student } = await supabase
@@ -2825,7 +2826,8 @@ app.post('/api/student/change-password', async (c) => {
     await supabase
       .from('students')
       .update({
-        temporary_password: newPassword,  // In production, this should be hashed
+        password: newPassword,  // Store as permanent password
+        temporary_password: null,  // Clear temporary flag
         account_status: 'active'
       })
       .eq('id', studentId)
