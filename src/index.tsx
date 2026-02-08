@@ -4468,6 +4468,15 @@ app.get('/api/student/module/:moduleId/quiz', async (c) => {
       return c.json({ success: false, message: 'Student ID required' }, 400)
     }
     
+    // Check if environment variables are set
+    if (!c.env.SUPABASE_URL || !c.env.SUPABASE_SERVICE_ROLE_KEY) {
+      console.error('[QUIZ API] Missing Supabase environment variables')
+      return c.json({ 
+        success: false, 
+        message: 'Server configuration error: Missing Supabase credentials. Please contact administrator.' 
+      }, 500)
+    }
+    
     const supabase = getSupabaseAdminClient(c.env)
     
     // Get quiz questions for the module
@@ -4502,7 +4511,7 @@ app.get('/api/student/module/:moduleId/quiz', async (c) => {
     console.error('[QUIZ API] Unexpected error:', error)
     return c.json({ 
       success: false, 
-      message: `Server error: ${error.message}` 
+      message: `Server error: ${error.message || 'Unknown error'}` 
     }, 500)
   }
 })
