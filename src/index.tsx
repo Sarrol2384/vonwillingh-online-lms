@@ -2667,6 +2667,8 @@ app.post('/api/admin/applications/:id/reject', async (c) => {
 app.post('/api/student/login', async (c) => {
   try {
     const { email, password } = await c.req.json()
+    console.log('Login attempt for:', email)
+    
     const supabase = getSupabaseAdminClient(c.env)
     
     // Find student by email
@@ -2675,6 +2677,8 @@ app.post('/api/student/login', async (c) => {
       .select('id, full_name, email, password, temporary_password, account_status, last_login')
       .eq('email', email)
       .single()
+    
+    console.log('Student lookup result:', { found: !!student, error: error?.message })
     
     if (error || !student) {
       return c.json({ success: false, message: 'Invalid email or password' }, 401)
@@ -2690,6 +2694,8 @@ app.post('/api/student/login', async (c) => {
     
     // Check if password matches (check both permanent and temporary)
     const passwordMatches = student.password === password || student.temporary_password === password
+    console.log('Password match:', passwordMatches)
+    
     if (!passwordMatches) {
       return c.json({ success: false, message: 'Invalid email or password' }, 401)
     }
@@ -2726,19 +2732,24 @@ app.post('/api/student/login', async (c) => {
     // Generate unique session token
     const sessionToken = `session_${student.id}_${Date.now()}_${Math.random().toString(36).substring(7)}`
     
-    // Create session record
-    await supabase
-      .from('student_sessions')
-      .insert({
-        student_id: student.id,
-        session_token: sessionToken,
-        login_time: new Date().toISOString(),
-        device_info: deviceInfo,
-        browser: browser,
-        os: os,
-        ip_address: ipAddress,
-        status: 'active'
-      })
+    // Try to create session record (but don't fail if table doesn't exist)
+    try {
+      await supabase
+        .from('student_sessions')
+        .insert({
+          student_id: student.id,
+          session_token: sessionToken,
+          login_time: new Date().toISOString(),
+          device_info: deviceInfo,
+          browser: browser,
+          os: os,
+          ip_address: ipAddress,
+          status: 'active'
+        })
+    } catch (sessionError) {
+      // Log but don't fail login if sessions table doesn't exist
+      console.log('Session tracking skipped:', sessionError)
+    }
     
     // Check if using temporary password
     const isTemporaryPassword = student.temporary_password !== null
