@@ -4646,4 +4646,41 @@ app.post('/api/student/module/:moduleId/quiz/submit', async (c) => {
   }
 })
 
+// Diagnostic endpoint to check quiz setup
+app.get('/api/diagnostic/quiz-check', async (c) => {
+  try {
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    // Get all quiz questions
+    const { data: allQuestions, error: allError } = await supabase
+      .from('quiz_questions')
+      .select('id, module_id, question_text, order_number')
+      .limit(5)
+    
+    // Get ADVBUS001 Module 1
+    const { data: modules, error: moduleError } = await supabase
+      .from('modules')
+      .select('id, title, order_number, course_id, courses(code, name)')
+      .eq('courses.code', 'ADVBUS001')
+      .eq('order_number', 1)
+    
+    return c.json({
+      success: true,
+      data: {
+        sampleQuestions: allQuestions,
+        advbusModule: modules,
+        errors: {
+          questionsError: allError?.message,
+          moduleError: moduleError?.message
+        }
+      }
+    })
+  } catch (error: any) {
+    return c.json({
+      success: false,
+      error: error.message
+    }, 500)
+  }
+})
+
 export default app
