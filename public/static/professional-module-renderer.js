@@ -71,7 +71,7 @@ class ProfessionalModuleRenderer {
         
         for (const pattern of quizPatterns) {
             const match = content.match(pattern);
-            if (match && match.index < quizStartIndex || quizStartIndex === -1) {
+            if (match && (match.index < quizStartIndex || quizStartIndex === -1)) {
                 quizStartIndex = match.index;
                 foundPattern = pattern;
             }
