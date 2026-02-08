@@ -2774,23 +2774,33 @@ app.get('/api/student/dashboard', async (c) => {
     console.log('Student data:', student)
     console.log('Student error:', studentError)
     
-    // Get enrollments with course details
-    const { data: enrollments, error: enrollmentsError } = await supabase
+    // Get enrollments
+    const { data: rawEnrollments, error: enrollmentsError } = await supabase
       .from('enrollments')
-      .select(`
-        *,
-        courses:course_id (
-          id,
-          name,
-          level,
-          description,
-          price
-        )
-      `)
+      .select('*')
       .eq('student_id', studentId)
     
-    console.log('Enrollments data:', enrollments)
+    console.log('Raw enrollments:', rawEnrollments)
     console.log('Enrollments error:', enrollmentsError)
+    
+    // Get course details for each enrollment
+    const enrollments = []
+    if (rawEnrollments && rawEnrollments.length > 0) {
+      for (const enrollment of rawEnrollments) {
+        const { data: course } = await supabase
+          .from('courses')
+          .select('id, name, code, level, description, price, duration')
+          .eq('id', enrollment.course_id)
+          .single()
+        
+        enrollments.push({
+          ...enrollment,
+          courses: course
+        })
+      }
+    }
+    
+    console.log('Enrollments with courses:', enrollments)
     console.log('Enrollments count:', enrollments?.length || 0)
     
     return c.json({
