@@ -35,7 +35,7 @@ class QuizComponent {
       this.render();
     } catch (error) {
       console.error('Quiz initialization error:', error);
-      this.showError('Failed to load quiz');
+      this.showError(error.message || 'Failed to load quiz');
     }
   }
 
