@@ -1318,7 +1318,24 @@ app.get('/student/module/:moduleId', (c) => {
             document.getElementById('startQuizBtn')?.addEventListener('click', function() {
               const urlParams = new URLSearchParams(window.location.search);
               const moduleId = window.location.pathname.split('/').pop();
-              const currentSession = JSON.parse(sessionStorage.getItem('currentSession') || '{}');
+              
+              // Get student session (check both sessionStorage and localStorage)
+              const studentSession = JSON.parse(
+                sessionStorage.getItem('studentSession') || 
+                localStorage.getItem('studentSession') || 
+                '{}'
+              );
+              
+              // Get enrollment ID from the module progress or enrollment
+              const enrollmentId = studentSession.enrollmentId || null;
+              
+              console.log('[Quiz Init]', { moduleId, studentId: studentSession.studentId, enrollmentId });
+              
+              if (!studentSession.studentId) {
+                alert('Please log in to take the quiz');
+                window.location.href = '/student-login';
+                return;
+              }
               
               // Show modal
               const modal = document.getElementById('quizModal');
@@ -1327,7 +1344,7 @@ app.get('/student/module/:moduleId', (c) => {
                 modal.classList.add('flex');
                 
                 // Initialize quiz component
-                window.quizComponent = new QuizComponent('quizContainer', moduleId, currentSession.studentId, currentSession.enrollmentId);
+                window.quizComponent = new QuizComponent('quizContainer', moduleId, studentSession.studentId, enrollmentId);
                 window.quizComponent.init();
               }
             });
