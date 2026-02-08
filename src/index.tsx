@@ -4651,34 +4651,73 @@ app.get('/api/diagnostic/quiz-check', async (c) => {
   try {
     const supabase = getSupabaseAdminClient(c.env)
     
-    // Get all quiz questions
-    const { data: allQuestions, error: allError } = await supabase
-      .from('quiz_questions')
-      .select('id, module_id, question_text, order_number')
-      .limit(5)
+    // Get ADVBUS001 Module 1 first
+    const { data: course, error: courseError } = await supabase
+      .from('courses')
+      .select('id, code, name')
+      .eq('code', 'ADVBUS001')
+      .single()
     
-    // Get ADVBUS001 Module 1
-    const { data: modules, error: moduleError } = await supabase
+    if (courseError || !course) {
+      return c.json({
+        success: false,
+        message: 'ADVBUS001 course not found',
+        error: courseError?.message
+      })
+    }
+    
+    const { data: module, error: moduleError } = await supabase
       .from('modules')
-      .select('id, title, order_number, course_id, courses(code, name)')
-      .eq('courses.code', 'ADVBUS001')
+      .select('id, title, order_number')
+      .eq('course_id', course.id)
       .eq('order_number', 1)
+      .single()
+    
+    if (moduleError || !module) {
+      return c.json({
+        success: false,
+        message: 'Module 1 not found for ADVBUS001',
+        courseFound: course,
+        error: moduleError?.message
+      })
+    }
+    
+    // Now check for quiz questions
+    const { data: questions, error: questionsError } = await supabase
+      .from('quiz_questions')
+      .select('id, question_text, module_id, order_number, difficulty_level')
+      .eq('module_id', module.id)
+      .order('order_number', { ascending: true })
     
     return c.json({
       success: true,
-      data: {
-        sampleQuestions: allQuestions,
-        advbusModule: modules,
-        errors: {
-          questionsError: allError?.message,
-          moduleError: moduleError?.message
-        }
+      course: {
+        id: course.id,
+        code: course.code,
+        name: course.name
+      },
+      module: {
+        id: module.id,
+        title: module.title,
+        order_number: module.order_number
+      },
+      quizQuestions: {
+        count: questions?.length || 0,
+        sample: questions?.slice(0, 3).map(q => ({
+          order: q.order_number,
+          difficulty: q.difficulty_level,
+          question: q.question_text?.substring(0, 50) + '...'
+        }))
+      },
+      errors: {
+        questionsError: questionsError?.message
       }
     })
   } catch (error: any) {
     return c.json({
       success: false,
-      error: error.message
+      error: error.message,
+      stack: error.stack
     }, 500)
   }
 })
