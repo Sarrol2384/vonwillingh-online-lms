@@ -4462,6 +4462,8 @@ app.get('/api/student/module/:moduleId/quiz', async (c) => {
     const moduleId = c.req.param('moduleId')
     const studentId = c.req.query('studentId')
     
+    console.log('[QUIZ API] Request:', { moduleId, studentId })
+    
     if (!studentId) {
       return c.json({ success: false, message: 'Student ID required' }, 400)
     }
@@ -4475,26 +4477,32 @@ app.get('/api/student/module/:moduleId/quiz', async (c) => {
       .eq('module_id', moduleId)
       .order('order_number', { ascending: true })
     
+    console.log('[QUIZ API] Supabase response:', { questionCount: questions?.length, error: error?.message })
+    
     if (error) {
-      return c.json({ success: false, message: error.message }, 500)
+      console.error('[QUIZ API] Supabase error:', error)
+      return c.json({ success: false, message: `Database error: ${error.message}` }, 500)
     }
     
     // Check if no questions found
     if (!questions || questions.length === 0) {
+      console.warn('[QUIZ API] No questions found for module:', moduleId)
       return c.json({ 
         success: false, 
         message: `No quiz questions found for module ${moduleId}. Please ensure questions are added in the database.` 
       }, 404)
     }
     
+    console.log('[QUIZ API] Success - returning', questions.length, 'questions')
     return c.json({ 
       success: true, 
       questions: questions 
     })
   } catch (error: any) {
+    console.error('[QUIZ API] Unexpected error:', error)
     return c.json({ 
       success: false, 
-      message: error.message 
+      message: `Server error: ${error.message}` 
     }, 500)
   }
 })
