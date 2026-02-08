@@ -1255,6 +1255,35 @@ app.get('/student/module/:moduleId', (c) => {
                     <div id="moduleContentArea" class="module-content"></div>
                 </div>
 
+                <!-- Quiz Section -->
+                <div id="quizSection" class="bg-white rounded-lg shadow-md p-8 mb-6 hidden">
+                    <div class="border-t-4 border-blue-600 -m-8 p-8">
+                        <h2 class="text-2xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-clipboard-check text-blue-600 mr-3"></i>
+                            Module Quiz
+                        </h2>
+                        <p class="text-gray-600 mb-6">
+                            Test your knowledge with this 30-question quiz. You need 70% to pass and unlock the next module.
+                        </p>
+                        <button id="startQuizBtn" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                            <i class="fas fa-play mr-2"></i>Start Quiz
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Modal -->
+                <div id="quizModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+                    <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                        <div class="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-center justify-between">
+                            <h2 class="text-2xl font-bold">Module Quiz</h2>
+                            <button id="closeQuizBtn" class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                        <div id="quizContainer" class="p-6"></div>
+                    </div>
+                </div>
+
                 <!-- Navigation & Actions -->
                 <div class="flex items-center justify-between">
                     <button id="previousBtn" class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
@@ -1273,8 +1302,46 @@ app.get('/student/module/:moduleId', (c) => {
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+        <script src="/static/quiz-component.js"></script>
         <script src="/static/module-viewer.js"></script>
         <script src="/static/professional-module-renderer.js"></script>
+        <script>
+          // Initialize quiz when module loads
+          document.addEventListener('DOMContentLoaded', function() {
+            // Show quiz section after content loads
+            setTimeout(() => {
+              const quizSection = document.getElementById('quizSection');
+              if (quizSection) quizSection.classList.remove('hidden');
+            }, 1000);
+
+            // Start quiz button
+            document.getElementById('startQuizBtn')?.addEventListener('click', function() {
+              const urlParams = new URLSearchParams(window.location.search);
+              const moduleId = window.location.pathname.split('/').pop();
+              const currentSession = JSON.parse(sessionStorage.getItem('currentSession') || '{}');
+              
+              // Show modal
+              const modal = document.getElementById('quizModal');
+              if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                
+                // Initialize quiz component
+                window.quizComponent = new QuizComponent('quizContainer', moduleId, currentSession.studentId, currentSession.enrollmentId);
+                window.quizComponent.init();
+              }
+            });
+
+            // Close quiz button
+            document.getElementById('closeQuizBtn')?.addEventListener('click', function() {
+              const modal = document.getElementById('quizModal');
+              if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+              }
+            });
+          });
+        </script>
     </body>
     </html>
   `)
@@ -4379,6 +4446,173 @@ app.get('/api/student/certificate/:studentId/:courseId', async (c) => {
       }
     })
     
+  } catch (error: any) {
+    return c.json({ 
+      success: false, 
+      message: error.message 
+    }, 500)
+  }
+})
+
+// ==================== QUIZ API ROUTES ====================
+
+// Get quiz questions for a module
+app.get('/api/student/module/:moduleId/quiz', async (c) => {
+  try {
+    const moduleId = c.req.param('moduleId')
+    const studentId = c.req.query('studentId')
+    
+    if (!studentId) {
+      return c.json({ success: false, message: 'Student ID required' }, 400)
+    }
+    
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    // Get quiz questions for the module
+    const { data: questions, error } = await supabase
+      .from('quiz_questions')
+      .select('*')
+      .eq('module_id', moduleId)
+      .order('order_number', { ascending: true })
+    
+    if (error) {
+      return c.json({ success: false, message: error.message }, 500)
+    }
+    
+    return c.json({ 
+      success: true, 
+      questions: questions || [] 
+    })
+  } catch (error: any) {
+    return c.json({ 
+      success: false, 
+      message: error.message 
+    }, 500)
+  }
+})
+
+// Get quiz attempts for a student and module
+app.get('/api/student/module/:moduleId/quiz/attempts', async (c) => {
+  try {
+    const moduleId = c.req.param('moduleId')
+    const studentId = c.req.query('studentId')
+    
+    if (!studentId) {
+      return c.json({ success: false, message: 'Student ID required' }, 400)
+    }
+    
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    // Get quiz attempts
+    const { data: attempts, error } = await supabase
+      .from('quiz_attempts')
+      .select('*')
+      .eq('student_id', studentId)
+      .eq('module_id', moduleId)
+      .order('created_at', { ascending: false })
+    
+    if (error) {
+      return c.json({ success: false, message: error.message }, 500)
+    }
+    
+    return c.json({ 
+      success: true, 
+      attempts: attempts || [] 
+    })
+  } catch (error: any) {
+    return c.json({ 
+      success: false, 
+      message: error.message 
+    }, 500)
+  }
+})
+
+// Submit quiz answers
+app.post('/api/student/module/:moduleId/quiz/submit', async (c) => {
+  try {
+    const moduleId = c.req.param('moduleId')
+    const body = await c.req.json()
+    const { studentId, enrollmentId, answers, timeSpentSeconds } = body
+    
+    if (!studentId || !answers) {
+      return c.json({ success: false, message: 'Missing required fields' }, 400)
+    }
+    
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    // Get quiz questions
+    const { data: questions } = await supabase
+      .from('quiz_questions')
+      .select('*')
+      .eq('module_id', moduleId)
+      .order('order_number', { ascending: true })
+    
+    if (!questions || questions.length === 0) {
+      return c.json({ success: false, message: 'No quiz questions found' }, 404)
+    }
+    
+    // Grade the quiz
+    const results: any = {}
+    let correctCount = 0
+    const questionsAttempted = Object.keys(answers)
+    
+    questionsAttempted.forEach(questionId => {
+      const question = questions.find(q => q.id === questionId)
+      if (question) {
+        const isCorrect = answers[questionId] === question.correct_answer
+        results[questionId] = isCorrect
+        if (isCorrect) correctCount++
+      }
+    })
+    
+    const totalQuestions = questionsAttempted.length
+    const wrongCount = totalQuestions - correctCount
+    const percentage = Math.round((correctCount / totalQuestions) * 100)
+    const passed = percentage >= 70
+    
+    // Get attempt number
+    const { data: previousAttempts } = await supabase
+      .from('quiz_attempts')
+      .select('attempt_number')
+      .eq('student_id', studentId)
+      .eq('module_id', moduleId)
+      .order('attempt_number', { ascending: false })
+      .limit(1)
+    
+    const attemptNumber = previousAttempts && previousAttempts.length > 0 
+      ? previousAttempts[0].attempt_number + 1 
+      : 1
+    
+    // Save attempt
+    const { data: attempt, error } = await supabase
+      .from('quiz_attempts')
+      .insert({
+        student_id: studentId,
+        module_id: moduleId,
+        enrollment_id: enrollmentId,
+        total_questions: totalQuestions,
+        correct_answers: correctCount,
+        wrong_answers: wrongCount,
+        percentage: percentage,
+        passed: passed,
+        attempt_number: attemptNumber,
+        questions_attempted: questionsAttempted,
+        answers: answers,
+        results: results,
+        time_spent_seconds: timeSpentSeconds,
+        started_at: new Date().toISOString()
+      })
+      .select()
+      .single()
+    
+    if (error) {
+      return c.json({ success: false, message: error.message }, 500)
+    }
+    
+    return c.json({ 
+      success: true, 
+      attempt: attempt 
+    })
   } catch (error: any) {
     return c.json({ 
       success: false, 
