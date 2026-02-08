@@ -4479,9 +4479,17 @@ app.get('/api/student/module/:moduleId/quiz', async (c) => {
       return c.json({ success: false, message: error.message }, 500)
     }
     
+    // Check if no questions found
+    if (!questions || questions.length === 0) {
+      return c.json({ 
+        success: false, 
+        message: `No quiz questions found for module ${moduleId}. Please ensure questions are added in the database.` 
+      }, 404)
+    }
+    
     return c.json({ 
       success: true, 
-      questions: questions || [] 
+      questions: questions 
     })
   } catch (error: any) {
     return c.json({ 
