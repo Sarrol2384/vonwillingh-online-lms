@@ -4522,6 +4522,8 @@ app.get('/api/student/module/:moduleId/quiz/attempts', async (c) => {
     const moduleId = c.req.param('moduleId')
     const studentId = c.req.query('studentId')
     
+    console.log('[QUIZ ATTEMPTS API] Request:', { moduleId, studentId })
+    
     if (!studentId) {
       return c.json({ success: false, message: 'Student ID required' }, 400)
     }
@@ -4536,18 +4538,31 @@ app.get('/api/student/module/:moduleId/quiz/attempts', async (c) => {
       .eq('module_id', moduleId)
       .order('created_at', { ascending: false })
     
+    console.log('[QUIZ ATTEMPTS API] Response:', { count: attempts?.length, error: error?.message })
+    
     if (error) {
-      return c.json({ success: false, message: error.message }, 500)
+      console.error('[QUIZ ATTEMPTS API] Error:', error)
+      // If table doesn't exist, return empty array instead of error
+      if (error.message?.includes('does not exist') || error.code === '42P01') {
+        console.warn('[QUIZ ATTEMPTS API] Table does not exist, returning empty array')
+        return c.json({ 
+          success: true, 
+          attempts: [] 
+        })
+      }
+      return c.json({ success: false, message: `Database error: ${error.message}` }, 500)
     }
     
+    console.log('[QUIZ ATTEMPTS API] Success - returning', attempts?.length || 0, 'attempts')
     return c.json({ 
       success: true, 
       attempts: attempts || [] 
     })
   } catch (error: any) {
+    console.error('[QUIZ ATTEMPTS API] Unexpected error:', error)
     return c.json({ 
       success: false, 
-      message: error.message 
+      message: `Server error: ${error.message || 'Unknown error'}` 
     }, 500)
   }
 })
