@@ -3426,7 +3426,7 @@ app.post('/api/payments/upload-proof', async (c) => {
 // Get payments (for admin)
 app.get('/api/admin/payments', async (c) => {
   try {
-    const supabase = getSupabaseClient(c.env)
+    const supabase = getSupabaseAdminClient(c.env)
     
     const { data: applications, error } = await supabase
       .from('applications')
