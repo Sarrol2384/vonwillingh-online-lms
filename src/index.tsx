@@ -2659,7 +2659,7 @@ app.post('/api/admin/applications/:id/reject', async (c) => {
 app.post('/api/student/login', async (c) => {
   try {
     const { email, password } = await c.req.json()
-    const supabase = getSupabaseClient(c.env)
+    const supabase = getSupabaseAdminClient(c.env)
     
     // Find student by email
     const { data: student, error } = await supabase
