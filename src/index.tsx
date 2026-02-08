@@ -1042,6 +1042,13 @@ app.get('/student/module/:moduleId', (c) => {
           .module-content p { margin-bottom: 1rem; }
           .module-content ul, .module-content ol { margin-left: 2rem; margin-bottom: 1rem; }
           .module-content li { margin-bottom: 0.5rem; }
+          /* Hide repeated quiz text patterns */
+          .module-content p:has(> strong:contains("Question")),
+          .module-content p:contains("**Question"),
+          .module-content p:contains("**Options:**"),
+          .module-content p:contains("**Correct Answer:**") {
+            display: none;
+          }
         </style>
     </head>
     <body class="bg-gray-50">
