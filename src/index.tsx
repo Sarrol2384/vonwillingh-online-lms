@@ -1090,7 +1090,7 @@ app.get('/student/module/:moduleId', (c) => {
 
                 <!-- Module Content -->
                 <div class="bg-white rounded-lg shadow-md p-8 mb-6">
-                    <div id="contentArea" class="module-content"></div>
+                    <div id="moduleContentArea" class="module-content"></div>
                 </div>
 
                 <!-- Navigation & Actions -->
@@ -1112,7 +1112,7 @@ app.get('/student/module/:moduleId', (c) => {
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
         <script src="/static/module-viewer.js"></script>
-        <script src="/static/quiz-renderer.js"></script>
+        <script src="/static/professional-module-renderer.js"></script>
     </body>
     </html>
   `)

@@ -48,7 +48,7 @@ async function loadModule(moduleId) {
       // Update content area
       document.getElementById('moduleHeading').textContent = module.title;
       document.getElementById('moduleDescription').textContent = module.description || '';
-      document.getElementById('contentArea').innerHTML = module.content || '<p>No content available.</p>';
+      document.getElementById('moduleContentArea').innerHTML = module.content || '<p>No content available.</p>';
       
       // Setup navigation buttons
       setupNavigation(navigation, module.course_id);
