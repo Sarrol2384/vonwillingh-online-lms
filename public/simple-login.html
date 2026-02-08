@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - Simple</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="max-w-md w-full">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold text-blue-900 mb-2">VonWillingh Online</h2>
+                <h3 class="text-2xl font-semibold text-gray-700">Student Portal</h3>
+                <p class="text-gray-600 mt-2">Sign in to access your courses</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div id="alertBox" class="hidden mb-4 p-4 rounded-lg"></div>
+                
+                <form id="loginForm" class="space-y-6">
+                    <div>
+                        <label class="block font-semibold mb-2 text-gray-700">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            value="sarrol@vonwillingh.co.za"
+                            required 
+                            class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                        >
+                    </div>
+                    <div>
+                        <label class="block font-semibold mb-2 text-gray-700">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            value="Lorras@116397"
+                            required 
+                            class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                        >
+                    </div>
+                    <button 
+                        type="submit" 
+                        id="loginBtn" 
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold text-lg"
+                    >
+                        Sign In
+                    </button>
+                </form>
+                
+                <div id="debugInfo" class="mt-6 p-4 bg-gray-100 rounded-lg text-sm font-mono">
+                    <div class="font-bold mb-2">Debug Info:</div>
+                    <div id="debugOutput">Waiting for login attempt...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const alertBox = document.getElementById('alertBox');
+            const debugOutput = document.getElementById('debugOutput');
+            
+            // Update UI
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Signing in...';
+            alertBox.classList.add('hidden');
+            debugOutput.innerHTML = `📝 Attempting login...<br>Email: ${email}<br>`;
+            
+            try {
+                debugOutput.innerHTML += '🌐 Sending request to /api/student/login...<br>';
+                
+                const response = await axios.post('/api/student/login', {
+                    email: email,
+                    password: password
+                });
+                
+                debugOutput.innerHTML += `✅ Response received!<br>Success: ${response.data.success}<br>`;
+                debugOutput.innerHTML += `Data: ${JSON.stringify(response.data, null, 2)}<br>`;
+                
+                if (response.data.success) {
+                    // Store session
+                    const sessionData = {
+                        studentId: response.data.student.id,
+                        fullName: response.data.student.full_name,
+                        email: response.data.student.email,
+                        loginTime: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem('studentSession', JSON.stringify(sessionData));
+                    
+                    // Show success
+                    alertBox.className = 'mb-4 p-4 rounded-lg bg-green-100 text-green-800 border-2 border-green-300';
+                    alertBox.textContent = '✅ Login successful! Redirecting...';
+                    alertBox.classList.remove('hidden');
+                    
+                    debugOutput.innerHTML += '✅ Session stored in localStorage<br>';
+                    debugOutput.innerHTML += `👤 Student: ${response.data.student.full_name}<br>`;
+                    debugOutput.innerHTML += '🔄 Redirecting to dashboard in 2 seconds...<br>';
+                    
+                    // Redirect
+                    setTimeout(() => {
+                        window.location.href = '/student/dashboard';
+                    }, 2000);
+                    
+                } else {
+                    throw new Error(response.data.message || 'Login failed');
+                }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                
+                debugOutput.innerHTML += `❌ ERROR!<br>`;
+                debugOutput.innerHTML += `Type: ${error.name}<br>`;
+                debugOutput.innerHTML += `Message: ${error.message}<br>`;
+                
+                if (error.response) {
+                    debugOutput.innerHTML += `Status: ${error.response.status}<br>`;
+                    debugOutput.innerHTML += `Data: ${JSON.stringify(error.response.data, null, 2)}<br>`;
+                }
+                
+                alertBox.className = 'mb-4 p-4 rounded-lg bg-red-100 text-red-800 border-2 border-red-300';
+                alertBox.textContent = error.response?.data?.message || error.message || 'Login failed';
+                alertBox.classList.remove('hidden');
+                
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Sign In';
+            }
+        });
+    </script>
+</body>
+</html>

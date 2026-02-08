@@ -647,6 +647,12 @@ app.get('/application-success', (c) => {
   `)
 })
 
+// Simple Login (for debugging)
+app.get('/simple-login', async (c) => {
+  const html = await Bun.file('public/simple-login.html').text()
+  return c.html(html)
+})
+
 // Student Login (placeholder - will connect to Supabase)
 app.get('/student-login', (c) => {
   return c.html(`
