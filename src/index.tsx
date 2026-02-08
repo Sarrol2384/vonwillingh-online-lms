@@ -2761,7 +2761,7 @@ app.get('/api/student/dashboard', async (c) => {
     
     console.log('Dashboard request for studentId:', studentId)
     
-    const supabase = getSupabaseClient(c.env)
+    const supabase = getSupabaseAdminClient(c.env)
     
     // Get student info
     const { data: student, error: studentError } = await supabase
