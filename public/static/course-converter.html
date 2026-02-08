@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course JSON Converter - VonWillingh Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h1 class="text-3xl font-bold mb-4">
+                <i class="fas fa-exchange-alt mr-2 text-blue-600"></i>
+                Course JSON Converter
+            </h1>
+            <p class="text-gray-600 mb-6">Convert Course Studio JSON to LMS-compatible format</p>
+            
+            <!-- Upload Original JSON -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Upload Course Studio JSON:
+                </label>
+                <input type="file" id="fileInput" accept=".json" class="block w-full text-sm text-gray-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-blue-50 file:text-blue-700
+                    hover:file:bg-blue-100"/>
+            </div>
+            
+            <!-- Original JSON Display -->
+            <div id="originalSection" class="hidden mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Original JSON Structure:
+                </label>
+                <pre id="originalJson" class="bg-gray-100 p-4 rounded text-xs overflow-auto max-h-64"></pre>
+            </div>
+            
+            <!-- Converted JSON Display -->
+            <div id="convertedSection" class="hidden mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    <i class="fas fa-check-circle text-green-600 mr-1"></i>
+                    Converted JSON (Ready for Import):
+                </label>
+                <pre id="convertedJson" class="bg-green-50 p-4 rounded text-xs overflow-auto max-h-64 border border-green-300"></pre>
+            </div>
+            
+            <!-- Download Button -->
+            <div id="downloadSection" class="hidden">
+                <button id="downloadBtn" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    <i class="fas fa-download mr-2"></i>
+                    Download Converted JSON
+                </button>
+                <a href="/admin/courses/import" class="ml-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition inline-block">
+                    <i class="fas fa-upload mr-2"></i>
+                    Go to Import Page
+                </a>
+            </div>
+            
+            <!-- Error Display -->
+            <div id="errorSection" class="hidden bg-red-50 border border-red-300 rounded p-4 text-red-800"></div>
+        </div>
+    </div>
+
+    <script>
+        let convertedData = null;
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const jsonData = JSON.parse(event.target.result);
+                    
+                    // Show original
+                    document.getElementById('originalSection').classList.remove('hidden');
+                    document.getElementById('originalJson').textContent = JSON.stringify(jsonData, null, 2);
+                    
+                    // Convert
+                    convertedData = convertToLMSFormat(jsonData);
+                    
+                    // Show converted
+                    document.getElementById('convertedSection').classList.remove('hidden');
+                    document.getElementById('convertedJson').textContent = JSON.stringify(convertedData, null, 2);
+                    
+                    // Show download
+                    document.getElementById('downloadSection').classList.remove('hidden');
+                    document.getElementById('errorSection').classList.add('hidden');
+                    
+                } catch (error) {
+                    document.getElementById('errorSection').classList.remove('hidden');
+                    document.getElementById('errorSection').textContent = 'Error: ' + error.message;
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            if (!convertedData) return;
+            
+            const blob = new Blob([JSON.stringify(convertedData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'course-ready-for-import.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        function convertToLMSFormat(data) {
+            // Check if already in correct format
+            if (data.course && data.modules) {
+                console.log('✅ Already in correct format!');
+                return data;
+            }
+            
+            // Try to detect format and convert
+            let converted = {
+                course: {},
+                modules: []
+            };
+            
+            // Format 1: Top-level course properties
+            if (data.name || data.title) {
+                converted.course = {
+                    name: data.name || data.title,
+                    code: data.code || `COURSE${Date.now()}`,
+                    level: data.level || 'Certificate',
+                    category: data.category || 'General',
+                    description: data.description || data.overview || '',
+                    duration: data.duration || '4 weeks',
+                    price: parseFloat(data.price || 0)
+                };
+                
+                // Extract modules
+                if (Array.isArray(data.modules)) {
+                    converted.modules = data.modules;
+                } else if (Array.isArray(data.lessons)) {
+                    converted.modules = data.lessons;
+                } else if (Array.isArray(data.content)) {
+                    converted.modules = data.content;
+                }
+            }
+            
+            // Format 2: Nested course object
+            else if (data.courseData || data.courseInfo) {
+                const courseObj = data.courseData || data.courseInfo;
+                converted.course = {
+                    name: courseObj.name || courseObj.title,
+                    code: courseObj.code || `COURSE${Date.now()}`,
+                    level: courseObj.level || 'Certificate',
+                    category: courseObj.category || 'General',
+                    description: courseObj.description || '',
+                    duration: courseObj.duration || '4 weeks',
+                    price: parseFloat(courseObj.price || 0)
+                };
+                
+                converted.modules = data.modules || data.lessons || [];
+            }
+            
+            // Ensure modules have required fields
+            converted.modules = converted.modules.map((module, index) => ({
+                title: module.title || module.name || `Module ${index + 1}`,
+                description: module.description || module.summary || '',
+                order_number: module.order_number || module.order || (index + 1),
+                content: module.content || module.text || module.html || '',
+                content_type: module.content_type || 'lesson',
+                duration_minutes: module.duration_minutes || module.duration || null,
+                video_url: module.video_url || module.videoUrl || null,
+                quiz: module.quiz || null
+            }));
+            
+            return converted;
+        }
+    </script>
+</body>
+</html>
