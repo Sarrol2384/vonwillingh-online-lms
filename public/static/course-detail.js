@@ -71,13 +71,13 @@ async function loadCourseDetail(courseId, studentId) {
                 <div class="flex-shrink-0 w-12 h-12 rounded-full ${
                   isCompleted ? 'bg-green-500' : isInProgress ? 'bg-yellow-500' : 'bg-gray-300'
                 } flex items-center justify-center text-white font-bold">
-                  ${isCompleted ? '<i class="fas fa-check"></i>' : module.module_number}
+                  ${isCompleted ? '<i class="fas fa-check"></i>' : (module.order_number || index + 1)}
                 </div>
                 <div class="flex-1">
                   <h4 class="font-bold text-lg mb-1">${module.title}</h4>
-                  <p class="text-gray-600 text-sm mb-2">${module.description || ''}</p>
+                  <p class="text-gray-600 text-sm mb-2">${module.description || 'Learn essential concepts about management in this comprehensive module.'}</p>
                   <div class="flex items-center space-x-3 text-sm text-gray-500">
-                    <span><i class="fas fa-file-alt mr-1"></i>${module.content_type}</span>
+                    <span><i class="fas fa-file-alt mr-1"></i>${module.content_type || 'lesson'}</span>
                     ${module.duration_minutes ? `<span><i class="fas fa-clock mr-1"></i>${module.duration_minutes} min</span>` : ''}
                     <span class="px-2 py-1 rounded-full text-xs ${
                       isCompleted ? 'bg-green-100 text-green-800' : 
