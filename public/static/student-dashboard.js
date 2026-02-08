@@ -37,8 +37,12 @@ async function loadDashboard() {
   try {
     const response = await axios.get(`/api/student/dashboard?studentId=${session.studentId}`);
     
+    console.log('Dashboard API response:', response.data);
+    
     if (response.data.success) {
       const { enrollments } = response.data;
+      
+      console.log('Enrollments:', enrollments);
       
       // Update stats
       document.getElementById('enrolledCount').textContent = enrollments.length;
@@ -50,12 +54,16 @@ async function loadDashboard() {
       // Hide loading
       loadingDiv.classList.add('hidden');
       
+      // Filter out enrollments with missing course data
+      const validEnrollments = enrollments.filter(e => e.courses && e.courses.name);
+      console.log('Valid enrollments:', validEnrollments);
+      
       // Display courses
-      if (enrollments.length === 0) {
+      if (validEnrollments.length === 0) {
         noCoursesMessage.classList.remove('hidden');
       } else {
         coursesContainer.classList.remove('hidden');
-        coursesContainer.innerHTML = enrollments.map(enrollment => `
+        coursesContainer.innerHTML = validEnrollments.map(enrollment => `
           <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
             <div class="flex items-start justify-between">
               <div class="flex-1">
@@ -116,10 +124,17 @@ async function loadDashboard() {
     
   } catch (error) {
     console.error('Dashboard load error:', error);
-    loadingDiv.innerHTML = `
-      <div class="text-center text-red-600">
-        <i class="fas fa-exclamation-circle text-3xl mb-2"></i>
-        <p>Failed to load dashboard data</p>
+    console.error('Error details:', error.response?.data || error.message);
+    loadingDiv.classList.add('hidden');
+    coursesContainer.classList.remove('hidden');
+    coursesContainer.innerHTML = `
+      <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+        <i class="fas fa-exclamation-triangle text-red-600 text-4xl mb-3"></i>
+        <p class="text-red-800 font-medium">Failed to load dashboard data</p>
+        <p class="text-red-600 text-sm mt-2">${error.response?.data?.message || error.message}</p>
+        <button onclick="location.reload()" class="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+          <i class="fas fa-redo mr-2"></i>Retry
+        </button>
       </div>
     `;
   }
