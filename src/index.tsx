@@ -648,9 +648,165 @@ app.get('/application-success', (c) => {
 })
 
 // Simple Login (for debugging)
-app.get('/simple-login', async (c) => {
-  const html = await Bun.file('public/simple-login.html').text()
-  return c.html(html)
+app.get('/simple-login', (c) => {
+  return c.html(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - Debug</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="max-w-md w-full">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold text-blue-900 mb-2">VonWillingh Online</h2>
+                <h3 class="text-2xl font-semibold text-gray-700">Student Portal - Debug Mode</h3>
+                <p class="text-gray-600 mt-2">Sign in to access your courses</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div id="alertBox" class="hidden mb-4 p-4 rounded-lg"></div>
+                
+                <form id="loginForm" class="space-y-6">
+                    <div>
+                        <label class="block font-semibold mb-2 text-gray-700">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            value="sarrol@vonwillingh.co.za"
+                            required 
+                            class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                        >
+                    </div>
+                    <div>
+                        <label class="block font-semibold mb-2 text-gray-700">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            value="Lorras@116397"
+                            required 
+                            class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                        >
+                    </div>
+                    <button 
+                        type="submit" 
+                        id="loginBtn" 
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold text-lg"
+                    >
+                        Sign In
+                    </button>
+                </form>
+                
+                <div id="debugInfo" class="mt-6 p-4 bg-gray-100 rounded-lg text-sm font-mono overflow-auto max-h-96">
+                    <div class="font-bold mb-2 text-lg">📊 Debug Info:</div>
+                    <div id="debugOutput" class="whitespace-pre-wrap">Waiting for login attempt...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const alertBox = document.getElementById('alertBox');
+            const debugOutput = document.getElementById('debugOutput');
+            
+            // Update UI
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Signing in...';
+            alertBox.classList.add('hidden');
+            debugOutput.innerHTML = \`📝 Attempting login...
+Email: \${email}
+Time: \${new Date().toLocaleString()}
+
+\`;
+            
+            try {
+                debugOutput.innerHTML += '🌐 Sending POST request to /api/student/login...\\n';
+                debugOutput.innerHTML += \`Request body: \${JSON.stringify({email, password: '***'}, null, 2)}\\n\\n\`;
+                
+                const response = await axios.post('/api/student/login', {
+                    email: email,
+                    password: password
+                });
+                
+                debugOutput.innerHTML += \`✅ Response received!\\nStatus: \${response.status}\\n\\n\`;
+                debugOutput.innerHTML += \`Response data:\\n\${JSON.stringify(response.data, null, 2)}\\n\\n\`;
+                
+                if (response.data.success) {
+                    // Store session
+                    const sessionData = {
+                        studentId: response.data.student.id,
+                        fullName: response.data.student.full_name,
+                        email: response.data.student.email,
+                        loginTime: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem('studentSession', JSON.stringify(sessionData));
+                    
+                    // Show success
+                    alertBox.className = 'mb-4 p-4 rounded-lg bg-green-100 text-green-800 border-2 border-green-300 font-semibold';
+                    alertBox.textContent = '✅ Login successful! Redirecting to dashboard...';
+                    alertBox.classList.remove('hidden');
+                    
+                    debugOutput.innerHTML += \`✅ Session stored in localStorage\\n\`;
+                    debugOutput.innerHTML += \`👤 Student: \${response.data.student.full_name}\\n\`;
+                    debugOutput.innerHTML += \`🆔 Student ID: \${response.data.student.id}\\n\`;
+                    debugOutput.innerHTML += '🔄 Redirecting to /student/dashboard in 2 seconds...\\n';
+                    
+                    // Redirect
+                    setTimeout(() => {
+                        window.location.href = '/student/dashboard';
+                    }, 2000);
+                    
+                } else {
+                    throw new Error(response.data.message || 'Login failed');
+                }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                
+                debugOutput.innerHTML += \`\\n❌ ERROR OCCURRED!\\n\`;
+                debugOutput.innerHTML += \`Error Type: \${error.name}\\n\`;
+                debugOutput.innerHTML += \`Error Message: \${error.message}\\n\\n\`;
+                
+                if (error.response) {
+                    debugOutput.innerHTML += \`HTTP Status: \${error.response.status}\\n\`;
+                    debugOutput.innerHTML += \`Response Data:\\n\${JSON.stringify(error.response.data, null, 2)}\\n\`;
+                } else if (error.request) {
+                    debugOutput.innerHTML += 'No response received from server\\n';
+                    debugOutput.innerHTML += 'Possible causes:\\n';
+                    debugOutput.innerHTML += '- Server is down\\n';
+                    debugOutput.innerHTML += '- Network error\\n';
+                    debugOutput.innerHTML += '- CORS issue\\n';
+                } else {
+                    debugOutput.innerHTML += \`Setup Error: \${error.message}\\n\`;
+                }
+                
+                alertBox.className = 'mb-4 p-4 rounded-lg bg-red-100 text-red-800 border-2 border-red-300 font-semibold';
+                alertBox.textContent = error.response?.data?.message || error.message || 'Login failed';
+                alertBox.classList.remove('hidden');
+                
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Sign In';
+            }
+        });
+        
+        // Show initial info
+        console.log('Simple Login Page Loaded');
+        console.log('Email pre-filled:', document.getElementById('email').value);
+    </script>
+</body>
+</html>
+  `)
 })
 
 // Student Login (placeholder - will connect to Supabase)
