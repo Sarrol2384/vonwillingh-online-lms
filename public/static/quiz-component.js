@@ -41,14 +41,22 @@ class QuizComponent {
 
   async loadQuizData() {
     try {
-      const response = await axios.get(`/api/student/module/${this.moduleId}/quiz?studentId=${this.studentId}`);
+      console.log('[QuizComponent] Loading quiz for:', { moduleId: this.moduleId, studentId: this.studentId });
+      const url = `/api/student/module/${this.moduleId}/quiz?studentId=${this.studentId}`;
+      console.log('[QuizComponent] Fetching:', url);
+      
+      const response = await axios.get(url);
+      
+      console.log('[QuizComponent] Response:', response.data);
       
       if (response.data.success) {
         this.questions = response.data.questions;
+        console.log('[QuizComponent] Loaded', this.questions.length, 'questions');
       } else {
         throw new Error(response.data.message || 'Failed to load quiz');
       }
     } catch (error) {
+      console.error('[QuizComponent] Load error:', error);
       if (error.response && error.response.data && error.response.data.message) {
         throw new Error(error.response.data.message);
       }
