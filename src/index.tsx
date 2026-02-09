@@ -3308,6 +3308,8 @@ app.post('/api/student/module/:moduleId/complete', async (c) => {
     const moduleId = c.req.param('moduleId')
     const { studentId, enrollmentId } = await c.req.json()
     
+    console.log('[API] Marking module complete:', { moduleId, studentId, enrollmentId })
+    
     const supabase = getSupabaseAdminClient(c.env)
     
     // Update module progress
@@ -3345,6 +3347,8 @@ app.post('/api/student/module/:moduleId/complete', async (c) => {
     const completedModules = completedProgress?.length || 0
     const progressPercentage = totalModules > 0 ? (completedModules / totalModules) * 100 : 0
     
+    console.log('[API] Progress calculated:', { totalModules, completedModules, progressPercentage })
+    
     // Update enrollment progress
     const updateData: any = {
       modules_completed: completedModules,
@@ -3362,6 +3366,12 @@ app.post('/api/student/module/:moduleId/complete', async (c) => {
       .from('enrollments')
       .update(updateData)
       .eq('id', enrollmentId)
+    
+    console.log('[API] Module completion successful:', {
+      completedModules,
+      totalModules,
+      progressPercentage: parseFloat(progressPercentage.toFixed(2))
+    })
     
     return c.json({
       success: true,
