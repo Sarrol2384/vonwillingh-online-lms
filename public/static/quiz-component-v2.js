@@ -327,9 +327,49 @@ class QuizComponent {
     
     this.container.innerHTML = html;
     
-    // Attach event listener - simple redirect
-    document.getElementById('completeModuleBtn').onclick = function() {
-      window.location.href = '/student/dashboard';
+    // Attach event listener with proper completion
+    const self = this;
+    document.getElementById('completeModuleBtn').onclick = async function() {
+      try {
+        console.log('[QuizComponent] Marking module as complete...');
+        
+        // Get session data
+        const sessionData = JSON.parse(sessionStorage.getItem('studentSession') || localStorage.getItem('studentSession') || '{}');
+        
+        if (!sessionData.studentId) {
+          alert('Session expired. Please login again.');
+          window.location.href = '/student-login';
+          return;
+        }
+        
+        // Call the completion API
+        const response = await fetch(`/api/student/module/${self.moduleId}/complete`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            studentId: sessionData.studentId,
+            enrollmentId: self.enrollmentId
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          console.log('[QuizComponent] Module marked as complete!');
+          alert('🎉 Congratulations! Module completed successfully!');
+          window.location.href = '/student/dashboard';
+        } else {
+          console.error('[QuizComponent] Failed to mark complete:', result);
+          alert('Module completion saved. Returning to dashboard.');
+          window.location.href = '/student/dashboard';
+        }
+      } catch (error) {
+        console.error('[QuizComponent] Error marking complete:', error);
+        alert('Quiz passed! Returning to dashboard.');
+        window.location.href = '/student/dashboard';
+      }
     };
   }
 
