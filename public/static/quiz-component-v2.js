@@ -202,9 +202,6 @@ class QuizComponent {
         </div>
         
         <div class="mt-4 flex items-center space-x-2 text-sm">
-          <span class="px-2 py-1 rounded ${this.getDifficultyClass(question.difficulty || 'medium')}">
-            ${(question.difficulty || 'medium').toUpperCase()}
-          </span>
           <span class="text-gray-500">${question.points || 1} point${(question.points || 1) > 1 ? 's' : ''}</span>
           ${this.getQuestionTypeLabel(questionType)}
         </div>
