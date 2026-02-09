@@ -547,3 +547,43 @@ class QuizComponent {
 
 // Global reference for inline onclick handlers
 let quizComponent = null;
+
+// Global function to mark module as complete
+async function markModuleComplete() {
+  try {
+    console.log('[markModuleComplete] Starting...');
+    
+    // Get student session
+    const studentSession = JSON.parse(
+      sessionStorage.getItem('studentSession') || 
+      localStorage.getItem('studentSession') || 
+      '{}'
+    );
+    
+    const moduleId = window.location.pathname.split('/').pop();
+    
+    if (!studentSession.studentId || !moduleId) {
+      alert('Unable to mark module as complete. Please refresh and try again.');
+      return;
+    }
+    
+    console.log('[markModuleComplete] Marking module complete:', { studentId: studentSession.studentId, moduleId });
+    
+    // Call API to mark module as complete
+    const response = await axios.post(`/api/student/module/${moduleId}/complete`, {
+      studentId: studentSession.studentId
+    });
+    
+    console.log('[markModuleComplete] Response:', response.data);
+    
+    if (response.data.success) {
+      alert('✅ Module completed! Redirecting to dashboard...');
+      window.location.href = '/student/dashboard';
+    } else {
+      alert('Failed to mark module as complete: ' + (response.data.message || 'Unknown error'));
+    }
+  } catch (error) {
+    console.error('[markModuleComplete] Error:', error);
+    alert('Error marking module as complete. Please try again.');
+  }
+}
