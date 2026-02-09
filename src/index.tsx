@@ -1315,7 +1315,7 @@ app.get('/student/module/:moduleId', (c) => {
             }, 1000);
 
             // Start quiz button
-            document.getElementById('startQuizBtn')?.addEventListener('click', function() {
+            document.getElementById('startQuizBtn')?.addEventListener('click', async function() {
               const urlParams = new URLSearchParams(window.location.search);
               const moduleId = window.location.pathname.split('/').pop();
               
@@ -1326,16 +1326,31 @@ app.get('/student/module/:moduleId', (c) => {
                 '{}'
               );
               
-              // Get enrollment ID from the module progress or enrollment
-              const enrollmentId = studentSession.enrollmentId || null;
-              
-              console.log('[Quiz Init]', { moduleId, studentId: studentSession.studentId, enrollmentId });
+              console.log('[Quiz Init] Student session:', studentSession);
               
               if (!studentSession.studentId) {
                 alert('Please log in to take the quiz');
                 window.location.href = '/student-login';
                 return;
               }
+              
+              // Fetch enrollment ID from the module progress API
+              let enrollmentId = studentSession.enrollmentId;
+              
+              if (!enrollmentId) {
+                try {
+                  const progressResponse = await axios.get(\`/api/student/module/\${moduleId}?studentId=\${studentSession.studentId}\`);
+                  if (progressResponse.data.success && progressResponse.data.progress) {
+                    enrollmentId = progressResponse.data.progress.enrollment_id;
+                    console.log('[Quiz Init] Got enrollmentId from module progress:', enrollmentId);
+                  }
+                } catch (error) {
+                  console.warn('[Quiz Init] Could not fetch enrollment ID:', error);
+                  // Continue without enrollmentId - it's optional for now
+                }
+              }
+              
+              console.log('[Quiz Init]', { moduleId, studentId: studentSession.studentId, enrollmentId });
               
               // Show modal
               const modal = document.getElementById('quizModal');
