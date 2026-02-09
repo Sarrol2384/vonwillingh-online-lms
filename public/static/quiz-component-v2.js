@@ -52,6 +52,13 @@ class QuizComponent {
       if (response.data.success) {
         this.questions = response.data.questions;
         console.log('[QuizComponent] Loaded', this.questions.length, 'questions');
+        
+        // Log first 3 questions to see their types
+        console.log('[QuizComponent] Sample questions:', this.questions.slice(0, 3).map(q => ({
+          order: q.order_number,
+          type: q.question_type,
+          text: q.question_text.substring(0, 50)
+        })));
       } else {
         throw new Error(response.data.message || 'Failed to load quiz');
       }
