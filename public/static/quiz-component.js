@@ -328,10 +328,17 @@ class QuizComponent {
     this.container.innerHTML = html;
     
     // Attach event listener to complete button
+    const self = this;
     setTimeout(() => {
       const completeBtn = document.getElementById('completeModuleBtn');
       if (completeBtn) {
-        completeBtn.addEventListener('click', () => this.markModuleComplete());
+        console.log('[QuizComponent] Attaching click handler to complete button');
+        completeBtn.addEventListener('click', async function() {
+          console.log('[QuizComponent] Complete button clicked!');
+          await self.markModuleComplete();
+        });
+      } else {
+        console.error('[QuizComponent] Complete button not found!');
       }
     }, 100);
   }
