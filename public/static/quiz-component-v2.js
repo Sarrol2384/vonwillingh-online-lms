@@ -329,12 +329,25 @@ class QuizComponent {
     
     // Attach event listener with proper completion
     const self = this;
-    document.getElementById('completeModuleBtn').onclick = async function() {
+    const btn = document.getElementById('completeModuleBtn');
+    
+    console.log('[QuizComponent] Button found:', btn, 'ModuleId:', self.moduleId, 'EnrollmentId:', self.enrollmentId);
+    
+    if (!btn) {
+      console.error('[QuizComponent] Complete button not found!');
+      return;
+    }
+    
+    btn.onclick = async function() {
+      console.log('[QuizComponent] ===== BUTTON CLICKED =====');
+      console.log('[QuizComponent] ModuleId:', self.moduleId);
+      console.log('[QuizComponent] EnrollmentId:', self.enrollmentId);
+      
       try {
-        console.log('[QuizComponent] Marking module as complete...');
-        
         // Get session data
         const sessionData = JSON.parse(sessionStorage.getItem('studentSession') || localStorage.getItem('studentSession') || '{}');
+        
+        console.log('[QuizComponent] Session data:', sessionData);
         
         if (!sessionData.studentId) {
           alert('Session expired. Please login again.');
@@ -342,33 +355,44 @@ class QuizComponent {
           return;
         }
         
+        const apiUrl = `/api/student/module/${self.moduleId}/complete`;
+        const requestBody = {
+          studentId: sessionData.studentId,
+          enrollmentId: self.enrollmentId
+        };
+        
+        console.log('[QuizComponent] Calling API:', apiUrl);
+        console.log('[QuizComponent] Request body:', requestBody);
+        
         // Call the completion API
-        const response = await fetch(`/api/student/module/${self.moduleId}/complete`, {
+        const response = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            studentId: sessionData.studentId,
-            enrollmentId: self.enrollmentId
-          })
+          body: JSON.stringify(requestBody)
         });
+        
+        console.log('[QuizComponent] Response status:', response.status);
         
         const result = await response.json();
         
+        console.log('[QuizComponent] Response data:', result);
+        
         if (result.success) {
-          console.log('[QuizComponent] Module marked as complete!');
+          console.log('[QuizComponent] ✅ SUCCESS! Module marked as complete!');
           alert('🎉 Congratulations! Module completed successfully!');
           window.location.href = '/student/dashboard';
         } else {
-          console.error('[QuizComponent] Failed to mark complete:', result);
-          alert('Module completion saved. Returning to dashboard.');
-          window.location.href = '/student/dashboard';
+          console.error('[QuizComponent] ❌ API returned failure:', result);
+          alert('Failed to mark module complete: ' + (result.message || 'Unknown error'));
+          // Don't redirect on failure
         }
       } catch (error) {
-        console.error('[QuizComponent] Error marking complete:', error);
-        alert('Quiz passed! Returning to dashboard.');
-        window.location.href = '/student/dashboard';
+        console.error('[QuizComponent] ❌ EXCEPTION:', error);
+        console.error('[QuizComponent] Error stack:', error.stack);
+        alert('Error: ' + error.message);
+        // Don't redirect on error
       }
     };
   }
