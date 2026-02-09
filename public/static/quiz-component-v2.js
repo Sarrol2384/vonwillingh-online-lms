@@ -153,6 +153,12 @@ class QuizComponent {
     const questionType = question.question_type || 'single_choice';
     const inputType = questionType === 'multiple_choice' ? 'checkbox' : 'radio';
     
+    console.log('[QuizComponent] Rendering question', index + 1, {
+      questionType,
+      inputType,
+      question: question.question_text.substring(0, 50)
+    });
+    
     return `
       <div class="question-card bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
         <div class="flex items-start space-x-3 mb-4">
@@ -175,12 +181,13 @@ class QuizComponent {
                 <label class="flex items-start space-x-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
                   <input 
                     type="${inputType}" 
-                    name="question_${question.id}" 
+                    name="question_${question.id}${inputType === 'checkbox' ? `_${optIndex}` : ''}" 
                     value="${option}"
-                    class="mt-1"
+                    class="mt-1 flex-shrink-0"
+                    data-question-id="${question.id}"
                     ${questionType === 'single_choice' || questionType === 'true_false' ? 'required' : ''}
                   >
-                  <span class="text-gray-700">${option}</span>
+                  <span class="text-gray-700 flex-1">${option}</span>
                 </label>
               `).join('')}
             </div>
@@ -239,8 +246,8 @@ class QuizComponent {
       const questionType = q.question_type || 'single_choice';
       
       if (questionType === 'multiple_choice') {
-        // For checkboxes, collect all checked values
-        const checkedBoxes = document.querySelectorAll(`input[name="question_${q.id}"]:checked`);
+        // For checkboxes, find all checked boxes with data-question-id attribute
+        const checkedBoxes = document.querySelectorAll(`input[data-question-id="${q.id}"]:checked`);
         const selectedAnswers = Array.from(checkedBoxes).map(cb => cb.value);
         
         if (selectedAnswers.length > 0) {
