@@ -4606,8 +4606,22 @@ app.post('/api/student/module/:moduleId/quiz/submit', async (c) => {
     const body = await c.req.json()
     const { studentId, enrollmentId, answers, timeSpentSeconds } = body
     
-    if (!studentId || !answers) {
-      return c.json({ success: false, message: 'Missing required fields' }, 400)
+    console.log('[QUIZ SUBMIT] Received submission:', {
+      moduleId,
+      studentId,
+      enrollmentId,
+      answersCount: answers ? Object.keys(answers).length : 0,
+      timeSpentSeconds
+    })
+    
+    if (!studentId) {
+      console.error('[QUIZ SUBMIT] Missing studentId')
+      return c.json({ success: false, message: 'Student ID is required' }, 400)
+    }
+    
+    if (!answers || Object.keys(answers).length === 0) {
+      console.error('[QUIZ SUBMIT] Missing or empty answers')
+      return c.json({ success: false, message: 'Answers are required' }, 400)
     }
     
     const supabase = getSupabaseAdminClient(c.env)

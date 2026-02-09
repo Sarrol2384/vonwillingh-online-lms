@@ -221,6 +221,17 @@ class QuizComponent {
     // Calculate time spent
     const timeSpent = Math.floor((Date.now() - this.startTime) / 1000);
     
+    // Prepare submission data
+    const submissionData = {
+      studentId: this.studentId,
+      enrollmentId: this.enrollmentId,
+      answers: this.studentAnswers,
+      timeSpentSeconds: timeSpent
+    };
+    
+    console.log('[QuizComponent] Submitting quiz with data:', submissionData);
+    console.log('[QuizComponent] Answer count:', Object.keys(this.studentAnswers).length);
+    
     // Show loading
     this.container.innerHTML = `
       <div class="text-center py-12">
@@ -231,12 +242,9 @@ class QuizComponent {
     
     try {
       // Submit to backend
-      const response = await axios.post(`/api/student/module/${this.moduleId}/quiz/submit`, {
-        studentId: this.studentId,
-        enrollmentId: this.enrollmentId,
-        answers: this.studentAnswers,
-        timeSpentSeconds: timeSpent
-      });
+      const response = await axios.post(`/api/student/module/${this.moduleId}/quiz/submit`, submissionData);
+      
+      console.log('[QuizComponent] Submit response:', response.data);
       
       if (response.data.success) {
         this.currentAttempt = response.data.attempt;
@@ -252,8 +260,12 @@ class QuizComponent {
       }
       
     } catch (error) {
-      console.error('Quiz submission error:', error);
-      this.showError('Failed to submit quiz. Please try again.');
+      console.error('[QuizComponent] Quiz submission error:', error);
+      if (error.response) {
+        console.error('[QuizComponent] Error response:', error.response.data);
+        console.error('[QuizComponent] Error status:', error.response.status);
+      }
+      this.showError(error.response?.data?.message || 'Failed to submit quiz. Please try again.');
     }
   }
 
