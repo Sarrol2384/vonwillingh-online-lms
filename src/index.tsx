@@ -1302,7 +1302,7 @@ app.get('/student/module/:moduleId', (c) => {
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
-        <script src="/static/quiz-component-v2.js?v=5"></script>
+        <script src="/static/quiz-component-v2.js?v=6"></script>
         <script src="/static/module-viewer.js"></script>
         <script src="/static/professional-module-renderer.js"></script>
         <script>
@@ -4655,7 +4655,31 @@ app.post('/api/student/module/:moduleId/quiz/submit', async (c) => {
     questionsAttempted.forEach(questionId => {
       const question = questions.find(q => q.id === questionId)
       if (question) {
-        const isCorrect = answers[questionId] === question.correct_answer
+        let isCorrect = false
+        const studentAnswer = answers[questionId]
+        const correctAnswer = question.correct_answer
+        
+        // Handle different question types
+        if (question.question_type === 'multiple_choice') {
+          // For multiple choice, both answers are JSON arrays - compare sorted arrays
+          try {
+            const studentArr = typeof studentAnswer === 'string' ? JSON.parse(studentAnswer) : studentAnswer
+            const correctArr = typeof correctAnswer === 'string' ? JSON.parse(correctAnswer) : correctAnswer
+            
+            // Sort both arrays and compare
+            const studentSorted = Array.isArray(studentArr) ? studentArr.sort().join('|') : ''
+            const correctSorted = Array.isArray(correctArr) ? correctArr.sort().join('|') : ''
+            
+            isCorrect = studentSorted === correctSorted
+          } catch (e) {
+            console.error('[QUIZ GRADE] Error parsing multiple choice answer:', e)
+            isCorrect = false
+          }
+        } else {
+          // For single choice and true/false, simple string comparison
+          isCorrect = studentAnswer === correctAnswer
+        }
+        
         results[questionId] = isCorrect
         if (isCorrect) correctCount++
       }

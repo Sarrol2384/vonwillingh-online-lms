@@ -150,6 +150,8 @@ class QuizComponent {
 
   renderQuestion(question, index) {
     const options = question.options || [];
+    const questionType = question.question_type || 'single_choice';
+    const inputType = questionType === 'multiple_choice' ? 'checkbox' : 'radio';
     
     return `
       <div class="question-card bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
@@ -162,33 +164,61 @@ class QuizComponent {
               ${question.question_text}
             </p>
             
+            ${questionType === 'multiple_choice' ? `
+              <p class="text-sm text-blue-600 mb-3 font-semibold">
+                <i class="fas fa-info-circle"></i> Select ALL that apply (multiple answers)
+              </p>
+            ` : ''}
+            
             <div class="space-y-2">
               ${options.map((option, optIndex) => `
                 <label class="flex items-start space-x-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
                   <input 
-                    type="radio" 
+                    type="${inputType}" 
                     name="question_${question.id}" 
                     value="${option}"
                     class="mt-1"
-                    required
+                    ${questionType === 'single_choice' || questionType === 'true_false' ? 'required' : ''}
                   >
                   <span class="text-gray-700">${option}</span>
                 </label>
               `).join('')}
             </div>
+            
+            ${question.video_resource ? `
+              <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div class="flex items-center space-x-2 mb-2">
+                  <i class="fas fa-video text-blue-600"></i>
+                  <span class="font-semibold text-blue-800">Video Resource</span>
+                </div>
+                <a href="${question.video_resource}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm flex items-center space-x-1">
+                  <i class="fab fa-youtube"></i>
+                  <span>Watch related video on YouTube</span>
+                  <i class="fas fa-external-link-alt text-xs"></i>
+                </a>
+              </div>
+            ` : ''}
           </div>
         </div>
         
-        ${question.difficulty_level ? `
-          <div class="mt-4 flex items-center space-x-2 text-sm">
-            <span class="px-2 py-1 rounded ${this.getDifficultyClass(question.difficulty_level)}">
-              ${question.difficulty_level.toUpperCase()}
-            </span>
-            <span class="text-gray-500">${question.points} point${question.points > 1 ? 's' : ''}</span>
-          </div>
-        ` : ''}
+        <div class="mt-4 flex items-center space-x-2 text-sm">
+          <span class="px-2 py-1 rounded ${this.getDifficultyClass(question.difficulty || 'medium')}">
+            ${(question.difficulty || 'medium').toUpperCase()}
+          </span>
+          <span class="text-gray-500">${question.points || 1} point${(question.points || 1) > 1 ? 's' : ''}</span>
+          ${this.getQuestionTypeLabel(questionType)}
+        </div>
       </div>
     `;
+  }
+  
+  getQuestionTypeLabel(type) {
+    const labels = {
+      'single_choice': '<span class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs">Single Answer</span>',
+      'multiple_choice': '<span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Multiple Answers</span>',
+      'true_false': '<span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">True/False</span>'
+    };
+    return labels[type] || '';
   }
 
   getDifficultyClass(level) {
@@ -206,15 +236,30 @@ class QuizComponent {
     this.studentAnswers = {};
     
     this.questions.forEach(q => {
-      const answer = formData.get(`question_${q.id}`);
-      if (answer) {
-        this.studentAnswers[q.id] = answer;
+      const questionType = q.question_type || 'single_choice';
+      
+      if (questionType === 'multiple_choice') {
+        // For checkboxes, collect all checked values
+        const checkedBoxes = document.querySelectorAll(`input[name="question_${q.id}"]:checked`);
+        const selectedAnswers = Array.from(checkedBoxes).map(cb => cb.value);
+        
+        if (selectedAnswers.length > 0) {
+          // Store as JSON array string to match the correct_answer format
+          this.studentAnswers[q.id] = JSON.stringify(selectedAnswers.sort());
+        }
+      } else {
+        // For radio buttons (single_choice and true_false)
+        const answer = formData.get(`question_${q.id}`);
+        if (answer) {
+          this.studentAnswers[q.id] = answer;
+        }
       }
     });
     
     // Validate all questions answered
-    if (Object.keys(this.studentAnswers).length < this.questions.length) {
-      alert('Please answer all questions before submitting.');
+    const unansweredCount = this.questions.length - Object.keys(this.studentAnswers).length;
+    if (unansweredCount > 0) {
+      alert(`Please answer all questions before submitting. ${unansweredCount} question(s) remaining.`);
       return;
     }
     
