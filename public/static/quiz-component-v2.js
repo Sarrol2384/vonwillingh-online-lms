@@ -198,20 +198,6 @@ class QuizComponent {
                 </label>
               `).join('')}
             </div>
-            
-            ${question.video_resource ? `
-              <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <div class="flex items-center space-x-2 mb-2">
-                  <i class="fas fa-video text-blue-600"></i>
-                  <span class="font-semibold text-blue-800">Video Resource</span>
-                </div>
-                <a href="${question.video_resource}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm flex items-center space-x-1">
-                  <i class="fab fa-youtube"></i>
-                  <span>Watch related video on YouTube</span>
-                  <i class="fas fa-external-link-alt text-xs"></i>
-                </a>
-              </div>
-            ` : ''}
           </div>
         </div>
         
