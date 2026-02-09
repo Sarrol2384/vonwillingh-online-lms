@@ -316,7 +316,7 @@ class QuizComponent {
         <!-- Action Buttons -->
         <div class="sticky bottom-0 bg-white border-t border-gray-200 p-4 shadow-lg mt-6">
           <button 
-            onclick="markModuleComplete()"
+            id="completeModuleBtn"
             class="w-full bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 transition font-bold"
           >
             ✅ Mark Module as Complete & Continue
@@ -326,6 +326,51 @@ class QuizComponent {
     `;
     
     this.container.innerHTML = html;
+    
+    // Attach event listener to complete button
+    setTimeout(() => {
+      const completeBtn = document.getElementById('completeModuleBtn');
+      if (completeBtn) {
+        completeBtn.addEventListener('click', () => this.markModuleComplete());
+      }
+    }, 100);
+  }
+
+  async markModuleComplete() {
+    try {
+      console.log('[QuizComponent] Marking module as complete...');
+      
+      // Get student session
+      const studentSession = JSON.parse(
+        sessionStorage.getItem('studentSession') || 
+        localStorage.getItem('studentSession') || 
+        '{}'
+      );
+      
+      if (!this.studentId || !this.moduleId) {
+        alert('Unable to mark module as complete. Please refresh and try again.');
+        return;
+      }
+      
+      console.log('[QuizComponent] Calling complete API:', { studentId: this.studentId, moduleId: this.moduleId });
+      
+      // Call API to mark module as complete
+      const response = await axios.post(`/api/student/module/${this.moduleId}/complete`, {
+        studentId: this.studentId
+      });
+      
+      console.log('[QuizComponent] Complete API response:', response.data);
+      
+      if (response.data.success) {
+        alert('✅ Module completed! Redirecting to dashboard...');
+        window.location.href = '/student/dashboard';
+      } else {
+        alert('Failed to mark module as complete: ' + (response.data.message || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('[QuizComponent] Error marking complete:', error);
+      alert('Error marking module as complete. Please try again.');
+    }
   }
 
   renderFailedResults() {
@@ -547,43 +592,3 @@ class QuizComponent {
 
 // Global reference for inline onclick handlers
 let quizComponent = null;
-
-// Global function to mark module as complete
-async function markModuleComplete() {
-  try {
-    console.log('[markModuleComplete] Starting...');
-    
-    // Get student session
-    const studentSession = JSON.parse(
-      sessionStorage.getItem('studentSession') || 
-      localStorage.getItem('studentSession') || 
-      '{}'
-    );
-    
-    const moduleId = window.location.pathname.split('/').pop();
-    
-    if (!studentSession.studentId || !moduleId) {
-      alert('Unable to mark module as complete. Please refresh and try again.');
-      return;
-    }
-    
-    console.log('[markModuleComplete] Marking module complete:', { studentId: studentSession.studentId, moduleId });
-    
-    // Call API to mark module as complete
-    const response = await axios.post(`/api/student/module/${moduleId}/complete`, {
-      studentId: studentSession.studentId
-    });
-    
-    console.log('[markModuleComplete] Response:', response.data);
-    
-    if (response.data.success) {
-      alert('✅ Module completed! Redirecting to dashboard...');
-      window.location.href = '/student/dashboard';
-    } else {
-      alert('Failed to mark module as complete: ' + (response.data.message || 'Unknown error'));
-    }
-  } catch (error) {
-    console.error('[markModuleComplete] Error:', error);
-    alert('Error marking module as complete. Please try again.');
-  }
-}
