@@ -1,0 +1,164 @@
+{
+  "course": {
+    "name": "Leadership Development Program",
+    "code": "LEAD001",
+    "level": "Certificate",
+    "category": "Leadership",
+    "description": "Comprehensive leadership development program covering foundational concepts through advanced leadership theories. Learn team dynamics, organizational culture, stakeholder management, and leadership development skills essential for South African business leaders.",
+    "duration": "8 weeks",
+    "price": 0
+  },
+  "modules": [
+    {
+      "title": "Module 2: Core Concepts in Leadership",
+      "description": "Advanced leadership theories including team dynamics, organizational culture, stakeholder management, and leadership development",
+      "order_number": 2,
+      "content": "<h1>Module 2: Core Concepts in Leadership</h1><h2>Building on the Foundation</h2><p>In Module 1, you learned foundational leadership concepts. Now we'll dive deeper into advanced topics that will help you lead effectively in complex organizational environments.</p><h2>1. Team Development and Dynamics</h2><h3>Tuckman's Stages of Team Development</h3><p><strong>Stage 1: Forming</strong></p><ul><li><strong>Characteristics:</strong> Politeness, uncertainty, testing boundaries</li><li><strong>Leader Role:</strong> Provide clear direction, set expectations, build trust</li><li><strong>Duration:</strong> Varies, but typically first few weeks</li></ul><p><strong>Stage 2: Storming</strong></p><ul><li><strong>Characteristics:</strong> Conflict, resistance, competition for influence</li><li><strong>Leader Role:</strong> Facilitate conflict resolution, maintain focus on goals</li><li><strong>Watch For:</strong> This is normal! Don't avoid conflict - work through it</li></ul><p><strong>Stage 3: Norming</strong></p><ul><li><strong>Characteristics:</strong> Cooperation, agreed processes, mutual respect</li><li><strong>Leader Role:</strong> Step back slightly, encourage team ownership</li><li><strong>Milestone:</strong> Team starts to self-organize effectively</li></ul><p><strong>Stage 4: Performing</strong></p><ul><li><strong>Characteristics:</strong> High productivity, strong relationships, autonomy</li><li><strong>Leader Role:</strong> Coach, delegate, remove obstacles</li><li><strong>Goal:</strong> Maintain momentum, celebrate achievements</li></ul><p><strong>Stage 5: Adjourning</strong></p><ul><li><strong>Characteristics:</strong> Project completion, team disbanding</li><li><strong>Leader Role:</strong> Acknowledge contributions, facilitate closure</li><li><strong>Important:</strong> Celebrate success, capture lessons learned</li></ul><div style='background: #f0f9ff; padding: 15px; border-left: 4px solid #0284c7; margin: 20px 0;'><strong>💡 SA Context:</strong> In diverse South African teams, the Storming stage may last longer due to different cultural communication styles. Be patient and use Ubuntu principles to build understanding.</div><h2>2. Situational Leadership Model</h2><h3>Matching Leadership Style to Team Readiness</h3><p><strong>S1: Directing (High Directive, Low Supportive)</strong></p><ul><li><strong>Use when:</strong> Team members are willing but lack skill/experience</li><li><strong>Behaviors:</strong> Clear instructions, close supervision, frequent feedback</li><li><strong>Example:</strong> New employees learning company systems</li></ul><p><strong>S2: Coaching (High Directive, High Supportive)</strong></p><ul><li><strong>Use when:</strong> Team has some skill but low confidence or commitment</li><li><strong>Behaviors:</strong> Explain decisions, encourage input, provide support</li><li><strong>Example:</strong> Mid-level staff facing new challenges</li></ul><p><strong>S3: Supporting (Low Directive, High Supportive)</strong></p><ul><li><strong>Use when:</strong> Team is skilled but needs confidence boost</li><li><strong>Behaviors:</strong> Facilitate decisions, provide encouragement</li><li><strong>Example:</strong> Experienced team members taking on leadership roles</li></ul><p><strong>S4: Delegating (Low Directive, Low Supportive)</strong></p><ul><li><strong>Use when:</strong> Team is both skilled and motivated</li><li><strong>Behaviors:</strong> Turn over decisions, monitor progress minimally</li><li><strong>Example:</strong> High-performing senior professionals</li></ul><h2>3. Path-Goal Leadership Theory</h2><p><strong>Core Idea:</strong> Leaders help followers achieve goals by clarifying paths and removing obstacles.</p><p><strong>Four Leadership Behaviors:</strong></p><ul><li><strong>Directive:</strong> Provide specific guidance (use when task is ambiguous)</li><li><strong>Supportive:</strong> Show concern for well-being (use when task is stressful)</li><li><strong>Participative:</strong> Consult with team (use when team has expertise)</li><li><strong>Achievement-Oriented:</strong> Set challenging goals (use when team wants growth)</li></ul><h2>4. Organizational Culture</h2><h3>Schein's Three Levels</h3><p><strong>Level 1: Artifacts</strong> - Visible elements (dress code, office layout)</p><p><strong>Level 2: Espoused Values</strong> - Stated beliefs (mission statements)</p><p><strong>Level 3: Basic Assumptions</strong> - Unconscious beliefs (deeply held views)</p><h2>5. Key Leadership Theories</h2><ul><li><strong>LMX Theory:</strong> Leaders develop different quality relationships with team members</li><li><strong>Level 5 Leadership:</strong> Personal humility + Professional will</li><li><strong>Learning Organizations:</strong> Five disciplines (Senge)</li><li><strong>Kotter's 8 Steps:</strong> Change management framework</li></ul><h2>Prepare for Your Quiz</h2><p>Test your understanding of these core leadership concepts. You need <strong>70% to pass</strong>.</p>",
+      "content_type": "lesson",
+      "duration_minutes": 50,
+      "video_url": null,
+      "quiz": {
+        "passing_score": 70,
+        "max_attempts": 3,
+        "questions": [
+          {
+            "id": 1,
+            "question": "According to Hersey and Blanchard's Situational Leadership Theory, which leadership style is most appropriate for followers with high competence but low commitment?",
+            "type": "multiple_choice",
+            "options": [
+              "Directing - high task, low relationship",
+              "Coaching - high task, high relationship",
+              "Supporting - low task, high relationship",
+              "Delegating - low task, low relationship"
+            ],
+            "correct_answer": "Supporting - low task, high relationship",
+            "difficulty": "hard",
+            "explanation": "Supporting style provides encouragement and involvement without heavy direction for competent followers who need motivation."
+          },
+          {
+            "id": 2,
+            "question": "According to Tuckman's model, which stage of team development is characterized by conflict, competition, and power struggles?",
+            "type": "multiple_choice",
+            "options": [
+              "Forming",
+              "Storming",
+              "Norming",
+              "Performing"
+            ],
+            "correct_answer": "Storming",
+            "difficulty": "medium",
+            "explanation": "The Storming stage involves conflict as team members compete for influence and challenge ideas. This is a normal and necessary phase."
+          },
+          {
+            "id": 3,
+            "question": "TRUE or FALSE: According to Expectancy Theory, motivation is highest when employees believe effort will lead to performance, performance will lead to rewards, and rewards are valued.",
+            "type": "multiple_choice",
+            "options": [
+              "True",
+              "False"
+            ],
+            "correct_answer": "True",
+            "difficulty": "medium",
+            "explanation": "Expectancy Theory states motivation equals Expectancy × Instrumentality × Valence. All three beliefs must be present for high motivation."
+          },
+          {
+            "id": 4,
+            "question": "What is the primary difference between Theory X and Theory Y management assumptions according to Douglas McGregor?",
+            "type": "multiple_choice",
+            "options": [
+              "Theory X assumes employees are lazy while Theory Y assumes employees are self-motivated",
+              "Theory X focuses on tasks while Theory Y focuses on relationships",
+              "Theory X is for manufacturing while Theory Y is for services",
+              "Theory X is autocratic while Theory Y is democratic"
+            ],
+            "correct_answer": "Theory X assumes employees are lazy while Theory Y assumes employees are self-motivated",
+            "difficulty": "medium",
+            "explanation": "Theory X assumes people dislike work and need control; Theory Y assumes people enjoy work and seek responsibility."
+          },
+          {
+            "id": 5,
+            "question": "According to Schein's model, which level of organizational culture consists of visible elements like dress code and office layout?",
+            "type": "multiple_choice",
+            "options": [
+              "Basic Assumptions",
+              "Espoused Values",
+              "Artifacts",
+              "Core Values"
+            ],
+            "correct_answer": "Artifacts",
+            "difficulty": "easy",
+            "explanation": "Artifacts are the visible, tangible elements of culture that you can see, hear, and feel - like dress codes, office layouts, and rituals."
+          },
+          {
+            "id": 6,
+            "question": "TRUE or FALSE: Groupthink occurs when the desire for harmony in a group leads to poor decision-making and suppression of dissenting views.",
+            "type": "multiple_choice",
+            "options": [
+              "True",
+              "False"
+            ],
+            "correct_answer": "True",
+            "difficulty": "easy",
+            "explanation": "Groupthink happens when pressure for consensus overrides realistic evaluation of alternatives, leading to poor decisions."
+          },
+          {
+            "id": 7,
+            "question": "What leadership approach does the Blake and Mouton Managerial Grid identify as most effective?",
+            "type": "multiple_choice",
+            "options": [
+              "Country Club - high people concern, low production concern",
+              "Authority-Compliance - high production concern, low people concern",
+              "Team Management - high people concern, high production concern",
+              "Middle-of-the-Road - moderate people and production concern"
+            ],
+            "correct_answer": "Team Management - high people concern, high production concern",
+            "difficulty": "medium",
+            "explanation": "Team Management (9,9) balances high concern for both people and production, producing the best results."
+          },
+          {
+            "id": 8,
+            "question": "According to Path-Goal Leadership Theory, which leadership behavior is most appropriate when the task is ambiguous and the team lacks experience?",
+            "type": "multiple_choice",
+            "options": [
+              "Supportive leadership",
+              "Participative leadership",
+              "Directive leadership",
+              "Achievement-oriented leadership"
+            ],
+            "correct_answer": "Directive leadership",
+            "difficulty": "medium",
+            "explanation": "Directive leadership provides specific guidance and clear expectations, which is most helpful when tasks are ambiguous and team members are inexperienced."
+          },
+          {
+            "id": 9,
+            "question": "According to Jim Collins, what characterizes Level 5 Leadership?",
+            "type": "multiple_choice",
+            "options": [
+              "High charisma and strong personality",
+              "Personal humility combined with professional will",
+              "Focus on short-term results",
+              "Celebrity CEO status"
+            ],
+            "correct_answer": "Personal humility combined with professional will",
+            "difficulty": "hard",
+            "explanation": "Level 5 leaders combine personal humility (modest, credits others) with professional will (unwavering resolve, high standards) to build enduring organizational greatness."
+          },
+          {
+            "id": 10,
+            "question": "Which of Kotter's 8 steps for leading change comes FIRST?",
+            "type": "multiple_choice",
+            "options": [
+              "Form a strategic vision",
+              "Create a sense of urgency",
+              "Build a guiding coalition",
+              "Generate short-term wins"
+            ],
+            "correct_answer": "Create a sense of urgency",
+            "difficulty": "medium",
+            "explanation": "Creating a sense of urgency is the first step in Kotter's model - helping others see the need for change before taking other actions."
+          }
+        ]
+      }
+    }
+  ]
+}
