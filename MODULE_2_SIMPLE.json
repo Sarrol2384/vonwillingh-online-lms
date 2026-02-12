@@ -1,0 +1,97 @@
+{
+  "course": {
+    "name": "Leadership Development Program",
+    "code": "LEAD001",
+    "level": "Certificate",
+    "category": "Leadership",
+    "description": "Comprehensive leadership training covering team dynamics, situational leadership, and organizational development",
+    "duration": "8 weeks",
+    "price": 0
+  },
+  "modules": [
+    {
+      "title": "Module 2: Core Concepts in Leadership",
+      "description": "Advanced leadership theories including team dynamics, organizational culture, stakeholder management, and leadership development",
+      "order_number": 2,
+      "content": "<div><h1>Module 2: Core Concepts in Leadership</h1><h2>Team Development and Dynamics</h2><p>Understanding how teams evolve is crucial for effective leadership. Bruce Tuckman identified five stages teams go through:</p><h3>Stage 1: Forming</h3><p>Characteristics: Team members are polite, uncertain, and getting to know each other</p><p>Leader Role: Provide clear direction, explain roles, build trust</p><p>Duration: First few weeks</p><h3>Stage 2: Storming</h3><p>Characteristics: Conflicts emerge, people challenge ideas, tension rises</p><p>Leader Role: Facilitate conflict resolution, remain calm, clarify goals</p><p>Watch For: This is normal! Don't avoid conflict—work through it</p><h3>Stage 3: Norming</h3><p>Characteristics: Team finds rhythm, establishes norms, cooperation increases</p><p>Leader Role: Step back gradually, encourage peer feedback</p><p>Milestone: Team starts to self-organize effectively</p><h3>Stage 4: Performing</h3><p>Characteristics: High productivity, autonomy, strong collaboration</p><p>Leader Role: Delegate, focus on strategy, remove obstacles</p><p>Goal: Maintain momentum, celebrate achievements</p><h3>Stage 5: Adjourning</h3><p>Characteristics: Project ends, team disbands, mixed emotions</p><p>Leader Role: Recognize contributions, facilitate closure</p><p>Important: Celebrate success, capture lessons learned</p><h2>Situational Leadership</h2><p>Developed by Ken Blanchard and Paul Hersey, this model says: There is no one best leadership style. You must adapt to your team member's development level.</p><h3>Practical Example</h3><p>Scenario: Thandi joins your team as a junior data analyst.</p><ul><li>Week 1-4 (D1): Use Directing style—show her exactly how to clean data, run reports</li><li>Month 2-3 (D2): Switch to Coaching—she can do tasks but needs reassurance and feedback</li><li>Month 4-6 (D3): Use Supporting—involve her in decisions, ask for her input</li><li>Month 7+ (D4): Move to Delegating—assign projects, let her lead small analyses</li></ul><h2>Key Takeaways</h2><ul><li>Teams go through predictable stages (Forming to Storming to Norming to Performing to Adjourning). Your leadership style should evolve with them.</li><li>There's no one-size-fits-all leadership style. Use Situational Leadership to adapt to each team member's development level.</li><li>Your job is to clarify the path and remove obstacles using directive, supportive, participative, or achievement-oriented behaviors as needed.</li></ul><p>You need 70% to pass the quiz and proceed to Module 3.</p></div>",
+      "content_type": "lesson",
+      "video_url": "",
+      "duration_minutes": 50,
+      "resources": [],
+      "quiz": {
+        "passing_score": 70,
+        "max_attempts": 3,
+        "questions": [
+          {
+            "id": 1,
+            "question": "According to Tuckman's model, in which stage do conflicts emerge and people challenge ideas?",
+            "type": "multiple_choice",
+            "options": [
+              "Forming",
+              "Storming",
+              "Norming",
+              "Performing"
+            ],
+            "correct_answer": "Storming",
+            "difficulty": "easy",
+            "explanation": "The Storming stage is when conflicts emerge, people challenge ideas, and tension rises. This is a normal and necessary stage of team development."
+          },
+          {
+            "id": 2,
+            "question": "In Situational Leadership, which style is appropriate for followers with high competence but low commitment?",
+            "type": "multiple_choice",
+            "options": [
+              "Directing",
+              "Coaching",
+              "Supporting",
+              "Delegating"
+            ],
+            "correct_answer": "Supporting",
+            "difficulty": "medium",
+            "explanation": "Supporting style is appropriate for followers with high competence but low commitment. They know how to do the work but need encouragement."
+          },
+          {
+            "id": 3,
+            "question": "True or False: According to Situational Leadership, there is one best leadership style for all situations.",
+            "type": "true_false",
+            "options": [
+              "True",
+              "False"
+            ],
+            "correct_answer": "False",
+            "difficulty": "easy",
+            "explanation": "False! Situational Leadership specifically states that there is no one best leadership style. Leaders must adapt based on the situation."
+          },
+          {
+            "id": 4,
+            "question": "What is the leader's primary role during the Forming stage?",
+            "type": "multiple_choice",
+            "options": [
+              "Facilitate conflict resolution",
+              "Delegate and empower",
+              "Provide clear direction and build trust",
+              "Step back and encourage peer feedback"
+            ],
+            "correct_answer": "Provide clear direction and build trust",
+            "difficulty": "medium",
+            "explanation": "During Forming, team members are uncertain. The leader must provide clear direction, explain roles, and build trust."
+          },
+          {
+            "id": 5,
+            "question": "In the Performing stage, what should the leader focus on?",
+            "type": "multiple_choice",
+            "options": [
+              "Providing detailed instructions",
+              "Resolving team conflicts",
+              "Delegating and removing obstacles",
+              "Explaining basic team norms"
+            ],
+            "correct_answer": "Delegating and removing obstacles",
+            "difficulty": "medium",
+            "explanation": "In Performing, the team is highly productive. The leader should delegate, focus on strategy, and remove obstacles."
+          }
+        ]
+      }
+    }
+  ]
+}

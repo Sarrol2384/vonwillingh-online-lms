@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2 Converter - Simple Copy/Paste</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .step h2 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .step p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            resize: vertical;
+            margin-top: 10px;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: transform 0.2s;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .button:active {
+            transform: translateY(0);
+        }
+        .output {
+            display: none;
+            margin-top: 20px;
+        }
+        .success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .success h3 {
+            margin-bottom: 10px;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-top: 15px;
+            position: relative;
+        }
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+        .info-box strong {
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Module 2 Content Converter</h1>
+            <p>Convert Module 2 JSON to SQL INSERT Statement</p>
+        </div>
+        
+        <div class="content">
+            <div class="step">
+                <h2>Step 1: Paste Module 2 JSON Below</h2>
+                <p>Copy the entire MODULE_2_CONTENT.json and paste it here:</p>
+                <textarea id="jsonInput" placeholder='Paste the JSON here...'></textarea>
+                <button class="button" onclick="convertJSON()">🔄 Convert to SQL</button>
+            </div>
+
+            <div id="output" class="output">
+                <div class="success">
+                    <h3>✅ Conversion Successful!</h3>
+                    <p>Your SQL INSERT statement is ready. Copy it and run in Supabase SQL Editor.</p>
+                </div>
+
+                <div class="step">
+                    <h2>Step 2: Copy the SQL Below</h2>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copySQLToClipboard()">📋 Copy SQL</button>
+                        <pre id="sqlOutput"></pre>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <h2>Step 3: Run in Supabase</h2>
+                    <div class="info-box">
+                        <p><strong>1.</strong> Go to your Supabase project</p>
+                        <p><strong>2.</strong> Click "SQL Editor" in the left sidebar</p>
+                        <p><strong>3.</strong> Paste the SQL above</p>
+                        <p><strong>4.</strong> Click "Run" to insert Module 2 content</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function convertJSON() {
+            const jsonInput = document.getElementById('jsonInput').value.trim();
+            
+            if (!jsonInput) {
+                alert('❌ Please paste the JSON first!');
+                return;
+            }
+
+            try {
+                const data = JSON.parse(jsonInput);
+                
+                if (!data.modules || !Array.isArray(data.modules) || data.modules.length === 0) {
+                    alert('❌ Invalid JSON structure. Expected { "modules": [...] }');
+                    return;
+                }
+
+                const module = data.modules[0];
+                
+                // Escape single quotes for SQL
+                const escapeSQL = (str) => {
+                    if (!str) return '';
+                    return str.replace(/'/g, "''");
+                };
+
+                // Generate SQL
+                const sql = `-- Insert Module 2: Core Concepts in Leadership
+DO $$
+DECLARE
+    v_course_id INTEGER;
+    v_module_id INTEGER;
+BEGIN
+    -- Get the Leadership course ID
+    SELECT id INTO v_course_id 
+    FROM courses 
+    WHERE name ILIKE '%Leadership%' OR code ILIKE '%LEAD%'
+    LIMIT 1;
+    
+    IF v_course_id IS NULL THEN
+        RAISE EXCEPTION 'Leadership course not found. Please create it first.';
+    END IF;
+    
+    RAISE NOTICE 'Found course ID: %', v_course_id;
+    
+    -- Insert Module 2
+    INSERT INTO modules (
+        course_id,
+        title,
+        description,
+        content,
+        content_type,
+        order_number,
+        duration
+    ) VALUES (
+        v_course_id,
+        '${escapeSQL(module.title)}',
+        '${escapeSQL(module.description)}',
+        '${escapeSQL(module.content)}',
+        'lesson',
+        ${module.order_number || 2},
+        50
+    )
+    RETURNING id INTO v_module_id;
+    
+    RAISE NOTICE 'Created Module 2 with ID: %', v_module_id;
+    
+    RAISE NOTICE '========================================';
+    RAISE NOTICE 'SUCCESS!';
+    RAISE NOTICE 'Module 2 ID: %', v_module_id;
+    RAISE NOTICE '========================================';
+END $$;`;
+
+                document.getElementById('sqlOutput').textContent = sql;
+                document.getElementById('output').style.display = 'block';
+                
+                // Scroll to output
+                document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+            } catch (error) {
+                alert('❌ Invalid JSON format. Please check your input.\n\nError: ' + error.message);
+                console.error('Parse error:', error);
+            }
+        }
+
+        function copySQLToClipboard() {
+            const sqlText = document.getElementById('sqlOutput').textContent;
+            
+            navigator.clipboard.writeText(sqlText).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                btn.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#667eea';
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy. Please select and copy manually.');
+                console.error('Copy failed:', err);
+            });
+        }
+
+        // Auto-load the JSON if available
+        window.addEventListener('DOMContentLoaded', () => {
+            const moduleJSON = {
+  "modules": [
+    {
+      "title": "Module 2: Core Concepts in Leadership",
+      "description": "Advanced leadership theories including team dynamics, organizational culture, stakeholder management, and leadership development",
+      "order_number": 2,
+      "content": "<div style=\\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 900px; margin: 0 auto; line-height: 1.8; color: #333;\\">\\n\\n<div style=\\"background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);\\">\\n  <h1 style=\\"margin: 0 0 15px 0; font-size: 36px; font-weight: 700;\\">Module 2: Core Concepts in Leadership</h1>\\n  <p style=\\"margin: 0; font-size: 18px; opacity: 0.95;\\">Advanced leadership theories and practical applications</p>\\n</div>\\n\\n<div style=\\"background: #f8f9fa; padding: 25px; border-left: 5px solid #667eea; border-radius: 8px; margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; margin-top: 0;\\">🎯 Building on the Foundation</h2>\\n  <p>In Module 1, you learned about Ubuntu philosophy, emotional intelligence, and basic leadership styles. Now we'll dive deeper into advanced leadership concepts that will help you lead teams, manage change, and build strong organizations.</p>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">1️⃣ Team Development and Dynamics</h2>\\n  \\n  <h3 style=\\"color: #764ba2; margin-top: 25px;\\">Tuckman's Stages of Team Development</h3>\\n  <p>Understanding how teams evolve is crucial for effective leadership. Bruce Tuckman identified five stages teams go through:</p>\\n  \\n  <div style=\\"background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 20px 0;\\">\\n    <h4 style=\\"color: #1976d2; margin-top: 0;\\">Stage 1: Forming</h4>\\n    <p><strong>Characteristics:</strong> Team members are polite, uncertain, and getting to know each other</p>\\n    <p><strong>Leader Role:</strong> Provide clear direction, explain roles, build trust</p>\\n    <p><strong>Duration:</strong> First few weeks</p>\\n  </div>\\n  \\n  <div style=\\"background: #fff3e0; padding: 20px; border-radius: 8px; margin: 20px 0;\\">\\n    <h4 style=\\"color: #f57c00; margin-top: 0;\\">Stage 2: Storming</h4>\\n    <p><strong>Characteristics:</strong> Conflicts emerge, people challenge ideas, tension rises</p>\\n    <p><strong>Leader Role:</strong> Facilitate conflict resolution, remain calm, clarify goals</p>\\n    <p><strong>Watch For:</strong> This is normal! Don't avoid conflict—work through it</p>\\n  </div>\\n  \\n  <div style=\\"background: #e8f5e9; padding: 20px; border-radius: 8px; margin: 20px 0;\\">\\n    <h4 style=\\"color: #388e3c; margin-top: 0;\\">Stage 3: Norming</h4>\\n    <p><strong>Characteristics:</strong> Team finds rhythm, establishes norms, cooperation increases</p>\\n    <p><strong>Leader Role:</strong> Step back gradually, encourage peer feedback</p>\\n    <p><strong>Milestone:</strong> Team starts to self-organize effectively</p>\\n  </div>\\n  \\n  <div style=\\"background: #f3e5f5; padding: 20px; border-radius: 8px; margin: 20px 0;\\">\\n    <h4 style=\\"color: #7b1fa2; margin-top: 0;\\">Stage 4: Performing</h4>\\n    <p><strong>Characteristics:</strong> High productivity, autonomy, strong collaboration</p>\\n    <p><strong>Leader Role:</strong> Delegate, focus on strategy, remove obstacles</p>\\n    <p><strong>Goal:</strong> Maintain momentum, celebrate achievements</p>\\n  </div>\\n  \\n  <div style=\\"background: #fce4ec; padding: 20px; border-radius: 8px; margin: 20px 0;\\">\\n    <h4 style=\\"color: #c2185b; margin-top: 0;\\">Stage 5: Adjourning</h4>\\n    <p><strong>Characteristics:</strong> Project ends, team disbands, mixed emotions</p>\\n    <p><strong>Leader Role:</strong> Recognize contributions, facilitate closure</p>\\n    <p><strong>Important:</strong> Celebrate success, capture lessons learned</p>\\n  </div>\\n  \\n  <div style=\\"background: #fff8e1; border-left: 4px solid #ffa000; padding: 15px; margin: 20px 0; border-radius: 4px;\\">\\n    <p><strong>🇿🇦 SA Context:</strong> In South African workplaces with diverse cultural backgrounds, the Forming and Storming stages may be longer. Ubuntu philosophy helps: \\"I am because we are\\" reminds us that working through differences strengthens the team.</p>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">2️⃣ Situational Leadership</h2>\\n  \\n  <p>Developed by Ken Blanchard and Paul Hersey, this model says: <strong>\\"There is no one best leadership style.\\"</strong> You must adapt to your team member's development level.</p>\\n  \\n  <table style=\\"width: 100%; border-collapse: collapse; margin: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);\\">\\n    <thead>\\n      <tr style=\\"background: #667eea; color: white;\\">\\n        <th style=\\"padding: 15px; text-align: left; border: 1px solid #ddd;\\">Development Level</th>\\n        <th style=\\"padding: 15px; text-align: left; border: 1px solid #ddd;\\">Characteristics</th>\\n        <th style=\\"padding: 15px; text-align: left; border: 1px solid #ddd;\\">Leadership Style</th>\\n      </tr>\\n    </thead>\\n    <tbody>\\n      <tr style=\\"background: #f9f9f9;\\">\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\"><strong>D1: Low Competence, High Commitment</strong></td>\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\">Enthusiastic beginner, needs guidance</td>\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\"><strong>S1: Directing</strong><br/>Give clear instructions, supervise closely</td>\\n      </tr>\\n      <tr>\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\"><strong>D2: Some Competence, Low Commitment</strong></td>\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\">Disillusioned learner, faces challenges</td>\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\"><strong>S2: Coaching</strong><br/>Direct AND support, explain decisions</td>\\n      </tr>\\n      <tr style=\\"background: #f9f9f9;\\">\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\"><strong>D3: High Competence, Variable Commitment</strong></td>\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\">Capable but cautious performer</td>\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\"><strong>S3: Supporting</strong><br/>Share decision-making, build confidence</td>\\n      </tr>\\n      <tr>\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\"><strong>D4: High Competence, High Commitment</strong></td>\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\">Self-reliant achiever</td>\\n        <td style=\\"padding: 15px; border: 1px solid #ddd;\\"><strong>S4: Delegating</strong><br/>Empower, monitor progress lightly</td>\\n      </tr>\\n    </tbody>\\n  </table>\\n  \\n  <div style=\\"background: #e1f5fe; padding: 20px; border-radius: 8px; margin-top: 25px;\\">\\n    <h3 style=\\"color: #0277bd; margin-top: 0;\\">💡 Practical Example:</h3>\\n    <p><strong>Scenario:</strong> Thandi joins your team as a junior data analyst.</p>\\n    <ul style=\\"line-height: 2;\\">\\n      <li><strong>Week 1–4 (D1):</strong> Use <em>Directing</em> style—show her exactly how to clean data, run reports</li>\\n      <li><strong>Month 2–3 (D2):</strong> Switch to <em>Coaching</em>—she can do tasks but needs reassurance and feedback</li>\\n      <li><strong>Month 4–6 (D3):</strong> Use <em>Supporting</em>—involve her in decisions, ask for her input</li>\\n      <li><strong>Month 7+ (D4):</strong> Move to <em>Delegating</em>—assign projects, let her lead small analyses</li>\\n    </ul>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">3️⃣ Path-Goal Leadership Theory</h2>\\n  \\n  <p>Developed by Robert House, this theory focuses on how leaders can help team members reach their goals by clarifying the path and removing obstacles.</p>\\n  \\n  <h3 style=\\"color: #764ba2; margin-top: 25px;\\">Four Leadership Behaviors:</h3>\\n  \\n  <div style=\\"display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 25px 0;\\">\\n    <div style=\\"background: #e8eaf6; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #3f51b5; margin-top: 0;\\">🎯 Directive</h4>\\n      <p><strong>When to use:</strong> Task is ambiguous, team lacks experience</p>\\n      <p><strong>Actions:</strong> Set clear goals, establish schedules, explain standards</p>\\n    </div>\\n    \\n    <div style=\\"background: #fce4ec; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #c2185b; margin-top: 0;\\">🤝 Supportive</h4>\\n      <p><strong>When to use:</strong> Task is stressful or repetitive</p>\\n      <p><strong>Actions:</strong> Show concern, be approachable, create friendly environment</p>\\n    </div>\\n    \\n    <div style=\\"background: #e0f2f1; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #00796b; margin-top: 0;\\">👥 Participative</h4>\\n      <p><strong>When to use:</strong> Team has expertise, needs buy-in</p>\\n      <p><strong>Actions:</strong> Consult team, consider suggestions, involve in decisions</p>\\n    </div>\\n    \\n    <div style=\\"background: #fff3e0; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #e65100; margin-top: 0;\\">🏆 Achievement-Oriented</h4>\\n      <p><strong>When to use:</strong> Team is skilled, wants challenge</p>\\n      <p><strong>Actions:</strong> Set ambitious goals, show confidence, expect excellence</p>\\n    </div>\\n  </div>\\n  \\n  <div style=\\"background: #ffebee; border-left: 4px solid #d32f2f; padding: 15px; margin: 20px 0; border-radius: 4px;\\">\\n    <p><strong>⚠️ Key Insight:</strong> The same leader should use ALL four behaviors at different times, depending on the situation and team member needs!</p>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">4️⃣ Organizational Culture and Leadership</h2>\\n  \\n  <p>Edgar Schein's model shows culture has three levels—and leaders influence all three:</p>\\n  \\n  <div style=\\"margin: 25px 0;\\">\\n    <div style=\\"background: linear-gradient(to right, #667eea, #764ba2); color: white; padding: 20px; border-radius: 8px 8px 0 0;\\">\\n      <h3 style=\\"margin: 0;\\">Level 1: Artifacts (Visible)</h3>\\n      <p style=\\"margin: 10px 0 0 0;\\">What you can see and touch</p>\\n    </div>\\n    <div style=\\"background: #f5f5f5; padding: 20px; border-left: 3px solid #667eea; border-right: 3px solid #667eea;\\">\\n      <ul style=\\"margin: 0; padding-left: 20px;\\">\\n        <li>Office layout (open plan vs. private offices)</li>\\n        <li>Dress code (formal suits vs. casual)</li>\\n        <li>Rituals (weekly team lunches, recognition ceremonies)</li>\\n        <li>Language and jargon used</li>\\n      </ul>\\n      <p style=\\"margin-top: 15px; font-style: italic; color: #666;\\">Leader Action: Model the behavior you want to see</p>\\n    </div>\\n  </div>\\n  \\n  <div style=\\"margin: 25px 0;\\">\\n    <div style=\\"background: linear-gradient(to right, #764ba2, #667eea); color: white; padding: 20px; border-radius: 8px 8px 0 0;\\">\\n      <h3 style=\\"margin: 0;\\">Level 2: Espoused Values (Stated)</h3>\\n      <p style=\\"margin: 10px 0 0 0;\\">What the organization says it believes</p>\\n    </div>\\n    <div style=\\"background: #f5f5f5; padding: 20px; border-left: 3px solid #764ba2; border-right: 3px solid #764ba2;\\">\\n      <ul style=\\"margin: 0; padding-left: 20px;\\">\\n        <li>Mission and vision statements</li>\\n        <li>Core values (e.g., \\"innovation,\\" \\"integrity\\")</li>\\n        <li>Written policies and procedures</li>\\n        <li>Public commitments (e.g., sustainability goals)</li>\\n      </ul>\\n      <p style=\\"margin-top: 15px; font-style: italic; color: #666;\\">Leader Action: Communicate values clearly and consistently</p>\\n    </div>\\n  </div>\\n  \\n  <div style=\\"margin: 25px 0;\\">\\n    <div style=\\"background: linear-gradient(to right, #667eea, #764ba2); color: white; padding: 20px; border-radius: 8px 8px 0 0;\\">\\n      <h3 style=\\"margin: 0;\\">Level 3: Basic Assumptions (Invisible)</h3>\\n      <p style=\\"margin: 10px 0 0 0;\\">Unconscious, taken-for-granted beliefs</p>\\n    </div>\\n    <div style=\\"background: #f5f5f5; padding: 20px; border-left: 3px solid #667eea; border-right: 3px solid #667eea; border-radius: 0 0 8px 8px;\\">\\n      <ul style=\\"margin: 0; padding-left: 20px;\\">\\n        <li>Beliefs about human nature (people are trustworthy / people need control)</li>\\n        <li>Assumptions about time (deadlines are flexible / deadlines are absolute)</li>\\n        <li>Relationship to environment (we adapt to change / we control our destiny)</li>\\n      </ul>\\n      <p style=\\"margin-top: 15px; font-style: italic; color: #666;\\">Leader Action: Challenge unhelpful assumptions through your decisions</p>\\n    </div>\\n  </div>\\n  \\n  <div style=\\"background: #fff8e1; border-left: 4px solid #ffa000; padding: 15px; margin: 20px 0; border-radius: 4px;\\">\\n    <p><strong>🇿🇦 SA Workplace Culture Note:</strong> South African organizations often blend multiple cultural values. Ubuntu (\\"I am because we are\\") may coexist with Western individualistic values. Effective leaders acknowledge this complexity and create inclusive cultures.</p>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">5️⃣ Stakeholder Management</h2>\\n  \\n  <p>Leaders don't operate in isolation. You must understand and manage relationships with all stakeholders—people who affect or are affected by your decisions.</p>\\n  \\n  <h3 style=\\"color: #764ba2; margin-top: 25px;\\">Power-Interest Grid</h3>\\n  <p>Map your stakeholders based on their power (ability to influence) and interest (how much they care):</p>\\n  \\n  <table style=\\"width: 100%; border-collapse: collapse; margin: 25px 0; text-align: center;\\">\\n    <tr>\\n      <td style=\\"width: 50%; padding: 0;\\"></td>\\n      <td colspan=\\"2\\" style=\\"background: #e3f2fd; padding: 10px; font-weight: bold; border: 2px solid #667eea;\\">POWER (Influence)</td>\\n    </tr>\\n    <tr>\\n      <td rowspan=\\"2\\" style=\\"background: #e3f2fd; padding: 10px; font-weight: bold; border: 2px solid #667eea; writing-mode: vertical-lr; transform: rotate(180deg);\\">INTEREST (Engagement)</td>\\n      <td style=\\"background: #ffebee; padding: 30px; border: 2px solid #667eea; vertical-align: top;\\">\\n        <strong style=\\"color: #c62828;\\">HIGH POWER, LOW INTEREST</strong><br/><br/>\\n        <strong>Strategy:</strong> Keep Satisfied<br/>\\n        <em>Update regularly, don't overwhelm</em><br/><br/>\\n        <strong>Example:</strong> Senior exec not directly involved<br/>\\n        <strong>Action:</strong> Send brief monthly updates\\n      </td>\\n      <td style=\\"background: #c8e6c9; padding: 30px; border: 2px solid #667eea; vertical-align: top;\\">\\n        <strong style=\\"color: #2e7d32;\\">HIGH POWER, HIGH INTEREST</strong><br/><br/>\\n        <strong>Strategy:</strong> Manage Closely<br/>\\n        <em>Engage actively, involve in decisions</em><br/><br/>\\n        <strong>Example:</strong> Your direct manager<br/>\\n        <strong>Action:</strong> Weekly check-ins, seek input\\n      </td>\\n    </tr>\\n    <tr>\\n      <td style=\\"background: #fff9c4; padding: 30px; border: 2px solid #667eea; vertical-align: top;\\">\\n        <strong style=\\"color: #f57f17;\\">LOW POWER, LOW INTEREST</strong><br/><br/>\\n        <strong>Strategy:</strong> Monitor<br/>\\n        <em>Keep informed, minimal effort</em><br/><br/>\\n        <strong>Example:</strong> Peripheral team<br/>\\n        <strong>Action:</strong> Quarterly newsletter\\n      </td>\\n      <td style=\\"background: #e1bee7; padding: 30px; border: 2px solid #667eea; vertical-align: top;\\">\\n        <strong style=\\"color: #6a1b9a;\\">LOW POWER, HIGH INTEREST</strong><br/><br/>\\n        <strong>Strategy:</strong> Keep Informed<br/>\\n        <em>Provide information, listen to concerns</em><br/><br/>\\n        <strong>Example:</strong> Junior team members<br/>\\n        <strong>Action:</strong> Town halls, open Q&A\\n      </td>\\n    </tr>\\n  </table>\\n  \\n  <div style=\\"background: #e8f5e9; padding: 20px; border-radius: 8px; margin-top: 25px;\\">\\n    <h3 style=\\"color: #2e7d32; margin-top: 0;\\">✅ Stakeholder Engagement Checklist</h3>\\n    <ul style=\\"line-height: 2;\\">\\n      <li>❏ Identify all stakeholders (internal and external)</li>\\n      <li>❏ Assess their power and interest levels</li>\\n      <li>❏ Understand their goals and concerns</li>\\n      <li>❏ Develop a communication plan for each group</li>\\n      <li>❏ Review and update quarterly</li>\\n    </ul>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">6️⃣ Leader-Member Exchange (LMX) Theory</h2>\\n  \\n  <p>This theory, developed by George Graen, suggests that leaders don't treat all team members equally. Instead, they develop different quality relationships with different people.</p>\\n  \\n  <div style=\\"display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 25px 0;\\">\\n    <div style=\\"background: #e8f5e9; padding: 25px; border-radius: 8px; border: 2px solid #4caf50;\\">\\n      <h3 style=\\"color: #2e7d32; margin-top: 0;\\">✅ High-Quality LMX (\\"In-Group\\")</h3>\\n      <p><strong>Characteristics:</strong></p>\\n      <ul style=\\"line-height: 2;\\">\\n        <li>High trust and respect</li>\\n        <li>More autonomy and responsibility</li>\\n        <li>Frequent communication</li>\\n        <li>Career development support</li>\\n      </ul>\\n      <p style=\\"margin-top: 15px;\\"><strong>Result:</strong> Higher job satisfaction, better performance, more promotions</p>\\n    </div>\\n    \\n    <div style=\\"background: #ffebee; padding: 25px; border-radius: 8px; border: 2px solid #f44336;\\">\\n      <h3 style=\\"color: #c62828; margin-top: 0;\\">❌ Low-Quality LMX (\\"Out-Group\\")</h3>\\n      <p><strong>Characteristics:</strong></p>\\n      <ul style=\\"line-height: 2;\\">\\n        <li>Formal, transactional relationship</li>\\n        <li>Limited to job description</li>\\n        <li>Less frequent interaction</li>\\n        <li>Fewer development opportunities</li>\\n      </ul>\\n      <p style=\\"margin-top: 15px;\\"><strong>Result:</strong> Lower satisfaction, higher turnover, reduced innovation</p>\\n    </div>\\n  </div>\\n  \\n  <div style=\\"background: #ffebee; border-left: 4px solid #d32f2f; padding: 15px; margin: 20px 0; border-radius: 4px;\\">\\n    <p><strong>⚠️ The Ethical Challenge:</strong> While LMX is natural (we connect more with some people), leaders must:</p>\\n    <ul style=\\"margin: 10px 0;\\">\\n      <li>Be aware of in-group/out-group dynamics</li>\\n      <li>Actively work to build high-quality relationships with ALL team members</li>\\n      <li>Ensure fairness in opportunities and resources</li>\\n      <li>Avoid favoritism based on irrelevant factors (shared background, personality similarity)</li>\\n    </ul>\\n  </div>\\n  \\n  <div style=\\"background: #e1f5fe; padding: 20px; border-radius: 8px; margin-top: 25px;\\">\\n    <h3 style=\\"color: #0277bd; margin-top: 0;\\">💡 How to Develop High-Quality LMX with Everyone:</h3>\\n    <ol style=\\"line-height: 2;\\">\\n      <li><strong>One-on-One Time:</strong> Schedule regular 1:1 meetings with each team member</li>\\n      <li><strong>Active Listening:</strong> Really hear their ideas, concerns, and career goals</li>\\n      <li><strong>Delegate Meaningful Work:</strong> Give challenging assignments, not just routine tasks</li>\\n      <li><strong>Invest in Development:</strong> Provide mentoring, training, and growth opportunities</li>\\n      <li><strong>Show Appreciation:</strong> Recognize contributions publicly and privately</li>\\n    </ol>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">7️⃣ Level 5 Leadership (Jim Collins)</h2>\\n  \\n  <p>In his book <em>\\"Good to Great,\\"</em> Jim Collins studied companies that made the leap from good performance to great performance. He found they all had \\"Level 5\\" leaders.</p>\\n  \\n  <div style=\\"background: linear-gradient(to bottom, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; text-align: center; margin: 25px 0;\\">\\n    <h3 style=\\"margin: 0 0 20px 0; font-size: 28px;\\">The Level 5 Paradox</h3>\\n    <p style=\\"font-size: 20px; margin: 0;\\"><strong>Personal Humility</strong> + <strong>Professional Will</strong></p>\\n  </div>\\n  \\n  <table style=\\"width: 100%; border-collapse: collapse; margin: 25px 0;\\">\\n    <tr style=\\"background: #f5f5f5;\\">\\n      <th style=\\"padding: 15px; text-align: left; border: 2px solid #667eea; background: #e8eaf6; color: #3f51b5;\\">Personal Humility</th>\\n      <th style=\\"padding: 15px; text-align: left; border: 2px solid #667eea; background: #fce4ec; color: #c2185b;\\">Professional Will</th>\\n    </tr>\\n    <tr>\\n      <td style=\\"padding: 20px; border: 1px solid #ddd; vertical-align: top;\\">\\n        <ul style=\\"margin: 0; line-height: 2;\\">\\n          <li>Modest, never boastful</li>\\n          <li>Credits others for success</li>\\n          <li>Takes blame for failures</li>\\n          <li>Channels ambition into the organization, not themselves</li>\\n          <li>Sets up successors for success</li>\\n        </ul>\\n      </td>\\n      <td style=\\"padding: 20px; border: 1px solid #ddd; vertical-align: top;\\">\\n        <ul style=\\"margin: 0; line-height: 2;\\">\\n          <li>Creates superb results</li>\\n          <li>Demonstrates unwavering resolve</li>\\n          <li>Sets high standards</li>\\n          <li>Makes tough decisions for long-term good</li>\\n          <li>Never wavers in difficult times</li>\\n        </ul>\\n      </td>\\n    </tr>\\n  </table>\\n  \\n  <div style=\\"background: #fff3e0; padding: 20px; border-radius: 8px; margin: 25px 0;\\">\\n    <h3 style=\\"color: #e65100; margin-top: 0;\\">🔍 Level 5 Example: Nelson Mandela</h3>\\n    <p><strong>Personal Humility:</strong></p>\\n    <ul style=\\"line-height: 2;\\">\\n      <li>Forgave his oppressors</li>\\n      <li>Stepped down after one term as president</li>\\n      <li>Credited others in the liberation movement</li>\\n      <li>Lived modestly despite his stature</li>\\n    </ul>\\n    <p><strong>Professional Will:</strong></p>\\n    <ul style=\\"line-height: 2;\\">\\n      <li>Never compromised on core values (equality, democracy)</li>\\n      <li>Made tough decisions (e.g., Truth and Reconciliation Commission)</li>\\n      <li>United a divided nation</li>\\n      <li>Set bold vision for a new South Africa</li>\\n    </ul>\\n  </div>\\n  \\n  <div style=\\"background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px; margin: 20px 0; border-radius: 4px;\\">\\n    <p><strong>💡 Key Takeaway:</strong> Level 5 leaders are not celebrity CEOs. They are often quiet, reserved, and shy—but they get results. They build enduring greatness by putting the organization first.</p>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">8️⃣ Learning Organizations (Peter Senge)</h2>\\n  \\n  <p>A <strong>learning organization</strong> is one that continuously transforms itself by encouraging learning at all levels. Peter Senge identified five disciplines:</p>\\n  \\n  <div style=\\"margin: 25px 0;\\">\\n    <div style=\\"background: #e8f5e9; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid #4caf50;\\">\\n      <h3 style=\\"color: #2e7d32; margin-top: 0;\\">1. Personal Mastery</h3>\\n      <p>Individuals continually clarify and deepen their personal vision, focus energy, develop patience, and see reality objectively.</p>\\n      <p><strong>Leader Action:</strong> Support team members' learning goals, provide resources for development</p>\\n    </div>\\n    \\n    <div style=\\"background: #e3f2fd; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid #2196f3;\\">\\n      <h3 style=\\"color: #1565c0; margin-top: 0;\\">2. Mental Models</h3>\\n      <p>Deeply ingrained assumptions and generalizations that influence how we understand the world and take action.</p>\\n      <p><strong>Leader Action:</strong> Encourage reflection (\\"Why do we do it this way?\\"), challenge assumptions</p>\\n    </div>\\n    \\n    <div style=\\"background: #f3e5f5; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid #9c27b0;\\">\\n      <h3 style=\\"color: #6a1b9a; margin-top: 0;\\">3. Shared Vision</h3>\\n      <p>A common picture of the future that fosters genuine commitment rather than compliance.</p>\\n      <p><strong>Leader Action:</strong> Co-create vision with your team, ensure everyone understands \\"why\\"</p>\\n    </div>\\n    \\n    <div style=\\"background: #fff3e0; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid #ff9800;\\">\\n      <h3 style=\\"color: #e65100; margin-top: 0;\\">4. Team Learning</h3>\\n      <p>The process of aligning and developing the capacity of a team to create the results its members truly desire.</p>\\n      <p><strong>Leader Action:</strong> Facilitate dialogue, create safe space for honest conversation</p>\\n    </div>\\n    \\n    <div style=\\"background: #ffebee; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid #f44336;\\">\\n      <h3 style=\\"color: #c62828; margin-top: 0;\\">5. Systems Thinking</h3>\\n      <p>The discipline that integrates all five. It's about seeing the \\"big picture\\" and understanding interrelationships.</p>\\n      <p><strong>Leader Action:</strong> Help team see how their work connects to the whole organization</p>\\n    </div>\\n  </div>\\n  \\n  <div style=\\"background: #e1f5fe; padding: 20px; border-radius: 8px; margin-top: 25px;\\">\\n    <h3 style=\\"color: #0277bd; margin-top: 0;\\">🔧 Practical Application:</h3>\\n    <p><strong>Create a Learning Culture:</strong></p>\\n    <ul style=\\"line-height: 2;\\">\\n      <li><strong>Psychological Safety:</strong> Make it safe to admit mistakes and ask questions</li>\\n      <li><strong>After-Action Reviews:</strong> After projects, ask: What went well? What didn't? What did we learn?</li>\\n      <li><strong>Experiment:</strong> Encourage small pilots and tests before full rollout</li>\\n      <li><strong>Share Knowledge:</strong> Create forums (lunch-and-learns, wikis) for sharing</li>\\n      <li><strong>Reward Learning:</strong> Celebrate when someone learns from failure</li>\\n    </ul>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">9️⃣ Change Management: Kotter's 8-Step Model</h2>\\n  \\n  <p>Leading change is one of the most critical—and challenging—leadership tasks. John Kotter's research shows that 70% of change initiatives fail, usually because leaders skip steps.</p>\\n  \\n  <div style=\\"margin: 25px 0;\\">\\n    <div style=\\"display: flex; align-items: center; background: #ffebee; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <div style=\\"background: #f44336; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin-right: 20px; flex-shrink: 0;\\">1</div>\\n      <div>\\n        <h3 style=\\"color: #c62828; margin: 0 0 10px 0;\\">Create a Sense of Urgency</h3>\\n        <p style=\\"margin: 0;\\">Help others see the need for change. Use data, stories, and market realities. Don't manufacture fake urgency—be authentic about what's at stake.</p>\\n      </div>\\n    </div>\\n    \\n    <div style=\\"display: flex; align-items: center; background: #fff3e0; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <div style=\\"background: #ff9800; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin-right: 20px; flex-shrink: 0;\\">2</div>\\n      <div>\\n        <h3 style=\\"color: #e65100; margin: 0 0 10px 0;\\">Build a Guiding Coalition</h3>\\n        <p style=\\"margin: 0;\\">Assemble a team with enough power to lead change. Include people with position power, expertise, credibility, and leadership skills.</p>\\n      </div>\\n    </div>\\n    \\n    <div style=\\"display: flex; align-items: center; background: #fff9c4; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <div style=\\"background: #fbc02d; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin-right: 20px; flex-shrink: 0;\\">3</div>\\n      <div>\\n        <h3 style=\\"color: #f57f17; margin: 0 0 10px 0;\\">Form a Strategic Vision</h3>\\n        <p style=\\"margin: 0;\\">Create a clear vision and strategy for change. People need to see where you're going—make it compelling and easy to communicate.</p>\\n      </div>\\n    </div>\\n    \\n    <div style=\\"display: flex; align-items: center; background: #e8f5e9; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <div style=\\"background: #4caf50; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin-right: 20px; flex-shrink: 0;\\">4</div>\\n      <div>\\n        <h3 style=\\"color: #2e7d32; margin: 0 0 10px 0;\\">Enlist a Volunteer Army</h3>\\n        <p style=\\"margin: 0;\\">Communicate the vision broadly and frequently. Use every channel. Address concerns. Get buy-in at all levels.</p>\\n      </div>\\n    </div>\\n    \\n    <div style=\\"display: flex; align-items: center; background: #e1f5fe; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <div style=\\"background: #2196f3; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin-right: 20px; flex-shrink: 0;\\">5</div>\\n      <div>\\n        <h3 style=\\"color: #1565c0; margin: 0 0 10px 0;\\">Enable Action by Removing Barriers</h3>\\n        <p style=\\"margin: 0;\\">Identify and remove obstacles. Change systems or structures that undermine the vision. Encourage risk-taking and nontraditional ideas.</p>\\n      </div>\\n    </div>\\n    \\n    <div style=\\"display: flex; align-items: center; background: #f3e5f5; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <div style=\\"background: #9c27b0; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin-right: 20px; flex-shrink: 0;\\">6</div>\\n      <div>\\n        <h3 style=\\"color: #6a1b9a; margin: 0 0 10px 0;\\">Generate Short-Term Wins</h3>\\n        <p style=\\"margin: 0;\\">Plan for and create visible performance improvements. Recognize and reward people involved. Build momentum.</p>\\n      </div>\\n    </div>\\n    \\n    <div style=\\"display: flex; align-items: center; background: #e8eaf6; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <div style=\\"background: #3f51b5; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin-right: 20px; flex-shrink: 0;\\">7</div>\\n      <div>\\n        <h3 style=\\"color: #283593; margin: 0 0 10px 0;\\">Sustain Acceleration</h3>\\n        <p style=\\"margin: 0;\\">Use increased credibility to change systems, structures, and policies that don't fit the vision. Hire, promote, and develop employees who can implement the vision.</p>\\n      </div>\\n    </div>\\n    \\n    <div style=\\"display: flex; align-items: center; background: #e0f2f1; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <div style=\\"background: #009688; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin-right: 20px; flex-shrink: 0;\\">8</div>\\n      <div>\\n        <h3 style=\\"color: #00695c; margin: 0 0 10px 0;\\">Institute Change</h3>\\n        <p style=\\"margin: 0;\\">Anchor changes in the culture. Articulate connections between new behaviors and organizational success. Ensure leadership development and succession.</p>\\n      </div>\\n    </div>\\n  </div>\\n  \\n  <div style=\\"background: #ffebee; border-left: 4px solid #d32f2f; padding: 15px; margin: 20px 0; border-radius: 4px;\\">\\n    <p><strong>⚠️ Common Mistake:</strong> Leaders often jump to Step 5 (action) without doing Steps 1-4. Without urgency, a coalition, and a clear vision, your change effort will likely fail.</p>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">🔟 Diversity and Inclusion Leadership</h2>\\n  \\n  <p>In South Africa's diverse workplace, inclusive leadership isn't just \\"nice to have\\"—it's essential for performance and innovation.</p>\\n  \\n  <div style=\\"background: #e3f2fd; padding: 25px; border-radius: 8px; margin: 25px 0;\\">\\n    <h3 style=\\"color: #1565c0; margin-top: 0;\\">📊 The Business Case for Diversity</h3>\\n    <ul style=\\"line-height: 2;\\">\\n      <li><strong>Innovation:</strong> Diverse teams generate 20% more revenue from innovation (BCG study)</li>\\n      <li><strong>Decision-Making:</strong> Inclusive teams make better decisions 87% of the time (Cloverpop study)</li>\\n      <li><strong>Performance:</strong> Companies in top quartile for ethnic diversity are 35% more likely to outperform peers (McKinsey)</li>\\n      <li><strong>Employee Engagement:</strong> Inclusive teams have 50% lower turnover rates</li>\\n    </ul>\\n  </div>\\n  \\n  <h3 style=\\"color: #764ba2; margin-top: 30px;\\">Six Inclusive Leadership Behaviors</h3>\\n  \\n  <div style=\\"margin: 25px 0;\\">\\n    <div style=\\"background: #f3e5f5; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <h4 style=\\"color: #7b1fa2; margin-top: 0;\\">1. Visible Commitment</h4>\\n      <p>Articulate the importance of diversity. Challenge biased behavior. Allocate resources to D&I initiatives.</p>\\n      <p style=\\"font-style: italic; color: #666; margin: 10px 0 0 0;\\">Example: \\"Our hiring goal this quarter is 50% diverse candidates in the final pool.\\"</p>\\n    </div>\\n    \\n    <div style=\\"background: #fff3e0; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <h4 style=\\"color: #e65100; margin-top: 0;\\">2. Humility</h4>\\n      <p>Admit you don't have all the answers. Be open to feedback. Acknowledge your own biases.</p>\\n      <p style=\\"font-style: italic; color: #666; margin: 10px 0 0 0;\\">Example: \\"I realize my upbringing gives me blind spots. Help me see what I'm missing.\\"</p>\\n    </div>\\n    \\n    <div style=\\"background: #e8f5e9; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <h4 style=\\"color: #2e7d32; margin-top: 0;\\">3. Awareness of Bias</h4>\\n      <p>Understand unconscious biases (affinity bias, confirmation bias, etc.). Use structured processes to reduce bias in decisions.</p>\\n      <p style=\\"font-style: italic; color: #666; margin: 10px 0 0 0;\\">Example: Use blind resume screening, structured interviews with standard questions.</p>\\n    </div>\\n    \\n    <div style=\\"background: #e1f5fe; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <h4 style=\\"color: #0277bd; margin-top: 0;\\">4. Curiosity About Others</h4>\\n      <p>Ask questions. Listen actively. Show genuine interest in different perspectives and experiences.</p>\\n      <p style=\\"font-style: italic; color: #666; margin: 10px 0 0 0;\\">Example: \\"Tell me about your experience navigating your career as a woman in tech.\\"</p>\\n    </div>\\n    \\n    <div style=\\"background: #fce4ec; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <h4 style=\\"color: #c2185b; margin-top: 0;\\">5. Cultural Intelligence</h4>\\n      <p>Learn about different cultures, norms, and communication styles. Adapt your approach when needed.</p>\\n      <p style=\\"font-style: italic; color: #666; margin: 10px 0 0 0;\\">Example: Understand that direct confrontation may be uncomfortable in some cultures; find alternative ways to give feedback.</p>\\n    </div>\\n    \\n    <div style=\\"background: #ffebee; padding: 20px; border-radius: 8px; margin-bottom: 15px;\\">\\n      <h4 style=\\"color: #c62828; margin-top: 0;\\">6. Effective Collaboration</h4>\\n      <p>Create conditions where diverse perspectives are heard. Manage conflict constructively. Ensure everyone can contribute.</p>\\n      <p style=\\"font-style: italic; color: #666; margin: 10px 0 0 0;\\">Example: \\"Let's go around the table—I want to hear from everyone before we decide.\\"</p>\\n    </div>\\n  </div>\\n  \\n  <div style=\\"background: #fff8e1; border-left: 4px solid #ffa000; padding: 15px; margin: 20px 0; border-radius: 4px;\\">\\n    <p><strong>🇿🇦 SA Leadership Context:</strong> South Africa's history makes inclusive leadership both more urgent and more complex. Leaders must navigate legacy issues, language diversity (11 official languages!), and varying cultural norms—all while building unified teams. Ubuntu offers a powerful framework: recognize our shared humanity while honoring our differences.</p>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">1️⃣1️⃣ Leading Virtual and Hybrid Teams</h2>\\n  \\n  <p>The COVID-19 pandemic accelerated a trend that's here to stay. Many leaders now manage teams that work remotely, in-office, or in a hybrid model.</p>\\n  \\n  <h3 style=\\"color: #764ba2; margin-top: 25px;\\">Unique Challenges of Virtual Leadership</h3>\\n  \\n  <div style=\\"display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 25px 0;\\">\\n    <div style=\\"background: #ffebee; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #c62828; margin-top: 0;\\">⚠️ Challenge</h4>\\n      <p><strong>Reduced spontaneous communication</strong></p>\\n      <p style=\\"font-size: 14px; color: #666;\\">No hallway chats, coffee breaks, or overheard conversations</p>\\n    </div>\\n    <div style=\\"background: #e8f5e9; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #2e7d32; margin-top: 0;\\">✅ Solution</h4>\\n      <p><strong>Over-communicate intentionally</strong></p>\\n      <p style=\\"font-size: 14px; color: #666;\\">Schedule regular check-ins, use video liberally, create virtual social spaces (Slack channels for non-work chat)</p>\\n    </div>\\n    \\n    <div style=\\"background: #ffebee; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #c62828; margin-top: 0;\\">⚠️ Challenge</h4>\\n      <p><strong>Harder to build trust and culture</strong></p>\\n      <p style=\\"font-size: 14px; color: #666;\\">People feel disconnected, less engaged</p>\\n    </div>\\n    <div style=\\"background: #e8f5e9; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #2e7d32; margin-top: 0;\\">✅ Solution</h4>\\n      <p><strong>Be intentional about culture-building</strong></p>\\n      <p style=\\"font-size: 14px; color: #666;\\">Virtual team lunches, online games, celebrate birthdays/milestones, share personal updates</p>\\n    </div>\\n    \\n    <div style=\\"background: #ffebee; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #c62828; margin-top: 0;\\">⚠️ Challenge</h4>\\n      <p><strong>Visibility bias</strong></p>\\n      <p style=\\"font-size: 14px; color: #666;\\">In-office people get more opportunities than remote workers</p>\\n    </div>\\n    <div style=\\"background: #e8f5e9; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #2e7d32; margin-top: 0;\\">✅ Solution</h4>\\n      <p><strong>Track opportunities and assignments</strong></p>\\n      <p style=\\"font-size: 14px; color: #666;\\">Ensure remote workers get challenging projects, promotions, and face time with leadership</p>\\n    </div>\\n    \\n    <div style=\\"background: #ffebee; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #c62828; margin-top: 0;\\">⚠️ Challenge</h4>\\n      <p><strong>Zoom fatigue and burnout</strong></p>\\n      <p style=\\"font-size: 14px; color: #666;\\">Back-to-back video calls are exhausting</p>\\n    </div>\\n    <div style=\\"background: #e8f5e9; padding: 20px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #2e7d32; margin-top: 0;\\">✅ Solution</h4>\\n      <p><strong>Vary communication modes</strong></p>\\n      <p style=\\"font-size: 14px; color: #666;\\">Not every meeting needs video. Use voice calls, async messaging, and build in breaks</p>\\n    </div>\\n  </div>\\n  \\n  <div style=\\"background: #e1f5fe; padding: 20px; border-radius: 8px; margin-top: 25px;\\">\\n    <h3 style=\\"color: #0277bd; margin-top: 0;\\">🎯 Best Practices for Hybrid Leadership</h3>\\n    <ol style=\\"line-height: 2;\\">\\n      <li><strong>Default to Inclusive:</strong> If one person is remote, run the meeting as if everyone is remote (all on video, not some in a conference room)</li>\\n      <li><strong>Document Everything:</strong> Don't rely on \\"you had to be there\\" moments. Write things down in shared spaces</li>\\n      <li><strong>Focus on Outcomes, Not Activity:</strong> Measure results, not hours online or in-office</li>\\n      <li><strong>Set Clear Norms:</strong> When do we use email vs. Slack vs. meetings? What are our core collaboration hours?</li>\\n      <li><strong>Tech Equity:</strong> Ensure remote workers have the tools they need (good internet, monitors, ergonomic setup)</li>\\n      <li><strong>Model Flexibility:</strong> If you want your team to embrace hybrid work, embrace it yourself</li>\\n    </ol>\\n  </div>\\n  \\n  <div style=\\"background: #fff8e1; border-left: 4px solid #ffa000; padding: 15px; margin: 20px 0; border-radius: 4px;\\">\\n    <p><strong>🇿🇦 SA Context:</strong> Internet connectivity varies widely in South Africa. Be mindful that not all team members have stable, high-speed connections. Have backup plans (phone dial-in for meetings, offline work options) and advocate for employer-provided data if needed.</p>\\n  </div>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">1️⃣2️⃣ Providing Effective Feedback</h2>\\n  \\n  <p>One of the most important—and most avoided—leadership skills is giving feedback. Done well, it accelerates development. Done poorly, it demotivates and damages relationships.</p>\\n  \\n  <h3 style=\\"color: #764ba2; margin-top: 25px;\\">The SBI Model (Situation-Behavior-Impact)</h3>\\n  \\n  <p>This framework from the Center for Creative Leadership helps you give specific, actionable feedback:</p>\\n  \\n  <div style=\\"background: #f5f5f5; padding: 25px; border-radius: 8px; margin: 25px 0; border-left: 5px solid #667eea;\\">\\n    <div style=\\"margin-bottom: 25px;\\">\\n      <h4 style=\\"color: #667eea; margin-top: 0;\\">📍 Situation</h4>\\n      <p><strong>When and where did it happen? Who was involved?</strong></p>\\n      <p style=\\"color: #666; font-style: italic;\\">This grounds the feedback in a specific context, not a vague generality.</p>\\n      <p style=\\"background: white; padding: 15px; border-radius: 4px; margin-top: 10px;\\"><strong>Example:</strong> \\"In yesterday's client presentation when you were presenting the Q3 results...\\"</p>\\n    </div>\\n    \\n    <div style=\\"margin-bottom: 25px;\\">\\n      <h4 style=\\"color: #764ba2; margin-top: 0;\\">👁️ Behavior</h4>\\n      <p><strong>What did the person actually do or say?</strong></p>\\n      <p style=\\"color: #666; font-style: italic;\\">Describe observable actions, not interpretations or judgments.</p>\\n      <p style=\\"background: white; padding: 15px; border-radius: 4px; margin-top: 10px;\\"><strong>Example:</strong> \\"...you said 'I think maybe we might have possibly met our targets' instead of stating it clearly...\\"</p>\\n    </div>\\n    \\n    <div>\\n      <h4 style=\\"color: #e91e63; margin-top: 0;\\">💥 Impact</h4>\\n      <p><strong>What was the result of that behavior?</strong></p>\\n      <p style=\\"color: #666; font-style: italic;\\">Explain the effect on you, the team, the project, or the client.</p>\\n      <p style=\\"background: white; padding: 15px; border-radius: 4px; margin-top: 10px;\\"><strong>Example:</strong> \\"...and I noticed the client looked confused. They asked clarifying questions that used up time we needed for other topics. It undermined their confidence in our results.\\"</p>\\n    </div>\\n  </div>\\n  \\n  <div style=\\"display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0;\\">\\n    <div style=\\"background: #ffebee; padding: 25px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #c62828; margin-top: 0; text-align: center;\\">❌ Vague Feedback (Ineffective)</h4>\\n      <p style=\\"font-style: italic; color: #555;\\"><strong>Manager:</strong> \\"You need to be more confident in meetings.\\"</p>\\n      <p style=\\"margin-top: 15px; color: #666;\\"><strong>Problem:</strong> The person doesn't know what specific behavior to change or why it matters.</p>\\n    </div>\\n    \\n    <div style=\\"background: #e8f5e9; padding: 25px; border-radius: 8px;\\">\\n      <h4 style=\\"color: #2e7d32; margin-top: 0; text-align: center;\\">✅ SBI Feedback (Effective)</h4>\\n      <p style=\\"font-style: italic; color: #555;\\"><strong>Manager:</strong> \\"In yesterday's client presentation, when you presented the Q3 results, you said 'I think maybe we might have possibly met our targets.' The client looked confused and asked clarifying questions that used up our time. It undermined their confidence in our results.\\"</p>\\n      <p style=\\"margin-top: 15px; color: #666;\\"><strong>Benefit:</strong> The person knows exactly what happened and the consequences.</p>\\n    </div>\\n  </div>\\n  \\n  <h3 style=\\"color: #764ba2; margin-top: 30px;\\">Additional Feedback Best Practices</h3>\\n  \\n  <ul style=\\"line-height: 2.2;\\">\\n    <li><strong>Make it timely:</strong> Give feedback soon after the event (within 24-48 hours if possible)</li>\\n    <li><strong>Balance positive and constructive:</strong> Catch people doing things right, not just wrong</li>\\n    <li><strong>Focus on behavior, not personality:</strong> Say \\"You interrupted Sarah three times,\\" not \\"You're rude\\"</li>\\n    <li><strong>Make it two-way:</strong> Ask for their perspective—there may be context you're missing</li>\\n    <li><strong>End with a forward focus:</strong> \\"Going forward, try stating results directly: 'We exceeded our target by 8%.'\\"</li>\\n    <li><strong>Follow up:</strong> Check in later to see if the behavior has changed</li>\\n  </ul>\\n  \\n  <div style=\\"background: #e3f2fd; padding: 20px; border-radius: 8px; margin-top: 25px;\\">\\n    <h3 style=\\"color: #0277bd; margin-top: 0;\\">💡 Cultural Consideration: Direct vs. Indirect Communication</h3>\\n    <p>Some cultures value direct feedback (\\"Tell me straight\\"), while others prefer indirect, softer approaches (\\"saving face\\" is important). In South Africa's multicultural workplace:</p>\\n    <ul style=\\"line-height: 2;\\">\\n      <li><strong>Ask:</strong> \\"How do you prefer to receive feedback?\\"</li>\\n      <li><strong>Adapt:</strong> For indirect communicators, you might start with positives and ask questions rather than making statements</li>\\n      <li><strong>Be consistent:</strong> Everyone still needs clear feedback—just adjust your delivery</li>\\n    </ul>\\n  </div>\\n</div>\\n\\n<div style=\\"background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; margin-bottom: 30px;\\">\\n  <h2 style=\\"margin: 0 0 20px 0; font-size: 32px;\\">🎓 Key Takeaways from Module 2</h2>\\n  <ul style=\\"line-height: 2.5; font-size: 16px;\\">\\n    <li><strong>Teams go through predictable stages</strong> (Forming → Storming → Norming → Performing → Adjourning). Your leadership style should evolve with them.</li>\\n    <li><strong>There's no one-size-fits-all leadership style.</strong> Use Situational Leadership to adapt to each team member's development level.</li>\\n    <li><strong>Your job is to clarify the path and remove obstacles</strong> (Path-Goal Theory), using directive, supportive, participative, or achievement-oriented behaviors as needed.</li>\\n    <li><strong>Culture operates at three levels</strong> (artifacts, espoused values, basic assumptions). Leaders shape culture through their actions, not just their words.</li>\\n    <li><strong>Map your stakeholders</strong> by power and interest, then tailor your engagement strategy accordingly.</li>\\n    <li><strong>Build high-quality relationships with all team members,</strong> not just those similar to you (LMX Theory).</li>\\n    <li><strong>Level 5 leaders combine personal humility with professional will.</strong> They put the organization ahead of their ego.</li>\\n    <li><strong>Create a learning organization</strong> through personal mastery, mental models, shared vision, team learning, and systems thinking.</li>\\n    <li><strong>Follow Kotter's 8-step change model.</strong> Don't skip steps—most change efforts fail because leaders rush to action.</li>\\n    <li><strong>Inclusive leadership is a competitive advantage,</strong> especially in diverse South Africa. Practice humility, curiosity, and cultural intelligence.</li>\\n    <li><strong>Virtual and hybrid teams require intentional leadership.</strong> Over-communicate, build culture deliberately, and ensure equity between remote and in-office workers.</li>\\n    <li><strong>Use the SBI model</strong> (Situation-Behavior-Impact) to give specific, actionable feedback that drives improvement.</li>\\n  </ul>\\n</div>\\n\\n<div style=\\"background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 30px;\\">\\n  <h2 style=\\"color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 25px;\\">📝 Prepare for Your Quiz</h2>\\n  \\n  <p style=\\"font-size: 16px; margin-bottom: 20px;\\">The Module 2 quiz will test your understanding of these advanced leadership concepts. Make sure you can:</p>\\n  \\n  <ul style=\\"line-height: 2.2; font-size: 15px;\\">\\n    <li>✅ Identify the five stages of team development and appropriate leader behaviors for each</li>\\n    <li>✅ Match team member development levels with the correct Situational Leadership style</li>\\n    <li>✅ Apply Path-Goal Theory to different scenarios</li>\\n    <li>✅ Describe Schein's three levels of organizational culture</li>\\n    <li>✅ Use the Power-Interest Grid to categorize stakeholders</li>\\n    <li>✅ Explain the characteristics of Level 5 Leadership</li>\\n    <li>✅ Define Peter Senge's five disciplines of a learning organization</li>\\n    <li>✅ Recall and apply Kotter's 8-step change model</li>\\n    <li>✅ Demonstrate understanding of inclusive leadership behaviors</li>\\n    <li>✅ Identify best practices for virtual/hybrid team leadership</li>\\n    <li>✅ Use the SBI model to structure feedback</li>\\n  </ul>\\n  \\n  <div style=\\"background: #fff3e0; padding: 20px; border-radius: 8px; margin-top: 25px; text-align: center;\\">\\n    <p style=\\"font-size: 18px; font-weight: 600; color: #e65100; margin: 0;\\">📊 You need <strong>70%</strong> to pass the quiz and proceed to Module 3.</p>\\n    <p style=\\"margin: 15px 0 0 0; color: #666;\\">Take your time, review the material, and good luck!</p>\\n  </div>\\n</div>\\n\\n</div>",
+      "resources": []
+    }
+  ]
+};
+
+            // Auto-fill the textarea
+            document.getElementById('jsonInput').value = JSON.stringify(moduleJSON, null, 2);
+        });
+    </script>
+</body>
+</html>

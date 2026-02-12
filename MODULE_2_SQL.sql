@@ -5,8 +5,8 @@
 
 DO $$
 DECLARE
-    v_course_id INTEGER;
-    v_module_id INTEGER;
+    v_course_id UUID;
+    v_module_id UUID;
 BEGIN
     -- Get the Leadership course ID
     SELECT id INTO v_course_id 
@@ -28,7 +28,7 @@ BEGIN
         content,
         content_type,
         order_number,
-        duration
+        duration_minutes
     ) VALUES (
         v_course_id,
         'Module 2: Core Concepts in Leadership',

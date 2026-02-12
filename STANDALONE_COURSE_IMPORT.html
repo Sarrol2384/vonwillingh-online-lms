@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Course Import - VonWillingh Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-5xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h1 class="text-3xl font-bold mb-4">
+                <i class="fas fa-database mr-2 text-blue-600"></i>
+                Direct Course Import to Database
+            </h1>
+            <p class="text-gray-600 mb-6">Upload a JSON file to import complete course with modules and quizzes directly to Supabase</p>
+            
+            <!-- Connection Status (Pre-configured) -->
+            <div class="bg-green-50 border border-green-300 rounded p-4 mb-6">
+                <h2 class="font-bold text-green-900 mb-2">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    Database Connection Ready
+                </h2>
+                <p class="text-sm text-green-800">Connected to: https://laqauvikkazfpurknfkf.supabase.co</p>
+            </div>
+            
+            <!-- Upload JSON -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    <i class="fas fa-file-upload text-blue-600 mr-1"></i>
+                    Upload Course JSON:
+                </label>
+                <input type="file" id="fileInput" accept=".json" class="block w-full text-sm text-gray-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-green-50 file:text-green-700
+                    hover:file:bg-green-100"/>
+            </div>
+            
+            <!-- JSON Preview -->
+            <div id="previewSection" class="hidden mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    <i class="fas fa-eye text-blue-600 mr-1"></i>
+                    Course Preview:
+                </label>
+                <div id="coursePreview" class="bg-gray-50 p-4 rounded border"></div>
+            </div>
+            
+            <!-- Import Button -->
+            <div id="importSection" class="hidden mb-6">
+                <button id="importBtn" class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                    <i class="fas fa-upload mr-2"></i>
+                    Import to Database
+                </button>
+            </div>
+            
+            <!-- Progress Display -->
+            <div id="progressSection" class="hidden mb-6">
+                <div class="bg-blue-50 border border-blue-300 rounded p-4">
+                    <h3 class="font-bold text-blue-900 mb-2">
+                        <i class="fas fa-spinner fa-spin mr-2"></i>
+                        Import Progress
+                    </h3>
+                    <div id="progressLog" class="text-sm space-y-1 font-mono"></div>
+                </div>
+            </div>
+            
+            <!-- Results Display -->
+            <div id="resultsSection" class="hidden">
+                <div id="resultsContent" class="rounded p-4"></div>
+            </div>
+            
+            <!-- Error Display -->
+            <div id="errorSection" class="hidden bg-red-50 border border-red-300 rounded p-4 text-red-800"></div>
+        </div>
+    </div>
+
+    <script>
+        // Pre-configure Supabase connection
+        const SUPABASE_URL = 'https://laqauvikkazfpurknfkf.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhcWF1dmlrYW96ZnB1cmtuZ2tmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk5NTg1NjksImV4cCI6MjA4NTUzNDU2OX0.Lte-s41-oBz8GsjQISJ_RgG9ZDE2couNVVP6b12aJl8';
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        let courseData = null;
+
+        // Handle file upload
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    courseData = JSON.parse(event.target.result);
+                    showPreview(courseData);
+                    document.getElementById('previewSection').classList.remove('hidden');
+                    document.getElementById('importSection').classList.remove('hidden');
+                    document.getElementById('errorSection').classList.add('hidden');
+                } catch (error) {
+                    showError('Invalid JSON: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        // Show preview
+        function showPreview(data) {
+            const course = data.course;
+            const modules = data.modules || [];
+            
+            let html = `
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg">${course.name}</h3>
+                    <p class="text-sm text-gray-600">Code: ${course.code} | Level: ${course.level} | Category: ${course.category}</p>
+                    <p class="text-sm mt-2">${course.description}</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Modules (${modules.length}):</h4>
+                    <ul class="space-y-1 text-sm">
+            `;
+            
+            modules.forEach(module => {
+                const quizCount = module.quiz && module.quiz.questions ? module.quiz.questions.length : 0;
+                const contentLength = module.content ? module.content.length : 0;
+                html += `
+                    <li class="flex justify-between py-2 border-b">
+                        <span><strong>${module.order_number}.</strong> ${module.title}</span>
+                        <span class="text-gray-500">${module.duration_minutes || '?'} min | ${quizCount} quiz Qs | ${(contentLength/1000).toFixed(1)}KB content</span>
+                    </li>
+                `;
+            });
+            
+            html += `</ul></div>`;
+            document.getElementById('coursePreview').innerHTML = html;
+        }
+
+        // Import to database
+        document.getElementById('importBtn').addEventListener('click', async function() {
+            if (!courseData) {
+                showError('Please upload a JSON file first!');
+                return;
+            }
+            
+            try {
+                document.getElementById('progressSection').classList.remove('hidden');
+                document.getElementById('importBtn').disabled = true;
+                document.getElementById('importBtn').innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Importing...';
+                
+                await importCourse(courseData);
+                
+                document.getElementById('importBtn').disabled = false;
+                document.getElementById('importBtn').innerHTML = '<i class="fas fa-upload mr-2"></i>Import to Database';
+            } catch (error) {
+                showError('Import failed: ' + error.message);
+                console.error('Full error:', error);
+                document.getElementById('importBtn').disabled = false;
+                document.getElementById('importBtn').innerHTML = '<i class="fas fa-upload mr-2"></i>Import to Database';
+            }
+        });
+
+        async function importCourse(data) {
+            logProgress('🚀 Starting import...');
+            
+            // Step 1: Check if course exists
+            logProgress('🔍 Checking if course exists...');
+            const { data: existingCourse } = await supabase
+                .from('courses')
+                .select('id')
+                .eq('code', data.course.code)
+                .single();
+            
+            let courseId;
+            
+            if (existingCourse) {
+                logProgress('⚠️ Course exists! Deleting old data...');
+                
+                // Delete old modules and their quiz questions
+                const { data: modules } = await supabase
+                    .from('modules')
+                    .select('id')
+                    .eq('course_id', existingCourse.id);
+                
+                if (modules && modules.length > 0) {
+                    const moduleIds = modules.map(m => m.id);
+                    
+                    // Delete quiz questions
+                    const { error: deleteQuizError } = await supabase
+                        .from('quiz_questions')
+                        .delete()
+                        .in('module_id', moduleIds);
+                    
+                    if (deleteQuizError) {
+                        logProgress('⚠️ Quiz deletion error (might be OK if no quizzes): ' + deleteQuizError.message);
+                    } else {
+                        logProgress('✅ Deleted old quiz questions');
+                    }
+                    
+                    // Delete modules
+                    await supabase
+                        .from('modules')
+                        .delete()
+                        .eq('course_id', existingCourse.id);
+                    logProgress('✅ Deleted old modules');
+                }
+                
+                // Update course
+                await supabase
+                    .from('courses')
+                    .update({
+                        name: data.course.name,
+                        level: data.course.level,
+                        category: data.course.category,
+                        description: data.course.description,
+                        duration: data.course.duration,
+                        price: data.course.price || 0
+                    })
+                    .eq('id', existingCourse.id);
+                
+                courseId = existingCourse.id;
+                logProgress('✅ Updated course info');
+            } else {
+                // Create new course
+                logProgress('📝 Creating new course...');
+                const { data: newCourse, error } = await supabase
+                    .from('courses')
+                    .insert([{
+                        name: data.course.name,
+                        code: data.course.code,
+                        level: data.course.level,
+                        category: data.course.category,
+                        description: data.course.description,
+                        duration: data.course.duration,
+                        price: data.course.price || 0
+                    }])
+                    .select()
+                    .single();
+                
+                if (error) throw error;
+                courseId = newCourse.id;
+                logProgress('✅ Created course with ID: ' + courseId);
+            }
+            
+            // Step 2: Import modules
+            logProgress(`📚 Importing ${data.modules.length} modules...`);
+            
+            for (let i = 0; i < data.modules.length; i++) {
+                const module = data.modules[i];
+                logProgress(`  📄 [${i + 1}/${data.modules.length}] ${module.title}`);
+                
+                // Insert module
+                const { data: newModule, error: moduleError } = await supabase
+                    .from('modules')
+                    .insert([{
+                        course_id: courseId,
+                        title: module.title,
+                        description: module.description || '',
+                        order_number: module.order_number,
+                        content: module.content || '',
+                        content_type: module.content_type || 'lesson',
+                        duration_minutes: module.duration_minutes,
+                        video_url: module.video_url || null
+                    }])
+                    .select()
+                    .single();
+                
+                if (moduleError) {
+                    logProgress(`  ❌ Module insert failed: ${moduleError.message}`);
+                    throw moduleError;
+                }
+                logProgress(`  ✅ Module inserted (ID: ${newModule.id.substring(0, 8)}...)`);
+                
+                // Step 3: Import quiz questions
+                if (module.quiz && module.quiz.questions && module.quiz.questions.length > 0) {
+                    logProgress(`  🎯 Importing ${module.quiz.questions.length} quiz questions...`);
+                    
+                    const quizQuestions = module.quiz.questions.map(q => ({
+                        module_id: newModule.id,
+                        question_text: q.question,
+                        question_type: q.type === 'true_false' ? 'true_false' : 'single_choice',
+                        options: q.options,
+                        correct_answer: q.correct_answer,
+                        points: 2,
+                        order_number: q.id,
+                        hint_feedback: `Think about: ${q.question.substring(0, 50)}...`,
+                        correct_feedback: 'Correct!',
+                        detailed_explanation: q.explanation || ''
+                    }));
+                    
+                    const { error: quizError } = await supabase
+                        .from('quiz_questions')
+                        .insert(quizQuestions);
+                    
+                    if (quizError) {
+                        logProgress(`  ❌ Quiz insert failed: ${quizError.message}`);
+                        throw quizError;
+                    }
+                    logProgress(`  ✅ Inserted ${quizQuestions.length} quiz questions`);
+                } else {
+                    logProgress(`  ℹ️ No quiz questions for this module`);
+                }
+            }
+            
+            logProgress('🎉 Import completed successfully!');
+            showSuccess(data.course.name, data.course.code, data.modules.length);
+        }
+
+        function logProgress(message) {
+            const log = document.getElementById('progressLog');
+            const entry = document.createElement('div');
+            entry.textContent = message;
+            entry.className = 'py-1';
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function showSuccess(courseName, courseCode, moduleCount) {
+            document.getElementById('resultsSection').classList.remove('hidden');
+            document.getElementById('resultsContent').className = 'rounded p-4 bg-green-50 border border-green-300';
+            document.getElementById('resultsContent').innerHTML = `
+                <h3 class="font-bold text-green-900 mb-2">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    Import Successful!
+                </h3>
+                <p class="text-sm text-green-800 mb-3">
+                    Successfully imported <strong>${courseName}</strong> (${courseCode}) with ${moduleCount} modules.
+                </p>
+                <a href="https://vonwillingh-online-lms.pages.dev/courses" target="_blank" class="inline-block mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                    <i class="fas fa-external-link-alt mr-2"></i>
+                    View Course Catalog
+                </a>
+            `;
+        }
+
+        function showError(message) {
+            document.getElementById('errorSection').classList.remove('hidden');
+            document.getElementById('errorSection').innerHTML = `
+                <h3 class="font-bold text-red-900 mb-2">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    Error
+                </h3>
+                <p class="text-sm">${message}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

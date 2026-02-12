@@ -1,0 +1,97 @@
+{
+  "course": {
+    "name": "Leadership Development Program",
+    "code": "LEAD001",
+    "level": "Certificate",
+    "category": "Leadership",
+    "description": "Comprehensive leadership training covering team dynamics, situational leadership, and organizational development",
+    "duration": "8 weeks",
+    "price": 0
+  },
+  "modules": [
+    {
+      "title": "Module 2: Core Concepts in Leadership",
+      "description": "Advanced leadership theories including team dynamics, organizational culture, stakeholder management, and leadership development",
+      "order_number": 2,
+      "content": "<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 20px; border-radius: 12px; margin-bottom: 30px; text-align: center;'><h1 style='margin: 0 0 15px 0; font-size: 2.2em;'>Module 2: Core Concepts in Leadership</h1><p style='font-size: 1.3em; margin: 0; opacity: 0.95;'>Advanced leadership theories and practical applications</p></div><div style='background: #e8f5e9; border-left: 5px solid #4caf50; padding: 25px; margin: 30px 0; border-radius: 8px;'><h3 style='color: #2e7d32; margin-top: 0;'>🎯 What You Will Learn</h3><ul style='line-height: 1.8; margin: 10px 0;'><li>✅ Tuckman stages of team development</li><li>✅ Situational Leadership Model</li><li>✅ Path-Goal Leadership Theory</li><li>✅ How to adapt your style to team needs</li></ul></div><h2>Team Development and Dynamics</h2><p>Understanding how teams evolve is crucial for effective leadership. Bruce Tuckman identified five stages teams go through:</p><div style='background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #1976d2; margin-top: 0;'>Stage 1: Forming</h4><p><strong>Characteristics:</strong> Team members are polite, uncertain, and getting to know each other</p><p><strong>Leader Role:</strong> Provide clear direction, explain roles, build trust</p><p><strong>Duration:</strong> First few weeks</p></div><div style='background: #fff3e0; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #f57c00; margin-top: 0;'>Stage 2: Storming</h4><p><strong>Characteristics:</strong> Conflicts emerge, people challenge ideas, tension rises</p><p><strong>Leader Role:</strong> Facilitate conflict resolution, remain calm, clarify goals</p><p><strong>Watch For:</strong> This is normal! Work through conflict constructively</p></div><div style='background: #e8f5e9; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #388e3c; margin-top: 0;'>Stage 3: Norming</h4><p><strong>Characteristics:</strong> Team finds rhythm, establishes norms, cooperation increases</p><p><strong>Leader Role:</strong> Step back gradually, encourage peer feedback</p><p><strong>Milestone:</strong> Team starts to self-organize effectively</p></div><div style='background: #f3e5f5; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #7b1fa2; margin-top: 0;'>Stage 4: Performing</h4><p><strong>Characteristics:</strong> High productivity, autonomy, strong collaboration</p><p><strong>Leader Role:</strong> Delegate, focus on strategy, remove obstacles</p><p><strong>Goal:</strong> Maintain momentum, celebrate achievements</p></div><div style='background: #fce4ec; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #c2185b; margin-top: 0;'>Stage 5: Adjourning</h4><p><strong>Characteristics:</strong> Project ends, team disbands, mixed emotions</p><p><strong>Leader Role:</strong> Recognize contributions, facilitate closure</p><p><strong>Important:</strong> Celebrate success, capture lessons learned</p></div><h2>Situational Leadership</h2><p>Developed by Ken Blanchard and Paul Hersey, this model says there is no one best leadership style. You must adapt to your team member development level.</p><div style='background: #e1f5fe; padding: 20px; border-radius: 8px; margin-top: 25px;'><h3 style='color: #0277bd; margin-top: 0;'>💡 Practical Example</h3><p><strong>Scenario:</strong> Thandi joins your team as a junior data analyst.</p><ul style='line-height: 2;'><li><strong>Week 1 to 4 (D1):</strong> Use Directing style - show her exactly how to clean data and run reports</li><li><strong>Month 2 to 3 (D2):</strong> Switch to Coaching - she can do tasks but needs reassurance and feedback</li><li><strong>Month 4 to 6 (D3):</strong> Use Supporting - involve her in decisions, ask for her input</li><li><strong>Month 7 plus (D4):</strong> Move to Delegating - assign projects, let her lead small analyses</li></ul></div><div style='background: #fff3e0; border: 2px solid #ff9800; padding: 20px; margin: 25px 0; border-radius: 8px;'><h4 style='color: #e65100; margin-top: 0;'>💡 Key Insight</h4><p style='margin-bottom: 0;'><strong>There is no one-size-fits-all leadership style.</strong> Adapt your approach based on each team member readiness and the situation!</p></div><h2>Path-Goal Leadership Theory</h2><p>Developed by Robert House, this theory focuses on how leaders can help team members reach their goals by clarifying the path and removing obstacles.</p><h3>Four Leadership Behaviors:</h3><ul style='line-height: 1.8;'><li><strong>Directive:</strong> Set clear goals, establish schedules, explain standards. Use when task is ambiguous or team lacks experience.</li><li><strong>Supportive:</strong> Show concern, be approachable, create friendly environment. Use when task is stressful or repetitive.</li><li><strong>Participative:</strong> Consult team, consider suggestions, involve in decisions. Use when team has expertise and needs buy-in.</li><li><strong>Achievement-Oriented:</strong> Set ambitious goals, show confidence, expect excellence. Use when team is skilled and wants challenge.</li></ul><div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-top: 30px;'><h3 style='margin: 0 0 15px 0;'>🎓 Key Takeaways</h3><ul style='line-height: 2; font-size: 15px;'><li>Teams go through predictable stages. Your leadership style should evolve with them.</li><li>Adapt your leadership style to each team member development level.</li><li>Your job is to clarify the path and remove obstacles.</li></ul><p style='margin-top: 20px; font-weight: bold;'>📊 You need 70% to pass the quiz and proceed to Module 3.</p></div>",
+      "content_type": "lesson",
+      "video_url": "",
+      "duration_minutes": 50,
+      "resources": [],
+      "quiz": {
+        "passing_score": 70,
+        "max_attempts": 3,
+        "questions": [
+          {
+            "id": 1,
+            "question": "According to Tuckman model, in which stage do conflicts emerge and people challenge ideas?",
+            "type": "multiple_choice",
+            "options": [
+              "Forming",
+              "Storming",
+              "Norming",
+              "Performing"
+            ],
+            "correct_answer": "Storming",
+            "difficulty": "easy",
+            "explanation": "The Storming stage is when conflicts emerge, people challenge ideas, and tension rises. This is a normal and necessary stage of team development where the leader facilitates conflict resolution."
+          },
+          {
+            "id": 2,
+            "question": "In Situational Leadership, which style is appropriate for followers with high competence but low commitment?",
+            "type": "multiple_choice",
+            "options": [
+              "Directing",
+              "Coaching",
+              "Supporting",
+              "Delegating"
+            ],
+            "correct_answer": "Supporting",
+            "difficulty": "medium",
+            "explanation": "Supporting style is appropriate for followers with high competence but low commitment. They know how to do the work but need encouragement and involvement in decision-making to rebuild motivation."
+          },
+          {
+            "id": 3,
+            "question": "True or False: According to Situational Leadership, there is one best leadership style for all situations.",
+            "type": "true_false",
+            "options": [
+              "True",
+              "False"
+            ],
+            "correct_answer": "False",
+            "difficulty": "easy",
+            "explanation": "False! Situational Leadership specifically states that there is no one best leadership style. Leaders must adapt their style based on the follower development level and the situation."
+          },
+          {
+            "id": 4,
+            "question": "What is the leader primary role during the Forming stage of team development?",
+            "type": "multiple_choice",
+            "options": [
+              "Facilitate conflict resolution",
+              "Delegate and empower",
+              "Provide clear direction and build trust",
+              "Step back and encourage peer feedback"
+            ],
+            "correct_answer": "Provide clear direction and build trust",
+            "difficulty": "medium",
+            "explanation": "During the Forming stage, team members are polite, uncertain, and getting to know each other. The leader role is to provide clear direction, explain roles, and build trust to help the team establish its foundation."
+          },
+          {
+            "id": 5,
+            "question": "In the Performing stage, what should the leader focus on?",
+            "type": "multiple_choice",
+            "options": [
+              "Providing detailed instructions",
+              "Resolving team conflicts",
+              "Delegating and removing obstacles",
+              "Explaining basic team norms"
+            ],
+            "correct_answer": "Delegating and removing obstacles",
+            "difficulty": "medium",
+            "explanation": "In the Performing stage, the team has high productivity, autonomy, and strong collaboration. The leader should delegate, focus on strategy, and remove obstacles to maintain momentum and celebrate achievements."
+          }
+        ]
+      }
+    }
+  ]
+}

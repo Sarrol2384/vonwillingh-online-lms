@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Import V3 - Direct</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h1 class="text-2xl font-bold mb-2">📚 Course Import Tool V3</h1>
+            <p class="text-xs text-gray-500 mb-4">Direct Mode - 2026-02-11 20:35</p>
+            
+            <div class="mb-4 p-3 bg-green-50 border border-green-200 rounded">
+                <p class="text-sm text-green-800">✅ Connected to Supabase</p>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">Upload JSON File:</label>
+                <input type="file" id="fileInput" accept=".json" 
+                       onchange="handleFileSelect(this)"
+                       class="block w-full text-sm border rounded p-2"/>
+            </div>
+            
+            <div id="preview" class="hidden mb-4 p-4 bg-blue-50 border border-blue-200 rounded">
+                <h3 class="font-bold mb-2">Preview:</h3>
+                <div id="previewContent"></div>
+            </div>
+            
+            <button id="importBtn" onclick="startImport()" 
+                    class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    disabled>
+                Import Course
+            </button>
+            
+            <div id="status" class="hidden mt-4 p-3 rounded"></div>
+            
+            <div id="progress" class="hidden mt-4 p-4 bg-gray-50 border rounded">
+                <h3 class="font-bold mb-2">Progress:</h3>
+                <div id="progressLog" class="text-sm space-y-1 font-mono max-h-96 overflow-y-auto"></div>
+            </div>
+            
+            <div id="result" class="hidden mt-4 p-4 rounded"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize
+        console.log('=== INITIALIZING ===');
+        
+        const supabase = window.supabase.createClient(
+            'https://laqauvikkazfpurknfkf.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhcWF1dmlrYW96ZnB1cmtuZ2tmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk5NTg1NjksImV4cCI6MjA4NTUzNDU2OX0.Lte-s41-oBz8GsjQISJ_RgG9ZDE2couNVVP6b12aJl8'
+        );
+        
+        console.log('Supabase initialized');
+        
+        let courseData = null;
+        
+        // File select handler
+        window.handleFileSelect = function(input) {
+            console.log('=== FILE SELECT ===');
+            console.log('Input:', input);
+            console.log('Files:', input.files);
+            
+            if (!input.files || input.files.length === 0) {
+                console.log('No file selected');
+                return;
+            }
+            
+            const file = input.files[0];
+            console.log('File name:', file.name);
+            console.log('File size:', file.size);
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                console.log('File loaded');
+                try {
+                    const text = e.target.result;
+                    console.log('Text length:', text.length);
+                    
+                    courseData = JSON.parse(text);
+                    console.log('JSON parsed:', courseData.course.name);
+                    
+                    // Show preview
+                    document.getElementById('preview').classList.remove('hidden');
+                    document.getElementById('previewContent').innerHTML = 
+                        '<p><strong>Course:</strong> ' + courseData.course.name + '</p>' +
+                        '<p><strong>Code:</strong> ' + courseData.course.code + '</p>' +
+                        '<p><strong>Modules:</strong> ' + courseData.modules.length + '</p>' +
+                        '<p><strong>Quiz Questions:</strong> ' + courseData.modules[0].quiz.questions.length + '</p>';
+                    
+                    // Enable button
+                    const btn = document.getElementById('importBtn');
+                    btn.disabled = false;
+                    console.log('Button enabled!');
+                    
+                    showStatus('File loaded successfully! Ready to import.', 'green');
+                    
+                } catch (error) {
+                    console.error('Parse error:', error);
+                    showStatus('Error: ' + error.message, 'red');
+                }
+            };
+            
+            reader.onerror = function(error) {
+                console.error('Read error:', error);
+                showStatus('Failed to read file', 'red');
+            };
+            
+            console.log('Starting read...');
+            reader.readAsText(file);
+        };
+        
+        // Import handler
+        window.startImport = function() {
+            console.log('=== IMPORT STARTED ===');
+            
+            if (!courseData) {
+                alert('No course data loaded!');
+                return;
+            }
+            
+            document.getElementById('progress').classList.remove('hidden');
+            document.getElementById('importBtn').disabled = true;
+            
+            performImport();
+        };
+        
+        function showStatus(msg, color) {
+            const status = document.getElementById('status');
+            status.textContent = msg;
+            status.className = 'mt-4 p-3 rounded bg-' + color + '-50 border border-' + color + '-300 text-' + color + '-900';
+            status.classList.remove('hidden');
+        }
+        
+        function log(msg) {
+            console.log('LOG:', msg);
+            const div = document.createElement('div');
+            div.textContent = msg;
+            div.className = 'py-0.5';
+            document.getElementById('progressLog').appendChild(div);
+        }
+        
+        function performImport() {
+            log('🚀 Starting import...');
+            
+            const course = courseData.course;
+            const modules = courseData.modules;
+            
+            // Check existing
+            log('Checking for existing course...');
+            supabase
+                .from('courses')
+                .select('id')
+                .eq('code', course.code)
+                .maybeSingle()
+                .then(function(response) {
+                    if (response.error) throw response.error;
+                    
+                    const existing = response.data;
+                    
+                    if (existing) {
+                        log('Course exists, updating...');
+                        return updateExisting(existing.id, course, modules);
+                    } else {
+                        log('Creating new course...');
+                        return createNew(course, modules);
+                    }
+                })
+                .then(function() {
+                    log('🎉 IMPORT COMPLETE!');
+                    showSuccess(course.name, course.code, modules.length);
+                })
+                .catch(function(error) {
+                    console.error('Import error:', error);
+                    log('❌ ERROR: ' + error.message);
+                    showStatus('Import failed: ' + error.message, 'red');
+                    document.getElementById('importBtn').disabled = false;
+                });
+        }
+        
+        function createNew(course, modules) {
+            return supabase
+                .from('courses')
+                .insert({
+                    name: course.name,
+                    code: course.code,
+                    level: course.level,
+                    category: course.category,
+                    description: course.description,
+                    duration: course.duration,
+                    price: course.price || 0
+                })
+                .select()
+                .single()
+                .then(function(response) {
+                    if (response.error) throw response.error;
+                    log('✅ Course created');
+                    return importModules(response.data.id, modules);
+                });
+        }
+        
+        function updateExisting(courseId, course, modules) {
+            // Delete old modules first
+            return supabase
+                .from('modules')
+                .select('id')
+                .eq('course_id', courseId)
+                .then(function(response) {
+                    if (response.error) throw response.error;
+                    
+                    const oldModules = response.data || [];
+                    if (oldModules.length === 0) {
+                        return Promise.resolve();
+                    }
+                    
+                    const moduleIds = oldModules.map(function(m) { return m.id; });
+                    
+                    // Delete quizzes then modules
+                    return supabase
+                        .from('quiz_questions')
+                        .delete()
+                        .in('module_id', moduleIds)
+                        .then(function() {
+                            return supabase
+                                .from('modules')
+                                .delete()
+                                .eq('course_id', courseId);
+                        })
+                        .then(function() {
+                            log('✅ Deleted old data');
+                        });
+                })
+                .then(function() {
+                    // Update course
+                    return supabase
+                        .from('courses')
+                        .update({
+                            name: course.name,
+                            level: course.level,
+                            category: course.category,
+                            description: course.description,
+                            duration: course.duration,
+                            price: course.price
+                        })
+                        .eq('id', courseId);
+                })
+                .then(function() {
+                    log('✅ Course updated');
+                    return importModules(courseId, modules);
+                });
+        }
+        
+        function importModules(courseId, modules) {
+            log('Importing ' + modules.length + ' modules...');
+            
+            let promise = Promise.resolve();
+            
+            modules.forEach(function(mod, index) {
+                promise = promise.then(function() {
+                    log('  [' + (index + 1) + '/' + modules.length + '] ' + mod.title);
+                    
+                    return supabase
+                        .from('modules')
+                        .insert({
+                            course_id: courseId,
+                            title: mod.title,
+                            description: mod.description || '',
+                            order_number: mod.order_number,
+                            content: mod.content || '',
+                            content_type: mod.content_type || 'lesson',
+                            duration_minutes: mod.duration_minutes,
+                            video_url: mod.video_url || null
+                        })
+                        .select()
+                        .single()
+                        .then(function(response) {
+                            if (response.error) throw response.error;
+                            
+                            log('    ✅ Module inserted');
+                            
+                            if (mod.quiz && mod.quiz.questions && mod.quiz.questions.length > 0) {
+                                log('    🎯 Importing ' + mod.quiz.questions.length + ' quiz questions...');
+                                
+                                const quizData = mod.quiz.questions.map(function(q) {
+                                    return {
+                                        module_id: response.data.id,
+                                        question_text: q.question,
+                                        question_type: q.type === 'true_false' ? 'true_false' : 'single_choice',
+                                        options: q.options,
+                                        correct_answer: q.correct_answer,
+                                        points: 2,
+                                        order_number: q.id,
+                                        hint_feedback: 'Think carefully',
+                                        correct_feedback: 'Correct!',
+                                        detailed_explanation: q.explanation || ''
+                                    };
+                                });
+                                
+                                return supabase
+                                    .from('quiz_questions')
+                                    .insert(quizData)
+                                    .then(function(response) {
+                                        if (response.error) throw response.error;
+                                        log('    ✅ ' + quizData.length + ' quiz questions inserted');
+                                    });
+                            }
+                        });
+                });
+            });
+            
+            return promise;
+        }
+        
+        function showSuccess(courseName, courseCode, moduleCount) {
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('result').className = 'mt-4 p-4 rounded bg-green-50 border-2 border-green-300 text-green-900';
+            document.getElementById('result').innerHTML =
+                '<h3 class="font-bold text-lg mb-2">✅ Success!</h3>' +
+                '<p class="mb-4">Course <strong>"' + courseName + '"</strong> (' + courseCode + ') imported successfully with ' + moduleCount + ' module(s)!</p>' +
+                '<a href="https://vonwillingh-online-lms.pages.dev/courses" target="_blank" class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">' +
+                'View Courses →' +
+                '</a>';
+        }
+        
+        console.log('=== READY ===');
+    </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:;">
+    <title>Course Import - Standalone</title>
+    <style>
+        body { font-family: Arial; max-width: 800px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+        .box { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { margin: 0 0 10px 0; }
+        input[type="file"] { display: block; margin: 10px 0; padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 100%; box-sizing: border-box; }
+        button { background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #1d4ed8; }
+        button:disabled { background: #9ca3af; cursor: not-allowed; }
+        .status { padding: 12px; border-radius: 6px; margin: 10px 0; }
+        .success { background: #d1fae5; border: 1px solid #10b981; color: #065f46; }
+        .error { background: #fee2e2; border: 1px solid #ef4444; color: #991b1b; }
+        .info { background: #dbeafe; border: 1px solid #3b82f6; color: #1e40af; }
+        #log { font-family: monospace; font-size: 12px; background: #f9fafb; padding: 10px; border-radius: 4px; max-height: 400px; overflow-y: auto; }
+        #log div { padding: 2px 0; }
+        .preview { background: #f0f9ff; padding: 15px; border-radius: 6px; border: 1px solid #bae6fd; }
+        .preview p { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>📚 Course Import - Standalone</h1>
+        <p style="color: #666; font-size: 14px;">Works locally - Bypasses CSP restrictions</p>
+        
+        <div class="status success">
+            ✅ Ready to import
+        </div>
+        
+        <label><strong>Step 1:</strong> Select your JSON file:</label>
+        <input type="file" id="fileInput" accept=".json">
+        
+        <div id="preview" style="display:none;" class="preview">
+            <strong>File Preview:</strong>
+            <div id="previewContent"></div>
+        </div>
+        
+        <div id="statusBox" style="display:none;"></div>
+        
+        <button id="importBtn">Import Course</button>
+        
+        <div id="logBox" style="display:none; margin-top: 20px;">
+            <strong>Import Log:</strong>
+            <div id="log"></div>
+        </div>
+        
+        <div id="result" style="display:none; margin-top: 20px;"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        (function() {
+            console.log('Initializing...');
+            
+            const supabase = window.supabase.createClient(
+                'https://laqauvikkazfpurknfkf.supabase.co',
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhcWF1dmlrYW96ZnB1cmtuZ2tmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk5NTg1NjksImV4cCI6MjA4NTUzNDU2OX0.Lte-s41-oBz8GsjQISJ_RgG9ZDE2couNVVP6b12aJl8'
+            );
+            
+            let courseData = null;
+            
+            document.getElementById('fileInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    try {
+                        courseData = JSON.parse(evt.target.result);
+                        
+                        document.getElementById('preview').style.display = 'block';
+                        document.getElementById('previewContent').innerHTML = 
+                            '<p>Course: <strong>' + courseData.course.name + '</strong></p>' +
+                            '<p>Code: ' + courseData.course.code + '</p>' +
+                            '<p>Modules: ' + courseData.modules.length + '</p>';
+                        
+                        showStatus('File loaded! Ready to import.', 'info');
+                    } catch (err) {
+                        showStatus('Error: ' + err.message, 'error');
+                    }
+                };
+                reader.readAsText(file);
+            });
+            
+            document.getElementById('importBtn').addEventListener('click', function() {
+                if (!courseData) {
+                    alert('Please select a file first!');
+                    return;
+                }
+                
+                this.disabled = true;
+                this.textContent = 'Importing...';
+                
+                document.getElementById('logBox').style.display = 'block';
+                log('🚀 Starting import...');
+                
+                const course = courseData.course;
+                const modules = courseData.modules;
+                
+                supabase.from('courses').select('id').eq('code', course.code).maybeSingle()
+                    .then(function(res) {
+                        if (res.error) throw res.error;
+                        
+                        if (res.data) {
+                            log('Course exists, updating...');
+                            return updateCourse(res.data.id, course, modules);
+                        } else {
+                            log('Creating new course...');
+                            return createCourse(course, modules);
+                        }
+                    })
+                    .then(function() {
+                        log('✅ COMPLETE!');
+                        showStatus('Import successful!', 'success');
+                        document.getElementById('result').style.display = 'block';
+                        document.getElementById('result').innerHTML = 
+                            '<div class="status success">' +
+                            '<h3 style="margin:0 0 10px 0;">✅ Success!</h3>' +
+                            '<p>Course: <strong>' + course.name + '</strong></p>' +
+                            '<a href="https://vonwillingh-online-lms.pages.dev/courses" target="_blank" style="display:inline-block; margin-top:10px; padding:8px 16px; background:#059669; color:white; text-decoration:none; border-radius:4px;">View Courses</a>' +
+                            '</div>';
+                    })
+                    .catch(function(err) {
+                        log('❌ ERROR: ' + err.message);
+                        showStatus('Failed: ' + err.message, 'error');
+                        document.getElementById('importBtn').disabled = false;
+                        document.getElementById('importBtn').textContent = 'Import Course';
+                    });
+            });
+            
+            function showStatus(msg, type) {
+                const box = document.getElementById('statusBox');
+                box.className = 'status ' + type;
+                box.textContent = msg;
+                box.style.display = 'block';
+            }
+            
+            function log(msg) {
+                const div = document.createElement('div');
+                div.textContent = msg;
+                document.getElementById('log').appendChild(div);
+            }
+            
+            function createCourse(course, modules) {
+                return supabase.from('courses').insert({
+                    name: course.name, code: course.code, level: course.level,
+                    category: course.category, description: course.description,
+                    duration: course.duration, price: course.price || 0
+                }).select().single()
+                    .then(function(res) {
+                        if (res.error) throw res.error;
+                        log('✅ Course created');
+                        return importMods(res.data.id, modules);
+                    });
+            }
+            
+            function updateCourse(id, course, modules) {
+                return supabase.from('modules').select('id').eq('course_id', id)
+                    .then(function(res) {
+                        if (res.error) throw res.error;
+                        const mods = res.data || [];
+                        if (mods.length === 0) return;
+                        
+                        const ids = mods.map(function(m) { return m.id; });
+                        return supabase.from('quiz_questions').delete().in('module_id', ids)
+                            .then(function() {
+                                return supabase.from('modules').delete().eq('course_id', id);
+                            })
+                            .then(function() { log('✅ Deleted old data'); });
+                    })
+                    .then(function() {
+                        return supabase.from('courses').update({
+                            name: course.name, level: course.level, category: course.category,
+                            description: course.description, duration: course.duration, price: course.price
+                        }).eq('id', id);
+                    })
+                    .then(function() {
+                        log('✅ Course updated');
+                        return importMods(id, modules);
+                    });
+            }
+            
+            function importMods(courseId, modules) {
+                log('Importing ' + modules.length + ' modules...');
+                let p = Promise.resolve();
+                modules.forEach(function(mod, i) {
+                    p = p.then(function() {
+                        log('[' + (i+1) + '/' + modules.length + '] ' + mod.title);
+                        return supabase.from('modules').insert({
+                            course_id: courseId, title: mod.title, description: mod.description || '',
+                            order_number: mod.order_number, content: mod.content || '',
+                            content_type: mod.content_type || 'lesson',
+                            duration_minutes: mod.duration_minutes, video_url: mod.video_url || null
+                        }).select().single()
+                            .then(function(res) {
+                                if (res.error) throw res.error;
+                                log('  ✅ Module inserted');
+                                if (mod.quiz && mod.quiz.questions && mod.quiz.questions.length) {
+                                    log('  🎯 ' + mod.quiz.questions.length + ' quiz questions...');
+                                    const quiz = mod.quiz.questions.map(function(q) {
+                                        return {
+                                            module_id: res.data.id, question_text: q.question,
+                                            question_type: q.type === 'true_false' ? 'true_false' : 'single_choice',
+                                            options: q.options, correct_answer: q.correct_answer,
+                                            points: 2, order_number: q.id,
+                                            hint_feedback: 'Think carefully', correct_feedback: 'Correct!',
+                                            detailed_explanation: q.explanation || ''
+                                        };
+                                    });
+                                    return supabase.from('quiz_questions').insert(quiz)
+                                        .then(function(r) {
+                                            if (r.error) throw r.error;
+                                            log('  ✅ ' + quiz.length + ' questions inserted');
+                                        });
+                                }
+                            });
+                    });
+                });
+                return p;
+            }
+        })();
+    </script>
+</body>
+</html>
