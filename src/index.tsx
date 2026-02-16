@@ -10,6 +10,7 @@ import {
   getPaymentVerifiedEmail,
   getCourseCompletionEmail
 } from './email'
+import { requireAdminSimple, importCourseSimple, testImportSystem } from './import-api-simple'
 
 type Bindings = {
   SUPABASE_URL: string
@@ -2935,6 +2936,22 @@ app.post('/api/courses/external-import', async (c) => {
     }, 500)
   }
 })
+
+// ============================================================
+// COURSE IMPORT API - Simple Auth Version
+// ============================================================
+
+// Test endpoint - Check if import system is ready
+app.get('/api/admin/courses/import/test', testImportSystem)
+
+// Import endpoint with simple password auth
+app.post('/api/admin/courses/import-simple', requireAdminSimple, async (c) => {
+  const supabase = getSupabaseAdminClient(c.env)
+  c.set('supabaseAdmin', supabase)
+  return importCourseSimple(c)
+})
+
+// ============================================================
 
 // API endpoint - Admin Login
 app.post('/api/admin/login', async (c) => {
