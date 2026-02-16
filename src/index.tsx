@@ -301,9 +301,34 @@ app.get('/', (c) => {
 })
 
 // Courses catalog page
-app.get('/courses', (c) => {
-  const category = c.req.query('category')
-  const filteredCourses = category ? COURSES.filter(course => course.category === category) : COURSES
+app.get('/courses', async (c) => {
+  try {
+    // Load courses from database
+    const supabase = getSupabaseAdminClient(c.env)
+    const { data: dbCourses, error } = await supabase
+      .from('courses')
+      .select('id, name, code, level, category, description, duration, price, modules_count')
+      .order('created_at', { ascending: false })
+    
+    if (error) {
+      console.error('Error loading courses:', error)
+      // Fall back to hardcoded courses if database fails
+      var allCourses = COURSES
+    } else {
+      // Use database courses, map to expected format
+      var allCourses = dbCourses && dbCourses.length > 0 ? dbCourses.map(course => ({
+        id: course.id,
+        name: course.name,
+        category: course.category || 'General',
+        level: course.level,
+        modules: course.modules_count || 0,
+        duration: course.duration || '',
+        price: course.price || 0
+      })) : COURSES
+    }
+    
+    const category = c.req.query('category')
+    const filteredCourses = category ? allCourses.filter(course => course.category === category) : allCourses
   
   return c.html(`
     <!DOCTYPE html>
@@ -339,14 +364,14 @@ app.get('/courses', (c) => {
 
         <!-- Course Catalog -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <h2 class="text-4xl font-bold mb-8 brand-text">Course Catalog - 40 Programs</h2>
+            <h2 class="text-4xl font-bold mb-8 brand-text">Course Catalog - ${allCourses.length} Programs</h2>
             
             <!-- Filter -->
             <div class="mb-8 bg-white p-4 rounded-lg shadow">
                 <label class="font-semibold mr-4">Filter by Category:</label>
                 <select onchange="window.location.href = this.value" class="border border-gray-300 rounded px-4 py-2">
-                    <option value="/courses">All Courses (40)</option>
-                    ${Array.from(new Set(COURSES.map(c => c.category))).map(cat => 
+                    <option value="/courses">All Courses (${allCourses.length})</option>
+                    ${Array.from(new Set(allCourses.map(c => c.category))).map(cat => 
                       `<option value="/courses?category=${encodeURIComponent(cat)}" ${category === cat ? 'selected' : ''}>${cat}</option>`
                     ).join('')}
                 </select>
@@ -382,6 +407,10 @@ app.get('/courses', (c) => {
     </body>
     </html>
   `)
+  } catch (error) {
+    console.error('Courses page error:', error)
+    return c.text('Error loading courses', 500)
+  }
 })
 
 // Application form page
