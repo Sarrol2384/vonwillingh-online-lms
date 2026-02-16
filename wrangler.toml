@@ -1,0 +1,15 @@
+name = "vonwillingh-online-lms"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "dist"
+
+[build]
+command = "npm run build"
+
+[site]
+bucket = "dist"
+
+# Environment variables (set these in Cloudflare Dashboard)
+[vars]
+# SUPABASE_URL = "https://dgcobxtkzewzkrzpfcdr.supabase.co"
+# SUPABASE_ANON_KEY = "your-key-here"
+# SUPABASE_SERVICE_ROLE_KEY = "your-key-here"
