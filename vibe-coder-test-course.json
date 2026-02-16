@@ -1,0 +1,24 @@
+{
+  "name": "🎉 Vibe Coder's First Import Test",
+  "level": "Certificate",
+  "category": "Testing",
+  "price": 0,
+  "description": "This course was imported automatically to test the new import system. Created for the ultimate vibe coder! 😎",
+  "duration": "2 weeks",
+  "modules": [
+    {
+      "title": "Module 1: Welcome to Auto-Import",
+      "description": "Your first auto-imported module",
+      "content": "<div style='padding: 20px; font-family: Arial;'><h1 style='color: #667eea;'>🚀 Welcome, Vibe Coder!</h1><p style='font-size: 1.1em; line-height: 1.8;'>This module was automatically imported by Claude (your AI assistant) while you relaxed and vibed. 😎</p><h2 style='color: #764ba2;'>What This Proves:</h2><ul style='line-height: 1.8; font-size: 1.05em;'><li>✅ Your import system works perfectly</li><li>✅ JSON to database conversion is smooth</li><li>✅ HTML content renders correctly</li><li>✅ Module ordering works</li><li>✅ You can now import real courses!</li></ul><div style='background: #e8f5e9; padding: 15px; margin: 20px 0; border-left: 4px solid #4caf50; border-radius: 5px;'><h3 style='margin-top: 0; color: #2e7d32;'>💡 Pro Tip</h3><p>Now that this works, you can import entire courses by just uploading JSON files. No more manual database entry!</p></div><h2>Next Steps:</h2><ol style='line-height: 1.8;'><li>Check your course catalog to see this course</li><li>Try the Course Converter with the Import Now button</li><li>Import your real course content</li><li>Keep vibing! 🎵</li></ol></div>",
+      "order_number": 1,
+      "duration_minutes": 30
+    },
+    {
+      "title": "Module 2: How It Works",
+      "description": "Behind the scenes of the import system",
+      "content": "<div style='padding: 20px; font-family: Arial;'><h1 style='color: #667eea;'>⚙️ Behind the Scenes</h1><p style='font-size: 1.1em;'>Here's what happened when this course was imported:</p><div style='background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;'><pre style='margin: 0; white-space: pre-wrap; word-wrap: break-word;'>1. JSON file created with course data\n2. Sent to /api/admin/courses/import-simple\n3. Backend validated the structure\n4. Course created in database\n5. Modules inserted with proper ordering\n6. Success response returned\n7. You can now see it in the catalog!</pre></div><h2 style='color: #764ba2;'>The Magic Behind It:</h2><ul style='line-height: 1.8;'><li><strong>Backend:</strong> Hono + TypeScript</li><li><strong>Database:</strong> Supabase (PostgreSQL)</li><li><strong>Auth:</strong> Simple password protection</li><li><strong>Frontend:</strong> Course Converter with Import Now button</li></ul><p style='background: #fff3e0; padding: 15px; border-left: 4px solid #ff9800; border-radius: 5px;'>This is just the beginning. You can now import courses with multiple modules, quizzes, resources, and more!</p></div>",
+      "order_number": 2,
+      "duration_minutes": 45
+    }
+  ]
+}
