@@ -3729,6 +3729,8 @@ app.post('/api/applications', async (c) => {
     }
     
     // Send application received confirmation email
+    let emailSent = false
+    let emailError = null
     try {
       // Get course name from database
       const { data: courseData } = await supabase
@@ -3744,16 +3746,22 @@ app.post('/api/applications', async (c) => {
         subject: 'Application Received - VonWillingh Online',
         html: getApplicationReceivedEmail(data.fullName, courseName)
       })
-      console.log('Application received email sent to:', data.email)
-    } catch (emailError) {
+      console.log('✅ Application received email sent to:', data.email)
+      emailSent = true
+    } catch (error: any) {
       // Log error but don't fail the request
-      console.error('Failed to send application received email:', emailError)
+      emailError = error.message || 'Unknown error'
+      console.error('❌ Failed to send application received email:', error)
     }
     
     return c.json({ 
       success: true, 
-      message: 'Application submitted successfully! Check your email for confirmation.',
-      applicationId: application.id
+      message: emailSent 
+        ? 'Application submitted successfully! Check your email for confirmation.'
+        : 'Application submitted successfully! (Note: Email notification failed to send)',
+      applicationId: application.id,
+      emailSent,
+      emailError
     })
     
   } catch (error: any) {
