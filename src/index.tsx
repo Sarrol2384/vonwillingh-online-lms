@@ -5020,7 +5020,82 @@ app.delete('/api/admin/courses/:id', async (c) => {
       }, 404)
     }
     
-    // Delete course (modules will be deleted automatically due to CASCADE)
+    // Step 1: Get all modules for this course
+    const { data: modules } = await supabase
+      .from('modules')
+      .select('id')
+      .eq('course_id', courseId)
+    
+    const moduleIds = modules?.map(m => m.id) || []
+    
+    // Step 2: Delete quiz questions for all modules (if any)
+    if (moduleIds.length > 0) {
+      console.log(`🗑️ Deleting quiz questions for ${moduleIds.length} modules...`)
+      const { error: quizError } = await supabase
+        .from('quiz_questions')
+        .delete()
+        .in('module_id', moduleIds)
+      
+      if (quizError) {
+        console.error('❌ Error deleting quiz questions:', quizError)
+        // Continue anyway - quiz questions might not exist
+      }
+    }
+    
+    // Step 3: Delete all student progress for these modules
+    if (moduleIds.length > 0) {
+      console.log(`🗑️ Deleting student progress for modules...`)
+      const { error: progressError } = await supabase
+        .from('student_progress')
+        .delete()
+        .in('module_id', moduleIds)
+      
+      if (progressError) {
+        console.error('❌ Error deleting student progress:', progressError)
+        // Continue anyway
+      }
+    }
+    
+    // Step 4: Delete all modules
+    if (moduleIds.length > 0) {
+      console.log(`🗑️ Deleting ${moduleIds.length} modules...`)
+      const { error: modulesError } = await supabase
+        .from('modules')
+        .delete()
+        .eq('course_id', courseId)
+      
+      if (modulesError) {
+        console.error('❌ Error deleting modules:', modulesError)
+        throw new Error(`Failed to delete modules: ${modulesError.message}`)
+      }
+    }
+    
+    // Step 5: Delete enrollments for this course
+    console.log(`🗑️ Deleting enrollments...`)
+    const { error: enrollmentError } = await supabase
+      .from('enrollments')
+      .delete()
+      .eq('course_id', courseId)
+    
+    if (enrollmentError) {
+      console.error('❌ Error deleting enrollments:', enrollmentError)
+      // Continue anyway
+    }
+    
+    // Step 6: Delete applications for this course
+    console.log(`🗑️ Deleting applications...`)
+    const { error: applicationError } = await supabase
+      .from('applications')
+      .delete()
+      .eq('course_id', courseId)
+    
+    if (applicationError) {
+      console.error('❌ Error deleting applications:', applicationError)
+      // Continue anyway
+    }
+    
+    // Step 7: Finally, delete the course itself
+    console.log(`🗑️ Deleting course...`)
     const { error: deleteError } = await supabase
       .from('courses')
       .delete()
@@ -5031,7 +5106,7 @@ app.delete('/api/admin/courses/:id', async (c) => {
       throw new Error(deleteError.message)
     }
     
-    console.log(`✅ Course deleted: ${course.name} (ID: ${courseId})`)
+    console.log(`✅ Course deleted successfully: ${course.name} (ID: ${courseId})`)
     
     return c.json({ 
       success: true,
