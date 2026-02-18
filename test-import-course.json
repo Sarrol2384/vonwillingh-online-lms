@@ -1,0 +1,24 @@
+{
+  "name": "Test Course Import",
+  "level": "Certificate",
+  "category": "Business Management",
+  "price": 0,
+  "description": "This is a test course to verify the import system works correctly.",
+  "duration": "2 weeks",
+  "modules": [
+    {
+      "title": "Module 1: Introduction",
+      "description": "Getting started with the course",
+      "content": "<h1>Welcome to Module 1</h1><p>This is the first module of the course.</p><h2>What You'll Learn</h2><ul><li>Basic concepts</li><li>Core principles</li><li>Practical applications</li></ul>",
+      "order_number": 1,
+      "duration_minutes": 45
+    },
+    {
+      "title": "Module 2: Advanced Topics",
+      "description": "Deep dive into advanced concepts",
+      "content": "<h1>Module 2: Advanced Topics</h1><p>Now that you understand the basics, let's explore advanced concepts.</p><h2>Key Topics</h2><ul><li>Advanced techniques</li><li>Best practices</li><li>Real-world examples</li></ul><h2>Summary</h2><p>This module covered important advanced topics that build on the foundation from Module 1.</p>",
+      "order_number": 2,
+      "duration_minutes": 60
+    }
+  ]
+}
