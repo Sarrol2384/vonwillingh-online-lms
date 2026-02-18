@@ -4342,6 +4342,355 @@ app.get('/admin-courses', (c) => {
   `)
 })
 
+// Admin Course Preview (No login required - shows course as students see it)
+app.get('/admin/courses/:courseId/preview', async (c) => {
+  const courseId = c.req.param('courseId')
+  
+  return c.html(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Course Preview - Admin - VonWillingh Online</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+        <style>
+          .brand-bg { background-color: ${BRAND_COLORS.primary}; }
+          .brand-text { color: ${BRAND_COLORS.primary}; }
+        </style>
+    </head>
+    <body class="bg-gray-50">
+        <!-- Admin Preview Banner -->
+        <div class="bg-yellow-100 border-b-2 border-yellow-400 px-4 py-2 text-center">
+            <p class="text-sm font-semibold text-yellow-800">
+                <i class="fas fa-eye mr-2"></i>ADMIN PREVIEW MODE - This is how students see this course
+            </p>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="brand-bg text-white shadow-lg">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between py-4">
+                    <div class="flex items-center space-x-4">
+                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
+                        <h1 class="text-xl font-bold">VonWillingh Online</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="/admin-courses" class="hover:bg-blue-800 px-4 py-2 rounded transition">
+                            <i class="fas fa-arrow-left mr-2"></i>Back to Admin
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mx-auto px-4 py-8 max-w-6xl">
+            <div id="loadingScreen" class="text-center py-12">
+                <i class="fas fa-spinner fa-spin text-4xl text-gray-400 mb-4"></i>
+                <p class="text-gray-600">Loading course preview...</p>
+            </div>
+
+            <div id="courseContent" class="hidden">
+                <!-- Course Header -->
+                <div class="bg-white rounded-lg shadow-md p-8 mb-6">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <span id="courseBadge" class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full mb-3"></span>
+                            <h1 id="courseTitle" class="text-3xl font-bold mb-3"></h1>
+                            <p id="courseDescription" class="text-gray-600 mb-4"></p>
+                            
+                            <div class="flex flex-wrap gap-6 text-sm text-gray-600">
+                                <div class="flex items-center">
+                                    <i class="fas fa-graduation-cap mr-2 brand-text"></i>
+                                    <span id="courseLevel"></span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-folder mr-2 brand-text"></i>
+                                    <span id="courseCategory"></span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock mr-2 brand-text"></i>
+                                    <span id="courseDuration"></span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-book mr-2 brand-text"></i>
+                                    <span id="moduleCount"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-6 text-right">
+                            <p class="text-3xl font-bold brand-text" id="coursePrice"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modules List -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold mb-4">Course Modules</h3>
+                    <div id="modulesContainer" class="space-y-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+        <script>
+            const courseId = '${courseId}';
+            
+            async function loadCoursePreview() {
+                try {
+                    const response = await axios.get(\`/api/admin/courses/\${courseId}/preview\`);
+                    const { course, modules } = response.data;
+                    
+                    // Display course info
+                    document.getElementById('courseBadge').textContent = course.level;
+                    document.getElementById('courseTitle').textContent = course.name;
+                    document.getElementById('courseDescription').textContent = course.description || 'No description available';
+                    document.getElementById('courseLevel').textContent = course.level;
+                    document.getElementById('courseCategory').textContent = course.category || 'General';
+                    document.getElementById('courseDuration').textContent = course.duration || 'Self-paced';
+                    document.getElementById('moduleCount').textContent = \`\${modules.length} Modules\`;
+                    document.getElementById('coursePrice').textContent = course.price === 0 ? 'FREE' : \`R \${course.price.toLocaleString()}\`;
+                    
+                    // Display modules
+                    const modulesContainer = document.getElementById('modulesContainer');
+                    modulesContainer.innerHTML = modules.map(module => \`
+                        <div class="border rounded-lg p-4 hover:shadow-md transition">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-lg mb-2">
+                                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-800 text-sm font-bold mr-3">
+                                            \${module.order_number || module.module_number}
+                                        </span>
+                                        \${module.title}
+                                    </h4>
+                                    <p class="text-sm text-gray-600 mb-3">\${module.description || 'No description'}</p>
+                                    <div class="flex items-center gap-4 text-xs text-gray-500">
+                                        <span>
+                                            <i class="fas fa-clock mr-1"></i>
+                                            \${module.duration_minutes || 45} minutes
+                                        </span>
+                                        <span>
+                                            <i class="fas fa-file-alt mr-1"></i>
+                                            \${module.content ? 'Content available' : 'No content'}
+                                        </span>
+                                    </div>
+                                </div>
+                                <a href="/admin/courses/\${courseId}/modules/\${module.id}/preview" 
+                                   class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition text-sm">
+                                    <i class="fas fa-eye mr-2"></i>Preview Module
+                                </a>
+                            </div>
+                        </div>
+                    \`).join('');
+                    
+                    // Show content, hide loading
+                    document.getElementById('loadingScreen').classList.add('hidden');
+                    document.getElementById('courseContent').classList.remove('hidden');
+                    
+                } catch (error) {
+                    console.error('Error loading course preview:', error);
+                    document.getElementById('loadingScreen').innerHTML = \`
+                        <div class="text-center py-12">
+                            <i class="fas fa-exclamation-triangle text-4xl text-red-400 mb-4"></i>
+                            <p class="text-red-600">Failed to load course preview</p>
+                            <p class="text-gray-600 mt-2">\${error.message}</p>
+                            <a href="/admin-courses" class="mt-4 inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                                Back to Admin
+                            </a>
+                        </div>
+                    \`;
+                }
+            }
+            
+            loadCoursePreview();
+        </script>
+    </body>
+    </html>
+  `)
+})
+
+// Admin Module Preview (No login required - shows module as students see it)
+app.get('/admin/courses/:courseId/modules/:moduleId/preview', async (c) => {
+  const courseId = c.req.param('courseId')
+  const moduleId = c.req.param('moduleId')
+  
+  return c.html(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Module Preview - Admin - VonWillingh Online</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+        <style>
+          .brand-bg { background-color: ${BRAND_COLORS.primary}; }
+          .brand-text { color: ${BRAND_COLORS.primary}; }
+          .module-content { line-height: 1.8; }
+          .module-content h1 { font-size: 2rem; font-weight: bold; margin-top: 2rem; margin-bottom: 1rem; color: ${BRAND_COLORS.primary}; }
+          .module-content h2 { font-size: 1.5rem; font-weight: bold; margin-top: 1.5rem; margin-bottom: 1rem; }
+          .module-content h3 { font-size: 1.25rem; font-weight: bold; margin-top: 1.25rem; margin-bottom: 0.75rem; }
+          .module-content p { margin-bottom: 1rem; }
+          .module-content ul, .module-content ol { margin-left: 2rem; margin-bottom: 1rem; }
+          .module-content li { margin-bottom: 0.5rem; }
+          .module-content a { color: ${BRAND_COLORS.accent}; text-decoration: underline; }
+          .module-content strong { font-weight: 600; }
+          .module-content em { font-style: italic; }
+        </style>
+    </head>
+    <body class="bg-gray-50">
+        <!-- Admin Preview Banner -->
+        <div class="bg-yellow-100 border-b-2 border-yellow-400 px-4 py-2 text-center">
+            <p class="text-sm font-semibold text-yellow-800">
+                <i class="fas fa-eye mr-2"></i>ADMIN PREVIEW MODE - This is how students see this module
+            </p>
+        </div>
+
+        <div id="loadingScreen" class="min-h-screen flex items-center justify-center">
+            <div class="text-center">
+                <i class="fas fa-spinner fa-spin text-4xl text-gray-400 mb-4"></i>
+                <p class="text-gray-600">Loading module preview...</p>
+            </div>
+        </div>
+
+        <div id="moduleContent" class="hidden">
+            <!-- Navigation -->
+            <nav class="brand-bg text-white shadow-lg">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between py-4">
+                        <div class="flex items-center space-x-4">
+                            <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
+                            <div>
+                                <p class="text-sm opacity-90" id="courseName">Course</p>
+                                <h1 class="text-lg font-bold" id="moduleTitle">Module</h1>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span id="modulePosition" class="text-sm">Module Preview</span>
+                            <a href="/admin/courses/${courseId}/preview" class="hover:bg-blue-800 px-4 py-2 rounded transition">
+                                <i class="fas fa-arrow-left mr-2"></i>Back to Course
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container mx-auto px-4 py-8 max-w-4xl">
+                <!-- Module Header -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h2 id="moduleHeading" class="text-2xl font-bold mb-2">Module Title</h2>
+                    <p id="moduleDescription" class="text-gray-600"></p>
+                    <div class="flex items-center gap-4 mt-4 text-sm text-gray-600">
+                        <span><i class="fas fa-clock mr-2"></i><span id="moduleDuration">45</span> minutes</span>
+                        <span><i class="fas fa-list-ol mr-2"></i>Order: <span id="moduleOrder">1</span></span>
+                    </div>
+                </div>
+
+                <!-- Module Content -->
+                <div class="bg-white rounded-lg shadow-md p-8 mb-6">
+                    <div id="moduleContentArea" class="module-content"></div>
+                </div>
+
+                <!-- Resources (if any) -->
+                <div id="resourcesSection" class="hidden bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-link mr-2"></i>Resources
+                    </h3>
+                    <div id="resourcesList" class="space-y-2"></div>
+                </div>
+
+                <!-- Quiz Section (if any) -->
+                <div id="quizSection" class="hidden bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-question-circle mr-2"></i>Quiz Questions
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-4">This module contains <span id="quizCount">0</span> quiz questions</p>
+                    <div id="quizQuestions" class="space-y-4"></div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between">
+                    <a href="/admin/courses/${courseId}/preview" 
+                       class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded transition">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Course
+                    </a>
+                    <a href="/admin-courses" 
+                       class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded transition">
+                        <i class="fas fa-home mr-2"></i>Admin Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+        <script>
+            const moduleId = '${moduleId}';
+            const courseId = '${courseId}';
+            
+            async function loadModulePreview() {
+                try {
+                    const response = await axios.get(\`/api/admin/modules/\${moduleId}/preview\`);
+                    const { module, course, quizQuestions } = response.data;
+                    
+                    // Display module info
+                    document.getElementById('courseName').textContent = course.name;
+                    document.getElementById('moduleTitle').textContent = module.title;
+                    document.getElementById('moduleHeading').textContent = module.title;
+                    document.getElementById('moduleDescription').textContent = module.description || '';
+                    document.getElementById('moduleDuration').textContent = module.duration_minutes || 45;
+                    document.getElementById('moduleOrder').textContent = module.order_number || module.module_number || '?';
+                    
+                    // Display module content
+                    document.getElementById('moduleContentArea').innerHTML = module.content || '<p class="text-gray-500 italic">No content available for this module.</p>';
+                    
+                    // Display quiz questions if any
+                    if (quizQuestions && quizQuestions.length > 0) {
+                        document.getElementById('quizSection').classList.remove('hidden');
+                        document.getElementById('quizCount').textContent = quizQuestions.length;
+                        
+                        const quizContainer = document.getElementById('quizQuestions');
+                        quizContainer.innerHTML = quizQuestions.map((q, index) => \`
+                            <div class="border rounded-lg p-4 bg-gray-50">
+                                <p class="font-semibold mb-2">Question \${index + 1}: \${q.question}</p>
+                                <p class="text-sm text-gray-600 mb-2">Type: \${q.question_type} | Points: \${q.points}</p>
+                                <div class="text-sm space-y-1">
+                                    \${q.options ? JSON.parse(q.options).map((opt, i) => \`
+                                        <div class="\${opt === q.correct_answer ? 'text-green-600 font-semibold' : 'text-gray-600'}">
+                                            <i class="fas fa-\${opt === q.correct_answer ? 'check-circle' : 'circle'} mr-2"></i>\${opt}
+                                        </div>
+                                    \`).join('') : '<p class="text-gray-500 italic">No options (open-ended question)</p>'}
+                                </div>
+                            </div>
+                        \`).join('');
+                    }
+                    
+                    // Show content, hide loading
+                    document.getElementById('loadingScreen').classList.add('hidden');
+                    document.getElementById('moduleContent').classList.remove('hidden');
+                    
+                } catch (error) {
+                    console.error('Error loading module preview:', error);
+                    document.getElementById('loadingScreen').innerHTML = \`
+                        <div class="text-center py-12">
+                            <i class="fas fa-exclamation-triangle text-4xl text-red-400 mb-4"></i>
+                            <p class="text-red-600">Failed to load module preview</p>
+                            <p class="text-gray-600 mt-2">\${error.message}</p>
+                            <a href="/admin/courses/${courseId}/preview" class="mt-4 inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                                Back to Course
+                            </a>
+                        </div>
+                    \`;
+                }
+            }
+            
+            loadModulePreview();
+        </script>
+    </body>
+    </html>
+  `)
+})
+
 // API: Get all courses with module counts
 app.get('/api/admin/courses', async (c) => {
   try {
@@ -4418,6 +4767,103 @@ app.get('/api/admin/courses/:id/modules', async (c) => {
       success: true,
       course,
       modules: modules || []
+    })
+    
+  } catch (error: any) {
+    return c.json({ 
+      success: false, 
+      message: error.message 
+    }, 500)
+  }
+})
+
+// API: Admin Course Preview - Get course with modules for preview
+app.get('/api/admin/courses/:courseId/preview', async (c) => {
+  try {
+    const courseId = c.req.param('courseId')
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    // Get course details
+    const { data: course, error: courseError } = await supabase
+      .from('courses')
+      .select('*')
+      .eq('id', courseId)
+      .single()
+    
+    if (courseError || !course) {
+      return c.json({ success: false, message: 'Course not found' }, 404)
+    }
+    
+    // Get modules
+    const { data: modules, error: modulesError } = await supabase
+      .from('modules')
+      .select('*')
+      .eq('course_id', courseId)
+      .order('order_number')
+    
+    if (modulesError) {
+      throw new Error(modulesError.message)
+    }
+    
+    return c.json({ 
+      success: true,
+      course,
+      modules: modules || []
+    })
+    
+  } catch (error: any) {
+    return c.json({ 
+      success: false, 
+      message: error.message 
+    }, 500)
+  }
+})
+
+// API: Admin Module Preview - Get module with quiz questions for preview
+app.get('/api/admin/modules/:moduleId/preview', async (c) => {
+  try {
+    const moduleId = c.req.param('moduleId')
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    // Get module details
+    const { data: module, error: moduleError } = await supabase
+      .from('modules')
+      .select('*')
+      .eq('id', moduleId)
+      .single()
+    
+    if (moduleError || !module) {
+      return c.json({ success: false, message: 'Module not found' }, 404)
+    }
+    
+    // Get course details
+    const { data: course, error: courseError } = await supabase
+      .from('courses')
+      .select('id, name, level, category')
+      .eq('id', module.course_id)
+      .single()
+    
+    if (courseError || !course) {
+      return c.json({ success: false, message: 'Course not found' }, 404)
+    }
+    
+    // Get quiz questions for this module
+    const { data: quizQuestions, error: quizError } = await supabase
+      .from('quiz_questions')
+      .select('*')
+      .eq('module_id', moduleId)
+      .order('order_number')
+    
+    // Don't fail if no quiz questions
+    if (quizError) {
+      console.error('Error loading quiz questions:', quizError)
+    }
+    
+    return c.json({ 
+      success: true,
+      module,
+      course,
+      quizQuestions: quizQuestions || []
     })
     
   } catch (error: any) {

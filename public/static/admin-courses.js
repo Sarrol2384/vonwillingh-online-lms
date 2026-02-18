@@ -127,6 +127,11 @@ function displayCourses(courses) {
                 }
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                <a href="/admin/courses/${course.id}/preview" 
+                   target="_blank"
+                   class="inline-block text-green-600 hover:text-green-800 font-medium">
+                    <i class="fas fa-external-link-alt mr-1"></i>Preview
+                </a>
                 <button onclick="viewModules(${course.id}, '${course.name.replace(/'/g, "\\'")}')" 
                         class="text-blue-600 hover:text-blue-800 font-medium">
                     <i class="fas fa-eye mr-1"></i>View Modules
