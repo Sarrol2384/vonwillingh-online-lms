@@ -4114,7 +4114,7 @@ app.post('/api/admin/payments/verify', async (c) => {
       }
       
       // Send welcome email with credentials
-      const loginUrl = `https://3001-i64xhl5zgmighole8jufo-2e1b9533.sandbox.novita.ai/student-login`
+      const loginUrl = `https://vonwillingh-online-lms.pages.dev/student-login`
       try {
         await sendEmail(c.env, {
           to: application.students.email,
@@ -5212,7 +5212,7 @@ app.post('/api/student/certificate/generate', async (c) => {
     
     // Send course completion email with certificate link
     try {
-      const dashboardUrl = 'https://3001-i64xhl5zgmighole8jufo-2e1b9533.sandbox.novita.ai/student/dashboard'
+      const dashboardUrl = 'https://vonwillingh-online-lms.pages.dev/student/dashboard'
       
       await sendEmail(c.env, {
         to: enrollment.students.email,
