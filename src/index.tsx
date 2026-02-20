@@ -1228,12 +1228,146 @@ app.get('/student/module/:moduleId', (c) => {
         <style>
           .brand-bg { background-color: ${BRAND_COLORS.primary}; }
           .brand-text { color: ${BRAND_COLORS.primary}; }
-          .module-content { line-height: 1.8; }
-          .module-content h2 { font-size: 1.5rem; font-weight: bold; margin-top: 1.5rem; margin-bottom: 1rem; }
-          .module-content h3 { font-size: 1.25rem; font-weight: bold; margin-top: 1.25rem; margin-bottom: 0.75rem; }
-          .module-content p { margin-bottom: 1rem; }
-          .module-content ul, .module-content ol { margin-left: 2rem; margin-bottom: 1rem; }
-          .module-content li { margin-bottom: 0.5rem; }
+          
+          /* Module Content Styling - Override inline styles from imported HTML */
+          .module-content { 
+            line-height: 1.8;
+            color: #1f2937 !important; /* Dark gray text */
+            background-color: transparent !important;
+          }
+          
+          /* Force readable text colors on all elements */
+          .module-content * {
+            color: #1f2937 !important; /* Dark gray for readability */
+            background-color: transparent !important;
+          }
+          
+          /* Headings */
+          .module-content h1 { 
+            font-size: 2rem; 
+            font-weight: bold; 
+            margin-top: 2rem; 
+            margin-bottom: 1.5rem;
+            color: ${BRAND_COLORS.primary} !important;
+          }
+          .module-content h2 { 
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            margin-top: 1.5rem; 
+            margin-bottom: 1rem;
+            color: ${BRAND_COLORS.primary} !important;
+          }
+          .module-content h3 { 
+            font-size: 1.25rem; 
+            font-weight: bold; 
+            margin-top: 1.25rem; 
+            margin-bottom: 0.75rem;
+            color: ${BRAND_COLORS.primary} !important;
+          }
+          .module-content h4 { 
+            font-size: 1.125rem; 
+            font-weight: bold; 
+            margin-top: 1rem; 
+            margin-bottom: 0.5rem;
+            color: #374151 !important;
+          }
+          
+          /* Paragraphs */
+          .module-content p { 
+            margin-bottom: 1rem;
+            line-height: 1.75;
+          }
+          
+          /* Lists */
+          .module-content ul, .module-content ol { 
+            margin-left: 2rem; 
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+          }
+          .module-content li { 
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+          }
+          
+          /* Strong/Bold text */
+          .module-content strong, .module-content b {
+            font-weight: 600;
+            color: #111827 !important;
+          }
+          
+          /* Colored boxes and cards - Fix dark backgrounds */
+          .module-content div[style*="background"],
+          .module-content div[style*="padding"] {
+            background-color: #f3f4f6 !important; /* Light gray background */
+            border: 1px solid #e5e7eb !important;
+            border-radius: 0.5rem !important;
+            padding: 1.5rem !important;
+            margin: 1rem 0 !important;
+          }
+          
+          /* Tables */
+          .module-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: white !important;
+          }
+          .module-content th {
+            background-color: ${BRAND_COLORS.primary} !important;
+            color: white !important;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+          }
+          .module-content td {
+            background-color: white !important;
+            color: #1f2937 !important;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+          }
+          .module-content tr:nth-child(even) td {
+            background-color: #f9fafb !important;
+          }
+          
+          /* Code blocks */
+          .module-content code, .module-content pre {
+            background-color: #f3f4f6 !important;
+            color: #1f2937 !important;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+          }
+          
+          /* Blockquotes */
+          .module-content blockquote {
+            border-left: 4px solid ${BRAND_COLORS.primary};
+            padding-left: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+            background-color: #f3f4f6 !important;
+            padding: 1rem !important;
+          }
+          
+          /* Links */
+          .module-content a {
+            color: #3b82f6 !important;
+            text-decoration: underline;
+          }
+          .module-content a:hover {
+            color: #2563eb !important;
+          }
+          
+          /* Remove any dark purple/black backgrounds */
+          .module-content [style*="rgb(93, 64, 134)"],
+          .module-content [style*="rgb(132, 94, 194)"],
+          .module-content [style*="#5d4086"],
+          .module-content [style*="#845ec2"],
+          .module-content [style*="background: rgb"],
+          .module-content [style*="background:rgb"] {
+            background-color: #f3f4f6 !important;
+            color: #1f2937 !important;
+          }
+          
           /* Hide repeated quiz text patterns */
           .module-content p:has(> strong:contains("Question")),
           .module-content p:contains("**Question"),
