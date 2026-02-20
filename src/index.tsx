@@ -120,7 +120,7 @@ app.get('/', (c) => {
                 <div class="flex justify-between items-center py-3">
                     <!-- Logo and Title -->
                     <div class="flex items-center space-x-3">
-                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-24 sm:h-28 md:h-32 object-contain">
+                        <img src="/static/vonwillingh-logo-v2.png" alt="VonWillingh Online Logo" class="h-24 sm:h-28 md:h-32 object-contain">
                         <div class="hidden sm:block">
                             <h1 class="text-sm sm:text-base md:text-xl font-bold leading-tight">VonWillingh Online</h1>
                             <p class="text-xs sm:text-sm text-blue-100">AI-Powered Business Training</p>
@@ -350,7 +350,7 @@ app.get('/courses', async (c) => {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center space-x-4">
-                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-16 w-auto">
+                        <img src="/static/vonwillingh-logo-v2.png" alt="VonWillingh Online Logo" class="h-16 w-auto">
                         <h1 class="text-xl font-bold">VonWillingh Online</h1>
                     </div>
                     <div class="flex space-x-4">
@@ -454,7 +454,7 @@ app.get('/apply', async (c) => {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center space-x-4">
-                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-16 w-auto">
+                        <img src="/static/vonwillingh-logo-v2.png" alt="VonWillingh Online Logo" class="h-16 w-auto">
                         <h1 class="text-xl font-bold">VonWillingh Online</h1>
                     </div>
                     <div class="flex space-x-4">
@@ -858,7 +858,7 @@ app.get('/student-login', (c) => {
         <div class="min-h-screen flex items-center justify-center px-4">
             <div class="max-w-md w-full">
                 <div class="text-center mb-8">
-                    <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-48 w-48 mx-auto mb-4">
+                    <img src="/static/vonwillingh-logo-v2.png" alt="VonWillingh Online Logo" class="h-48 w-48 mx-auto mb-4">
                     <h2 class="text-3xl font-bold">Student Portal</h2>
                     <p class="text-gray-600">Sign in to access your courses</p>
                 </div>
@@ -948,7 +948,7 @@ app.get('/student/dashboard', (c) => {
             <div class="container mx-auto px-4">
                 <div class="flex items-center justify-between py-4">
                     <div class="flex items-center space-x-4">
-                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
+                        <img src="/static/vonwillingh-logo-v2.png" alt="VonWillingh Online Logo" class="h-12 w-12">
                         <div>
                             <h1 class="text-xl font-bold">VonWillingh Online</h1>
                             <p class="text-sm opacity-90">Student Portal</p>
@@ -1033,7 +1033,7 @@ app.get('/student/dashboard', (c) => {
         </div>
 
         <!-- Hidden images for certificate generation -->
-        <img id="vonwillinghLogoImage" src="/static/vonwillingh-logo.png" style="display: none;" crossorigin="anonymous">
+        <img id="vonwillinghLogoImage" src="/static/vonwillingh-logo-v2.png" style="display: none;" crossorigin="anonymous">
         <img id="signature1Image" src="/static/signature-mjgumede.png" style="display: none;" crossorigin="anonymous">
         <img id="signature2Image" src="/static/signature-svonwillingh.png" style="display: none;" crossorigin="anonymous">
 
@@ -1065,7 +1065,7 @@ app.get('/student/change-password', (c) => {
         <div class="min-h-screen flex items-center justify-center px-4">
             <div class="max-w-md w-full">
                 <div class="text-center mb-8">
-                    <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-48 w-48 mx-auto mb-4">
+                    <img src="/static/vonwillingh-logo-v2.png" alt="VonWillingh Online Logo" class="h-48 w-48 mx-auto mb-4">
                     <h2 class="text-3xl font-bold">Change Password</h2>
                     <p class="text-gray-600">Please create a new permanent password</p>
                 </div>
@@ -1159,7 +1159,7 @@ app.get('/student/course/:courseId', (c) => {
             <div class="container mx-auto px-4">
                 <div class="flex items-center justify-between py-4">
                     <div class="flex items-center space-x-4">
-                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
+                        <img src="/static/vonwillingh-logo-v2.png" alt="VonWillingh Online Logo" class="h-12 w-12">
                         <div>
                             <h1 class="text-xl font-bold">VonWillingh Online</h1>
                             <p class="text-sm opacity-90">Course Content</p>
@@ -1257,7 +1257,7 @@ app.get('/student/module/:moduleId', (c) => {
                 <div class="container mx-auto px-4">
                     <div class="flex items-center justify-between py-4">
                         <div class="flex items-center space-x-4">
-                            <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
+                            <img src="/static/vonwillingh-logo-v2.png" alt="VonWillingh Online Logo" class="h-12 w-12">
                             <div>
                                 <p class="text-sm opacity-90" id="courseName">Course</p>
                                 <h1 class="text-lg font-bold" id="moduleTitle">Module</h1>
@@ -4373,7 +4373,7 @@ app.get('/admin/courses/:courseId/preview', async (c) => {
             <div class="container mx-auto px-4">
                 <div class="flex items-center justify-between py-4">
                     <div class="flex items-center space-x-4">
-                        <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
+                        <img src="/static/vonwillingh-logo-v2.png" alt="VonWillingh Online Logo" class="h-12 w-12">
                         <h1 class="text-xl font-bold">VonWillingh Online</h1>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -4560,7 +4560,7 @@ app.get('/admin/courses/:courseId/modules/:moduleId/preview', async (c) => {
                 <div class="container mx-auto px-4">
                     <div class="flex items-center justify-between py-4">
                         <div class="flex items-center space-x-4">
-                            <img src="/static/vonwillingh-logo.png" alt="VonWillingh Online Logo" class="h-12 w-12">
+                            <img src="/static/vonwillingh-logo-v2.png" alt="VonWillingh Online Logo" class="h-12 w-12">
                             <div>
                                 <p class="text-sm opacity-90" id="courseName">Course</p>
                                 <h1 class="text-lg font-bold" id="moduleTitle">Module</h1>
