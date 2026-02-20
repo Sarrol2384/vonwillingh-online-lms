@@ -1,5 +1,10 @@
 // Course Detail Page Handler
 
+// Make viewModule function globally accessible
+window.viewModule = function(moduleId) {
+  window.location.href = `/student/module/${moduleId}`;
+};
+
 document.addEventListener('DOMContentLoaded', async function() {
   // Check if logged in
   const session = getSession();
@@ -121,8 +126,4 @@ async function loadCourseDetail(courseId, studentId) {
       </div>
     `;
   }
-}
-
-function viewModule(moduleId) {
-  window.location.href = `/student/module/${moduleId}`;
 }
