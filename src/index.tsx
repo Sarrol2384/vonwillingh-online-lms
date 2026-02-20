@@ -1467,34 +1467,67 @@ app.get('/student/module/:moduleId', (c) => {
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
         <script src="/static/quiz-component-v3.js?v=12"></script>
+        <script src="/static/module-progression.js?v=1"></script>
         <script src="/static/module-viewer.js"></script>
         <script src="/static/professional-module-renderer.js"></script>
         <script>
-          // Initialize quiz when module loads
-          document.addEventListener('DOMContentLoaded', function() {
-            // Show quiz section after content loads
-            setTimeout(() => {
+          // Initialize progression and quiz when module loads
+          document.addEventListener('DOMContentLoaded', async function() {
+            const moduleId = window.location.pathname.split('/').pop();
+            
+            // Get student session (check both sessionStorage and localStorage)
+            const studentSession = JSON.parse(
+              sessionStorage.getItem('studentSession') || 
+              localStorage.getItem('studentSession') || 
+              '{}'
+            );
+            
+            console.log('[Module Init] Student session:', studentSession);
+            
+            if (!studentSession.studentId) {
+              alert('Please log in to view this module');
+              window.location.href = '/student-login';
+              return;
+            }
+            
+            // Initialize progression manager
+            try {
+              window.progressionManager = new ModuleProgressionManager(
+                moduleId,
+                studentSession.studentId,
+                studentSession.enrollmentId || null
+              );
+              
+              await window.progressionManager.init();
+              console.log('[Module Init] Progression manager initialized');
+              
+              // Show quiz section after initialization
+              setTimeout(() => {
+                const quizSection = document.getElementById('quizSection');
+                if (quizSection) {
+                  quizSection.classList.remove('hidden');
+                }
+              }, 500);
+              
+            } catch (error) {
+              console.error('[Module Init] Progression manager error:', error);
+              // Still show quiz section even if progression fails
               const quizSection = document.getElementById('quizSection');
               if (quizSection) quizSection.classList.remove('hidden');
-            }, 1000);
+            }
 
             // Start quiz button
             document.getElementById('startQuizBtn')?.addEventListener('click', async function() {
-              const urlParams = new URLSearchParams(window.location.search);
               const moduleId = window.location.pathname.split('/').pop();
-              
-              // Get student session (check both sessionStorage and localStorage)
               const studentSession = JSON.parse(
                 sessionStorage.getItem('studentSession') || 
                 localStorage.getItem('studentSession') || 
                 '{}'
               );
               
-              console.log('[Quiz Init] Student session:', studentSession);
-              
-              if (!studentSession.studentId) {
-                alert('Please log in to take the quiz');
-                window.location.href = '/student-login';
+              // Check if quiz is unlocked via progression manager
+              if (window.progressionManager && !window.progressionManager.quizUnlocked) {
+                alert('Please complete the module content first before taking the quiz.');
                 return;
               }
               
@@ -1503,7 +1536,7 @@ app.get('/student/module/:moduleId', (c) => {
               
               if (!enrollmentId) {
                 try {
-                  const progressResponse = await axios.get(\`/api/student/module/\${moduleId}?studentId=\${studentSession.studentId}\`);
+                  const progressResponse = await axios.get('/api/student/module/' + moduleId + '?studentId=' + studentSession.studentId);
                   if (progressResponse.data.success && progressResponse.data.progress) {
                     enrollmentId = progressResponse.data.progress.enrollment_id;
                     console.log('[Quiz Init] Got enrollmentId from module progress:', enrollmentId);
@@ -5735,6 +5768,284 @@ app.get('/api/diagnostic/quiz-check', async (c) => {
       error: error.message,
       stack: error.stack
     }, 500)
+  }
+})
+
+// =====================================================
+// MODULE PROGRESSION & QUIZ INTEGRATION APIs
+// =====================================================
+
+// Get progression rules for a module
+app.get('/api/student/module/:moduleId/progression-rules', async (c) => {
+  try {
+    const moduleId = c.req.param('moduleId')
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    console.log('[PROGRESSION] Getting rules for module:', moduleId)
+    
+    const { data: rules, error } = await supabase
+      .from('module_progression_rules')
+      .select('*')
+      .eq('module_id', moduleId)
+      .single()
+    
+    if (error && error.code !== 'PGRST116') { // PGRST116 = no rows found
+      console.error('[PROGRESSION] Error loading rules:', error)
+      return c.json({ success: false, message: error.message }, 500)
+    }
+    
+    // Return default rules if none found
+    if (!rules) {
+      console.log('[PROGRESSION] No rules found, using defaults')
+      return c.json({
+        success: true,
+        rules: {
+          requires_content_completion: true,
+          minimum_content_time_seconds: 1800,
+          requires_scroll_to_bottom: true,
+          requires_quiz_pass: true,
+          minimum_quiz_score: 70,
+          max_quiz_attempts: 3,
+          is_required_for_next: true,
+          manual_override_allowed: true
+        }
+      })
+    }
+    
+    console.log('[PROGRESSION] Rules loaded:', rules)
+    return c.json({ success: true, rules })
+    
+  } catch (error: any) {
+    console.error('[PROGRESSION] Unexpected error:', error)
+    return c.json({ success: false, message: error.message }, 500)
+  }
+})
+
+// Get content completion status for a student
+app.get('/api/student/module/:moduleId/content-completion', async (c) => {
+  try {
+    const moduleId = c.req.param('moduleId')
+    const studentId = c.req.query('studentId')
+    
+    if (!studentId) {
+      return c.json({ success: false, message: 'Student ID required' }, 400)
+    }
+    
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    console.log('[PROGRESSION] Getting completion for:', { moduleId, studentId })
+    
+    const { data: completion, error } = await supabase
+      .from('module_content_completion')
+      .select('*')
+      .eq('module_id', moduleId)
+      .eq('student_id', studentId)
+      .single()
+    
+    if (error && error.code !== 'PGRST116') {
+      console.error('[PROGRESSION] Error loading completion:', error)
+      return c.json({ success: false, message: error.message }, 500)
+    }
+    
+    console.log('[PROGRESSION] Completion loaded:', completion)
+    return c.json({ success: true, completion: completion || null })
+    
+  } catch (error: any) {
+    console.error('[PROGRESSION] Unexpected error:', error)
+    return c.json({ success: false, message: error.message }, 500)
+  }
+})
+
+// Save/update content completion
+app.post('/api/student/module/:moduleId/content-completion', async (c) => {
+  try {
+    const moduleId = c.req.param('moduleId')
+    const body = await c.req.json()
+    const { 
+      studentId, 
+      enrollmentId,
+      timeSpentSeconds, 
+      scrolledToBottom, 
+      contentFullyViewed,
+      lastScrollPosition,
+      totalScrollHeight,
+      action
+    } = body
+    
+    if (!studentId) {
+      return c.json({ success: false, message: 'Student ID required' }, 400)
+    }
+    
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    console.log('[PROGRESSION] Saving completion:', { moduleId, studentId, action })
+    
+    // Check if record exists
+    const { data: existing } = await supabase
+      .from('module_content_completion')
+      .select('id, started_at')
+      .eq('module_id', moduleId)
+      .eq('student_id', studentId)
+      .single()
+    
+    if (existing) {
+      // Update existing record
+      const { data: updated, error } = await supabase
+        .from('module_content_completion')
+        .update({
+          time_spent_seconds: timeSpentSeconds,
+          scrolled_to_bottom: scrolledToBottom,
+          content_fully_viewed: contentFullyViewed,
+          last_scroll_position: lastScrollPosition,
+          total_scroll_height: totalScrollHeight,
+          completed_at: contentFullyViewed ? new Date().toISOString() : existing.started_at,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', existing.id)
+        .select()
+        .single()
+      
+      if (error) {
+        console.error('[PROGRESSION] Error updating:', error)
+        return c.json({ success: false, message: error.message }, 500)
+      }
+      
+      console.log('[PROGRESSION] Updated completion')
+      return c.json({ success: true, completion: updated })
+      
+    } else {
+      // Create new record
+      const { data: created, error } = await supabase
+        .from('module_content_completion')
+        .insert({
+          module_id: moduleId,
+          student_id: studentId,
+          enrollment_id: enrollmentId,
+          started_at: new Date().toISOString(),
+          time_spent_seconds: timeSpentSeconds,
+          scrolled_to_bottom: scrolledToBottom,
+          content_fully_viewed: contentFullyViewed,
+          last_scroll_position: lastScrollPosition,
+          total_scroll_height: totalScrollHeight,
+          completed_at: contentFullyViewed ? new Date().toISOString() : null
+        })
+        .select()
+        .single()
+      
+      if (error) {
+        console.error('[PROGRESSION] Error creating:', error)
+        return c.json({ success: false, message: error.message }, 500)
+      }
+      
+      console.log('[PROGRESSION] Created completion')
+      return c.json({ success: true, completion: created })
+    }
+    
+  } catch (error: any) {
+    console.error('[PROGRESSION] Unexpected error:', error)
+    return c.json({ success: false, message: error.message }, 500)
+  }
+})
+
+// Check if student can access a module (based on previous module completion)
+app.get('/api/student/module/:moduleId/can-access', async (c) => {
+  try {
+    const moduleId = c.req.param('moduleId')
+    const studentId = c.req.query('studentId')
+    
+    if (!studentId) {
+      return c.json({ success: false, message: 'Student ID required' }, 400)
+    }
+    
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    console.log('[PROGRESSION] Checking access:', { moduleId, studentId })
+    
+    // Get current module info
+    const { data: currentModule } = await supabase
+      .from('modules')
+      .select('id, order_number, course_id')
+      .eq('id', moduleId)
+      .single()
+    
+    if (!currentModule) {
+      return c.json({ success: false, message: 'Module not found' }, 404)
+    }
+    
+    // If it's the first module, always allow access
+    if (currentModule.order_number === 1) {
+      return c.json({ 
+        success: true, 
+        canAccess: true,
+        reason: 'First module - no prerequisites'
+      })
+    }
+    
+    // Get previous module
+    const { data: previousModule } = await supabase
+      .from('modules')
+      .select('id')
+      .eq('course_id', currentModule.course_id)
+      .eq('order_number', currentModule.order_number - 1)
+      .single()
+    
+    if (!previousModule) {
+      // No previous module found, allow access
+      return c.json({ 
+        success: true, 
+        canAccess: true,
+        reason: 'No previous module found'
+      })
+    }
+    
+    // Check if previous module has progression rules
+    const { data: rules } = await supabase
+      .from('module_progression_rules')
+      .select('requires_quiz_pass, minimum_quiz_score, is_required_for_next')
+      .eq('module_id', previousModule.id)
+      .single()
+    
+    if (!rules || !rules.is_required_for_next) {
+      // No rules or not required for next module
+      return c.json({ 
+        success: true, 
+        canAccess: true,
+        reason: 'Previous module not required for progression'
+      })
+    }
+    
+    // Check if quiz is required and passed
+    if (rules.requires_quiz_pass) {
+      const { data: attempts } = await supabase
+        .from('quiz_attempts')
+        .select('passed, percentage')
+        .eq('module_id', previousModule.id)
+        .eq('student_id', studentId)
+        .order('created_at', { ascending: false })
+      
+      const hasPassed = attempts && attempts.some(a => a.passed)
+      
+      if (!hasPassed) {
+        return c.json({ 
+          success: true, 
+          canAccess: false,
+          reason: `You must pass the previous module quiz (${rules.minimum_quiz_score}% required)`,
+          requiresQuizPass: true,
+          previousModuleId: previousModule.id
+        })
+      }
+    }
+    
+    // All checks passed
+    return c.json({ 
+      success: true, 
+      canAccess: true,
+      reason: 'All prerequisites met'
+    })
+    
+  } catch (error: any) {
+    console.error('[PROGRESSION] Unexpected error:', error)
+    return c.json({ success: false, message: error.message }, 500)
   }
 })
 
