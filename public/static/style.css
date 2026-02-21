@@ -1,1 +1,19 @@
 h1 { font-family: Arial, Helvetica, sans-serif; }
+
+/* ============================================================
+   HIDE PLAIN-TEXT QUIZ IN MODULE CONTENT
+   ============================================================
+   The module content includes an embedded plain-text quiz.
+   We hide all <p> tags with "margin: 10px 0" styling which
+   are used exclusively for the plain-text quiz questions.
+   This preserves the educational content while hiding the
+   duplicate non-interactive quiz.
+   ============================================================ */
+
+#moduleContentArea p[style*="margin: 10px 0"] {
+    display: none !important;
+}
+
+#moduleContentArea p[style*="margin: 10px 0; font-size: 16px"] {
+    display: none !important;
+}
