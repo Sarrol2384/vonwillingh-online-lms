@@ -3075,37 +3075,8 @@ app.post('/api/courses/external-import', async (c) => {
     
     console.log(`✅ ${insertedModules.length} modules inserted`)
     
-    // 14. APPEND QUIZZES TO MODULE CONTENT (if any)
-    for (let i = 0; i < modules.length; i++) {
-      const module = modules[i]
-      if (module.quiz && module.quiz.questions && module.quiz.questions.length > 0) {
-        const moduleId = insertedModules[i].id
-        const quiz = module.quiz
-        
-        // Build quiz Markdown section
-        let quizSection = `\n\n---\n\n## 📝 Module Quiz\n\n`
-        quizSection += `**Passing Score:** ${quiz.passing_score || 70}%\n\n`
-        quizSection += `**Maximum Attempts:** ${quiz.max_attempts || 3}\n\n`
-        quizSection += `### Questions:\n\n`
-        
-        quiz.questions.forEach((q: any, qIndex: number) => {
-          quizSection += `**${qIndex + 1}. ${q.question}**\n\n`
-          q.options.forEach((opt: string, optIndex: number) => {
-            const letter = String.fromCharCode(65 + optIndex)
-            const isCorrect = opt === q.correct_answer ? ' ✅' : ''
-            quizSection += `${letter}) ${opt}${isCorrect}\n\n`
-          })
-        })
-        
-        // Update module content with quiz
-        await supabase
-          .from('modules')
-          .update({
-            content: insertedModules[i].content + quizSection
-          })
-          .eq('id', moduleId)
-      }
-    }
+    // 14. QUIZ QUESTIONS ARE NOW HANDLED BY QUIZ COMPONENT V3
+    // (Removed duplicate quiz content generation - quiz is rendered dynamically)
     
     // 15. SUCCESS RESPONSE
     return c.json({
