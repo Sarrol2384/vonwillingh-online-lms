@@ -245,11 +245,24 @@ class ModuleProgressionManager {
       // Content not complete - lock quiz
       if (startQuizBtn) {
         startQuizBtn.disabled = true;
-        startQuizBtn.classList.add('opacity-50', 'cursor-not-allowed');
-        startQuizBtn.classList.remove('hover:bg-blue-700');
+        startQuizBtn.classList.add('opacity-50', 'cursor-not-allowed', 'bg-gray-400');
+        startQuizBtn.classList.remove('hover:bg-blue-700', 'bg-blue-600');
+        
+        const timeRemaining = Math.max(0, Math.floor((this.progressionRules.minimum_content_time_seconds - this.contentTimeSpent) / 60));
+        const needsScroll = this.progressionRules.requires_scroll_to_bottom && !this.hasScrolledToBottom;
+        
+        let lockMessage = '🔒 Quiz Locked';
+        if (timeRemaining > 0 && needsScroll) {
+          lockMessage += ` - Read ${timeRemaining} more min & scroll to bottom`;
+        } else if (timeRemaining > 0) {
+          lockMessage += ` - Read ${timeRemaining} more minutes`;
+        } else if (needsScroll) {
+          lockMessage += ' - Scroll to bottom to unlock';
+        }
+        
         startQuizBtn.innerHTML = `
           <i class="fas fa-lock mr-2"></i>
-          Complete Content First
+          ${lockMessage}
         `;
       }
       
@@ -276,34 +289,93 @@ class ModuleProgressionManager {
     const timeProgress = Math.min(100, (this.contentTimeSpent / rules.minimum_content_time_seconds) * 100);
     const scrollProgress = this.hasScrolledToBottom ? 100 : 0;
     
+    const timeMinutesSpent = Math.floor(this.contentTimeSpent / 60);
+    const timeMinutesRequired = Math.floor(rules.minimum_content_time_seconds / 60);
+    const timeRemaining = Math.max(0, timeMinutesRequired - timeMinutesSpent);
+    
+    const allRequirementsMet = this.contentTimeSpent >= rules.minimum_content_time_seconds && 
+                               (!rules.requires_scroll_to_bottom || this.hasScrolledToBottom);
+    
     const progressHTML = `
-      <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-4">
-        <p class="font-bold text-yellow-800 mb-2">
-          <i class="fas fa-info-circle mr-2"></i>
-          Complete the module content to unlock the quiz
-        </p>
-        <div class="space-y-3">
-          <div>
-            <div class="flex justify-between text-sm text-yellow-700 mb-1">
-              <span>Time spent in module</span>
-              <span>${Math.floor(this.contentTimeSpent / 60)}/${Math.floor(rules.minimum_content_time_seconds / 60)} minutes</span>
-            </div>
-            <div class="w-full bg-yellow-200 rounded-full h-2">
-              <div class="bg-yellow-600 h-2 rounded-full transition-all" style="width: ${timeProgress}%"></div>
-            </div>
+      <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-4 rounded-r-lg">
+        <div class="flex items-start mb-4">
+          <div class="flex-shrink-0">
+            <i class="fas fa-clock text-blue-600 text-2xl mr-3"></i>
           </div>
+          <div class="flex-1">
+            <p class="font-bold text-blue-900 text-lg mb-2">
+              📚 Please Read the Module Content Above First
+            </p>
+            <p class="text-blue-800 text-sm mb-4">
+              To ensure you fully understand the material, you must spend at least <strong>${timeMinutesRequired} minutes</strong> reading this module and scroll through all the content before taking the quiz.
+            </p>
+            ${!allRequirementsMet ? `
+              <p class="text-blue-700 text-sm font-semibold">
+                ⏱️ The quiz button will automatically unlock when you complete both requirements below.
+              </p>
+            ` : `
+              <p class="text-green-700 text-sm font-semibold">
+                ✅ Requirements complete! The quiz is now unlocked.
+              </p>
+            `}
+          </div>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="bg-white rounded-lg p-4 shadow-sm">
+            <div class="flex justify-between items-center text-sm text-gray-700 mb-2">
+              <span class="font-semibold">
+                <i class="fas fa-hourglass-half mr-2 text-blue-600"></i>
+                Time Spent Reading
+              </span>
+              <span class="font-bold ${this.contentTimeSpent >= rules.minimum_content_time_seconds ? 'text-green-600' : 'text-blue-600'}">
+                ${timeMinutesSpent} / ${timeMinutesRequired} minutes
+                ${timeRemaining > 0 ? `(${timeRemaining} min remaining)` : '✓'}
+              </span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+              <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-500 flex items-center justify-end pr-2" style="width: ${timeProgress}%">
+                ${timeProgress > 10 ? '<span class="text-white text-xs font-semibold">' + Math.round(timeProgress) + '%</span>' : ''}
+              </div>
+            </div>
+            ${timeRemaining > 0 ? `
+              <p class="text-xs text-gray-600 mt-2 italic">
+                💡 Tip: This timer tracks your active time on this page. Keep reading to unlock the quiz!
+              </p>
+            ` : ''}
+          </div>
+          
           ${rules.requires_scroll_to_bottom ? `
-            <div>
-              <div class="flex justify-between text-sm text-yellow-700 mb-1">
-                <span>Scroll to bottom</span>
-                <span>${this.hasScrolledToBottom ? 'Complete ✓' : 'Not yet'}</span>
+            <div class="bg-white rounded-lg p-4 shadow-sm">
+              <div class="flex justify-between items-center text-sm text-gray-700 mb-2">
+                <span class="font-semibold">
+                  <i class="fas fa-arrows-alt-v mr-2 text-blue-600"></i>
+                  Scroll Through All Content
+                </span>
+                <span class="font-bold ${this.hasScrolledToBottom ? 'text-green-600' : 'text-orange-600'}">
+                  ${this.hasScrolledToBottom ? 'Complete ✓' : 'Scroll to the very bottom'}
+                </span>
               </div>
-              <div class="w-full bg-yellow-200 rounded-full h-2">
-                <div class="bg-yellow-600 h-2 rounded-full transition-all" style="width: ${scrollProgress}%"></div>
+              <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="bg-gradient-to-r from-orange-500 to-orange-600 h-3 rounded-full transition-all duration-500" style="width: ${scrollProgress}%"></div>
               </div>
+              ${!this.hasScrolledToBottom ? `
+                <p class="text-xs text-gray-600 mt-2 italic">
+                  💡 Tip: Scroll all the way down past all the content to complete this requirement.
+                </p>
+              ` : ''}
             </div>
           ` : ''}
         </div>
+        
+        ${allRequirementsMet ? `
+          <div class="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
+            <p class="text-green-800 text-sm font-semibold text-center">
+              <i class="fas fa-check-circle mr-2"></i>
+              All requirements met! Click "Start Quiz" below to begin.
+            </p>
+          </div>
+        ` : ''}
       </div>
     `;
     
