@@ -3122,6 +3122,7 @@ app.post('/api/courses/external-import', async (c) => {
           option_b: q.options ? q.options[1] : null,
           option_c: q.options && q.options[2] ? q.options[2] : null,
           option_d: q.options && q.options[3] ? q.options[3] : null,
+          option_e: q.options && q.options[4] ? q.options[4] : null,
           correct_answer: q.correct_answer || (q.correct_answers ? q.correct_answers.join(',') : null),
           points: q.points || 5,
           order_number: q.order_number
@@ -3203,6 +3204,7 @@ app.post('/api/admin/debug/insert-quiz', async (c) => {
       option_b: q.options ? q.options[1] : null,
       option_c: q.options && q.options[2] ? q.options[2] : null,
       option_d: q.options && q.options[3] ? q.options[3] : null,
+      option_e: q.options && q.options[4] ? q.options[4] : null,
       correct_answer: q.correct_answer || (q.correct_answers ? q.correct_answers.join(',') : null),
       points: q.points || 5,
       order_number: q.order_number
