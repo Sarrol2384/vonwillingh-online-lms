@@ -3075,8 +3075,61 @@ app.post('/api/courses/external-import', async (c) => {
     
     console.log(`✅ ${insertedModules.length} modules inserted`)
     
-    // 14. QUIZ QUESTIONS ARE NOW HANDLED BY QUIZ COMPONENT V3
-    // (Removed duplicate quiz content generation - quiz is rendered dynamically)
+    // 14. PROCESS QUIZ QUESTIONS
+    let totalQuestionsInserted = 0
+    
+    for (let i = 0; i < modules.length; i++) {
+      const module = modules[i]
+      const insertedModule = insertedModules[i]
+      
+      if (module.has_quiz && module.quiz && module.quiz.questions && module.quiz.questions.length > 0) {
+        console.log(`📝 Processing quiz for module: ${insertedModule.title}`)
+        console.log(`   Found ${module.quiz.questions.length} questions`)
+        
+        // Update module with quiz metadata
+        const { error: updateError } = await supabase
+          .from('modules')
+          .update({
+            has_quiz: true,
+            quiz_title: module.quiz.title || 'Module Quiz',
+            quiz_description: module.quiz.description || 'Test your knowledge'
+          })
+          .eq('id', insertedModule.id)
+        
+        if (updateError) {
+          console.error('⚠️ Failed to update module quiz metadata:', updateError)
+        }
+        
+        // Insert quiz questions
+        const quizInserts = module.quiz.questions.map((q: any) => ({
+          module_id: insertedModule.id,
+          question_text: q.question_text,
+          question_type: q.question_type,
+          option_a: q.options ? q.options[0] : null,
+          option_b: q.options ? q.options[1] : null,
+          option_c: q.options && q.options[2] ? q.options[2] : null,
+          option_d: q.options && q.options[3] ? q.options[3] : null,
+          option_e: q.options && q.options[4] ? q.options[4] : null,
+          correct_answer: q.correct_answer || (q.correct_answers ? q.correct_answers.join(',') : null),
+          points: q.points || 5,
+          order_number: q.order_number
+        }))
+        
+        const { data: insertedQuestions, error: questionsError } = await supabase
+          .from('quiz_questions')
+          .insert(quizInserts)
+          .select()
+        
+        if (questionsError) {
+          console.error('❌ Quiz questions insert error:', questionsError)
+        } else {
+          console.log(`✅ Inserted ${insertedQuestions.length} quiz questions for module: ${insertedModule.title}`)
+          totalQuestionsInserted += insertedQuestions.length
+        }
+      }
+    }
+    
+    console.log(`✅ Total quiz questions inserted: ${totalQuestionsInserted}`)
     
     // 15. SUCCESS RESPONSE
     return c.json({
