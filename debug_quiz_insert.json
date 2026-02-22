@@ -1,0 +1,389 @@
+{
+  "module_id": "57334199-8848-4eda-abb7-67dda62ce9f3",
+  "questions": [
+    {
+      "order_number": 1,
+      "question_text": "What is the primary purpose of AI in small business contexts?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "To replace all human employees",
+        "To automate repetitive tasks and improve decision-making",
+        "To create humanoid robots",
+        "To make businesses completely autonomous"
+      ],
+      "correct_answer": "B"
+    },
+    {
+      "order_number": 2,
+      "question_text": "According to the 2023 AI Index Report, what percentage of established South African businesses are already using AI tools?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "15%",
+        "25%",
+        "35%",
+        "45%"
+      ],
+      "correct_answer": "C"
+    },
+    {
+      "order_number": 3,
+      "question_text": "Which type of AI is most relevant for current small business applications?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "General AI (Strong AI)",
+        "Narrow AI (Weak AI)",
+        "Superintelligent AI",
+        "Quantum AI"
+      ],
+      "correct_answer": "B"
+    },
+    {
+      "order_number": 4,
+      "question_text": "Natural Language Processing (NLP) is primarily used for:",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "Image recognition and computer vision",
+        "Understanding and generating human language",
+        "Predicting stock prices",
+        "Managing inventory levels"
+      ],
+      "correct_answer": "B"
+    },
+    {
+      "order_number": 5,
+      "question_text": "According to the module, what was the impact of implementing an AI chatbot for a Cape Town guesthouse?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "20% reduction in costs and 10% increase in bookings",
+        "40% reduction in response time and 25% increase in bookings",
+        "50% reduction in staff and 30% increase in bookings",
+        "60% reduction in response time and 15% increase in bookings"
+      ],
+      "correct_answer": "B"
+    },
+    {
+      "order_number": 6,
+      "question_text": "What is the estimated contribution of AI to South Africa's GDP by 2030?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "R500 billion",
+        "R1 trillion",
+        "R1.8 trillion",
+        "R2.5 trillion"
+      ],
+      "correct_answer": "C"
+    },
+    {
+      "order_number": 7,
+      "question_text": "According to the module, small businesses using AI typically report productivity increases of:",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "5-10%",
+        "10-20%",
+        "20-30%",
+        "40-50%"
+      ],
+      "correct_answer": "C"
+    },
+    {
+      "order_number": 8,
+      "question_text": "Which of the following is a myth about AI?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "AI can help automate repetitive tasks",
+        "AI is only for big corporations",
+        "AI tools can improve customer satisfaction",
+        "AI requires human oversight for critical decisions"
+      ],
+      "correct_answer": "B"
+    },
+    {
+      "order_number": 9,
+      "question_text": "In the AI adoption action plan, what should be the focus during the 'Assess' phase (Week 1-2)?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "Purchasing the most expensive AI tools available",
+        "Identifying repetitive, time-consuming tasks and pain points",
+        "Replacing all employees with AI systems",
+        "Implementing AI across all departments simultaneously"
+      ],
+      "correct_answer": "B"
+    },
+    {
+      "order_number": 10,
+      "question_text": "What is the recommended first step when adopting AI in your business?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "Implement AI tools across all departments at once",
+        "Start small with one process or department",
+        "Replace all manual work with automated systems",
+        "Hire a team of AI specialists"
+      ],
+      "correct_answer": "B"
+    },
+    {
+      "order_number": 11,
+      "question_text": "How long should the 'Pilot' phase of AI adoption typically last?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "1-2 weeks",
+        "2-3 weeks",
+        "4-8 weeks",
+        "6 months"
+      ],
+      "correct_answer": "C"
+    },
+    {
+      "order_number": 12,
+      "question_text": "Machine learning systems are characterized by their ability to:",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "Only perform tasks they are explicitly programmed to do",
+        "Learn from data without being explicitly programmed",
+        "Replace human decision-making entirely",
+        "Function without any human oversight"
+      ],
+      "correct_answer": "B"
+    },
+    {
+      "order_number": 13,
+      "question_text": "What percentage of customers prefer businesses that personalize experiences?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "50%",
+        "60%",
+        "70%",
+        "80%"
+      ],
+      "correct_answer": "D"
+    },
+    {
+      "order_number": 14,
+      "question_text": "Entry-level AI tools for small businesses typically cost:",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "R50-100 per month",
+        "R200-500 per month",
+        "R1000-2000 per month",
+        "R5000+ per month"
+      ],
+      "correct_answer": "B"
+    },
+    {
+      "order_number": 15,
+      "question_text": "What is the typical ROI timeline for AI implementation in small businesses?",
+      "question_type": "multiple_choice",
+      "points": 3,
+      "options": [
+        "1-2 weeks",
+        "1 month",
+        "3-6 months",
+        "2 years"
+      ],
+      "correct_answer": "C"
+    },
+    {
+      "order_number": 16,
+      "question_text": "AI is designed to completely replace human employees in small businesses.",
+      "question_type": "true_false",
+      "points": 3,
+      "correct_answer": "False"
+    },
+    {
+      "order_number": 17,
+      "question_text": "You need technical expertise to use most modern AI business tools.",
+      "question_type": "true_false",
+      "points": 3,
+      "correct_answer": "False"
+    },
+    {
+      "order_number": 18,
+      "question_text": "South Africa leads the African continent in AI adoption.",
+      "question_type": "true_false",
+      "points": 3,
+      "correct_answer": "True"
+    },
+    {
+      "order_number": 19,
+      "question_text": "AI systems are perfect and never make mistakes.",
+      "question_type": "true_false",
+      "points": 3,
+      "correct_answer": "False"
+    },
+    {
+      "order_number": 20,
+      "question_text": "AI-powered businesses typically respond to customers 10 times faster than businesses without AI.",
+      "question_type": "true_false",
+      "points": 3,
+      "correct_answer": "True"
+    },
+    {
+      "order_number": 21,
+      "question_text": "Customer satisfaction scores can improve by an average of 15-25% with AI implementation.",
+      "question_type": "true_false",
+      "points": 3,
+      "correct_answer": "True"
+    },
+    {
+      "order_number": 22,
+      "question_text": "The 'Scale' phase of AI adoption should begin immediately after purchasing AI tools.",
+      "question_type": "true_false",
+      "points": 3,
+      "correct_answer": "False"
+    },
+    {
+      "order_number": 23,
+      "question_text": "Operating costs can be reduced by 10-40% depending on the AI application implemented.",
+      "question_type": "true_false",
+      "points": 3,
+      "correct_answer": "True"
+    },
+    {
+      "order_number": 24,
+      "question_text": "Which AI applications are specifically mentioned for the retail and e-commerce sector? (Select all that apply)",
+      "question_type": "multiple_select",
+      "points": 4,
+      "options": [
+        "Personalized product recommendations",
+        "Chatbots for customer service",
+        "Inventory forecasting",
+        "Dynamic pricing optimization",
+        "Automated tax filing"
+      ],
+      "correct_answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "order_number": 25,
+      "question_text": "Which of the following are identified as key principles for AI adoption success? (Select all that apply)",
+      "question_type": "multiple_select",
+      "points": 4,
+      "options": [
+        "Start small with one process",
+        "Focus on problems first, then find solutions",
+        "Implement across all departments simultaneously",
+        "Measure results with clear KPIs",
+        "Train your team in basic AI literacy"
+      ],
+      "correct_answers": [
+        "A",
+        "B",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "order_number": 26,
+      "question_text": "Which processes should be included in the 'Assess' phase (Week 1-2)? (Select all that apply)",
+      "question_type": "multiple_select",
+      "points": 4,
+      "options": [
+        "Map your current business processes",
+        "Identify repetitive, time-consuming tasks",
+        "Purchase AI tools immediately",
+        "Survey your team about pain points",
+        "Review customer feedback for service gaps"
+      ],
+      "correct_answers": [
+        "A",
+        "B",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "order_number": 27,
+      "question_text": "Which AI applications are mentioned for professional services businesses? (Select all that apply)",
+      "question_type": "multiple_select",
+      "points": 4,
+      "options": [
+        "Automated appointment scheduling",
+        "Document processing and data extraction",
+        "Client communication automation",
+        "Proposal and report generation",
+        "Inventory management"
+      ],
+      "correct_answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "order_number": 28,
+      "question_text": "Which of the following are examples of Narrow AI (Weak AI) mentioned in the module? (Select all that apply)",
+      "question_type": "multiple_select",
+      "points": 4,
+      "options": [
+        "ChatGPT and language models",
+        "Image recognition tools",
+        "Recommendation engines",
+        "Voice assistants",
+        "General artificial intelligence"
+      ],
+      "correct_answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "order_number": 29,
+      "question_text": "According to the module, what can AI help businesses achieve? (Select all that apply)",
+      "question_type": "multiple_select",
+      "points": 4,
+      "options": [
+        "Automate repetitive tasks",
+        "Analyze data quickly",
+        "Personalize customer experiences",
+        "Predict trends",
+        "Eliminate the need for all human employees"
+      ],
+      "correct_answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "order_number": 30,
+      "question_text": "Which activities are recommended during the 'Research' phase (Week 2-3)? (Select all that apply)",
+      "question_type": "multiple_select",
+      "points": 4,
+      "options": [
+        "Explore AI tools relevant to your industry",
+        "Read case studies from similar businesses",
+        "Take advantage of free trials",
+        "Calculate potential ROI for each tool",
+        "Implement AI across all departments"
+      ],
+      "correct_answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    }
+  ]
+}

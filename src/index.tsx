@@ -3078,12 +3078,24 @@ app.post('/api/courses/external-import', async (c) => {
     // 14. PROCESS QUIZ QUESTIONS
     let totalQuestionsInserted = 0
     
+    console.log('🔍 QUIZ PROCESSING DEBUG:')
+    console.log(`   Total modules to process: ${modules.length}`)
+    console.log(`   Inserted modules count: ${insertedModules.length}`)
+    
     for (let i = 0; i < modules.length; i++) {
       const module = modules[i]
       const insertedModule = insertedModules[i]
       
+      console.log(`\n🔍 Checking module ${i + 1}:`)
+      console.log(`   - Title: ${insertedModule.title}`)
+      console.log(`   - Module ID: ${insertedModule.id}`)
+      console.log(`   - has_quiz: ${module.has_quiz}`)
+      console.log(`   - module.quiz exists: ${!!module.quiz}`)
+      console.log(`   - module.quiz.questions exists: ${!!(module.quiz && module.quiz.questions)}`)
+      console.log(`   - Questions length: ${module.quiz && module.quiz.questions ? module.quiz.questions.length : 0}`)
+      
       if (module.has_quiz && module.quiz && module.quiz.questions && module.quiz.questions.length > 0) {
-        console.log(`📝 Processing quiz for module: ${insertedModule.title}`)
+        console.log(`\n📝 ✅ Processing quiz for module: ${insertedModule.title}`)
         console.log(`   Found ${module.quiz.questions.length} questions`)
         
         // Update module with quiz metadata
@@ -3101,6 +3113,7 @@ app.post('/api/courses/external-import', async (c) => {
         }
         
         // Insert quiz questions
+        console.log(`\n💾 Preparing to insert ${module.quiz.questions.length} questions...`)
         const quizInserts = module.quiz.questions.map((q: any) => ({
           module_id: insertedModule.id,
           question_text: q.question_text,
@@ -3109,11 +3122,12 @@ app.post('/api/courses/external-import', async (c) => {
           option_b: q.options ? q.options[1] : null,
           option_c: q.options && q.options[2] ? q.options[2] : null,
           option_d: q.options && q.options[3] ? q.options[3] : null,
-          option_e: q.options && q.options[4] ? q.options[4] : null,
           correct_answer: q.correct_answer || (q.correct_answers ? q.correct_answers.join(',') : null),
           points: q.points || 5,
           order_number: q.order_number
         }))
+        
+        console.log(`   First question sample:`, JSON.stringify(quizInserts[0], null, 2))
         
         const { data: insertedQuestions, error: questionsError } = await supabase
           .from('quiz_questions')
@@ -3122,14 +3136,18 @@ app.post('/api/courses/external-import', async (c) => {
         
         if (questionsError) {
           console.error('❌ Quiz questions insert error:', questionsError)
+          console.error('   Error details:', JSON.stringify(questionsError, null, 2))
         } else {
           console.log(`✅ Inserted ${insertedQuestions.length} quiz questions for module: ${insertedModule.title}`)
           totalQuestionsInserted += insertedQuestions.length
         }
+      } else {
+        console.log(`   ⚠️ Skipping quiz processing (condition not met)`)
       }
     }
     
-    console.log(`✅ Total quiz questions inserted: ${totalQuestionsInserted}`)
+    console.log(`\n✅ Total quiz questions inserted: ${totalQuestionsInserted}`)
+    console.log(`======================================\n`)
     
     // 15. SUCCESS RESPONSE
     return c.json({
@@ -3154,6 +3172,66 @@ app.post('/api/courses/external-import', async (c) => {
       message: 'Import failed: ' + error.message,
       error: 'INTERNAL_ERROR'
     }, 500)
+  }
+})
+
+// ============================================================
+// DEBUG ENDPOINT: Manually insert quiz questions
+// ============================================================
+app.post('/api/admin/debug/insert-quiz', async (c) => {
+  try {
+    const apiKey = c.req.header('X-API-Key')
+    if (apiKey !== 'vonwillingh-lms-import-key-2026') {
+      return c.json({ success: false, message: 'Unauthorized' }, 401)
+    }
+    
+    const supabase = getSupabaseAdminClient(c.env)
+    const body = await c.req.json()
+    const { module_id, questions } = body
+    
+    if (!module_id || !questions || !Array.isArray(questions)) {
+      return c.json({ success: false, message: 'Missing module_id or questions array' }, 400)
+    }
+    
+    console.log(`🔍 DEBUG: Inserting ${questions.length} questions for module ${module_id}`)
+    
+    const quizInserts = questions.map((q: any) => ({
+      module_id: module_id,
+      question_text: q.question_text,
+      question_type: q.question_type,
+      option_a: q.options ? q.options[0] : null,
+      option_b: q.options ? q.options[1] : null,
+      option_c: q.options && q.options[2] ? q.options[2] : null,
+      option_d: q.options && q.options[3] ? q.options[3] : null,
+      correct_answer: q.correct_answer || (q.correct_answers ? q.correct_answers.join(',') : null),
+      points: q.points || 5,
+      order_number: q.order_number
+    }))
+    
+    console.log(`   First question sample:`, JSON.stringify(quizInserts[0], null, 2))
+    
+    const { data: insertedQuestions, error: questionsError } = await supabase
+      .from('quiz_questions')
+      .insert(quizInserts)
+      .select()
+    
+    if (questionsError) {
+      console.error('❌ Insert error:', questionsError)
+      return c.json({ 
+        success: false, 
+        message: 'Insert failed', 
+        error: questionsError 
+      }, 500)
+    }
+    
+    return c.json({ 
+      success: true, 
+      message: `Inserted ${insertedQuestions.length} questions`,
+      inserted_count: insertedQuestions.length
+    })
+    
+  } catch (error: any) {
+    return c.json({ success: false, message: error.message }, 500)
   }
 })
 
