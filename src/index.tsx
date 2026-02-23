@@ -3114,19 +3114,41 @@ app.post('/api/courses/external-import', async (c) => {
         
         // Insert quiz questions
         console.log(`\n💾 Preparing to insert ${module.quiz.questions.length} questions...`)
-        const quizInserts = module.quiz.questions.map((q: any) => ({
-          module_id: insertedModule.id,
-          question_text: q.question_text,
-          question_type: q.question_type,
-          option_a: q.options ? q.options[0] : null,
-          option_b: q.options ? q.options[1] : null,
-          option_c: q.options && q.options[2] ? q.options[2] : null,
-          option_d: q.options && q.options[3] ? q.options[3] : null,
-          option_e: q.options && q.options[4] ? q.options[4] : null,
-          correct_answer: q.correct_answer || (q.correct_answers ? q.correct_answers.join(',') : null),
-          points: q.points || 5,
-          order_number: q.order_number
-        }))
+        const quizInserts = module.quiz.questions.map((q: any) => {
+          // Handle different question types
+          let option_a = null
+          let option_b = null
+          let option_c = null
+          let option_d = null
+          let option_e = null
+          
+          if (q.question_type === 'true_false') {
+            // True/False questions: Always set to "True" and "False"
+            option_a = 'True'
+            option_b = 'False'
+          } else if (q.options && Array.isArray(q.options)) {
+            // Multiple-choice and Multiple-select: Use provided options
+            option_a = q.options[0] || null
+            option_b = q.options[1] || null
+            option_c = q.options[2] || null
+            option_d = q.options[3] || null
+            option_e = q.options[4] || null
+          }
+          
+          return {
+            module_id: insertedModule.id,
+            question_text: q.question_text,
+            question_type: q.question_type, // Preserve type for frontend rendering
+            option_a,
+            option_b,
+            option_c,
+            option_d,
+            option_e,
+            correct_answer: q.correct_answer || (q.correct_answers ? q.correct_answers.join(',') : null),
+            points: q.points || 5,
+            order_number: q.order_number
+          }
+        })
         
         console.log(`   First question sample:`, JSON.stringify(quizInserts[0], null, 2))
         

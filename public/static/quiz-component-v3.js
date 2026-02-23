@@ -221,29 +221,38 @@ class QuizComponent {
   }
 
   renderAnswerOptions(question) {
+    // Build options array based on what's available
     const options = [
       { label: 'A', value: question.option_a },
       { label: 'B', value: question.option_b },
       { label: 'C', value: question.option_c },
-      { label: 'D', value: question.option_d }
-    ];
+      { label: 'D', value: question.option_d },
+      { label: 'E', value: question.option_e }
+    ].filter(opt => opt.value !== null && opt.value !== undefined && opt.value !== '');
+    
+    // Determine input type based on question type
+    const isMultipleSelect = question.question_type === 'multiple_select';
+    const inputType = isMultipleSelect ? 'checkbox' : 'radio';
+    
+    // For true/false questions, show special formatting
+    const isTrueFalse = question.question_type === 'true_false';
     
     return options.map(option => `
       <label 
-        class="quiz-option flex items-start p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition hover:bg-gray-50 hover:border-blue-400"
+        class="quiz-option flex items-start p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition hover:bg-gray-50 hover:border-blue-400 ${isTrueFalse ? 'hover:border-green-400' : ''}"
         data-question-id="${question.id}"
         style="min-height: 44px;"
       >
         <input 
-          type="radio" 
+          type="${inputType}" 
           name="question_${question.id}" 
           value="${option.label}"
-          class="quiz-radio mt-1 flex-shrink-0"
+          class="quiz-${inputType} mt-1 flex-shrink-0"
           data-question-id="${question.id}"
-          style="width: 20px; height: 20px; cursor: pointer;"
+          style="width: 20px; height: 20px; cursor: pointer; ${inputType === 'checkbox' ? 'border-radius: 4px;' : ''}"
         >
         <div class="ml-4 flex-1">
-          <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gray-100 text-gray-700 font-bold text-sm mr-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-full ${isTrueFalse ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'} font-bold text-sm mr-3">
             ${option.label}
           </span>
           <span class="text-gray-800">${option.value}</span>
@@ -348,9 +357,19 @@ class QuizComponent {
     this.studentAnswers = {};
     
     this.questions.forEach(q => {
-      const answer = formData.get(`question_${q.id}`);
-      if (answer) {
-        this.studentAnswers[q.id] = answer;
+      if (q.question_type === 'multiple_select') {
+        // For multiple-select questions, get all checked values
+        const selectedValues = formData.getAll(`question_${q.id}`);
+        if (selectedValues.length > 0) {
+          // Join with commas to match database format (e.g., "A,C,E")
+          this.studentAnswers[q.id] = selectedValues.join(',');
+        }
+      } else {
+        // For single-answer questions (multiple-choice, true/false)
+        const answer = formData.get(`question_${q.id}`);
+        if (answer) {
+          this.studentAnswers[q.id] = answer;
+        }
       }
     });
     
