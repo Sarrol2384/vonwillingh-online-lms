@@ -1,0 +1,11 @@
+--- a/public/static/quiz-component-v3.js
++++ b/public/static/quiz-component-v3.js
+@@ -250,7 +250,7 @@
+         <input 
+           type="${inputType}" 
+           name="question_${question.id}" 
+-          value="${option.label}"
++          value="${isTrueFalse ? option.value : option.label}"
+           class="quiz-${inputType} mt-1 flex-shrink-0"
+           data-question-id="${question.id}"
+           style="width: 20px; height: 20px; cursor: pointer; ${inputType === 'checkbox' ? 'border-radius: 4px;' : ''}"
