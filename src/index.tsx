@@ -5730,11 +5730,16 @@ app.post('/api/student/module/:moduleId/quiz/submit', async (c) => {
     // Grade the quiz
     const results: any = {}
     let correctCount = 0
+    let totalPoints = 0
+    let earnedPoints = 0
     const questionsAttempted = Object.keys(answers)
     
     questionsAttempted.forEach(questionId => {
       const question = questions.find(q => q.id === questionId)
       if (question) {
+        const questionPoints = question.points || 5
+        totalPoints += questionPoints
+        
         let isCorrect = false
         const studentAnswer = answers[questionId]
         const correctAnswer = question.correct_answer
@@ -5761,13 +5766,16 @@ app.post('/api/student/module/:moduleId/quiz/submit', async (c) => {
         }
         
         results[questionId] = isCorrect
-        if (isCorrect) correctCount++
+        if (isCorrect) {
+          correctCount++
+          earnedPoints += questionPoints
+        }
       }
     })
     
     const totalQuestions = questionsAttempted.length
     const wrongCount = totalQuestions - correctCount
-    const percentage = Math.round((correctCount / totalQuestions) * 100)
+    const percentage = totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0
     const passed = percentage >= 70
     
     // Get attempt number
@@ -5793,10 +5801,12 @@ app.post('/api/student/module/:moduleId/quiz/submit', async (c) => {
         total_questions: totalQuestions,
         correct_answers: correctCount,
         wrong_answers: wrongCount,
+        score: earnedPoints,           // Add score (earned points)
+        total_points: totalPoints,     // Add total possible points
         percentage: percentage,
         passed: passed,
         attempt_number: attemptNumber,
-        questions_attempted: questionsAttempted.length,  // FIX: Use length, not array
+        questions_attempted: questionsAttempted.length,
         answers: answers,
         results: results,
         time_spent_seconds: timeSpentSeconds,
