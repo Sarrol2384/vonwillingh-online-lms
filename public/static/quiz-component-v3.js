@@ -443,7 +443,9 @@ class QuizComponent {
 
   renderPassedResults() {
     const attempt = this.currentAttempt;
-    const percentage = Math.round((attempt.correct_answers / attempt.total_questions) * 100);
+    const percentage = attempt.percentage || 0;  // Use backend-calculated percentage
+    const score = attempt.score || attempt.correct_answers;  // Points earned
+    const totalPoints = attempt.total_points || attempt.total_questions;  // Total possible
     
     const html = `
       <div class="quiz-results max-w-4xl mx-auto">
@@ -456,7 +458,7 @@ class QuizComponent {
             Congratulations! You Passed!
           </h2>
           <p class="text-xl text-green-700 mb-6">
-            You scored <strong>${attempt.correct_answers}/${attempt.total_questions} (${percentage}%)</strong>
+            You scored <strong>${score}/${totalPoints} (${percentage}%)</strong>
           </p>
           <p class="text-lg text-green-800 font-medium bg-green-100 rounded-lg p-4 inline-block">
             You may proceed to Module 2
@@ -495,7 +497,9 @@ class QuizComponent {
 
   renderFailedResults() {
     const attempt = this.currentAttempt;
-    const percentage = Math.round((attempt.correct_answers / attempt.total_questions) * 100);
+    const percentage = attempt.percentage || 0;  // Use backend-calculated percentage
+    const score = attempt.score || attempt.correct_answers;  // Points earned
+    const totalPoints = attempt.total_points || attempt.total_questions;  // Total possible
     const remainingAttempts = this.maxAttempts - this.previousAttempts.length;
     const isLastAttempt = remainingAttempts === 0;
     
@@ -507,7 +511,7 @@ class QuizComponent {
             <i class="fas fa-times text-4xl text-white"></i>
           </div>
           <h2 class="text-4xl font-bold text-red-800 mb-2">
-            You scored ${attempt.correct_answers}/${attempt.total_questions} (${percentage}%)
+            You scored ${score}/${totalPoints} (${percentage}%)
           </h2>
           <p class="text-xl text-red-700 mb-6">
             You need 70% or higher to pass.
