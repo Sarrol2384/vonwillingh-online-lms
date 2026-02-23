@@ -5753,10 +5753,25 @@ app.post('/api/student/module/:moduleId/quiz/submit', async (c) => {
           const correctAnswers = correctAnswer.split(',').map((a: string) => a.trim()).sort().join(',')
           isCorrect = studentAnswers === correctAnswers
         } else {
-          // For multiple-choice and true/false, simple string comparison
+          // For multiple-choice and true/false, trim and compare (case-sensitive)
           // Student answer: "A", "B", "True", "False"
-          // Correct answer: "B", "True"
-          isCorrect = studentAnswer === correctAnswer
+          // Correct answer: "B", "True", "False"
+          const trimmedStudentAnswer = studentAnswer.trim()
+          const trimmedCorrectAnswer = correctAnswer.trim()
+          isCorrect = trimmedStudentAnswer === trimmedCorrectAnswer
+          
+          // Debug logging for true/false questions
+          if (question.question_type === 'true_false') {
+            console.log(`[GRADING] Q${question.order_number} (${question.question_type}):`, {
+              studentAnswer: `"${studentAnswer}"`,
+              correctAnswer: `"${correctAnswer}"`,
+              trimmedStudent: `"${trimmedStudentAnswer}"`,
+              trimmedCorrect: `"${trimmedCorrectAnswer}"`,
+              isCorrect,
+              studentLength: studentAnswer.length,
+              correctLength: correctAnswer.length
+            })
+          }
         }
         
         results[questionId] = isCorrect
