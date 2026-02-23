@@ -276,10 +276,23 @@ class QuizComponent {
     const progressWarning = document.getElementById('progressWarning');
     const progressWarningText = document.getElementById('progressWarningText');
     
-    // Track answer selections
+    // Track answer selections for BOTH radio buttons AND checkboxes
     const radioButtons = form.querySelectorAll('input[type="radio"]');
     radioButtons.forEach(radio => {
       radio.addEventListener('change', (e) => {
+        // Update visual selection
+        const questionId = e.target.dataset.questionId;
+        this.updateOptionStyles(questionId);
+        
+        // Update progress counter
+        this.updateProgressCounter();
+      });
+    });
+    
+    // Track checkbox changes for multiple-select questions
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', (e) => {
         // Update visual selection
         const questionId = e.target.dataset.questionId;
         this.updateOptionStyles(questionId);
@@ -299,8 +312,8 @@ class QuizComponent {
   updateOptionStyles(questionId) {
     const labels = document.querySelectorAll(`label[data-question-id="${questionId}"]`);
     labels.forEach(label => {
-      const radio = label.querySelector('input[type="radio"]');
-      if (radio.checked) {
+      const input = label.querySelector('input[type="radio"], input[type="checkbox"]');
+      if (input && input.checked) {
         label.classList.remove('border-gray-300');
         label.classList.add('border-blue-500', 'bg-blue-50');
       } else {
@@ -321,8 +334,15 @@ class QuizComponent {
   getAnsweredCount() {
     let count = 0;
     this.questions.forEach(q => {
-      const selected = document.querySelector(`input[name="question_${q.id}"]:checked`);
-      if (selected) count++;
+      if (q.question_type === 'multiple_select') {
+        // For multiple-select (checkboxes), check if at least one is checked
+        const checkedBoxes = document.querySelectorAll(`input[name="question_${q.id}"]:checked`);
+        if (checkedBoxes.length > 0) count++;
+      } else {
+        // For radio buttons (multiple-choice, true/false), check if one is selected
+        const selected = document.querySelector(`input[name="question_${q.id}"]:checked`);
+        if (selected) count++;
+      }
     });
     return count;
   }
