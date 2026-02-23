@@ -1466,7 +1466,7 @@ app.get('/student/module/:moduleId', (c) => {
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
-        <script src="/static/quiz-component-v3.js?v=12"></script>
+        <script src="/static/quiz-component-v3.js?v=13"></script>
         <script src="/static/module-progression.js?v=1"></script>
         <script src="/static/module-viewer.js"></script>
         <script src="/static/professional-module-renderer.js"></script>
