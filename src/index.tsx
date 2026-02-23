@@ -5745,23 +5745,17 @@ app.post('/api/student/module/:moduleId/quiz/submit', async (c) => {
         const correctAnswer = question.correct_answer
         
         // Handle different question types
-        if (question.question_type === 'multiple_choice') {
-          // For multiple choice, both answers are JSON arrays - compare sorted arrays
-          try {
-            const studentArr = typeof studentAnswer === 'string' ? JSON.parse(studentAnswer) : studentAnswer
-            const correctArr = typeof correctAnswer === 'string' ? JSON.parse(correctAnswer) : correctAnswer
-            
-            // Sort both arrays and compare
-            const studentSorted = Array.isArray(studentArr) ? studentArr.sort().join('|') : ''
-            const correctSorted = Array.isArray(correctArr) ? correctArr.sort().join('|') : ''
-            
-            isCorrect = studentSorted === correctSorted
-          } catch (e) {
-            console.error('[QUIZ GRADE] Error parsing multiple choice answer:', e)
-            isCorrect = false
-          }
+        if (question.question_type === 'multiple_select') {
+          // For multiple-select (checkboxes), compare comma-separated answers
+          // Student answer: "A,C,E" or "B,D"
+          // Correct answer: "A,C,E"
+          const studentAnswers = studentAnswer.split(',').map((a: string) => a.trim()).sort().join(',')
+          const correctAnswers = correctAnswer.split(',').map((a: string) => a.trim()).sort().join(',')
+          isCorrect = studentAnswers === correctAnswers
         } else {
-          // For single choice and true/false, simple string comparison
+          // For multiple-choice and true/false, simple string comparison
+          // Student answer: "A", "B", "True", "False"
+          // Correct answer: "B", "True"
           isCorrect = studentAnswer === correctAnswer
         }
         

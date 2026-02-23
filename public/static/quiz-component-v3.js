@@ -78,9 +78,13 @@ class QuizComponent {
         this.previousAttempts = response.data.attempts || [];
         console.log('[QuizComponent] Found', this.previousAttempts.length, 'previous attempts');
         
-        // Find last attempt
+        // Find last attempt - but only set currentAttempt if passed
+        // (If failed, allow retaking the quiz)
         if (this.previousAttempts.length > 0) {
-          this.currentAttempt = this.previousAttempts[0]; // Most recent
+          const lastAttempt = this.previousAttempts[0]; // Most recent
+          if (lastAttempt.passed) {
+            this.currentAttempt = lastAttempt; // Only set if passed
+          }
         }
       }
     } catch (error) {
