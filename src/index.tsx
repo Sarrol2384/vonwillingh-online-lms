@@ -5796,7 +5796,7 @@ app.post('/api/student/module/:moduleId/quiz/submit', async (c) => {
         percentage: percentage,
         passed: passed,
         attempt_number: attemptNumber,
-        questions_attempted: questionsAttempted,
+        questions_attempted: questionsAttempted.length,  // FIX: Use length, not array
         answers: answers,
         results: results,
         time_spent_seconds: timeSpentSeconds,
