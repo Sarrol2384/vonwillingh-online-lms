@@ -1466,7 +1466,7 @@ app.get('/student/module/:moduleId', (c) => {
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
-        <script src="/static/quiz-component-v3.js?v=14"></script>
+        <script src="/static/quiz-component-v3.js?v=12"></script>
         <script src="/static/module-progression.js?v=1"></script>
         <script src="/static/module-viewer.js"></script>
         <script src="/static/professional-module-renderer.js"></script>
@@ -3863,39 +3863,6 @@ app.post('/api/student/module/:moduleId/complete', async (c) => {
     
     const supabase = getSupabaseAdminClient(c.env)
     
-    // Check if module has a quiz
-    const { data: module } = await supabase
-      .from('modules')
-      .select('has_quiz, title, course_id')
-      .eq('id', moduleId)
-      .single()
-    
-    if (!module) {
-      return c.json({ success: false, message: 'Module not found' }, 404)
-    }
-    
-    // If module has a quiz, check if student passed it
-    if (module.has_quiz) {
-      const { data: quizAttempts } = await supabase
-        .from('quiz_attempts')
-        .select('passed, percentage')
-        .eq('student_id', studentId)
-        .eq('module_id', moduleId)
-        .eq('passed', true)
-        .limit(1)
-      
-      if (!quizAttempts || quizAttempts.length === 0) {
-        return c.json({ 
-          success: false, 
-          message: 'You must pass the quiz before marking this module as complete',
-          requiresQuiz: true,
-          moduleTitle: module.title
-        }, 400)
-      }
-      
-      console.log('[API] Quiz passed, allowing module completion')
-    }
-    
     // Update module progress
     await supabase
       .from('module_progress')
@@ -3910,7 +3877,12 @@ app.post('/api/student/module/:moduleId/complete', async (c) => {
       })
     
     // Get total modules and completed count for this enrollment
-    // Use the module data already fetched above (includes course_id)
+    const { data: module } = await supabase
+      .from('modules')
+      .select('course_id')
+      .eq('id', moduleId)
+      .single()
+    
     const { data: allModules } = await supabase
       .from('modules')
       .select('id')

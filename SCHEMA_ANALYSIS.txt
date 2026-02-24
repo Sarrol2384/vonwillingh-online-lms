@@ -1,0 +1,22 @@
+Current quiz_questions table schema:
+
+✅ id - uuid - NO - gen_random_uuid()
+✅ module_id - uuid - NO - NULL
+✅ question_text - text - NO - NULL
+✅ option_a - text - NO - NULL
+✅ option_b - text - NO - NULL
+✅ option_c - text - NO - NULL
+✅ option_d - text - NO - NULL
+✅ correct_answer - character varying - NO - NULL
+✅ difficulty - character varying - NO - NULL
+✅ explanation - text - YES - NULL
+✅ order_number - integer - NO - NULL
+✅ created_at - timestamp with time zone - YES - now()
+✅ updated_at - timestamp with time zone - YES - now()
+✅ option_e - text - YES - NULL
+✅ points - integer - YES - 5
+
+MISSING COLUMN:
+❌ question_type - NOT IN THE TABLE!
+
+This is why the insert fails - the table doesn't have question_type column!

@@ -7,7 +7,7 @@
 // - Progress counter on submit button
 // - Validation before submission
 // - Pass/Fail with explanations based on requirements
-// - Unlimited attempts until pass (70%+)
+// - 3 attempts maximum
 // - Keyboard accessible
 // =====================================================
 
@@ -101,8 +101,11 @@ class QuizComponent {
       return;
     }
     
-    // REMOVED: Max attempts check - students can retry until they pass!
-    // No limit on attempts - students can keep trying until they achieve 70%+
+    // Check if max attempts reached
+    if (this.previousAttempts.length >= this.maxAttempts && (!this.currentAttempt || !this.currentAttempt.passed)) {
+      this.renderMaxAttemptsReached();
+      return;
+    }
     
     // Show quiz form (or failed results if applicable)
     if (!this.currentAttempt) {
@@ -139,7 +142,7 @@ class QuizComponent {
                 <p class="text-sm text-blue-100">Minutes</p>
               </div>
               <div class="text-center">
-                <p class="text-2xl font-bold">${attemptNumber}</p>
+                <p class="text-2xl font-bold">${attemptNumber}/${this.maxAttempts}</p>
                 <p class="text-sm text-blue-100">Attempt</p>
               </div>
             </div>
@@ -152,7 +155,7 @@ class QuizComponent {
               <i class="fas fa-info-circle text-yellow-500 text-xl mr-3 mt-1"></i>
               <div>
                 <p class="font-bold text-yellow-800">Retake Attempt ${attemptNumber}</p>
-                <p class="text-yellow-700">You can retry as many times as needed until you achieve 70% or higher.</p>
+                <p class="text-yellow-700">You have ${this.maxAttempts - attemptNumber + 1} attempt(s) remaining.</p>
               </div>
             </div>
           </div>
@@ -501,7 +504,8 @@ class QuizComponent {
     const percentage = attempt.percentage || 0;  // Use backend-calculated percentage
     const score = attempt.score || attempt.correct_answers;  // Points earned
     const totalPoints = attempt.total_points || attempt.total_questions;  // Total possible
-    const attemptNumber = this.previousAttempts.length;
+    const remainingAttempts = this.maxAttempts - this.previousAttempts.length;
+    const isLastAttempt = remainingAttempts === 0;
     
     const html = `
       <div class="quiz-results max-w-4xl mx-auto">
@@ -516,19 +520,41 @@ class QuizComponent {
           <p class="text-xl text-red-700 mb-6">
             You need 70% or higher to pass.
           </p>
-          <p class="text-lg text-red-800 font-medium bg-red-100 rounded-lg p-4 inline-block">
-            This was attempt #${attemptNumber}. You can retry as many times as needed!
-          </p>
+          ${!isLastAttempt ? `
+            <p class="text-lg text-red-800 font-medium bg-red-100 rounded-lg p-4 inline-block">
+              You have ${remainingAttempts} attempt(s) remaining
+            </p>
+          ` : `
+            <p class="text-lg text-red-800 font-medium bg-red-100 rounded-lg p-4 inline-block">
+              This was your final attempt
+            </p>
+          `}
         </div>
 
-        <!-- Show/Hide Answers -->
-        <div class="mb-6">
-          <!-- Hide Answers - Always hide on failed attempts -->
+        ${isLastAttempt ? `
+          <!-- Show All Answers (Final Attempt) -->
+          <div class="mb-6">
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
+              <p class="text-blue-800">
+                <i class="fas fa-info-circle mr-2"></i>
+                <strong>Final Attempt:</strong> Below are all correct answers and explanations to help you learn.
+              </p>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">
+              Detailed Review - All Questions
+            </h3>
+          </div>
+
+          <div class="space-y-6">
+            ${this.questions.map((q, index) => this.renderQuestionReview(q, index, true)).join('')}
+          </div>
+        ` : `
+          <!-- Hide Answers (Attempt Remaining) -->
           <div class="mb-6">
             <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6 rounded">
               <p class="text-yellow-800">
                 <i class="fas fa-info-circle mr-2"></i>
-                <strong>Try Again:</strong> Review the module content and retry the quiz. You can attempt as many times as needed!
+                <strong>Try Again:</strong> Correct answers are hidden until you pass or reach your final attempt.
               </p>
             </div>
             <h3 class="text-2xl font-bold text-gray-800 mb-4">
@@ -539,17 +565,27 @@ class QuizComponent {
               Review the module content and try again.
             </p>
           </div>
-        </div>
+        `}
 
         <!-- Action Buttons -->
         <div class="sticky bottom-0 bg-white border-t-2 border-gray-200 p-6 shadow-2xl mt-8 rounded-lg space-y-3">
-          <button 
-            onclick="location.reload()"
-            class="w-full bg-blue-600 text-white py-4 px-6 rounded-lg hover:bg-blue-700 transition font-bold text-lg"
-          >
-            <i class="fas fa-redo mr-2"></i>
-            Retry Quiz
-          </button>
+          ${!isLastAttempt ? `
+            <button 
+              onclick="location.reload()"
+              class="w-full bg-blue-600 text-white py-4 px-6 rounded-lg hover:bg-blue-700 transition font-bold text-lg"
+            >
+              <i class="fas fa-redo mr-2"></i>
+              Retry Quiz
+            </button>
+          ` : `
+            <button 
+              onclick="document.getElementById('quizModal').classList.add('hidden')"
+              class="w-full bg-gray-600 text-white py-4 px-6 rounded-lg hover:bg-gray-700 transition font-bold text-lg"
+            >
+              <i class="fas fa-times mr-2"></i>
+              Close
+            </button>
+          `}
         </div>
       </div>
     `;

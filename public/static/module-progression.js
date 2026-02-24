@@ -119,15 +119,23 @@ class ModuleProgressionManager {
       this.saveContentCompletion('started');
     }
     
-    // Track time spent (update every 30 seconds)
-    this.timeTracker = setInterval(() => {
+    // Update UI every second (for real-time feedback)
+    this.uiUpdateTracker = setInterval(() => {
       this.contentTimeSpent = Math.floor((new Date() - this.contentStartTime) / 1000);
+      this.updateUI();
       this.checkContentCompletion();
+    }, 1000); // Every 1 second for UI updates
+    
+    // Save to database every 30 seconds (reduce server load)
+    this.dbSaveTracker = setInterval(() => {
       this.saveContentCompletion('update');
     }, 30000); // Every 30 seconds
     
     // Track scroll position
     window.addEventListener('scroll', this.handleScroll.bind(this));
+    
+    // Initial UI update
+    this.updateUI();
     
     console.log('[Progression] Content tracking started');
   }
@@ -486,8 +494,11 @@ class ModuleProgressionManager {
   }
 
   destroy() {
-    if (this.timeTracker) {
-      clearInterval(this.timeTracker);
+    if (this.uiUpdateTracker) {
+      clearInterval(this.uiUpdateTracker);
+    }
+    if (this.dbSaveTracker) {
+      clearInterval(this.dbSaveTracker);
     }
     window.removeEventListener('scroll', this.handleScroll);
   }
