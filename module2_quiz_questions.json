@@ -1,0 +1,442 @@
+[
+  {
+    "order_number": 1,
+    "question_text": "Which best describes how AI learns?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "easy",
+    "options": [
+      "AI is pre-programmed with all possible answers",
+      "AI learns by identifying patterns in example data",
+      "AI uses random guessing to find correct answers",
+      "AI downloads knowledge from the internet in real-time"
+    ],
+    "correct_answer": "B",
+    "explanation": "AI learns by being shown many examples (training data) and identifying patterns in that data, similar to how a child learns to recognize objects by seeing many examples."
+  },
+  {
+    "order_number": 2,
+    "question_text": "What are the three key ingredients every AI system needs to work?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "medium",
+    "options": [
+      "Internet connection, smartphone, and cloud storage",
+      "Data, algorithm, and computing power",
+      "Programmer, database, and website",
+      "Electricity, software, and hardware"
+    ],
+    "correct_answer": "B",
+    "explanation": "Every AI system requires: (1) Data to learn from, (2) An algorithm (the 'recipe' for processing), and (3) Computing power to run the calculations. For small businesses, AI tools typically provide the algorithm and computing power, you just need to provide the data."
+  },
+  {
+    "order_number": 3,
+    "question_text": "In supervised learning, what makes it 'supervised'?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "medium",
+    "options": [
+      "A human must watch the AI at all times",
+      "The AI is trained with examples that include the correct answers",
+      "The AI requires constant internet supervision",
+      "Government regulations supervise all AI training"
+    ],
+    "correct_answer": "B",
+    "explanation": "Supervised learning means you show the AI examples along with the correct answers (labels). For example, showing images labeled 'cat' or 'dog' so the AI learns to distinguish between them. The 'supervision' comes from providing these labeled examples."
+  },
+  {
+    "order_number": 4,
+    "question_text": "A small Durban restaurant wants to predict daily customer numbers based on weather, day of week, and local events. Which type of machine learning is this?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "hard",
+    "options": [
+      "Unsupervised learning",
+      "Supervised learning",
+      "Reinforcement learning",
+      "Deep learning"
+    ],
+    "correct_answer": "B",
+    "explanation": "This is supervised learning because you're training the AI with historical data (weather, day, events) paired with known outcomes (actual customer count). The AI learns the relationship between inputs and the target outcome (customer numbers)."
+  },
+  {
+    "order_number": 5,
+    "question_text": "Which AI technology would you use to automatically categorize customer emails into 'Sales', 'Support', and 'Complaint'?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "medium",
+    "options": [
+      "Computer Vision",
+      "Natural Language Processing (NLP)",
+      "Reinforcement Learning",
+      "Quantum Computing"
+    ],
+    "correct_answer": "B",
+    "explanation": "Natural Language Processing (NLP) is the AI technology that understands and processes text. Text classification (categorizing emails) is a core NLP capability. Computer Vision works with images, not text."
+  },
+  {
+    "order_number": 6,
+    "question_text": "What does sentiment analysis do?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "easy",
+    "options": [
+      "Analyzes customer spending patterns",
+      "Detects emotions (positive/negative/neutral) in text",
+      "Predicts future market trends",
+      "Measures website traffic"
+    ],
+    "correct_answer": "B",
+    "explanation": "Sentiment analysis is an NLP technique that detects emotional tone in text - whether a customer review, email, or social media post expresses positive, negative, or neutral sentiment."
+  },
+  {
+    "order_number": 7,
+    "question_text": "When a chatbot reads 'What are your business hours?' and responds appropriately, which NLP process happens FIRST?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "hard",
+    "options": [
+      "Response generation",
+      "Knowledge retrieval",
+      "Tokenization (breaking into words)",
+      "Context understanding"
+    ],
+    "correct_answer": "C",
+    "explanation": "The first step in NLP processing is tokenization - breaking the sentence into individual words or tokens. Then comes intent detection, entity recognition, context understanding, knowledge retrieval, and finally response generation."
+  },
+  {
+    "order_number": 8,
+    "question_text": "According to the module, which South African languages have the BEST NLP support currently?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "medium",
+    "options": [
+      "isiZulu and isiXhosa (95%+ accuracy)",
+      "English and Afrikaans (95%+ accuracy)",
+      "All 11 official languages equally (95%+ accuracy)",
+      "Only English (95%+ accuracy)"
+    ],
+    "correct_answer": "B",
+    "explanation": "English and Afrikaans have excellent NLP support (95%+ accuracy). isiZulu and isiXhosa have growing support (70-85% accuracy), while other SA languages have limited but emerging support."
+  },
+  {
+    "order_number": 9,
+    "question_text": "What is Computer Vision?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "easy",
+    "options": [
+      "AI that improves eyesight through surgery",
+      "AI that sees and understands images and videos",
+      "Software for designing computer graphics",
+      "Virtual reality headsets for gaming"
+    ],
+    "correct_answer": "B",
+    "explanation": "Computer Vision is AI technology that can 'see' and understand visual information from images and videos - identifying objects, reading text, detecting defects, recognizing faces, etc."
+  },
+  {
+    "order_number": 10,
+    "question_text": "A manufacturing company wants to detect product defects by analyzing photos of items on the assembly line. Which AI technology should they use?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "medium",
+    "options": [
+      "Natural Language Processing",
+      "Machine Learning forecasting",
+      "Computer Vision",
+      "Chatbot technology"
+    ],
+    "correct_answer": "C",
+    "explanation": "Computer Vision is the correct technology for analyzing images to detect visual defects. It can identify cracks, scratches, misalignments, or other quality issues in product photos."
+  },
+  {
+    "order_number": 11,
+    "question_text": "What does OCR (Optical Character Recognition) do?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "easy",
+    "options": [
+      "Creates images from text descriptions",
+      "Reads and extracts text from images or scanned documents",
+      "Optimizes computer RAM for better performance",
+      "Organizes customer records automatically"
+    ],
+    "correct_answer": "B",
+    "explanation": "OCR (Optical Character Recognition) is a Computer Vision technology that reads text from images - such as extracting data from scanned invoices, receipts, or business cards."
+  },
+  {
+    "order_number": 12,
+    "question_text": "In the Port Elizabeth automotive parts example, the AI vision system checked parts at what rate compared to human inspectors?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "hard",
+    "options": [
+      "2x faster (200 vs 100 parts/hour)",
+      "3x faster (300 vs 100 parts/hour)",
+      "5x faster (500 vs 100 parts/hour)",
+      "10x faster (1000 vs 100 parts/hour)"
+    ],
+    "correct_answer": "C",
+    "explanation": "The AI vision system checked 500 parts per hour compared to 100 parts per hour by human inspectors - a 5x increase in speed. Additionally, accuracy improved from 92% to 99.2%."
+  },
+  {
+    "order_number": 13,
+    "question_text": "What does the term 'Algorithm' mean in AI?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "easy",
+    "options": [
+      "The data used to train AI",
+      "Step-by-step instructions the AI follows",
+      "The computer hardware that runs AI",
+      "The final prediction made by AI"
+    ],
+    "correct_answer": "B",
+    "explanation": "An algorithm is a set of step-by-step instructions or rules that the AI system follows to process data and make decisions. Different algorithms are suited for different types of problems."
+  },
+  {
+    "order_number": 14,
+    "question_text": "What is an API (Application Programming Interface)?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "medium",
+    "options": [
+      "A type of AI algorithm",
+      "How different software systems communicate with each other",
+      "An advanced programming language",
+      "A computer security protocol"
+    ],
+    "correct_answer": "B",
+    "explanation": "An API is a way for different software systems to talk to each other. It allows you to connect AI tools to your existing business systems (like connecting a chatbot to your customer database)."
+  },
+  {
+    "order_number": 15,
+    "question_text": "What does 'bias' mean in AI systems?",
+    "question_type": "multiple_choice",
+    "points": 3,
+    "difficulty": "medium",
+    "options": [
+      "When AI processes data too slowly",
+      "When AI makes unfair assumptions or discriminatory decisions",
+      "When AI requires too much computing power",
+      "When AI costs more than expected"
+    ],
+    "correct_answer": "B",
+    "explanation": "Bias in AI means the system makes unfair or discriminatory assumptions, often because the training data reflected historical biases. This can lead to unfair treatment of certain groups and potential legal issues."
+  },
+  {
+    "order_number": 16,
+    "question_text": "Pre-trained AI models (like ChatGPT) require you to provide your own training data before you can use them.",
+    "question_type": "true_false",
+    "points": 3,
+    "difficulty": "easy",
+    "correct_answer": "False",
+    "explanation": "False. Pre-trained models like ChatGPT, Google Vision, and other cloud AI services are already trained on massive datasets and work immediately without requiring your own training data. This makes them perfect for small businesses."
+  },
+  {
+    "order_number": 17,
+    "question_text": "Unsupervised learning is when AI finds patterns in data without being told what to look for.",
+    "question_type": "true_false",
+    "points": 3,
+    "difficulty": "medium",
+    "correct_answer": "True",
+    "explanation": "True. Unsupervised learning means the AI discovers patterns on its own without labeled examples. It's useful for customer segmentation, anomaly detection, and discovering hidden patterns in data."
+  },
+  {
+    "order_number": 18,
+    "question_text": "Cloud AI means you need to purchase expensive computer hardware to run AI systems.",
+    "question_type": "true_false",
+    "points": 3,
+    "difficulty": "easy",
+    "correct_answer": "False",
+    "explanation": "False. Cloud AI runs on internet servers (the 'cloud'), so you don't need expensive hardware. You access it via the internet and typically pay monthly subscription fees (pay-as-you-go model)."
+  },
+  {
+    "order_number": 19,
+    "question_text": "For small business applications, 85% AI accuracy is usually good enough.",
+    "question_type": "true_false",
+    "points": 3,
+    "difficulty": "medium",
+    "correct_answer": "True",
+    "explanation": "True. For most business applications (chatbots, content generation, basic categorization), 85%+ accuracy is acceptable. Higher accuracy (95%+) is needed for critical applications like medical diagnosis or financial fraud detection."
+  },
+  {
+    "order_number": 20,
+    "question_text": "AI can understand sarcasm, humor, and South African slang perfectly.",
+    "question_type": "true_false",
+    "points": 3,
+    "difficulty": "easy",
+    "correct_answer": "False",
+    "explanation": "False. AI still struggles with sarcasm, humor, and cultural nuances like South African slang. This is one of AI's current limitations - it processes language literally and lacks cultural context understanding."
+  },
+  {
+    "order_number": 21,
+    "question_text": "The 'human-in-the-loop' approach means using AI for efficiency but keeping humans for oversight and critical decisions.",
+    "question_type": "true_false",
+    "points": 3,
+    "difficulty": "medium",
+    "correct_answer": "True",
+    "explanation": "True. Human-in-the-loop is a best practice where AI handles routine tasks and provides recommendations, but humans make final decisions on critical matters. For example, AI screens resumes but humans conduct interviews."
+  },
+  {
+    "order_number": 22,
+    "question_text": "More data always produces better AI results, regardless of data quality.",
+    "question_type": "true_false",
+    "points": 3,
+    "difficulty": "medium",
+    "correct_answer": "False",
+    "explanation": "False. Data quality matters more than quantity. 100 high-quality, accurate, complete records are better than 10,000 records with errors, missing fields, or inconsistencies. Bad data leads to bad AI predictions."
+  },
+  {
+    "order_number": 23,
+    "question_text": "Transfer learning means using a pre-trained AI model and adapting it to your specific needs.",
+    "question_type": "true_false",
+    "points": 3,
+    "difficulty": "hard",
+    "correct_answer": "True",
+    "explanation": "True. Transfer learning takes an AI model that's already been trained on a large dataset and fine-tunes it for your specific use case. This is faster and cheaper than training a model from scratch."
+  },
+  {
+    "order_number": 24,
+    "question_text": "Which THREE ingredients are essential for every AI system to work? (Select all that apply)",
+    "question_type": "multiple_select",
+    "points": 4,
+    "difficulty": "easy",
+    "options": [
+      "Data to learn from",
+      "Algorithm (processing recipe)",
+      "Computing power",
+      "Internet connection",
+      "Smartphone app"
+    ],
+    "correct_answers": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "The three essential ingredients are: (1) Data - information for the AI to learn from, (2) Algorithm - the instructions for how to process data, and (3) Computing power - hardware to run the calculations. Internet and smartphones are helpful but not essential components."
+  },
+  {
+    "order_number": 25,
+    "question_text": "Which of the following are NLP (Natural Language Processing) capabilities? (Select all that apply)",
+    "question_type": "multiple_select",
+    "points": 4,
+    "difficulty": "medium",
+    "options": [
+      "Text classification (categorizing documents)",
+      "Sentiment analysis (detecting emotions)",
+      "Object detection in images",
+      "Language translation",
+      "Question answering (chatbots)"
+    ],
+    "correct_answers": [
+      "A",
+      "B",
+      "D",
+      "E"
+    ],
+    "explanation": "NLP capabilities include text classification, sentiment analysis, translation, and question answering - all involve processing human language. Object detection in images is a Computer Vision capability, not NLP."
+  },
+  {
+    "order_number": 26,
+    "question_text": "Which business scenarios are appropriate for Computer Vision technology? (Select all that apply)",
+    "question_type": "multiple_select",
+    "points": 4,
+    "difficulty": "medium",
+    "options": [
+      "Detecting product defects in manufacturing",
+      "Reading text from scanned invoices (OCR)",
+      "Predicting customer churn",
+      "Counting inventory from shelf photos",
+      "Generating social media captions"
+    ],
+    "correct_answers": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": "Computer Vision is used for visual tasks: defect detection, OCR (reading text from images), and counting objects in photos. Customer churn prediction uses Machine Learning, and generating captions uses NLP/text generation."
+  },
+  {
+    "order_number": 27,
+    "question_text": "According to the module, which are current limitations of AI? (Select all that apply)",
+    "question_type": "multiple_select",
+    "points": 4,
+    "difficulty": "medium",
+    "options": [
+      "Cannot understand common sense reasoning like humans",
+      "Struggles with sarcasm and humor",
+      "Cannot process images or videos",
+      "Cannot explain why it made specific decisions",
+      "Cannot work without internet connection"
+    ],
+    "correct_answers": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": "Current AI limitations include: lack of common sense reasoning, difficulty with sarcasm/humor, and inability to explain decisions ('black box' problem). AI CAN process images/videos (Computer Vision) and CAN work offline in some cases (edge AI)."
+  },
+  {
+    "order_number": 28,
+    "question_text": "Which situations should NOT rely solely on AI without human oversight? (Select all that apply)",
+    "question_type": "multiple_select",
+    "points": 4,
+    "difficulty": "hard",
+    "options": [
+      "Final hiring decisions affecting people's livelihoods",
+      "Generating social media post ideas",
+      "Medical diagnosis without doctor review",
+      "Scheduling customer appointments",
+      "Decisions requiring empathy and ethical judgment"
+    ],
+    "correct_answers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": "AI should NOT make final decisions alone in high-stakes scenarios: hiring/firing, medical diagnosis, or situations requiring empathy and ethics. AI is fine for low-risk tasks like generating content ideas or scheduling appointments."
+  },
+  {
+    "order_number": 29,
+    "question_text": "What characterizes good quality training data for AI? (Select all that apply)",
+    "question_type": "multiple_select",
+    "points": 4,
+    "difficulty": "medium",
+    "options": [
+      "Accurate and reflects reality",
+      "As much data as possible, quality doesn't matter",
+      "Complete with no missing fields",
+      "Consistent format throughout",
+      "Recent and up-to-date"
+    ],
+    "correct_answers": [
+      "A",
+      "C",
+      "D",
+      "E"
+    ],
+    "explanation": "Good quality data is: accurate, complete (no missing fields), consistent in format, and recent/up-to-date. Quality matters MORE than quantity - having massive amounts of poor-quality data will produce poor AI results."
+  },
+  {
+    "order_number": 30,
+    "question_text": "Which questions should you ask BEFORE choosing an AI technology for your business? (Select all that apply)",
+    "question_type": "multiple_select",
+    "points": 4,
+    "difficulty": "hard",
+    "options": [
+      "What specific problem am I solving?",
+      "Which AI is most expensive?",
+      "Do I have the required data?",
+      "What's my budget?",
+      "Does it integrate with my existing systems?"
+    ],
+    "correct_answers": [
+      "A",
+      "C",
+      "D",
+      "E"
+    ],
+    "explanation": "Important questions include: the specific problem being solved, data availability, budget constraints, and system integration. Choosing the most expensive AI is NOT a good criterion - choose based on fit for your needs, not price alone."
+  }
+]

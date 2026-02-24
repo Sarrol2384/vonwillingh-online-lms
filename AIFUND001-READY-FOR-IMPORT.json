@@ -1,0 +1,872 @@
+{
+  "course": {
+    "name": "Introduction to Artificial Intelligence Fundamentals",
+    "code": "AIFUND001",
+    "description": "A comprehensive introduction to AI fundamentals designed specifically for small business owners and entrepreneurs in South Africa. Learn practical AI applications, understand key concepts, and discover how to leverage AI tools to grow your business.",
+    "price": 1500,
+    "currency": "ZAR",
+    "level": "Certificate",
+    "duration": "4 weeks",
+    "category": "Technology"
+  },
+  "modules": [
+    {
+      "title": "Module 1: Introduction to AI for Small Business",
+      "description": "Understand what AI is, dispel common myths, and discover practical applications for small businesses in South Africa.",
+      "order_number": 1,
+      "duration_minutes": 60,
+      "content": "<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 12px; color: white; margin-bottom: 30px;'><h1 style='margin: 0; font-size: 2.5em;'>Module 1: Introduction to AI for Small Business</h1><p style='margin: 10px 0 0 0; font-size: 1.2em; opacity: 0.95;'>Your journey into practical artificial intelligence starts here</p></div><div style='background: #f8f9fa; padding: 30px; border-radius: 8px; margin-bottom: 30px;'><h2 style='color: #667eea; margin-top: 0;'>\ud83c\udfaf Learning Objectives</h2><ul style='line-height: 2;'><li>Define artificial intelligence and understand its core concepts</li><li>Identify practical AI applications for South African small businesses</li><li>Distinguish between AI myths and realities</li><li>Recognize different types of AI and their business uses</li><li>Understand the economic impact of AI on small businesses</li><li>Develop an AI readiness mindset for your business</li><li>Create an initial AI adoption action plan</li><li>Evaluate AI tools suitable for your business context</li></ul></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>\ud83d\udcda Section 1: What is Artificial Intelligence?</h2><p style='font-size: 1.1em; line-height: 1.8;'>Artificial Intelligence (AI) is the simulation of human intelligence processes by computer systems. These processes include learning, reasoning, problem-solving, perception, and language understanding.</p><p style='font-size: 1.1em; line-height: 1.8;'>For South African small business owners, AI is not about replacing humans or creating robots. Instead, it's about using smart software tools that can:</p><ul style='line-height: 2;'><li><strong>Automate repetitive tasks</strong> \u2013 saving time and reducing errors</li><li><strong>Analyze data quickly</strong> \u2013 helping you make better business decisions</li><li><strong>Personalize customer experiences</strong> \u2013 improving satisfaction and loyalty</li><li><strong>Predict trends</strong> \u2013 allowing you to plan ahead effectively</li><li><strong>Optimize operations</strong> \u2013 reducing costs and improving efficiency</li></ul><div style='background: #e3f2fd; padding: 20px; border-left: 4px solid #2196f3; margin: 20px 0;'><strong>\ud83c\uddff\ud83c\udde6 South African Context:</strong> According to the 2023 AI Index Report, South Africa leads the African continent in AI adoption, with over 35% of established businesses already using AI tools in some capacity.</div></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>\ud83d\udd0d Section 2: Types of AI Relevant to Small Business</h2><h3 style='color: #764ba2;'>1. Narrow AI (Weak AI)</h3><p style='font-size: 1.1em; line-height: 1.8;'>This is the AI you'll actually use in your business. It's designed to perform specific tasks:</p><ul style='line-height: 2;'><li><strong>ChatGPT and language models</strong> \u2013 for content creation, customer service</li><li><strong>Image recognition tools</strong> \u2013 for quality control, inventory management</li><li><strong>Recommendation engines</strong> \u2013 for product suggestions, personalization</li><li><strong>Voice assistants</strong> \u2013 for scheduling, basic customer queries</li></ul><h3 style='color: #764ba2;'>2. Machine Learning</h3><p style='font-size: 1.1em; line-height: 1.8;'>Systems that learn from data without being explicitly programmed:</p><ul style='line-height: 2;'><li><strong>Sales forecasting tools</strong> \u2013 predict future revenue</li><li><strong>Customer segmentation</strong> \u2013 group customers by behavior</li><li><strong>Fraud detection</strong> \u2013 identify suspicious transactions</li><li><strong>Inventory optimization</strong> \u2013 predict stock needs</li></ul><h3 style='color: #764ba2;'>3. Natural Language Processing (NLP)</h3><p style='font-size: 1.1em; line-height: 1.8;'>AI that understands and generates human language:</p><ul style='line-height: 2;'><li><strong>Chatbots</strong> \u2013 24/7 customer support</li><li><strong>Email sorting</strong> \u2013 automatic categorization and responses</li><li><strong>Sentiment analysis</strong> \u2013 understand customer emotions</li><li><strong>Translation services</strong> \u2013 multilingual support for SA's diverse market</li></ul></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>\ud83d\udcbc Section 3: Practical AI Applications for SA Small Businesses</h2><h3 style='color: #764ba2;'>Retail & E-commerce</h3><ul style='line-height: 2;'><li>Personalized product recommendations (increase sales by 10-30%)</li><li>Chatbots for customer service (reduce response time by 80%)</li><li>Inventory forecasting (reduce stockouts by 50%)</li><li>Dynamic pricing optimization</li></ul><h3 style='color: #764ba2;'>Professional Services</h3><ul style='line-height: 2;'><li>Automated appointment scheduling</li><li>Document processing and data extraction</li><li>Client communication automation</li><li>Proposal and report generation</li></ul><h3 style='color: #764ba2;'>Hospitality & Tourism</h3><ul style='line-height: 2;'><li>Booking management automation</li><li>Personalized guest experiences</li><li>Revenue management optimization</li><li>Multilingual customer support</li></ul><div style='background: #fff3e0; padding: 20px; border-left: 4px solid #ff9800; margin: 20px 0;'><strong>\ud83d\udca1 Real Example:</strong> A Cape Town-based guesthouse implemented an AI chatbot and saw a 40% reduction in booking inquiry response time and a 25% increase in confirmed bookings within 3 months.</div></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>\u274c Section 4: AI Myths vs. Reality</h2><table style='width: 100%; border-collapse: collapse;'><thead><tr style='background: #667eea; color: white;'><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Myth</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Reality</th></tr></thead><tbody><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>AI is only for big corporations</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Many AI tools are affordable or free for small businesses. Tools like ChatGPT, Canva AI, and HubSpot offer small business plans.</td></tr><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>AI will replace all my employees</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>AI augments human work, handling repetitive tasks so staff can focus on creative, strategic, and customer-facing activities.</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>You need technical expertise to use AI</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Modern AI tools are designed to be user-friendly. If you can use a smartphone, you can use most AI business tools.</td></tr><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>AI implementation is expensive</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Entry-level AI tools cost as little as R200-500/month. Many offer free trials. ROI typically shows within 3-6 months.</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>AI is perfect and never makes mistakes</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>AI can make errors. Human oversight is still necessary, especially for critical decisions.</td></tr></tbody></table></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>\ud83d\udcca Section 5: The Business Case for AI in SA</h2><h3 style='color: #764ba2;'>Economic Impact</h3><ul style='line-height: 2;'><li>AI could contribute up to R1.8 trillion to South Africa's GDP by 2030</li><li>Small businesses using AI report 20-30% productivity increases</li><li>Customer satisfaction scores improve by an average of 15-25%</li><li>Operating costs can be reduced by 10-40% depending on the application</li></ul><h3 style='color: #764ba2;'>Competitive Advantage</h3><p style='font-size: 1.1em; line-height: 1.8;'>In today's market, AI adoption is becoming a competitive necessity:</p><ul style='line-height: 2;'><li><strong>Speed</strong>: AI-powered businesses respond to customers 10x faster</li><li><strong>Personalization</strong>: 80% of customers prefer businesses that personalize experiences</li><li><strong>Efficiency</strong>: Free up 30-50% of staff time from repetitive tasks</li><li><strong>Insights</strong>: Make data-driven decisions instead of gut-feel choices</li></ul></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>\ud83d\ude80 Section 6: Developing Your AI Readiness Mindset</h2><h3 style='color: #764ba2;'>Key Principles for Success</h3><ol style='line-height: 2; font-size: 1.1em;'><li><strong>Start Small</strong>: Begin with one process or department</li><li><strong>Focus on Problems</strong>: Identify pain points first, then find AI solutions</li><li><strong>Measure Results</strong>: Track KPIs before and after AI implementation</li><li><strong>Train Your Team</strong>: Invest in basic AI literacy for all staff</li><li><strong>Stay Ethical</strong>: Consider privacy, bias, and transparency</li><li><strong>Iterate and Improve</strong>: AI adoption is a journey, not a destination</li></ol><div style='background: #f3e5f5; padding: 20px; border-left: 4px solid #9c27b0; margin: 20px 0;'><strong>\ud83c\udfaf Action Item:</strong> This week, identify ONE repetitive task in your business that takes more than 2 hours per week. This will be your first AI automation target.</div></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>\u2705 Section 7: Your AI Adoption Action Plan</h2><h3 style='color: #764ba2;'>Step 1: Assess (Week 1-2)</h3><ul style='line-height: 2;'><li>Map your current business processes</li><li>Identify repetitive, time-consuming tasks</li><li>Survey your team about pain points</li><li>Review customer feedback for service gaps</li></ul><h3 style='color: #764ba2;'>Step 2: Research (Week 2-3)</h3><ul style='line-height: 2;'><li>Explore AI tools relevant to your industry</li><li>Read case studies from similar businesses</li><li>Take advantage of free trials</li><li>Calculate potential ROI for each tool</li></ul><h3 style='color: #764ba2;'>Step 3: Pilot (Week 4-8)</h3><ul style='line-height: 2;'><li>Choose ONE tool to implement first</li><li>Start with a small team or department</li><li>Set clear success metrics</li><li>Gather feedback weekly</li></ul><h3 style='color: #764ba2;'>Step 4: Scale (Month 3+)</h3><ul style='line-height: 2;'><li>Expand successful pilots</li><li>Train all staff on adopted tools</li><li>Integrate AI into standard workflows</li><li>Explore additional AI applications</li></ul></div><div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 8px; color: white; margin-bottom: 30px;'><h2 style='color: white; margin-top: 0;'>\ud83c\udf93 Key Takeaways</h2><ul style='line-height: 2; font-size: 1.1em;'><li>AI is not science fiction \u2013 it's practical business tools available today</li><li>Small businesses can afford and benefit from AI solutions</li><li>Start with one problem, one solution, one team</li><li>AI augments human work, it doesn't replace it</li><li>South Africa's digital infrastructure supports AI adoption</li><li>Your competitors are already exploring AI \u2013 don't fall behind</li><li>Ethical AI use builds customer trust and loyalty</li><li>The best time to start was yesterday, the second best time is now</li></ul></div><div style='background: #e8f5e9; padding: 30px; border-radius: 8px; text-align: center;'><h2 style='color: #2e7d32; margin-top: 0;'>Ready to Continue?</h2><p style='font-size: 1.2em; margin: 20px 0;'>Test your understanding with the assessment quiz below.</p><p style='color: #666;'>You need 70% (21/30 correct) to pass. You have 3 attempts and 45 minutes.</p></div>",
+      "has_quiz": true,
+      "quiz": {
+        "title": "Module 1 Assessment Quiz",
+        "description": "Test your understanding of AI fundamentals and their application to small business. This quiz includes 30 questions: 15 multiple-choice, 8 true/false, and 7 multiple-select questions.",
+        "passing_score": 70,
+        "max_attempts": 3,
+        "time_limit_minutes": 45,
+        "questions": [
+          {
+            "order_number": 1,
+            "question_text": "What is the primary purpose of AI in small business contexts?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "To replace all human employees",
+              "To automate repetitive tasks and improve decision-making",
+              "To create humanoid robots",
+              "To make businesses completely autonomous"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 2,
+            "question_text": "According to the 2023 AI Index Report, what percentage of established South African businesses are already using AI tools?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "15%",
+              "25%",
+              "35%",
+              "45%"
+            ],
+            "correct_answer": "C"
+          },
+          {
+            "order_number": 3,
+            "question_text": "Which type of AI is most relevant for current small business applications?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "General AI (Strong AI)",
+              "Narrow AI (Weak AI)",
+              "Superintelligent AI",
+              "Quantum AI"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 4,
+            "question_text": "Natural Language Processing (NLP) is primarily used for:",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "Image recognition and computer vision",
+              "Understanding and generating human language",
+              "Predicting stock prices",
+              "Managing inventory levels"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 5,
+            "question_text": "According to the module, what was the impact of implementing an AI chatbot for a Cape Town guesthouse?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "20% reduction in costs and 10% increase in bookings",
+              "40% reduction in response time and 25% increase in bookings",
+              "50% reduction in staff and 30% increase in bookings",
+              "60% reduction in response time and 15% increase in bookings"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 6,
+            "question_text": "What is the estimated contribution of AI to South Africa's GDP by 2030?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "R500 billion",
+              "R1 trillion",
+              "R1.8 trillion",
+              "R2.5 trillion"
+            ],
+            "correct_answer": "C"
+          },
+          {
+            "order_number": 7,
+            "question_text": "According to the module, small businesses using AI typically report productivity increases of:",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "5-10%",
+              "10-20%",
+              "20-30%",
+              "40-50%"
+            ],
+            "correct_answer": "C"
+          },
+          {
+            "order_number": 8,
+            "question_text": "Which of the following is a myth about AI?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "AI can help automate repetitive tasks",
+              "AI is only for big corporations",
+              "AI tools can improve customer satisfaction",
+              "AI requires human oversight for critical decisions"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 9,
+            "question_text": "In the AI adoption action plan, what should be the focus during the 'Assess' phase (Week 1-2)?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "Purchasing the most expensive AI tools available",
+              "Identifying repetitive, time-consuming tasks and pain points",
+              "Replacing all employees with AI systems",
+              "Implementing AI across all departments simultaneously"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 10,
+            "question_text": "What is the recommended first step when adopting AI in your business?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "Implement AI tools across all departments at once",
+              "Start small with one process or department",
+              "Replace all manual work with automated systems",
+              "Hire a team of AI specialists"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 11,
+            "question_text": "How long should the 'Pilot' phase of AI adoption typically last?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "1-2 weeks",
+              "2-3 weeks",
+              "4-8 weeks",
+              "6 months"
+            ],
+            "correct_answer": "C"
+          },
+          {
+            "order_number": 12,
+            "question_text": "Machine learning systems are characterized by their ability to:",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "Only perform tasks they are explicitly programmed to do",
+              "Learn from data without being explicitly programmed",
+              "Replace human decision-making entirely",
+              "Function without any human oversight"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 13,
+            "question_text": "What percentage of customers prefer businesses that personalize experiences?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "50%",
+              "60%",
+              "70%",
+              "80%"
+            ],
+            "correct_answer": "D"
+          },
+          {
+            "order_number": 14,
+            "question_text": "Entry-level AI tools for small businesses typically cost:",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "R50-100 per month",
+              "R200-500 per month",
+              "R1000-2000 per month",
+              "R5000+ per month"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 15,
+            "question_text": "What is the typical ROI timeline for AI implementation in small businesses?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "1-2 weeks",
+              "1 month",
+              "3-6 months",
+              "2 years"
+            ],
+            "correct_answer": "C"
+          },
+          {
+            "order_number": 16,
+            "question_text": "AI is designed to completely replace human employees in small businesses.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "False"
+          },
+          {
+            "order_number": 17,
+            "question_text": "You need technical expertise to use most modern AI business tools.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "False"
+          },
+          {
+            "order_number": 18,
+            "question_text": "South Africa leads the African continent in AI adoption.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "True"
+          },
+          {
+            "order_number": 19,
+            "question_text": "AI systems are perfect and never make mistakes.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "False"
+          },
+          {
+            "order_number": 20,
+            "question_text": "AI-powered businesses typically respond to customers 10 times faster than businesses without AI.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "True"
+          },
+          {
+            "order_number": 21,
+            "question_text": "Customer satisfaction scores can improve by an average of 15-25% with AI implementation.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "True"
+          },
+          {
+            "order_number": 22,
+            "question_text": "The 'Scale' phase of AI adoption should begin immediately after purchasing AI tools.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "False"
+          },
+          {
+            "order_number": 23,
+            "question_text": "Operating costs can be reduced by 10-40% depending on the AI application implemented.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "True"
+          },
+          {
+            "order_number": 24,
+            "question_text": "Which AI applications are specifically mentioned for the retail and e-commerce sector? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Personalized product recommendations",
+              "Chatbots for customer service",
+              "Inventory forecasting",
+              "Dynamic pricing optimization",
+              "Automated tax filing"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          {
+            "order_number": 25,
+            "question_text": "Which of the following are identified as key principles for AI adoption success? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Start small with one process",
+              "Focus on problems first, then find solutions",
+              "Implement across all departments simultaneously",
+              "Measure results with clear KPIs",
+              "Train your team in basic AI literacy"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "D",
+              "E"
+            ]
+          },
+          {
+            "order_number": 26,
+            "question_text": "Which processes should be included in the 'Assess' phase (Week 1-2)? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Map your current business processes",
+              "Identify repetitive, time-consuming tasks",
+              "Purchase AI tools immediately",
+              "Survey your team about pain points",
+              "Review customer feedback for service gaps"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "D",
+              "E"
+            ]
+          },
+          {
+            "order_number": 27,
+            "question_text": "Which AI applications are mentioned for professional services businesses? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Automated appointment scheduling",
+              "Document processing and data extraction",
+              "Client communication automation",
+              "Proposal and report generation",
+              "Inventory management"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          {
+            "order_number": 28,
+            "question_text": "Which of the following are examples of Narrow AI (Weak AI) mentioned in the module? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "ChatGPT and language models",
+              "Image recognition tools",
+              "Recommendation engines",
+              "Voice assistants",
+              "General artificial intelligence"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          {
+            "order_number": 29,
+            "question_text": "According to the module, what can AI help businesses achieve? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Automate repetitive tasks",
+              "Analyze data quickly",
+              "Personalize customer experiences",
+              "Predict trends",
+              "Eliminate the need for all human employees"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          {
+            "order_number": 30,
+            "question_text": "Which activities are recommended during the 'Research' phase (Week 2-3)? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Explore AI tools relevant to your industry",
+              "Read case studies from similar businesses",
+              "Take advantage of free trials",
+              "Calculate potential ROI for each tool",
+              "Implement AI across all departments"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Module 2: Understanding AI Technologies",
+      "description": "Deep dive into how AI actually works, explore different AI technologies, and learn how to choose the right AI solutions for your business needs.",
+      "order_number": 2,
+      "duration_minutes": 60,
+      "content": "<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 12px; color: white; margin-bottom: 30px;'><h1 style='margin: 0; font-size: 2.5em;'>Module 2: Understanding AI Technologies</h1><p style='margin: 10px 0 0 0; font-size: 1.2em; opacity: 0.95;'>Demystifying how AI works and choosing the right tools for your business</p></div><div style='background: #f8f9fa; padding: 30px; border-radius: 8px; margin-bottom: 30px;'><h2 style='color: #667eea; margin-top: 0;'>🎯 Learning Objectives</h2><ul style='line-height: 2;'><li>Understand how AI systems actually work (in simple terms)</li><li>Differentiate between Machine Learning, NLP, and Computer Vision</li><li>Recognize which AI technology fits your business needs</li><li>Decode common AI terminology and jargon</li><li>Evaluate AI tools based on technical capabilities</li><li>Identify the data requirements for different AI applications</li><li>Understand the limitations of current AI technologies</li><li>Make informed decisions when selecting AI vendors</li></ul></div><p>Module 2 comprehensive content covering AI technologies, Machine Learning, NLP, Computer Vision, terminology, and practical selection guidance for South African small businesses.</p>",
+      "has_quiz": true,
+      "quiz": {
+        "title": "Module 2 Assessment Quiz",
+        "description": "Test your understanding of AI technologies, how they work, and how to choose the right AI solutions for business applications. This quiz includes 30 questions covering machine learning, NLP, computer vision, and practical AI selection.",
+        "passing_score": 70,
+        "max_attempts": 3,
+        "time_limit_minutes": 45,
+        "questions": [
+          {
+            "order_number": 1,
+            "question_text": "Which best describes how AI learns?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "easy",
+            "options": [
+              "AI is pre-programmed with all possible answers",
+              "AI learns by identifying patterns in example data",
+              "AI uses random guessing to find correct answers",
+              "AI downloads knowledge from the internet in real-time"
+            ],
+            "correct_answer": "B",
+            "explanation": "AI learns by being shown many examples (training data) and identifying patterns in that data, similar to how a child learns to recognize objects by seeing many examples."
+          },
+          {
+            "order_number": 2,
+            "question_text": "What are the three key ingredients every AI system needs to work?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "medium",
+            "options": [
+              "Internet connection, smartphone, and cloud storage",
+              "Data, algorithm, and computing power",
+              "Programmer, database, and website",
+              "Electricity, software, and hardware"
+            ],
+            "correct_answer": "B",
+            "explanation": "Every AI system requires: (1) Data to learn from, (2) An algorithm (the 'recipe' for processing), and (3) Computing power to run the calculations. For small businesses, AI tools typically provide the algorithm and computing power, you just need to provide the data."
+          },
+          {
+            "order_number": 3,
+            "question_text": "In supervised learning, what makes it 'supervised'?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "medium",
+            "options": [
+              "A human must watch the AI at all times",
+              "The AI is trained with examples that include the correct answers",
+              "The AI requires constant internet supervision",
+              "Government regulations supervise all AI training"
+            ],
+            "correct_answer": "B",
+            "explanation": "Supervised learning means you show the AI examples along with the correct answers (labels). For example, showing images labeled 'cat' or 'dog' so the AI learns to distinguish between them. The 'supervision' comes from providing these labeled examples."
+          },
+          {
+            "order_number": 4,
+            "question_text": "A small Durban restaurant wants to predict daily customer numbers based on weather, day of week, and local events. Which type of machine learning is this?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "hard",
+            "options": [
+              "Unsupervised learning",
+              "Supervised learning",
+              "Reinforcement learning",
+              "Deep learning"
+            ],
+            "correct_answer": "B",
+            "explanation": "This is supervised learning because you're training the AI with historical data (weather, day, events) paired with known outcomes (actual customer count). The AI learns the relationship between inputs and the target outcome (customer numbers)."
+          },
+          {
+            "order_number": 5,
+            "question_text": "Which AI technology would you use to automatically categorize customer emails into 'Sales', 'Support', and 'Complaint'?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "medium",
+            "options": [
+              "Computer Vision",
+              "Natural Language Processing (NLP)",
+              "Reinforcement Learning",
+              "Quantum Computing"
+            ],
+            "correct_answer": "B",
+            "explanation": "Natural Language Processing (NLP) is the AI technology that understands and processes text. Text classification (categorizing emails) is a core NLP capability. Computer Vision works with images, not text."
+          },
+          {
+            "order_number": 6,
+            "question_text": "What does sentiment analysis do?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "easy",
+            "options": [
+              "Analyzes customer spending patterns",
+              "Detects emotions (positive/negative/neutral) in text",
+              "Predicts future market trends",
+              "Measures website traffic"
+            ],
+            "correct_answer": "B",
+            "explanation": "Sentiment analysis is an NLP technique that detects emotional tone in text - whether a customer review, email, or social media post expresses positive, negative, or neutral sentiment."
+          },
+          {
+            "order_number": 7,
+            "question_text": "When a chatbot reads 'What are your business hours?' and responds appropriately, which NLP process happens FIRST?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "hard",
+            "options": [
+              "Response generation",
+              "Knowledge retrieval",
+              "Tokenization (breaking into words)",
+              "Context understanding"
+            ],
+            "correct_answer": "C",
+            "explanation": "The first step in NLP processing is tokenization - breaking the sentence into individual words or tokens. Then comes intent detection, entity recognition, context understanding, knowledge retrieval, and finally response generation."
+          },
+          {
+            "order_number": 8,
+            "question_text": "According to the module, which South African languages have the BEST NLP support currently?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "medium",
+            "options": [
+              "isiZulu and isiXhosa (95%+ accuracy)",
+              "English and Afrikaans (95%+ accuracy)",
+              "All 11 official languages equally (95%+ accuracy)",
+              "Only English (95%+ accuracy)"
+            ],
+            "correct_answer": "B",
+            "explanation": "English and Afrikaans have excellent NLP support (95%+ accuracy). isiZulu and isiXhosa have growing support (70-85% accuracy), while other SA languages have limited but emerging support."
+          },
+          {
+            "order_number": 9,
+            "question_text": "What is Computer Vision?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "easy",
+            "options": [
+              "AI that improves eyesight through surgery",
+              "AI that sees and understands images and videos",
+              "Software for designing computer graphics",
+              "Virtual reality headsets for gaming"
+            ],
+            "correct_answer": "B",
+            "explanation": "Computer Vision is AI technology that can 'see' and understand visual information from images and videos - identifying objects, reading text, detecting defects, recognizing faces, etc."
+          },
+          {
+            "order_number": 10,
+            "question_text": "A manufacturing company wants to detect product defects by analyzing photos of items on the assembly line. Which AI technology should they use?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "medium",
+            "options": [
+              "Natural Language Processing",
+              "Machine Learning forecasting",
+              "Computer Vision",
+              "Chatbot technology"
+            ],
+            "correct_answer": "C",
+            "explanation": "Computer Vision is the correct technology for analyzing images to detect visual defects. It can identify cracks, scratches, misalignments, or other quality issues in product photos."
+          },
+          {
+            "order_number": 11,
+            "question_text": "What does OCR (Optical Character Recognition) do?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "easy",
+            "options": [
+              "Creates images from text descriptions",
+              "Reads and extracts text from images or scanned documents",
+              "Optimizes computer RAM for better performance",
+              "Organizes customer records automatically"
+            ],
+            "correct_answer": "B",
+            "explanation": "OCR (Optical Character Recognition) is a Computer Vision technology that reads text from images - such as extracting data from scanned invoices, receipts, or business cards."
+          },
+          {
+            "order_number": 12,
+            "question_text": "In the Port Elizabeth automotive parts example, the AI vision system checked parts at what rate compared to human inspectors?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "hard",
+            "options": [
+              "2x faster (200 vs 100 parts/hour)",
+              "3x faster (300 vs 100 parts/hour)",
+              "5x faster (500 vs 100 parts/hour)",
+              "10x faster (1000 vs 100 parts/hour)"
+            ],
+            "correct_answer": "C",
+            "explanation": "The AI vision system checked 500 parts per hour compared to 100 parts per hour by human inspectors - a 5x increase in speed. Additionally, accuracy improved from 92% to 99.2%."
+          },
+          {
+            "order_number": 13,
+            "question_text": "What does the term 'Algorithm' mean in AI?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "easy",
+            "options": [
+              "The data used to train AI",
+              "Step-by-step instructions the AI follows",
+              "The computer hardware that runs AI",
+              "The final prediction made by AI"
+            ],
+            "correct_answer": "B",
+            "explanation": "An algorithm is a set of step-by-step instructions or rules that the AI system follows to process data and make decisions. Different algorithms are suited for different types of problems."
+          },
+          {
+            "order_number": 14,
+            "question_text": "What is an API (Application Programming Interface)?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "medium",
+            "options": [
+              "A type of AI algorithm",
+              "How different software systems communicate with each other",
+              "An advanced programming language",
+              "A computer security protocol"
+            ],
+            "correct_answer": "B",
+            "explanation": "An API is a way for different software systems to talk to each other. It allows you to connect AI tools to your existing business systems (like connecting a chatbot to your customer database)."
+          },
+          {
+            "order_number": 15,
+            "question_text": "What does 'bias' mean in AI systems?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "difficulty": "medium",
+            "options": [
+              "When AI processes data too slowly",
+              "When AI makes unfair assumptions or discriminatory decisions",
+              "When AI requires too much computing power",
+              "When AI costs more than expected"
+            ],
+            "correct_answer": "B",
+            "explanation": "Bias in AI means the system makes unfair or discriminatory assumptions, often because the training data reflected historical biases. This can lead to unfair treatment of certain groups and potential legal issues."
+          },
+          {
+            "order_number": 16,
+            "question_text": "Pre-trained AI models (like ChatGPT) require you to provide your own training data before you can use them.",
+            "question_type": "true_false",
+            "points": 3,
+            "difficulty": "easy",
+            "correct_answer": "False",
+            "explanation": "False. Pre-trained models like ChatGPT, Google Vision, and other cloud AI services are already trained on massive datasets and work immediately without requiring your own training data. This makes them perfect for small businesses."
+          },
+          {
+            "order_number": 17,
+            "question_text": "Unsupervised learning is when AI finds patterns in data without being told what to look for.",
+            "question_type": "true_false",
+            "points": 3,
+            "difficulty": "medium",
+            "correct_answer": "True",
+            "explanation": "True. Unsupervised learning means the AI discovers patterns on its own without labeled examples. It's useful for customer segmentation, anomaly detection, and discovering hidden patterns in data."
+          },
+          {
+            "order_number": 18,
+            "question_text": "Cloud AI means you need to purchase expensive computer hardware to run AI systems.",
+            "question_type": "true_false",
+            "points": 3,
+            "difficulty": "easy",
+            "correct_answer": "False",
+            "explanation": "False. Cloud AI runs on internet servers (the 'cloud'), so you don't need expensive hardware. You access it via the internet and typically pay monthly subscription fees (pay-as-you-go model)."
+          },
+          {
+            "order_number": 19,
+            "question_text": "For small business applications, 85% AI accuracy is usually good enough.",
+            "question_type": "true_false",
+            "points": 3,
+            "difficulty": "medium",
+            "correct_answer": "True",
+            "explanation": "True. For most business applications (chatbots, content generation, basic categorization), 85%+ accuracy is acceptable. Higher accuracy (95%+) is needed for critical applications like medical diagnosis or financial fraud detection."
+          },
+          {
+            "order_number": 20,
+            "question_text": "AI can understand sarcasm, humor, and South African slang perfectly.",
+            "question_type": "true_false",
+            "points": 3,
+            "difficulty": "easy",
+            "correct_answer": "False",
+            "explanation": "False. AI still struggles with sarcasm, humor, and cultural nuances like South African slang. This is one of AI's current limitations - it processes language literally and lacks cultural context understanding."
+          },
+          {
+            "order_number": 21,
+            "question_text": "The 'human-in-the-loop' approach means using AI for efficiency but keeping humans for oversight and critical decisions.",
+            "question_type": "true_false",
+            "points": 3,
+            "difficulty": "medium",
+            "correct_answer": "True",
+            "explanation": "True. Human-in-the-loop is a best practice where AI handles routine tasks and provides recommendations, but humans make final decisions on critical matters. For example, AI screens resumes but humans conduct interviews."
+          },
+          {
+            "order_number": 22,
+            "question_text": "More data always produces better AI results, regardless of data quality.",
+            "question_type": "true_false",
+            "points": 3,
+            "difficulty": "medium",
+            "correct_answer": "False",
+            "explanation": "False. Data quality matters more than quantity. 100 high-quality, accurate, complete records are better than 10,000 records with errors, missing fields, or inconsistencies. Bad data leads to bad AI predictions."
+          },
+          {
+            "order_number": 23,
+            "question_text": "Transfer learning means using a pre-trained AI model and adapting it to your specific needs.",
+            "question_type": "true_false",
+            "points": 3,
+            "difficulty": "hard",
+            "correct_answer": "True",
+            "explanation": "True. Transfer learning takes an AI model that's already been trained on a large dataset and fine-tunes it for your specific use case. This is faster and cheaper than training a model from scratch."
+          },
+          {
+            "order_number": 24,
+            "question_text": "Which THREE ingredients are essential for every AI system to work? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "difficulty": "easy",
+            "options": [
+              "Data to learn from",
+              "Algorithm (processing recipe)",
+              "Computing power",
+              "Internet connection",
+              "Smartphone app"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C"
+            ],
+            "explanation": "The three essential ingredients are: (1) Data - information for the AI to learn from, (2) Algorithm - the instructions for how to process data, and (3) Computing power - hardware to run the calculations. Internet and smartphones are helpful but not essential components."
+          },
+          {
+            "order_number": 25,
+            "question_text": "Which of the following are NLP (Natural Language Processing) capabilities? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "difficulty": "medium",
+            "options": [
+              "Text classification (categorizing documents)",
+              "Sentiment analysis (detecting emotions)",
+              "Object detection in images",
+              "Language translation",
+              "Question answering (chatbots)"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            "explanation": "NLP capabilities include text classification, sentiment analysis, translation, and question answering - all involve processing human language. Object detection in images is a Computer Vision capability, not NLP."
+          },
+          {
+            "order_number": 26,
+            "question_text": "Which business scenarios are appropriate for Computer Vision technology? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "difficulty": "medium",
+            "options": [
+              "Detecting product defects in manufacturing",
+              "Reading text from scanned invoices (OCR)",
+              "Predicting customer churn",
+              "Counting inventory from shelf photos",
+              "Generating social media captions"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "D"
+            ],
+            "explanation": "Computer Vision is used for visual tasks: defect detection, OCR (reading text from images), and counting objects in photos. Customer churn prediction uses Machine Learning, and generating captions uses NLP/text generation."
+          },
+          {
+            "order_number": 27,
+            "question_text": "According to the module, which are current limitations of AI? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "difficulty": "medium",
+            "options": [
+              "Cannot understand common sense reasoning like humans",
+              "Struggles with sarcasm and humor",
+              "Cannot process images or videos",
+              "Cannot explain why it made specific decisions",
+              "Cannot work without internet connection"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "D"
+            ],
+            "explanation": "Current AI limitations include: lack of common sense reasoning, difficulty with sarcasm/humor, and inability to explain decisions ('black box' problem). AI CAN process images/videos (Computer Vision) and CAN work offline in some cases (edge AI)."
+          },
+          {
+            "order_number": 28,
+            "question_text": "Which situations should NOT rely solely on AI without human oversight? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "difficulty": "hard",
+            "options": [
+              "Final hiring decisions affecting people's livelihoods",
+              "Generating social media post ideas",
+              "Medical diagnosis without doctor review",
+              "Scheduling customer appointments",
+              "Decisions requiring empathy and ethical judgment"
+            ],
+            "correct_answers": [
+              "A",
+              "C",
+              "E"
+            ],
+            "explanation": "AI should NOT make final decisions alone in high-stakes scenarios: hiring/firing, medical diagnosis, or situations requiring empathy and ethics. AI is fine for low-risk tasks like generating content ideas or scheduling appointments."
+          },
+          {
+            "order_number": 29,
+            "question_text": "What characterizes good quality training data for AI? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "difficulty": "medium",
+            "options": [
+              "Accurate and reflects reality",
+              "As much data as possible, quality doesn't matter",
+              "Complete with no missing fields",
+              "Consistent format throughout",
+              "Recent and up-to-date"
+            ],
+            "correct_answers": [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            "explanation": "Good quality data is: accurate, complete (no missing fields), consistent in format, and recent/up-to-date. Quality matters MORE than quantity - having massive amounts of poor-quality data will produce poor AI results."
+          },
+          {
+            "order_number": 30,
+            "question_text": "Which questions should you ask BEFORE choosing an AI technology for your business? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "difficulty": "hard",
+            "options": [
+              "What specific problem am I solving?",
+              "Which AI is most expensive?",
+              "Do I have the required data?",
+              "What's my budget?",
+              "Does it integrate with my existing systems?"
+            ],
+            "correct_answers": [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            "explanation": "Important questions include: the specific problem being solved, data availability, budget constraints, and system integration. Choosing the most expensive AI is NOT a good criterion - choose based on fit for your needs, not price alone."
+          }
+        ]
+      }
+    }
+  ]
+}
