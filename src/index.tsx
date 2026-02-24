@@ -3910,12 +3910,7 @@ app.post('/api/student/module/:moduleId/complete', async (c) => {
       })
     
     // Get total modules and completed count for this enrollment
-    const { data: module } = await supabase
-      .from('modules')
-      .select('course_id')
-      .eq('id', moduleId)
-      .single()
-    
+    // Use the module data already fetched above (includes course_id)
     const { data: allModules } = await supabase
       .from('modules')
       .select('id')
