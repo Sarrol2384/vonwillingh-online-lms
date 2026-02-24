@@ -3863,6 +3863,39 @@ app.post('/api/student/module/:moduleId/complete', async (c) => {
     
     const supabase = getSupabaseAdminClient(c.env)
     
+    // Check if module has a quiz
+    const { data: module } = await supabase
+      .from('modules')
+      .select('has_quiz, title, course_id')
+      .eq('id', moduleId)
+      .single()
+    
+    if (!module) {
+      return c.json({ success: false, message: 'Module not found' }, 404)
+    }
+    
+    // If module has a quiz, check if student passed it
+    if (module.has_quiz) {
+      const { data: quizAttempts } = await supabase
+        .from('quiz_attempts')
+        .select('passed, percentage')
+        .eq('student_id', studentId)
+        .eq('module_id', moduleId)
+        .eq('passed', true)
+        .limit(1)
+      
+      if (!quizAttempts || quizAttempts.length === 0) {
+        return c.json({ 
+          success: false, 
+          message: 'You must pass the quiz before marking this module as complete',
+          requiresQuiz: true,
+          moduleTitle: module.title
+        }, 400)
+      }
+      
+      console.log('[API] Quiz passed, allowing module completion')
+    }
+    
     // Update module progress
     await supabase
       .from('module_progress')

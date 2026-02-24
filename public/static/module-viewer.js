@@ -159,15 +159,63 @@ async function markAsComplete(moduleId) {
     } else {
       completeBtn.disabled = false;
       completeBtn.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Mark as Complete';
-      alert(response.data.message || 'Failed to mark as complete');
+      
+      // Show quiz requirement message if applicable
+      if (response.data.requiresQuiz) {
+        showQuizRequiredMessage(response.data.moduleTitle);
+      } else {
+        alert(response.data.message || 'Failed to mark as complete');
+      }
     }
     
   } catch (error) {
     console.error('Mark complete error:', error);
     completeBtn.disabled = false;
     completeBtn.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Mark as Complete';
-    alert('An error occurred. Please try again.');
+    
+    // Check if it's a quiz requirement error
+    if (error.response && error.response.data && error.response.data.requiresQuiz) {
+      showQuizRequiredMessage(error.response.data.moduleTitle);
+    } else {
+      alert('An error occurred. Please try again.');
+    }
   }
+}
+
+function showQuizRequiredMessage(moduleTitle) {
+  const message = document.createElement('div');
+  message.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+  message.innerHTML = `
+    <div class="bg-white rounded-lg p-8 max-w-md mx-4 shadow-2xl">
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
+          <i class="fas fa-exclamation-triangle text-3xl text-yellow-600"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-2">Quiz Required!</h3>
+        <p class="text-gray-600">
+          You must pass the quiz before marking this module as complete.
+        </p>
+      </div>
+      
+      <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+        <p class="text-sm text-yellow-800">
+          <strong>${moduleTitle || 'This module'}</strong> includes a quiz that you must pass (70% or higher) before you can proceed to the next module.
+        </p>
+      </div>
+      
+      <div class="space-y-3">
+        <button onclick="this.closest('.fixed').remove(); document.getElementById('quizModal')?.classList.remove('hidden')" 
+                class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition font-semibold">
+          <i class="fas fa-clipboard-check mr-2"></i>Go to Quiz
+        </button>
+        <button onclick="this.closest('.fixed').remove()" 
+                class="w-full bg-gray-200 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-300 transition font-semibold">
+          <i class="fas fa-times mr-2"></i>Close
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(message);
 }
 
 function showSuccessMessage(progress) {
