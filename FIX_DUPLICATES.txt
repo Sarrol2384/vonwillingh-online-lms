@@ -1,0 +1,18 @@
+# Fix Duplicate Enrollments - Simple Solution
+
+## Option 1: Supabase Table Editor (30 seconds)
+1. Go to: https://supabase.com/dashboard
+2. Click: Table Editor → enrollments table
+3. Filter: course_id = 35
+4. Delete duplicate rows (keep the one with newest enrolled_at)
+5. Refresh dashboard
+
+## Option 2: Manual Unenroll (1 minute)
+1. Dashboard → Click ⋮ on each duplicate course card
+2. Select "Unenroll" for both
+3. Go to courses page → Enroll once
+4. Done
+
+## Option 3: SQL (if you prefer)
+File: `FIX_DUPLICATES_SUPABASE_V2.sql`
+Run in Supabase SQL Editor (browser)
