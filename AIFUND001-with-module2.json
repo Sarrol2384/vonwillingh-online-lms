@@ -1,0 +1,431 @@
+{
+  "course": {
+    "name": "Introduction to Artificial Intelligence Fundamentals",
+    "code": "AIFUND001",
+    "description": "A comprehensive introduction to AI fundamentals designed specifically for small business owners and entrepreneurs in South Africa. Learn practical AI applications, understand key concepts, and discover how to leverage AI tools to grow your business.",
+    "price": 1500,
+    "currency": "ZAR",
+    "level": "Certificate",
+    "duration": "4 weeks",
+    "category": "Technology"
+  },
+  "modules": [
+    {
+      "title": "Module 1: Introduction to AI for Small Business",
+      "description": "Understand what AI is, dispel common myths, and discover practical applications for small businesses in South Africa.",
+      "order_number": 1,
+      "duration_minutes": 60,
+      "content": "<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 12px; color: white; margin-bottom: 30px;'><h1 style='margin: 0; font-size: 2.5em;'>Module 1: Introduction to AI for Small Business</h1><p style='margin: 10px 0 0 0; font-size: 1.2em; opacity: 0.95;'>Your journey into practical artificial intelligence starts here</p></div><div style='background: #f8f9fa; padding: 30px; border-radius: 8px; margin-bottom: 30px;'><h2 style='color: #667eea; margin-top: 0;'>🎯 Learning Objectives</h2><ul style='line-height: 2;'><li>Define artificial intelligence and understand its core concepts</li><li>Identify practical AI applications for South African small businesses</li><li>Distinguish between AI myths and realities</li><li>Recognize different types of AI and their business uses</li><li>Understand the economic impact of AI on small businesses</li><li>Develop an AI readiness mindset for your business</li><li>Create an initial AI adoption action plan</li><li>Evaluate AI tools suitable for your business context</li></ul></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>📚 Section 1: What is Artificial Intelligence?</h2><p style='font-size: 1.1em; line-height: 1.8;'>Artificial Intelligence (AI) is the simulation of human intelligence processes by computer systems. These processes include learning, reasoning, problem-solving, perception, and language understanding.</p><p style='font-size: 1.1em; line-height: 1.8;'>For South African small business owners, AI is not about replacing humans or creating robots. Instead, it's about using smart software tools that can:</p><ul style='line-height: 2;'><li><strong>Automate repetitive tasks</strong> – saving time and reducing errors</li><li><strong>Analyze data quickly</strong> – helping you make better business decisions</li><li><strong>Personalize customer experiences</strong> – improving satisfaction and loyalty</li><li><strong>Predict trends</strong> – staying ahead of market changes</li><li><strong>Improve efficiency</strong> – allowing you to focus on strategic growth</li></ul></div><div style='background: #fff3cd; padding: 25px; border-radius: 8px; margin: 30px 0; border-left: 5px solid #ffc107;'><h3 style='color: #856404; margin-top: 0;'>💡 Real-World Example</h3><p style='line-height: 1.8; color: #856404;'>A Cape Town-based guesthouse implemented an AI-powered chatbot to handle booking inquiries outside office hours. Within three months, they saw a <strong>40% reduction in response time</strong> and a <strong>25% increase in confirmed bookings</strong> – without hiring additional staff.</p></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>🔍 Section 2: Types of AI Relevant to Small Business</h2><h3>1. Narrow AI (Weak AI)</h3><p style='font-size: 1.1em; line-height: 1.8;'>This is AI designed to perform specific tasks. It's what most businesses use today:</p><ul style='line-height: 2;'><li><strong>ChatGPT and language models</strong> – for writing, customer service, content creation</li><li><strong>Image recognition tools</strong> – for quality control, inventory management</li><li><strong>Recommendation engines</strong> – for personalized marketing</li><li><strong>Voice assistants</strong> – for appointment scheduling, reminders</li></ul><h3>2. Machine Learning (ML)</h3><p style='font-size: 1.1em; line-height: 1.8;'>Systems that learn from data without being explicitly programmed. Applications include:</p><ul style='line-height: 2;'><li>Sales forecasting</li><li>Customer behavior prediction</li><li>Fraud detection</li><li>Inventory optimization</li></ul><h3>3. Natural Language Processing (NLP)</h3><p style='font-size: 1.1em; line-height: 1.8;'>AI that understands and generates human language:</p><ul style='line-height: 2;'><li>Email categorization and response</li><li>Sentiment analysis on customer reviews</li><li>Chatbots and virtual assistants</li><li>Document summarization</li></ul></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>🇿🇦 Section 3: AI in the South African Context</h2><h3>Current State of AI Adoption</h3><p style='font-size: 1.1em; line-height: 1.8;'>According to the 2023 AI Index Report:</p><ul style='line-height: 2;'><li>South Africa leads the African continent in AI adoption</li><li>35% of established businesses are already using some form of AI</li><li>The AI market in SA is growing at 28% annually</li><li>Most common applications: customer service, marketing automation, and data analysis</li></ul><h3>Economic Impact</h3><p style='font-size: 1.1em; line-height: 1.8;'><strong>AI could contribute R1.8 trillion to South Africa's GDP by 2030</strong>, according to PwC's Global AI Study. For small businesses specifically:</p><ul style='line-height: 2;'><li>20-30% increase in productivity</li><li>15-25% improvement in customer satisfaction scores</li><li>10-40% reduction in operating costs</li><li>3-6 month typical ROI timeline</li></ul><h3>Local Success Stories</h3><div style='background: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;'><strong>Case Study 1: Johannesburg Accounting Firm</strong><p>Implemented AI-powered document processing, reducing data entry time by 60% and allowing staff to focus on higher-value advisory services. Revenue increased by 35% in one year.</p></div><div style='background: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;'><strong>Case Study 2: Durban E-Commerce Store</strong><p>Used AI-based inventory forecasting and personalized recommendations. Reduced overstock by 40% and increased average order value by 22%.</p></div></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>🚀 Section 4: Practical AI Applications by Business Type</h2><h3>Retail and E-Commerce</h3><ul style='line-height: 2;'><li>Personalized product recommendations</li><li>Chatbots for customer service</li><li>Inventory forecasting</li><li>Dynamic pricing optimization</li></ul><h3>Professional Services (Accounting, Legal, Consulting)</h3><ul style='line-height: 2;'><li>Automated appointment scheduling</li><li>Document processing and data extraction</li><li>Client communication automation</li><li>Proposal and report generation</li></ul><h3>Hospitality and Tourism</h3><ul style='line-height: 2;'><li>AI-powered booking systems</li><li>Multilingual customer support chatbots</li><li>Review analysis and reputation management</li><li>Dynamic pricing for peak/off-peak periods</li></ul><h3>Manufacturing and Distribution</h3><ul style='line-height: 2;'><li>Predictive maintenance</li><li>Quality control through computer vision</li><li>Supply chain optimization</li><li>Demand forecasting</li></ul></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>❌ Section 5: Common AI Myths Debunked</h2><div style='background: #ffebee; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 5px solid #f44336;'><h4 style='color: #c62828; margin-top: 0;'>❌ Myth: AI will replace all human employees</h4><p><strong>✅ Reality:</strong> AI is designed to augment human capabilities, not replace them. It handles repetitive tasks so humans can focus on creative, strategic, and relationship-building work.</p></div><div style='background: #ffebee; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 5px solid #f44336;'><h4 style='color: #c62828; margin-top: 0;'>❌ Myth: AI is only for big corporations</h4><p><strong>✅ Reality:</strong> Today's AI tools are accessible and affordable for small businesses, often costing R200-500/month with free entry-level options available.</p></div><div style='background: #ffebee; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 5px solid #f44336;'><h4 style='color: #c62828; margin-top: 0;'>❌ Myth: You need technical expertise to use AI</h4><p><strong>✅ Reality:</strong> Most modern AI business tools are designed with user-friendly interfaces that require no coding or technical knowledge.</p></div><div style='background: #ffebee; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 5px solid #f44336;'><h4 style='color: #c62828; margin-top: 0;'>❌ Myth: AI is too expensive for small businesses</h4><p><strong>✅ Reality:</strong> Many AI tools offer free tiers, and the ROI typically justifies the investment within 3-6 months.</p></div><div style='background: #ffebee; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 5px solid #f44336;'><h4 style='color: #c62828; margin-top: 0;'>❌ Myth: AI systems are perfect and never make mistakes</h4><p><strong>✅ Reality:</strong> AI systems require human oversight and continuous improvement. They're tools to enhance decision-making, not replace it.</p></div></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>📋 Section 6: Quick Start – AI Adoption Action Plan</h2><table style='width: 100%; border-collapse: collapse; margin: 20px 0;'><thead><tr style='background: #667eea; color: white;'><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Phase</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Timeline</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Key Activities</th></tr></thead><tbody><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>1. Assess</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Week 1-2</td><td style='padding: 15px; border: 1px solid #ddd;'>• Map your current business processes<br>• Identify repetitive, time-consuming tasks<br>• Survey your team about pain points<br>• Review customer feedback for service gaps</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>2. Research</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Week 2-3</td><td style='padding: 15px; border: 1px solid #ddd;'>• Explore AI tools relevant to your industry<br>• Read case studies from similar businesses<br>• Take advantage of free trials<br>• Calculate potential ROI for each tool</td></tr><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>3. Pilot</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Week 4-8</td><td style='padding: 15px; border: 1px solid #ddd;'>• Start with ONE process or department<br>• Set clear success metrics (KPIs)<br>• Train your team on the new tool<br>• Monitor and document results</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>4. Scale</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Month 3-6</td><td style='padding: 15px; border: 1px solid #ddd;'>• Expand to additional processes if pilot succeeds<br>• Optimize based on learnings<br>• Integrate AI tools with existing systems<br>• Develop internal AI literacy across team</td></tr></tbody></table></div><div style='background: #e8f5e9; padding: 30px; border-radius: 8px; margin-bottom: 30px;'><h2 style='color: #2e7d32; margin-top: 0;'>✅ Key Takeaways</h2><ul style='line-height: 2;'><li>AI is a practical tool for improving efficiency and decision-making in small businesses</li><li>South Africa is leading AI adoption in Africa, creating opportunities for early adopters</li><li>AI tools are accessible, affordable, and don't require technical expertise</li><li>Success comes from starting small, focusing on specific problems, and scaling gradually</li><li>The economic impact of AI can be significant: 20-30% productivity increases are common</li><li>AI augments human capabilities rather than replacing them</li></ul></div><div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 8px; color: white; text-align: center;'><h2 style='margin: 0 0 15px 0;'>🎯 Ready to Test Your Knowledge?</h2><p style='font-size: 1.1em; margin: 0;'>Complete the Module 1 Assessment Quiz to demonstrate your understanding and move forward to Module 2!</p></div>",
+      "has_quiz": true,
+      "quiz": {
+        "title": "Module 1 Assessment Quiz",
+        "description": "Test your understanding of AI fundamentals and their application to small business. This quiz includes 30 questions: 15 multiple-choice, 8 true/false, and 7 multiple-select questions.",
+        "passing_score": 70,
+        "max_attempts": 3,
+        "time_limit_minutes": 45,
+        "questions": [
+          {
+            "order_number": 1,
+            "question_text": "What is the primary purpose of AI in small business contexts?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "To replace all human employees",
+              "To automate repetitive tasks and improve decision-making",
+              "To create humanoid robots",
+              "To make businesses completely autonomous"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 2,
+            "question_text": "According to the 2023 AI Index Report, what percentage of established South African businesses are already using AI tools?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "15%",
+              "25%",
+              "35%",
+              "45%"
+            ],
+            "correct_answer": "C"
+          },
+          {
+            "order_number": 3,
+            "question_text": "Which type of AI is most relevant for current small business applications?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "General AI (Strong AI)",
+              "Narrow AI (Weak AI)",
+              "Superintelligent AI",
+              "Quantum AI"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 4,
+            "question_text": "Natural Language Processing (NLP) is primarily used for:",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "Image recognition and computer vision",
+              "Understanding and generating human language",
+              "Predicting stock prices",
+              "Managing inventory levels"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 5,
+            "question_text": "According to the module, what was the impact of implementing an AI chatbot for a Cape Town guesthouse?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "20% reduction in costs and 10% increase in bookings",
+              "40% reduction in response time and 25% increase in bookings",
+              "50% reduction in staff and 30% increase in bookings",
+              "60% reduction in response time and 15% increase in bookings"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 6,
+            "question_text": "What is the estimated contribution of AI to South Africa's GDP by 2030?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "R500 billion",
+              "R1 trillion",
+              "R1.8 trillion",
+              "R2.5 trillion"
+            ],
+            "correct_answer": "C"
+          },
+          {
+            "order_number": 7,
+            "question_text": "According to the module, small businesses using AI typically report productivity increases of:",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "5-10%",
+              "10-20%",
+              "20-30%",
+              "40-50%"
+            ],
+            "correct_answer": "C"
+          },
+          {
+            "order_number": 8,
+            "question_text": "Which of the following is a myth about AI?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "AI can help automate repetitive tasks",
+              "AI is only for big corporations",
+              "AI tools can improve customer satisfaction",
+              "AI requires human oversight for critical decisions"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 9,
+            "question_text": "In the AI adoption action plan, what should be the focus during the 'Assess' phase (Week 1-2)?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "Purchasing the most expensive AI tools available",
+              "Identifying repetitive, time-consuming tasks and pain points",
+              "Replacing all employees with AI systems",
+              "Implementing AI across all departments simultaneously"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 10,
+            "question_text": "What is the recommended first step when adopting AI in your business?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "Implement AI tools across all departments at once",
+              "Start small with one process or department",
+              "Replace all manual work with automated systems",
+              "Hire a team of AI specialists"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 11,
+            "question_text": "How long should the 'Pilot' phase of AI adoption typically last?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "1-2 weeks",
+              "2-3 weeks",
+              "4-8 weeks",
+              "6 months"
+            ],
+            "correct_answer": "C"
+          },
+          {
+            "order_number": 12,
+            "question_text": "Machine learning systems are characterized by their ability to:",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "Only perform tasks they are explicitly programmed to do",
+              "Learn from data without being explicitly programmed",
+              "Replace human decision-making entirely",
+              "Function without any human oversight"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 13,
+            "question_text": "What percentage of customers prefer businesses that personalize experiences?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "50%",
+              "60%",
+              "70%",
+              "80%"
+            ],
+            "correct_answer": "D"
+          },
+          {
+            "order_number": 14,
+            "question_text": "Entry-level AI tools for small businesses typically cost:",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "R50-100 per month",
+              "R200-500 per month",
+              "R1000-2000 per month",
+              "R5000+ per month"
+            ],
+            "correct_answer": "B"
+          },
+          {
+            "order_number": 15,
+            "question_text": "What is the typical ROI timeline for AI implementation in small businesses?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "1-2 weeks",
+              "1 month",
+              "3-6 months",
+              "2 years"
+            ],
+            "correct_answer": "C"
+          },
+          {
+            "order_number": 16,
+            "question_text": "AI is designed to completely replace human employees in small businesses.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "False"
+          },
+          {
+            "order_number": 17,
+            "question_text": "You need technical expertise to use most modern AI business tools.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "False"
+          },
+          {
+            "order_number": 18,
+            "question_text": "South Africa leads the African continent in AI adoption.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "True"
+          },
+          {
+            "order_number": 19,
+            "question_text": "AI systems are perfect and never make mistakes.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "False"
+          },
+          {
+            "order_number": 20,
+            "question_text": "AI-powered businesses typically respond to customers 10 times faster than businesses without AI.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "True"
+          },
+          {
+            "order_number": 21,
+            "question_text": "Customer satisfaction scores can improve by an average of 15-25% with AI implementation.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "True"
+          },
+          {
+            "order_number": 22,
+            "question_text": "The 'Scale' phase of AI adoption should begin immediately after purchasing AI tools.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "False"
+          },
+          {
+            "order_number": 23,
+            "question_text": "Operating costs can be reduced by 10-40% depending on the AI application implemented.",
+            "question_type": "true_false",
+            "points": 3,
+            "correct_answer": "True"
+          },
+          {
+            "order_number": 24,
+            "question_text": "Which AI applications are specifically mentioned for the retail and e-commerce sector? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Personalized product recommendations",
+              "Chatbots for customer service",
+              "Inventory forecasting",
+              "Dynamic pricing optimization",
+              "Automated tax filing"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          {
+            "order_number": 25,
+            "question_text": "Which of the following are identified as key principles for AI adoption success? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Start small with one process",
+              "Focus on problems first, then find solutions",
+              "Implement across all departments simultaneously",
+              "Measure results with clear KPIs",
+              "Train your team in basic AI literacy"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "D",
+              "E"
+            ]
+          },
+          {
+            "order_number": 26,
+            "question_text": "Which processes should be included in the 'Assess' phase (Week 1-2)? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Map your current business processes",
+              "Identify repetitive, time-consuming tasks",
+              "Purchase AI tools immediately",
+              "Survey your team about pain points",
+              "Review customer feedback for service gaps"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "D",
+              "E"
+            ]
+          },
+          {
+            "order_number": 27,
+            "question_text": "Which AI applications are mentioned for professional services businesses? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Automated appointment scheduling",
+              "Document processing and data extraction",
+              "Client communication automation",
+              "Proposal and report generation",
+              "Inventory management"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          {
+            "order_number": 28,
+            "question_text": "Which of the following are examples of Narrow AI (Weak AI) mentioned in the module? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "ChatGPT and language models",
+              "Image recognition tools",
+              "Recommendation engines",
+              "Voice assistants",
+              "General artificial intelligence"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          {
+            "order_number": 29,
+            "question_text": "According to the module, what can AI help businesses achieve? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Automate repetitive tasks",
+              "Analyze data quickly",
+              "Personalize customer experiences",
+              "Predict trends",
+              "Eliminate the need for all human employees"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          {
+            "order_number": 30,
+            "question_text": "Which activities are recommended during the 'Research' phase (Week 2-3)? (Select all that apply)",
+            "question_type": "multiple_select",
+            "points": 4,
+            "options": [
+              "Explore AI tools relevant to your industry",
+              "Read case studies from similar businesses",
+              "Take advantage of free trials",
+              "Calculate potential ROI for each tool",
+              "Implement AI across all departments"
+            ],
+            "correct_answers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Module 2: Understanding AI Technologies",
+      "description": "Dive deeper into specific AI technologies, tools, and platforms available for small businesses. Learn how to evaluate and select the right AI solutions for your needs.",
+      "order_number": 2,
+      "duration_minutes": 60,
+      "content": "<div style='background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%); padding: 40px; border-radius: 12px; color: white; margin-bottom: 30px;'><h1 style='margin: 0; font-size: 2.5em;'>Module 2: Understanding AI Technologies</h1><p style='margin: 10px 0 0 0; font-size: 1.2em; opacity: 0.95;'>Master the tools and technologies that power AI solutions</p></div><div style='background: #f8f9fa; padding: 30px; border-radius: 8px; margin-bottom: 30px;'><h2 style='color: #4CAF50; margin-top: 0;'>🎯 Learning Objectives</h2><ul style='line-height: 2;'><li>Understand the technical foundations of AI systems</li><li>Identify and evaluate AI tools for different business functions</li><li>Learn about cloud AI platforms and their capabilities</li><li>Recognize the importance of data in AI applications</li><li>Understand AI integration with existing business systems</li><li>Evaluate AI vendor offerings and pricing models</li></ul></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #4CAF50;'>🧠 Section 1: How AI Actually Works</h2><h3>The Three Pillars of AI</h3><div style='background: #E8F5E9; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #2E7D32; margin-top: 0;'>1. Data</h4><p style='line-height: 1.8;'>AI systems learn from data. The quality and quantity of data directly impacts AI performance. For small businesses, this means:</p><ul style='line-height: 1.8;'><li>Customer interaction data (emails, chat logs, purchase history)</li><li>Business operations data (sales, inventory, expenses)</li><li>External data (market trends, weather, economic indicators)</li></ul></div><div style='background: #E8F5E9; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #2E7D32; margin-top: 0;'>2. Algorithms</h4><p style='line-height: 1.8;'>The mathematical models that process data and make predictions or decisions. You don't need to understand the math, but you should understand what they can do:</p><ul style='line-height: 1.8;'><li><strong>Classification algorithms:</strong> Categorize data (spam detection, customer segmentation)</li><li><strong>Regression algorithms:</strong> Predict numerical values (sales forecasting, pricing)</li><li><strong>Clustering algorithms:</strong> Group similar items (customer personas, product categories)</li><li><strong>Neural networks:</strong> Complex pattern recognition (image recognition, natural language)</li></ul></div><div style='background: #E8F5E9; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #2E7D32; margin-top: 0;'>3. Computing Power</h4><p style='line-height: 1.8;'>The infrastructure to run AI systems. Modern cloud platforms make this accessible:</p><ul style='line-height: 1.8;'><li>No need for expensive hardware</li><li>Pay-as-you-go pricing</li><li>Scalable based on your needs</li><li>Maintained and updated by providers</li></ul></div></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #4CAF50;'>🛠️ Section 2: AI Tools by Business Function</h2><h3>Customer Service & Communication</h3><table style='width: 100%; border-collapse: collapse; margin: 20px 0;'><thead><tr style='background: #4CAF50; color: white;'><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Tool</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Primary Use</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Cost (ZAR/month)</th></tr></thead><tbody><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>Tidio</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>AI chatbot for website</td><td style='padding: 15px; border: 1px solid #ddd;'>Free - R700</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>Intercom</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Customer messaging platform</td><td style='padding: 15px; border: 1px solid #ddd;'>R1,000 - R3,500</td></tr><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>Zendesk</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Customer support ticketing</td><td style='padding: 15px; border: 1px solid #ddd;'>R900 - R2,800</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>Freshdesk</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Help desk automation</td><td style='padding: 15px; border: 1px solid #ddd;'>Free - R1,600</td></tr></tbody></table><h3>Marketing & Sales</h3><table style='width: 100%; border-collapse: collapse; margin: 20px 0;'><thead><tr style='background: #4CAF50; color: white;'><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Tool</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Primary Use</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Cost (ZAR/month)</th></tr></thead><tbody><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>HubSpot</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Marketing automation & CRM</td><td style='padding: 15px; border: 1px solid #ddd;'>Free - R4,500</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>Mailchimp</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Email marketing with AI recommendations</td><td style='padding: 15px; border: 1px solid #ddd;'>Free - R1,500</td></tr><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>Jasper AI</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>AI content writing</td><td style='padding: 15px; border: 1px solid #ddd;'>R800 - R2,500</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>Copy.ai</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Marketing copy generation</td><td style='padding: 15px; border: 1px solid #ddd;'>Free - R650</td></tr></tbody></table><h3>Operations & Productivity</h3><table style='width: 100%; border-collapse: collapse; margin: 20px 0;'><thead><tr style='background: #4CAF50; color: white;'><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Tool</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Primary Use</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Cost (ZAR/month)</th></tr></thead><tbody><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>Zapier</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Workflow automation</td><td style='padding: 15px; border: 1px solid #ddd;'>Free - R1,100</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>UiPath</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Robotic process automation</td><td style='padding: 15px; border: 1px solid #ddd;'>Free - R6,000</td></tr><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>Notion AI</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>AI-enhanced documentation</td><td style='padding: 15px; border: 1px solid #ddd;'>R160 per user</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>Otter.ai</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Meeting transcription</td><td style='padding: 15px; border: 1px solid #ddd;'>Free - R500</td></tr></tbody></table><h3>Data Analysis & Business Intelligence</h3><table style='width: 100%; border-collapse: collapse; margin: 20px 0;'><thead><tr style='background: #4CAF50; color: white;'><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Tool</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Primary Use</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Cost (ZAR/month)</th></tr></thead><tbody><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>Tableau</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Data visualization with AI insights</td><td style='padding: 15px; border: 1px solid #ddd;'>R1,200 - R2,500</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>Power BI</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Business intelligence & analytics</td><td style='padding: 15px; border: 1px solid #ddd;'>R200 - R350</td></tr><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>MonkeyLearn</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Text analysis & sentiment detection</td><td style='padding: 15px; border: 1px solid #ddd;'>Free - R5,000</td></tr></tbody></table></div><div style='background: #fff3cd; padding: 25px; border-radius: 8px; margin: 30px 0; border-left: 5px solid #ffc107;'><h3 style='color: #856404; margin-top: 0;'>💡 Real-World Example</h3><p style='line-height: 1.8; color: #856404;'>A Pretoria-based consulting firm integrated three AI tools: HubSpot for client management, Otter.ai for meeting notes, and Jasper for proposal writing. <strong>Total monthly cost: R1,460</strong>. <strong>Time saved: 15 hours per week</strong>. <strong>Revenue impact: R45,000 additional billing per month</strong> due to efficiency gains.</p></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #4CAF50;'>☁️ Section 3: Cloud AI Platforms</h2><h3>Major Providers and Their Offerings</h3><div style='background: #E3F2FD; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #1565C0; margin-top: 0;'>Google Cloud AI</h4><p style='line-height: 1.8;'><strong>Best for:</strong> Language processing, translation, and vision AI</p><p style='line-height: 1.8;'><strong>Key offerings:</strong></p><ul style='line-height: 1.8;'><li>AutoML for custom models without coding</li><li>Dialogflow for chatbots</li><li>Vision AI for image analysis</li><li>Natural Language API</li></ul><p style='line-height: 1.8;'><strong>Pricing:</strong> Pay-per-use, many services have free tiers</p></div><div style='background: #FFF3E0; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #E65100; margin-top: 0;'>Amazon Web Services (AWS) AI</h4><p style='line-height: 1.8;'><strong>Best for:</strong> Comprehensive AI/ML suite, scalability</p><p style='line-height: 1.8;'><strong>Key offerings:</strong></p><ul style='line-height: 1.8;'><li>Amazon Lex for conversational interfaces</li><li>Amazon Rekognition for image/video analysis</li><li>Amazon Forecast for time-series predictions</li><li>SageMaker for custom ML models</li></ul><p style='line-height: 1.8;'><strong>Pricing:</strong> Pay-per-use, 12-month free tier for new users</p></div><div style='background: #E8EAF6; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #283593; margin-top: 0;'>Microsoft Azure AI</h4><p style='line-height: 1.8;'><strong>Best for:</strong> Integration with Office 365 and Windows ecosystem</p><p style='line-height: 1.8;'><strong>Key offerings:</strong></p><ul style='line-height: 1.8;'><li>Azure Bot Service for chatbots</li><li>Cognitive Services (vision, speech, language)</li><li>Azure Machine Learning</li><li>Power Platform integration (Power BI, Power Automate)</li></ul><p style='line-height: 1.8;'><strong>Pricing:</strong> Pay-per-use, many services have free tiers</p></div></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #4CAF50;'>📊 Section 4: The Role of Data in AI</h2><h3>Data Quality Principles</h3><div style='background: #F3E5F5; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #6A1B9A; margin-top: 0;'>1. Accuracy</h4><p style='line-height: 1.8;'>Your AI is only as good as your data. Inaccurate data leads to poor predictions and decisions.</p><p style='line-height: 1.8;'><strong>Action items:</strong></p><ul style='line-height: 1.8;'><li>Regular data audits and cleaning</li><li>Validation rules for data entry</li><li>Automated error detection</li></ul></div><div style='background: #F3E5F5; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #6A1B9A; margin-top: 0;'>2. Completeness</h4><p style='line-height: 1.8;'>Missing data can skew AI results. Ensure comprehensive data collection.</p><p style='line-height: 1.8;'><strong>Action items:</strong></p><ul style='line-height: 1.8;'><li>Identify critical data fields</li><li>Implement data collection at all customer touchpoints</li><li>Use data enrichment services when appropriate</li></ul></div><div style='background: #F3E5F5; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #6A1B9A; margin-top: 0;'>3. Consistency</h4><p style='line-height: 1.8;'>Data should follow the same format and standards across your systems.</p><p style='line-height: 1.8;'><strong>Action items:</strong></p><ul style='line-height: 1.8;'><li>Standardize data formats (dates, names, addresses)</li><li>Use dropdown menus instead of free text when possible</li><li>Implement data normalization processes</li></ul></div><div style='background: #F3E5F5; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #6A1B9A; margin-top: 0;'>4. Timeliness</h4><p style='line-height: 1.8;'>AI models work best with recent, relevant data. Old data may not reflect current realities.</p><p style='line-height: 1.8;'><strong>Action items:</strong></p><ul style='line-height: 1.8;'><li>Regular data refreshes</li><li>Archive outdated data</li><li>Real-time data integration where possible</li></ul></div><h3>Data Privacy and Security</h3><div style='background: #FFEBEE; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #F44336;'><h4 style='color: #C62828; margin-top: 0;'>⚠️ Important Compliance Considerations</h4><p style='line-height: 1.8;'>When using AI, you must comply with:</p><ul style='line-height: 1.8;'><li><strong>POPIA (Protection of Personal Information Act):</strong> South Africa's data privacy law</li><li><strong>GDPR:</strong> If you have European customers</li><li><strong>Industry-specific regulations:</strong> Healthcare, finance, etc.</li></ul><p style='line-height: 1.8;'><strong>Key requirements:</strong></p><ul style='line-height: 1.8;'><li>Customer consent for data collection</li><li>Right to data access and deletion</li><li>Secure data storage and transmission</li><li>Transparent AI decision-making processes</li></ul></div></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #4CAF50;'>🔗 Section 5: Integration and Implementation</h2><h3>Integration Methods</h3><div style='background: #E0F7FA; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #006064; margin-top: 0;'>1. APIs (Application Programming Interfaces)</h4><p style='line-height: 1.8;'>The most common way to connect AI tools with your existing systems.</p><p style='line-height: 1.8;'><strong>Advantages:</strong></p><ul style='line-height: 1.8;'><li>Real-time data synchronization</li><li>Automated workflows</li><li>Scalable and flexible</li></ul><p style='line-height: 1.8;'><strong>Example:</strong> Connect your e-commerce platform to an AI recommendation engine via API</p></div><div style='background: #E0F7FA; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #006064; margin-top: 0;'>2. No-Code Integration Platforms</h4><p style='line-height: 1.8;'>Tools like Zapier, Make (Integromat), and Microsoft Power Automate allow you to connect apps without coding.</p><p style='line-height: 1.8;'><strong>Advantages:</strong></p><ul style='line-height: 1.8;'><li>No technical skills required</li><li>Quick setup</li><li>Visual workflow builders</li><li>Pre-built templates</li></ul><p style='line-height: 1.8;'><strong>Example:</strong> When a customer submits a form, automatically add them to your CRM, send a welcome email via AI-generated content, and create a follow-up task</p></div><div style='background: #E0F7FA; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #006064; margin-top: 0;'>3. Native Integrations</h4><p style='line-height: 1.8;'>Many AI tools offer built-in integrations with popular business software.</p><p style='line-height: 1.8;'><strong>Advantages:</strong></p><ul style='line-height: 1.8;'><li>Easiest to set up</li><li>Often included in the base price</li><li>Optimized for performance</li></ul><p style='line-height: 1.8;'><strong>Example:</strong> HubSpot's native integration with Gmail, or Shopify's integration with AI chatbots</p></div><h3>Implementation Best Practices</h3><table style='width: 100%; border-collapse: collapse; margin: 20px 0;'><thead><tr style='background: #4CAF50; color: white;'><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Phase</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Timeline</th><th style='padding: 15px; text-align: left; border: 1px solid #ddd;'>Key Activities</th></tr></thead><tbody><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>Planning</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Week 1</td><td style='padding: 15px; border: 1px solid #ddd;'>• Define integration requirements<br>• Map data flows<br>• Identify stakeholders<br>• Set success criteria</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>Setup</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Week 2-3</td><td style='padding: 15px; border: 1px solid #ddd;'>• Configure API keys<br>• Set up workflows<br>• Test connections<br>• Import historical data (if needed)</td></tr><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>Testing</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Week 3-4</td><td style='padding: 15px; border: 1px solid #ddd;'>• Run test scenarios<br>• Verify data accuracy<br>• Check error handling<br>• Validate with small user group</td></tr><tr><td style='padding: 15px; border: 1px solid #ddd;'><strong>Training</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Week 4-5</td><td style='padding: 15px; border: 1px solid #ddd;'>• Train team members<br>• Create user documentation<br>• Establish support processes<br>• Set up monitoring</td></tr><tr style='background: #f8f9fa;'><td style='padding: 15px; border: 1px solid #ddd;'><strong>Launch</strong></td><td style='padding: 15px; border: 1px solid #ddd;'>Week 5-6</td><td style='padding: 15px; border: 1px solid #ddd;'>• Go live with full deployment<br>• Monitor closely for issues<br>• Collect feedback<br>• Make adjustments</td></tr></tbody></table></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #4CAF50;'>💰 Section 6: Evaluating AI Vendors</h2><h3>Key Evaluation Criteria</h3><div style='background: #FFF9C4; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #F57F17; margin-top: 0;'>1. Functionality</h4><ul style='line-height: 1.8;'><li>Does it solve your specific business problem?</li><li>Are the features comprehensive or will you need additional tools?</li><li>Is it designed for your industry/business size?</li></ul></div><div style='background: #FFF9C4; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #F57F17; margin-top: 0;'>2. Ease of Use</h4><ul style='line-height: 1.8;'><li>How intuitive is the interface?</li><li>What's the learning curve for your team?</li><li>Is training/onboarding provided?</li></ul></div><div style='background: #FFF9C4; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #F57F17; margin-top: 0;'>3. Integration Capabilities</h4><ul style='line-height: 1.8;'><li>Does it integrate with your existing software?</li><li>Are integrations native or do you need third-party tools?</li><li>How reliable are the integrations?</li></ul></div><div style='background: #FFF9C4; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #F57F17; margin-top: 0;'>4. Pricing Structure</h4><ul style='line-height: 1.8;'><li>Is pricing transparent and predictable?</li><li>What's included in each tier?</li><li>Are there hidden costs (setup fees, overage charges)?</li><li>Can you scale up or down easily?</li></ul></div><div style='background: #FFF9C4; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #F57F17; margin-top: 0;'>5. Support and Documentation</h4><ul style='line-height: 1.8;'><li>What support channels are available? (email, chat, phone)</li><li>What are the support hours?</li><li>Is there a knowledge base or community forum?</li><li>Are there video tutorials and guides?</li></ul></div><div style='background: #FFF9C4; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #F57F17; margin-top: 0;'>6. Data Security and Compliance</h4><ul style='line-height: 1.8;'><li>Is the vendor POPIA compliant?</li><li>Where is data stored? (local vs international servers)</li><li>What security certifications do they have?</li><li>What's their data breach history?</li></ul></div><div style='background: #FFF9C4; padding: 20px; border-radius: 8px; margin: 20px 0;'><h4 style='color: #F57F17; margin-top: 0;'>7. Scalability and Performance</h4><ul style='line-height: 1.8;'><li>Can it handle growth in users, data, or transactions?</li><li>What are the performance guarantees (uptime, response time)?</li><li>Are there usage limits?</li></ul></div><h3>Vendor Evaluation Scorecard</h3><div style='background: #F5F5F5; padding: 20px; border-radius: 8px; margin: 20px 0;'><p style='line-height: 1.8;'>Use this scorecard to rate potential AI vendors (1-5 scale, 5 being best):</p><table style='width: 100%; border-collapse: collapse; margin: 10px 0;'><thead><tr style='background: #4CAF50; color: white;'><th style='padding: 10px; text-align: left; border: 1px solid #ddd;'>Criteria</th><th style='padding: 10px; text-align: center; border: 1px solid #ddd;'>Vendor A</th><th style='padding: 10px; text-align: center; border: 1px solid #ddd;'>Vendor B</th><th style='padding: 10px; text-align: center; border: 1px solid #ddd;'>Vendor C</th></tr></thead><tbody><tr style='background: #f8f9fa;'><td style='padding: 10px; border: 1px solid #ddd;'>Functionality (weight: 25%)</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td></tr><tr><td style='padding: 10px; border: 1px solid #ddd;'>Ease of Use (weight: 20%)</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td></tr><tr style='background: #f8f9fa;'><td style='padding: 10px; border: 1px solid #ddd;'>Integration (weight: 15%)</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td></tr><tr><td style='padding: 10px; border: 1px solid #ddd;'>Pricing (weight: 15%)</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td></tr><tr style='background: #f8f9fa;'><td style='padding: 10px; border: 1px solid #ddd;'>Support (weight: 10%)</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td></tr><tr><td style='padding: 10px; border: 1px solid #ddd;'>Security (weight: 10%)</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td></tr><tr style='background: #f8f9fa;'><td style='padding: 10px; border: 1px solid #ddd;'>Scalability (weight: 5%)</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'>_____</td></tr><tr style='background: #4CAF50; color: white;'><td style='padding: 10px; border: 1px solid #ddd;'><strong>Weighted Total</strong></td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'><strong>_____</strong></td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'><strong>_____</strong></td><td style='padding: 10px; text-align: center; border: 1px solid #ddd;'><strong>_____</strong></td></tr></tbody></table><p style='line-height: 1.8; font-style: italic; margin-top: 15px;'>Multiply each score by its weight, then sum for the weighted total. Aim for a minimum score of 3.5/5.0 before committing.</p></div></div><div style='background: #E8F5E9; padding: 30px; border-radius: 8px; margin-bottom: 30px;'><h2 style='color: #2E7D32; margin-top: 0;'>✅ Key Takeaways</h2><ul style='line-height: 2;'><li>AI tools are now accessible and affordable for small businesses across all functions</li><li>Cloud platforms (Google, AWS, Azure) provide enterprise-grade AI capabilities with pay-as-you-go pricing</li><li>Data quality is fundamental to AI success – invest in proper data management</li><li>No-code integration platforms make it easy to connect AI tools with existing systems</li><li>Use a structured evaluation process when selecting AI vendors</li><li>POPIA compliance and data security should be non-negotiable requirements</li><li>Start with tools that have free trials or entry-level tiers to minimize risk</li></ul></div><div style='background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%); padding: 30px; border-radius: 8px; color: white; text-align: center;'><h2 style='margin: 0 0 15px 0;'>🎯 Ready to Test Your Knowledge?</h2><p style='font-size: 1.1em; margin: 0;'>Complete the Module 2 Assessment Quiz to demonstrate your understanding of AI technologies and tools!</p></div>",
+      "has_quiz": true,
+      "quiz": {
+        "title": "Module 2 Assessment Quiz",
+        "description": "Test your understanding of AI technologies, tools, and implementation strategies. This quiz includes 30 questions covering cloud platforms, data management, integration methods, and vendor evaluation.",
+        "passing_score": 70,
+        "max_attempts": 3,
+        "time_limit_minutes": 45,
+        "questions": []
+      }
+    }
+  ]
+}

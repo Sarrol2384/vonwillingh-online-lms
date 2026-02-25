@@ -1,0 +1,44 @@
+{
+  "course": {
+    "name": "Introduction to Artificial Intelligence Fundamentals",
+    "code": "AIFUND001",
+    "description": "A comprehensive introduction to AI fundamentals designed specifically for small business owners and entrepreneurs in South Africa. Learn practical AI applications, understand key concepts, and discover how to leverage AI tools to grow your business.",
+    "price": 1500,
+    "currency": "ZAR",
+    "level": "Beginner",
+    "duration": "4 weeks",
+    "category": "Technology"
+  },
+  "modules": [
+    {
+      "title": "Module 1: Introduction to AI for Small Business",
+      "description": "Understand what AI is, dispel common myths, and discover practical applications for small businesses in South Africa.",
+      "order_number": 1,
+      "duration_minutes": 60,
+      "content": "<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 12px; color: white; margin-bottom: 30px;'><h1 style='margin: 0; font-size: 2.5em;'>Module 1: Introduction to AI for Small Business</h1><p style='margin: 10px 0 0 0; font-size: 1.2em; opacity: 0.95;'>Your journey into practical artificial intelligence starts here</p></div><div style='background: #f8f9fa; padding: 30px; border-radius: 8px; margin-bottom: 30px;'><h2 style='color: #667eea; margin-top: 0;'>🎯 Learning Objectives</h2><ul style='line-height: 2;'><li>Define artificial intelligence and understand its core concepts</li><li>Identify practical AI applications for South African small businesses</li><li>Distinguish between AI myths and realities</li><li>Recognize different types of AI and their business uses</li><li>Understand the economic impact of AI on small businesses</li><li>Develop an AI readiness mindset for your business</li><li>Create an initial AI adoption action plan</li><li>Evaluate AI tools suitable for your business context</li></ul></div><div style='background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'><h2 style='color: #667eea;'>📚 Section 1: What is Artificial Intelligence?</h2><p style='font-size: 1.1em; line-height: 1.8;'>Artificial Intelligence (AI) is the simulation of human intelligence processes by computer systems. These processes include learning, reasoning, problem-solving, perception, and language understanding.</p><p style='font-size: 1.1em; line-height: 1.8;'>For South African small business owners, AI is not about replacing humans or creating robots. Instead, it's about using smart software tools that can:</p><ul style='line-height: 2;'><li><strong>Automate repetitive tasks</strong> – saving time and reducing errors</li><li><strong>Analyze data quickly</strong> – helping you make better business decisions</li><li><strong>Personalize customer experiences</strong> – improving satisfaction and loyalty</li><li><strong>Predict trends</strong> – staying ahead of market changes</li><li><strong>Improve efficiency</strong> – allowing you to focus on strategic growth</li></ul></div><div style='background: #fff3cd; padding: 25px; border-radius: 8px; margin: 30px 0; border-left: 5px solid #ffc107;'><h3 style='color: #856404; margin-top: 0;'>💡 Real-World Example</h3><p style='line-height: 1.8; color: #856404;'>A Cape Town-based guesthouse implemented an AI-powered chatbot to handle booking inquiries outside office hours. Within three months, they saw a <strong>40% reduction in response time</strong> and a <strong>25% increase in confirmed bookings</strong> – without hiring additional staff.</p></div>",
+      "has_quiz": true,
+      "quiz": {
+        "title": "Module 1 Assessment Quiz",
+        "description": "Test your understanding of AI fundamentals and their application to small business. This quiz includes 30 questions: 15 multiple-choice, 8 true/false, and 7 multiple-select questions.",
+        "passing_score": 70,
+        "max_attempts": 3,
+        "time_limit_minutes": 45,
+        "questions": [
+          {
+            "order_number": 1,
+            "question_text": "What is the primary purpose of AI in small business contexts?",
+            "question_type": "multiple_choice",
+            "points": 3,
+            "options": [
+              "To replace all human employees",
+              "To automate repetitive tasks and improve decision-making",
+              "To create humanoid robots",
+              "To make businesses completely autonomous"
+            ],
+            "correct_answer": "B"
+          }
+        ]
+      }
+    }
+  ]
+}

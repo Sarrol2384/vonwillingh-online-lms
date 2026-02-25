@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "=== MERGE INSTRUCTIONS ==="
+echo ""
+echo "I have Module 1 ready with 30 quiz questions."
+echo ""
+echo "To complete the merge, please:"
+echo "1. Save your complete Module 2 JSON (from your message) to: /home/user/webapp/module2-provided.json"
+echo "2. Run: python3 complete_merge.py"
+echo ""
+echo "Alternatively, you can:"
+echo "- Use the import interface and paste the complete JSON directly"
+echo "- The JSON structure is ready, just needs Module 2 questions added"
