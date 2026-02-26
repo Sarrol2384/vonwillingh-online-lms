@@ -1934,6 +1934,11 @@ app.get('/admin-payments', (c) => {
   `)
 })
 
+// Admin redirect - /admin -> /admin-login
+app.get('/admin', (c) => {
+  return c.redirect('/admin-login')
+})
+
 // Admin Login Page
 app.get('/admin-login', (c) => {
   return c.html(`
