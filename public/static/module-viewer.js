@@ -27,11 +27,37 @@ function getSession() {
 
 async function loadModule(moduleId) {
   try {
+    // Load module data first to get course info
     const response = await axios.get(`/api/student/module/${moduleId}?studentId=${currentSession.studentId}`);
     
     if (response.data.success) {
       currentModule = response.data.module;
       const { module, progress, navigation } = response.data;
+      
+      // Check if student can access this module (check progression rules)
+      const accessCheck = await axios.get(`/api/student/module/${moduleId}/can-access?studentId=${currentSession.studentId}`);
+      
+      if (accessCheck.data.success && !accessCheck.data.canAccess) {
+        // Module is locked - show lock screen
+        document.getElementById('loadingScreen').classList.add('hidden');
+        document.getElementById('moduleContent').innerHTML = `
+          <div class="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+            <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
+              <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-lock text-orange-600 text-2xl"></i>
+              </div>
+              <h2 class="text-2xl font-bold text-gray-800 mb-2">Module Locked</h2>
+              <p class="text-gray-600 mb-6">${accessCheck.data.reason || 'You must complete the previous module quiz first'}</p>
+              <a href="/student/course/${module.course_id}" 
+                 class="inline-block brand-bg text-white px-6 py-3 rounded hover:bg-blue-800 transition">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Course
+              </a>
+            </div>
+          </div>
+        `;
+        document.getElementById('moduleContent').classList.remove('hidden');
+        return;
+      }
       
       // Store enrollment ID for completion tracking
       enrollmentId = progress.enrollment_id;

@@ -1934,6 +1934,11 @@ app.get('/admin-payments', (c) => {
   `)
 })
 
+// Admin redirect - /admin -> /admin-login
+app.get('/admin', (c) => {
+  return c.redirect('/admin-login')
+})
+
 // Admin Login Page
 app.get('/admin-login', (c) => {
   return c.html(`
@@ -3271,6 +3276,107 @@ app.post('/api/admin/courses/import-simple', requireAdminSimple, async (c) => {
   const supabase = getSupabaseAdminClient(c.env)
   c.set('supabaseAdmin', supabase)
   return importCourseSimple(c)
+})
+
+// Fix duplicate enrollments endpoint
+app.post('/api/admin/fix-duplicate-enrollments', requireAdminSimple, async (c) => {
+  try {
+    const supabase = getSupabaseAdminClient(c.env)
+    
+    // Get the course_id from request body or default to 35 (AIFUND001)
+    const { course_id } = await c.req.json().catch(() => ({ course_id: 35 }))
+    
+    console.log(`🔧 Fixing duplicate enrollments for course_id: ${course_id}`)
+    
+    // Step 1: Get all enrollments for this course
+    const { data: enrollments, error: fetchError } = await supabase
+      .from('enrollments')
+      .select('id, user_id, enrolled_at')
+      .eq('course_id', course_id)
+      .order('user_id')
+      .order('enrolled_at', { ascending: false })
+    
+    if (fetchError) {
+      console.error('❌ Error fetching enrollments:', fetchError)
+      return c.json({ 
+        success: false, 
+        message: `Failed to fetch enrollments: ${fetchError.message}` 
+      }, 500)
+    }
+    
+    if (!enrollments || enrollments.length === 0) {
+      return c.json({ 
+        success: true, 
+        message: 'No enrollments found for this course',
+        deleted: 0
+      })
+    }
+    
+    // Step 2: Identify duplicates (keep newest per user)
+    const userEnrollments = new Map<string, any[]>()
+    
+    enrollments.forEach(enrollment => {
+      const userId = enrollment.user_id
+      if (!userEnrollments.has(userId)) {
+        userEnrollments.set(userId, [])
+      }
+      userEnrollments.get(userId)!.push(enrollment)
+    })
+    
+    // Step 3: Collect IDs to delete (all but the first/newest per user)
+    const idsToDelete: string[] = []
+    
+    userEnrollments.forEach((userEnrolls, userId) => {
+      if (userEnrolls.length > 1) {
+        // Skip the first (newest) and delete the rest
+        for (let i = 1; i < userEnrolls.length; i++) {
+          idsToDelete.push(userEnrolls[i].id)
+        }
+      }
+    })
+    
+    if (idsToDelete.length === 0) {
+      return c.json({ 
+        success: true, 
+        message: 'No duplicate enrollments found',
+        total_enrollments: enrollments.length,
+        unique_users: userEnrollments.size,
+        deleted: 0
+      })
+    }
+    
+    // Step 4: Delete duplicate enrollments
+    const { error: deleteError } = await supabase
+      .from('enrollments')
+      .delete()
+      .in('id', idsToDelete)
+    
+    if (deleteError) {
+      console.error('❌ Error deleting duplicate enrollments:', deleteError)
+      return c.json({ 
+        success: false, 
+        message: `Failed to delete duplicates: ${deleteError.message}` 
+      }, 500)
+    }
+    
+    console.log(`✅ Successfully deleted ${idsToDelete.length} duplicate enrollments`)
+    
+    return c.json({ 
+      success: true, 
+      message: `Successfully removed ${idsToDelete.length} duplicate enrollment(s)`,
+      total_enrollments_before: enrollments.length,
+      unique_users: userEnrollments.size,
+      deleted: idsToDelete.length,
+      remaining: enrollments.length - idsToDelete.length
+    })
+    
+  } catch (error: any) {
+    console.error('❌ Error in fix-duplicate-enrollments:', error)
+    return c.json({ 
+      success: false, 
+      message: error.message || 'Unknown error occurred' 
+    }, 500)
+  }
 })
 
 // ============================================================
